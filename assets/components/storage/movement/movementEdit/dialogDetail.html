@@ -1,0 +1,35 @@
+<md-dialog aria-label="Detalles del item"
+           ng-scope
+           flex="60"
+           flex-xs="100">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 flex>
+                <span ng-if="!vm.detail.id">{{'STORAGE_MOVEMENT.DIALOG.TITLE_DETAIL'|translate}}</span>
+                <span ng-if="vm.detail.id">Editar Item</span>
+            </h2>
+            <span flex></span>
+
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()"
+                       aria-label="Cancelar">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <form name="formDetail">
+        <md-dialog-content md-border-bottom>
+            <div class="md-padding"
+                 ng-include="'/components/storage/movement/movementEdit/formDetail.html'"></div>
+        </md-dialog-content>
+        <md-dialog-actions class="text-right"
+                           ng-show="(vm.status || 1)==1">
+            <md-button class="md-raised md-primary"
+                       ng-click="vm.confirm()"
+                       ng-disabled="formDetail.$invalid || (!vm.detail.productDescription && !vm.detail.product)"
+                       aria-label="CRUD.SAVE"
+                       translate="CRUD.SAVE">
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

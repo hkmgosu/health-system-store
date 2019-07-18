@@ -1,0 +1,207 @@
+<p ng-show="!vm.timelineView"
+   class="text-center">Cargando actividad reciente...</p>
+<p ng-show="vm.timelineView.length === 0"
+   class="text-center">No hay actividad reciente</p>
+<!-- Comentarios -->
+<div ng-repeat="item in vm.timelineView | orderBy:'-createdAt'"
+     class="md-padding fade timeline-item">
+    <div ng-if="!item.type">
+        <div style="width:44px; height:44px; float:left;">
+            <ssvq-employee-avatar employee="item.createdBy"></ssvq-employee-avatar>
+        </div>
+        <div layout="column"
+             class="padding-left-10">
+            <span class="md-body-1">
+                <ssvq-employee-profile-link id-employee="{{::item.createdBy.id}}"> {{::item.createdBy.fullname}}
+                </ssvq-employee-profile-link>
+                comentó
+                <ssvq-custom-time-ago time-at="::item.createdAt"></ssvq-custom-time-ago>
+            </span>
+            <span class="md-body-1 respect-line-break comentario"
+                  ng-if="item.description"
+                  bind-html-compile="item.description"></span>
+            <ssvq-upload-list-files mode="Viewer"
+                                    files="item.attachments"
+                                    request-id="{{item.request}}"
+                                    comment-id="{{item.id}}"
+                                    ng-if="item.attachments && item.attachments.length > 0"
+                                    flex
+                                    class="tiny-files">
+            </ssvq-upload-list-files>
+        </div>
+    </div>
+    <div layout="column"
+         flex
+         ng-if="item.type==='employeeAssigned'">
+        <div layout="row">
+            <md-icon md-font-icon="zmdi zmdi-account"
+                     class="margin-left-20 margin-right-10">
+                <!--md-tooltip class="my-tooltip">
+                    <md-card class="no-padding-card">
+                        <md-card-content>
+                            <ssvq-log-comparison old-value="item.assignedOld.fullname"
+                                                 new-value="item.assignedTo.fullname"></ssvq-log-comparison>
+                        </md-card-content>
+                    </md-card>
+                </md-tooltip-->
+            </md-icon>
+            <span class="md-body-1"
+                  flex
+                  ng-show="item.assignedTo">
+                <ssvq-employee-profile-link id-employee="{{::item.createdBy.id}}"> {{::item.createdBy.fullname}}
+                </ssvq-employee-profile-link>
+                asignó la solicitud a
+                <ssvq-employee-profile-link id-employee="{{::item.assignedTo.id}}"> {{::item.assignedTo.fullname}}
+                </ssvq-employee-profile-link>
+                <ssvq-custom-time-ago time-at="::item.createdAt"></ssvq-custom-time-ago>
+            </span>
+            <span class="md-body-1"
+                  flex
+                  ng-show="!item.assignedTo">
+                <ssvq-employee-profile-link id-employee="{{::item.createdBy.id}}"> {{::item.createdBy.fullname}}
+                </ssvq-employee-profile-link>
+                quitó a la persona asignada
+                <ssvq-custom-time-ago time-at="::item.createdAt"></ssvq-custom-time-ago>
+            </span>
+        </div>
+        <div class="margin-left-60"
+             ng-if="item.comment">
+            <md-icon md-font-icon="zmdi zmdi-comment-outline"></md-icon>&nbsp;
+            <span class="md-caption respect-line-break">{{item.comment}}</span>
+        </div>
+    </div>
+    <div layout="column"
+         flex
+         ng-if="item.type==='unitAssigned'">
+        <div layout="row"
+             layout-align="center center">
+            <md-icon md-font-icon="zmdi zmdi-group-work"
+                     class="margin-left-20 margin-right-10">
+                <!--md-tooltip class="my-tooltip">
+                    <md-card class="no-padding-card">
+                        <md-card-content>
+                            <ssvq-log-comparison old-value="item.assignedOld.name"
+                                                 new-value="item.assignedTo.name"></ssvq-log-comparison>
+                        </md-card-content>
+                    </md-card>
+                </md-tooltip-->
+            </md-icon>
+            <span class="md-body-1"
+                  flex>
+                <ssvq-employee-profile-link id-employee="{{::item.createdBy.id}}"> {{::item.createdBy.fullname}}
+                </ssvq-employee-profile-link>
+                derivó la solicitud a
+                <b>{{item.assignedTo.name}}</b>
+                <ssvq-custom-time-ago time-at="::item.createdAt"></ssvq-custom-time-ago>
+            </span>
+        </div>
+        <div class="margin-left-60"
+             ng-if="item.comment">
+            <md-icon md-font-icon="zmdi zmdi-comment-outline"></md-icon>&nbsp;
+            <span class="md-caption respect-line-break">{{item.comment}}</span>
+        </div>
+    </div>
+    <div layout="row"
+         flex
+         ng-if="item.type==='label'">
+        <md-icon md-font-icon="zmdi zmdi-label"
+                 class="margin-left-20 margin-right-10"></md-icon>
+        <span class="md-body-1"
+              flex
+              ng-show="item.label">
+            <ssvq-employee-profile-link id-employee="{{::item.createdBy.id}}"> {{::item.createdBy.fullname}}
+            </ssvq-employee-profile-link>
+            le asignó el tipo
+            <b>{{item.label.name}}</b>
+            <ssvq-custom-time-ago time-at="::item.createdAt"></ssvq-custom-time-ago>
+        </span>
+        <span class="md-body-1"
+              flex
+              ng-show="!item.label">
+            <ssvq-employee-profile-link id-employee="{{::item.createdBy.id}}"> {{::item.createdBy.fullname}}
+            </ssvq-employee-profile-link>
+            quitó el tipo de solicitud
+            <ssvq-custom-time-ago time-at="::item.createdAt"></ssvq-custom-time-ago>
+        </span>
+    </div>
+    <div layout="row"
+         flex
+         ng-if="item.type==='dueDate'">
+        <md-icon md-font-icon="zmdi zmdi-time-countdown"
+                 class="margin-left-20 margin-right-10"></md-icon>
+        <span class="md-body-1"
+              flex
+              ng-show="item.dueDate">
+            <ssvq-employee-profile-link id-employee="{{::item.createdBy.id}}"> {{::item.createdBy.fullname}}
+            </ssvq-employee-profile-link>
+            cambió la fecha de vencimiento al
+            <b>{{item.dueDate | date : "dd MMM y" : 'UTC'}}</b>
+            <ssvq-custom-time-ago time-at="::item.createdAt"></ssvq-custom-time-ago>
+        </span>
+        <span class="md-body-1"
+              flex
+              ng-show="!item.dueDate">
+            <ssvq-employee-profile-link id-employee="{{::item.createdBy.id}}"> {{::item.createdBy.fullname}}
+            </ssvq-employee-profile-link>
+            dejó la solicitud sin fecha de vencimiento
+            <ssvq-custom-time-ago time-at="::item.createdAt"></ssvq-custom-time-ago>
+        </span>
+    </div>
+    <div layout="row"
+         flex
+         ng-if="item.type==='stateChanged'">
+        <md-icon md-font-icon="zmdi zmdi-time-countdown"
+                 class="margin-left-20 margin-right-10"></md-icon>
+        <span class="md-body-1"
+              flex>
+            <ssvq-employee-profile-link id-employee="{{::item.createdBy.id}}"> {{::item.createdBy.fullname}}
+            </ssvq-employee-profile-link>
+            cambió el estado a
+            <b>{{item.state.description}}</b>
+            <ssvq-custom-time-ago time-at="::item.createdAt"></ssvq-custom-time-ago>
+        </span>
+    </div>
+    <div layout="row"
+         flex
+         ng-if="item.type==='stakeholder:added'">
+        <md-icon md-font-icon="zmdi zmdi-accounts-list"
+                 class="margin-left-20 margin-right-10"></md-icon>
+        <span class="md-body-1"
+              flex>
+            <ssvq-employee-profile-link id-employee="{{::item.createdBy.id}}"> {{::item.createdBy.fullname}}
+            </ssvq-employee-profile-link>
+            agregó a
+            <ssvq-employee-profile-link id-employee="{{::item.employee.id}}"> {{::item.employee.fullname}}
+            </ssvq-employee-profile-link>
+            como participante
+            <ssvq-custom-time-ago time-at="::item.createdAt"></ssvq-custom-time-ago>
+        </span>
+    </div>
+    <div layout="row"
+         flex
+         ng-if="item.type==='stakeholder:removed'">
+        <md-icon md-font-icon="zmdi zmdi-accounts-list"
+                 class="margin-left-20 margin-right-10"></md-icon>
+        <span class="md-body-1"
+              flex>
+            <ssvq-employee-profile-link id-employee="{{::item.createdBy.id}}"> {{::item.createdBy.fullname}}
+            </ssvq-employee-profile-link>
+            quitó a
+            <ssvq-employee-profile-link id-employee="{{::item.employee.id}}"> {{::item.employee.fullname}}
+            </ssvq-employee-profile-link>
+            de los participantes
+            <ssvq-custom-time-ago time-at="::item.createdAt"></ssvq-custom-time-ago>
+        </span>
+    </div>
+</div>
+
+<div layout="row"
+     layout-align="center center"
+     ng-show="vm.timeline.length > 3 && !vm.showAll">
+    <md-button aria-label="Mostrar toda la actividad"
+               class="md-primary md-raised"
+               ng-click="vm.setShowAll()"
+               flex="90">
+        Mostrar toda la actividad
+    </md-button>
+</div>

@@ -1,0 +1,61 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button"
+                   href="#/bodega/solicitud-productos">
+            <md-tooltip>Volver al listado</md-tooltip>
+            <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+        </md-button>
+        <div layout="column"
+             flex>
+            <span class="md-subhead">Solicitud de Producto #{{vm.productRequest.correlative}}</span>
+            <span class="md-caption"
+                  md-truncate
+                  hide-xs>
+                Ingresada
+                <strong am-time-ago="vm.productRequest.createdAt"></strong>
+                por
+                <strong ssvq-employee-profile-link
+                        id-employee="{{vm.productRequest.createdBy.id}}">{{vm.productRequest.createdBy.fullname || '--'}}</strong>
+            </span>
+        </div>
+
+        <ssvq-storage-report-products-send product-request="vm.productRequest"></ssvq-storage-report-products-send>
+        <ssvq-storage-report-products-received product-request="vm.productRequest"></ssvq-storage-report-products-received>
+
+        <md-input-container class="margin-0">
+            <md-select ng-model="vm.statusProductRequest"
+                       class="md-subhead request-state md-no-underline"
+                       aria-label="Estado de la solicitud"
+                       ng-change="vm.onChangeStatus()">
+                <md-option ng-repeat="status in vm.getAllowedStatuses()"
+                           ng-value="status.id"
+                           ng-class="'statusParent' + status.statusParent">{{ status.description }}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+</md-toolbar>
+
+
+
+<div layout-gt-sm="row">
+    <div flex-gt-sm="60">
+        <md-subheader class="md-primary">Datos generales</md-subheader>
+
+        <md-card>
+            <md-card-content ng-include="'/components/storage/productRequest/productRequestEdit/formGeneral.html'">
+            </md-card-content>
+        </md-card>
+        <md-divider></md-divider>
+
+        <md-subheader class="md-primary">Comentarios</md-subheader>
+
+        <md-card>
+            <md-card-content ng-include="'/components/storage/productRequest/productRequestEdit/comments.html'">
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <div flex-gt-sm="40"
+         ng-include="'/components/storage/productRequest/productRequestEdit/details.html'"></div>
+</div>

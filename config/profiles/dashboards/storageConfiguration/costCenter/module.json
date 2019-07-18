@@ -1,0 +1,32 @@
+{
+    "name": "PRIVILEGES.STORAGE_COST_CENTER.NAME",
+    "description": "PRIVILEGES.STORAGE_COST_CENTER.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-cost-center",
+            "url": "/bodega/centro-costo",
+            "template": "<ssvq-storage-cost-center></ssvq-storage-cost-center>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/CostCenterController.get",
+                "Storage/CostCenterController.getAll"
+            ],
+            "create": [
+                "Storage/CostCenterController.create"
+            ],
+            "update": [
+                "Storage/CostCenterController.update"
+            ],
+            "delete": [
+                "Storage/CostCenterController.delete"
+            ]
+        }
+    }
+}

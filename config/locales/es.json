@@ -1,0 +1,11 @@
+{
+    "email.default.welcome": "Hola ,",
+    "email.default.followUsOn": "Siguenos en :",
+    "email.default.contact.title": "Telefono:",
+    "email.default.contact.phone": "Telefono:",
+    "email.default.contact.email": "Correo:",
+    "email.default.termsOfService.terms": "Terminos",
+    "email.default.termsOfService.privacy": "Privacidad",
+    "email.default.termsOfService.unsubscribe": "Dejar de recibir"
+
+}

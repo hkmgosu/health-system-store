@@ -1,0 +1,16 @@
+.badge.codigo {
+    background-color: steelblue;
+    color: white;
+    padding: 2px 4px;
+    border-radius: 1rem;
+    font-weight: normal;
+    font-size: 1rem;
+}
+
+ssvq-storage-express-income-edit ssvq-unit-autocomplete input {
+    color: gray !important;
+}
+
+ssvq-storage-express-income-edit ssvq-unit-autocomplete input:focus {
+    color: #000 !important;
+}

@@ -1,0 +1,17 @@
+{
+    "name": "PRIVILEGES.AUTOCONSULTA.NAME",
+    "description": "PRIVILEGES.AUTOCONSULTA.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.autoconsulta",
+            "url": "/autoconsulta",
+            "template": "<ssvq-autoconsulta-frame></ssvq-autoconsulta-frame>",
+            "icon": "zmdi zmdi-info",
+            "intranet": true
+        },
+        "_controllers": {}
+    }
+}

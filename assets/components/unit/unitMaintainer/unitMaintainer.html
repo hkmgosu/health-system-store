@@ -1,0 +1,147 @@
+<section layout="column"
+         layout-fill
+         class="full-container"
+         id="bottom-sheet-content"
+         flex>
+    <md-toolbar class="md-hue-1"
+                md-scroll-shrink>
+        <div class="md-toolbar-tools"
+             layout="row">
+            <md-button class="md-icon-button"
+                       ng-click="vm.updateList()"
+                       ng-disabled="!vm.mainUnit">
+                <md-icon md-font-icon="zmdi zmdi-home"></md-icon>
+                <md-tooltip>Ir al inicio</md-tooltip>
+            </md-button>
+            <div layout="row"
+                 style="overflow-y:auto;"
+                 flex>
+                <div ng-repeat="breadcrumbs in vm.breadcrumbs"
+                     layout="row"
+                     layout-align="center center">
+                    <span>/</span>
+                    <md-button ng-click="vm.updateList(breadcrumbs)"
+                               ng-disabled="breadcrumbs.id == vm.mainUnit.id">
+                        {{breadcrumbs.name}}
+                        <md-tooltip>Ir a {{breadcrumbs.name}}</md-tooltip>
+                    </md-button>
+                </div>
+            </div>
+            <md-button class="md-icon-button"
+                       ng-click="vm.showSearch = true;">
+                <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                <md-tooltip>Buscar</md-tooltip>
+            </md-button>
+            <ssvq-unit-autocomplete on-select="vm.updateList"
+                                    type="search"
+                                    clear-on-select="true"
+                                    ng-show="vm.showSearch"
+                                    flex=30
+                                    label="Buscar una unidad"></ssvq-unit-autocomplete>
+            <md-menu md-position-mode="target-right target"
+                     style="margin-right: 5px;">
+                <md-button class="md-icon-button"
+                           ng-click="$mdMenu.open()">
+                    <md-icon md-font-icon="zmdi zmdi-more"></md-icon>
+                    <md-tooltip>Ver más opciones</md-tooltip>
+                </md-button>
+                <md-menu-content width="4">
+                    <md-menu-item>
+                        <md-button ng-click="vm.addUnit();">
+                            <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            Agregar unidad dependiente
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="vm.editUnit(vm.mainUnit);">
+                            <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                            Editar unidad
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="vm.showOrgChart(vm.mainUnit, $event);">
+                            <md-icon md-font-icon="zmdi zmdi-view-quilt"></md-icon>
+                            Ver organigrama
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="vm.manageUnitEmployees(vm.mainUnit, $event);">
+                            <md-icon md-font-icon="fa fa-users"></md-icon>
+                            Gestionar funcionarios
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="vm.manageUnitBoss(vm.mainUnit, $event);">
+                            <md-icon md-font-icon="zmdi zmdi-star"></md-icon>
+                            Gestionar encargados
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="vm.mapEstablishment(vm.mainUnit, $event);">
+                            <md-icon md-font-icon="fa fa-building-o"></md-icon>
+                            Mapear establecimiento
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </div>
+    </md-toolbar>
+    <md-content flex>
+        <ssvq-no-results ng-show="vm.childrenList.length == 0"></ssvq-no-results>
+        <md-list class="padding-0 unit-list">
+            <md-list-item class="md-2-line"
+                          ng-click="vm.updateList(unit)"
+                          aria-label="{{unit.name}}"
+                          ng-repeat="unit in vm.childrenList"
+                          layout="row">
+                <div class="md-list-item-text"
+                     flex>
+                    <h4 md-truncate>
+                        {{unit.name}}
+                    </h4>
+                    <p>{{unit.description || '--'}}</p>
+                </div>
+                <md-menu md-position-mode="target-right target">
+                    <md-button class="md-icon-button"
+                               ng-click="$mdMenu.open()">
+                        <md-icon md-font-icon="zmdi zmdi-more"></md-icon>
+                        <md-tooltip>Ver más opciones</md-tooltip>
+                    </md-button>
+                    <md-menu-content width="4">
+                        <md-menu-item>
+                            <md-button ng-click="vm.editUnit(unit, $event);">
+                                <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                                Editar unidad
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="vm.showOrgChart(unit, $event);">
+                                <md-icon md-font-icon="zmdi zmdi-view-quilt"></md-icon>
+                                Ver organigrama
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="vm.manageUnitEmployees(unit, $event);">
+                                <md-icon md-font-icon="fa fa-users"></md-icon>
+                                Gestionar funcionarios
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="vm.manageUnitBoss(unit, $event);">
+                                <md-icon md-font-icon="zmdi zmdi-star"></md-icon>
+                                Gestionar encargados
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="vm.deleteUnit(unit, $event);">
+                                <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
+                                Eliminar unidad
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</section>

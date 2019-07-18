@@ -1,0 +1,32 @@
+{
+    "name": "PRIVILEGES.SAMU.MEDICINES.NAME",
+    "description": "PRIVILEGES.MEDICINES.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "create": false,
+            "read": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.samu-medicines",
+            "url": "/samu/medicamentos/",
+            "template": "<ssvq-medicine-maintainer></ssvq-medicine-maintainer>"
+        },
+        "_controllers": {
+            "read": [
+                "MedicineController.get",
+                "MedicineController.getAll"
+            ],
+            "create": [
+                "MedicineController.save"
+            ],
+            "update": [
+                "MedicineController.save"
+            ],
+            "delete": [
+                "MedicineController.delete"
+            ]
+        }
+    }
+}

@@ -1,0 +1,74 @@
+<div ng-if="vm.closuresList">
+    <md-list class="padding-0">
+        <md-list-item ng-repeat="closure in vm.closuresList | orderBy: '-createdAt'"
+                      ng-href="#/permisos/cierres/detalles/{{ ::closure.id }}"
+                      class="md-3-line md-long-text margin-0">
+            <md-icon class="md-avatar-icon"
+                     md-font-icon="fa fa-file-archive-o"
+                     layout="row"
+                     layout-align="center center"
+                     style="background: #5fa0bf;"></md-icon>
+            <div class="md-list-item-text"
+                 layout="column">
+                <h3>{{ closure.observation || '--' }}</h3>
+                <h4><b>#{{ closure.id }}</b> realizado el <b>{{ closure.createdAt | date }}</b> por <b>{{
+                        closure.createdBy.fullname }}</b></h4>
+                <p layout="row"
+                   layout-align="start center"
+                   md-truncate>
+                    <any layout="row"
+                         layout-align="start center">
+                        <md-icon md-font-icon="zmdi zmdi-calendar-check">
+                        </md-icon>
+                        <span>
+                            {{ (closure.correlativeEnd - closure.correlativeStart) + 1 }} permiso(s)
+                        </span>
+                    </any>
+                    <any layout="row"
+                         layout-align="start center">
+                        <span style="padding: 0 6px;">•</span>
+                        <md-icon style="font-size: 15px;"
+                                 md-font-icon="fa fa-hashtag">
+                        </md-icon>
+                        <span>
+                            Inicio: {{ closure.correlativeStart }} -
+                            Fin: {{ closure.correlativeEnd }}
+                        </span>
+                    </any>
+                </p>
+            </div>
+            <md-divider ng-show="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+</div>
+<div class="full-height"
+     ng-show="!vm.closuresList"
+     layout="column"
+     layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    <p>Cargando cierres...</p>
+</div>
+<div layout="row"
+     layout-align="center center">
+    <md-button aria-label="Ver más solicitudes"
+               class="md-primary md-raised ng-hide"
+               ng-show="vm.showMoreButton"
+               ng-disabled="vm.loading"
+               ng-click="vm.nextPage()"
+               flex="90">
+        <span ng-show="!vm.loading">Ver más cierres</span>
+        <span ng-show="vm.loading">Cargando cierres...</span>
+    </md-button>
+</div>
+<div ng-show="vm.closuresList.length === 0"
+     class="full-height"
+     layout="column"
+     layout-align="center center">
+    <div>
+        <md-icon md-font-icon="zmdi zmdi-search-in-page"
+                 class="md-warn"
+                 style="font-size: 46px;">
+        </md-icon>
+    </div>
+    <p>No se encontraron cierres</p>
+</div>

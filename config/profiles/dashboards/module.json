@@ -1,0 +1,23 @@
+{
+    "name": "PRIVILEGES.DASHBOARDS.NAME",
+    "description": "PRIVILEGES.DASHBOARDS.DESCRIPTION",
+    "view": "/",
+    "config": {
+        "privileges": {
+            "view": false
+        },
+        "_controllers": {
+            "read": [
+                "NotificationController.getMine",
+                "NotificationController.subscribe",
+                "NotificationController.getGroup",
+                "EmployeeController.validateEmail"
+            ],
+            "update": [
+                "NotificationController.toggleReaded",
+                "NotificationController.markAllAsReaded",
+                "EmployeeController.firstUpdate"
+            ]
+        }
+    }
+}

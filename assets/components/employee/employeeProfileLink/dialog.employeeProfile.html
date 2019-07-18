@@ -1,0 +1,68 @@
+<md-dialog aria-label="Perfil de funcionario"
+           flex="60"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.close()"
+                       aria-label="Cancelar">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver (esc)</md-tooltip>
+            </md-button>
+            <div layout="column"
+                 flex>
+                <span class="md-body-1">Perfil de funcionario</span>
+                <span class="md-body-2">{{::vm.employee.fullname}}</span>
+            </div>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout="row"
+                       layout-xs="column"
+                       layout-padding>
+        <div layout="row"
+             layout-align="center center">
+            <ssvq-employee-avatar class="mega-avatar"
+                                  employee="vm.employee"></ssvq-employee-avatar>
+        </div>
+        <md-divider hide-xs></md-divider>
+        <md-list flex>
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h3>Nombre completo</h3>
+                    <p>{{::vm.employee.fullname}}</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h3>Correo institucional</h3>
+                    <p>{{::vm.employee.email || '--'}}</p>
+                </div>
+                <md-button ng-show="::vm.employee.email"
+                           class="md-secondary md-icon-button"
+                           href="mailto:{{::vm.employee.email}}">
+                    <md-icon md-font-icon="zmdi zmdi-email"></md-icon>
+                    <md-tooltip>Enviar correo a {{::vm.employee.name}}</md-tooltip>
+                </md-button>
+            </md-list-item>
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h3>Anexo</h3>
+                    <p>{{::vm.employee.annexe || '--'}}</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h3>Cargo</h3>
+                    <p>{{::vm.employee.job.name || '--'}} en {{::vm.employee.unit.name || '--'}}</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h3>Establecimiento</h3>
+                    <p>{{::vm.employee.establishment.name || '--'}}</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-dialog-content>
+</md-dialog>

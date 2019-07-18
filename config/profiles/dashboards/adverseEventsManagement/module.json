@@ -1,0 +1,13 @@
+{
+    "name": "PRIVILEGES.ADVERSEEVENTSMANAGEMENT.NAME",
+    "description": "PRIVILEGES.ADVERSEEVENTSMANAGEMENT.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "icon": "zmdi zmdi-hospital-alt"
+        },
+        "_controllers": {}
+    }
+}

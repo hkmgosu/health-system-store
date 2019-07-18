@@ -1,0 +1,29 @@
+{
+    "name": "PRIVILEGES.SAMU.REM_SETTINGS.NAME",
+    "description": "PRIVILEGES.SAMU.REM_SETTINGS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.samu-rem-settings",
+            "url": "/samu/configuraciones",
+            "template": "<ssvq-rem-settings></ssvq-rem-settings>"
+        },
+        "_controllers": {
+            "read": [
+                "RemStatusController.getSupervisorList"
+            ],
+            "create": [
+                "RemStatusController.create"
+            ],
+            "update": [
+                "RemStatusController.addSupervisor",
+                "RemStatusController.removeSupervisor",
+                "RemStatusController.updateOrder"
+            ]
+        }
+    }
+}

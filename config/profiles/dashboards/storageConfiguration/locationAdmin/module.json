@@ -1,0 +1,34 @@
+{
+    "name": "PRIVILEGES.STORAGE_LOCATION.NAME",
+    "description": "PRIVILEGES.STORAGE_LOCATION.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-location-admin",
+            "url": "/bodega/ubicaciones",
+            "template": "<ssvq-storage-location-admin></ssvq-storage-location-admin>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/LocationController.get",
+                "Storage/LocationController.getAll",
+                "Storage/UnitProductsManagerController.getStorages"
+            ],
+            "create": [
+                "Storage/LocationController.create"
+            ],
+            "update": [
+                "Storage/LocationController.update"
+            ],
+            "delete": [
+                "Storage/LocationController.delete"
+            ]
+
+        }
+    }
+}

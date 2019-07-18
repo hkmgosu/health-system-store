@@ -1,0 +1,15 @@
+ssvq-viatic-calendar .md-button{
+    min-width: 0;    
+    padding: 0 !important;
+}
+
+ssvq-viatic-calendar md-list-item.holiday h3, md-list-item.holiday p {
+    color: red !important;
+}
+ssvq-viatic-calendar md-list-item.weekend {
+    background-color: #faebd7;
+}
+ssvq-viatic-calendar p.black-font {
+    font-weight: 400 !important;
+    color: #000 !important;
+}

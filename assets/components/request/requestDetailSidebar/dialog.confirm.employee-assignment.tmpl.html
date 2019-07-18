@@ -1,0 +1,60 @@
+<md-dialog flex="50"
+           flex-sm="80"
+           flex-xs="100"
+           aria-label="Asignación de solicitud">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Confirmar asignación de funcionario</h2>
+            <span flex></span>
+            <md-button class="md-icon-button"
+                       aria-label="Cancelar"
+                       ng-click="vm.close()">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <form name="employeeAssignmentForm">
+        <md-dialog-content layout="column"
+                           class="md-padding margin-top-10">
+            <ssvq-log-comparison old-value="vm.oldValue.fullname"
+                                 new-value="vm.newValue.fullname"></ssvq-log-comparison>
+            <md-divider></md-divider>
+            <div class="md-padding">
+                <md-input-container class="md-block"
+                                    md-no-float
+                                    flex>
+                    <md-icon md-font-icon="zmdi zmdi-comment-outline"></md-icon>
+                    <textarea ng-model="vm.comment"
+                              md-maxlength="600"
+                              rows="5"
+                              placeholder="Agrega un comentario"></textarea>
+                </md-input-container>
+            </div>
+            <md-divider></md-divider>
+            <md-subheader ng-if="vm.oldValue">Más opciones</md-subheader>
+            <div class="md-padding"
+                 ng-if="vm.oldValue">
+                <md-checkbox ng-model="vm.maintainAsStakeholder"
+                             aria-label="Mantener funcionario como participante">
+                    Mantener anterior como participante
+                    <md-tooltip>
+                        Si no lo mantienes como participante no podrá ver ni interactuar con la solicitud.
+                    </md-tooltip>
+                </md-checkbox>
+            </div>
+        </md-dialog-content>
+    </form>
+    <md-dialog-actions layout="row"
+                       layout-align="end center">
+        <md-button aria-label="Cancelar"
+                   class="md-accent"
+                   ng-click="vm.close()">
+            <span>Cancelar</span>
+        </md-button>
+        <md-button aria-label="Listo"
+                   class="md-primary"
+                   ng-click="vm.confirm(vm.comment, vm.maintainAsStakeholder)">
+            <span>Asignar</span>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

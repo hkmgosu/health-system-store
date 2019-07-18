@@ -1,0 +1,19 @@
+{
+    "name": "Productos Consolidados",
+    "description": "Productos Consolidades",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.report-consolidated-products",
+            "url": "/bodega/reporte-productos-consolidados",
+            "template": "<ssvq-report-consolidated-products></ssvq-report-consolidated-products>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/StorageReportController.getConsolidatedProducts"
+            ]
+        }
+    }
+}

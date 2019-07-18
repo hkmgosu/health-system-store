@@ -1,0 +1,53 @@
+<md-dialog aria-label='Título'
+           flex='60'
+           flex-sm='80'
+           flex-xs='100'
+           class='mobile-fullwidth-dialog'>
+    <md-toolbar>
+        <div class='md-toolbar-tools'>
+            <md-button class='md-icon-button'
+                       ng-click='vm.cancel()'>
+                <md-icon md-font-icon='zmdi zmdi-arrow-left'></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <div layout="column">
+                <span class='md-subhead'>Historial de turnos anteriores</span>
+                <span class="md-caption">{{vm.participant.member.fullname}}</span>
+            </div>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="min-height: 376px">
+        <md-list>
+            <md-list-item ng-repeat="participant in vm.participantHistory"
+                          class="md-2-line">
+                <md-icon md-font-icon="zmdi zmdi-assignment"
+                         class="md-avatar-icon"
+                         layout="row"
+                         layout-align="center center"></md-icon>
+                <div class="md-list-item-text"
+                     flex>
+                    <h4>{{participant.workshift.establishment.name}}</h4>
+                    <p>{{participant.workshift.title}}</p>
+                </div>
+                <div class="md-secondary"
+                     layout="column"
+                     layout-align="center end">
+                    <span class="md-body-1">
+                        <span class="md-body-2">Término:</span>
+                        {{participant.workshift.endTime |
+                        date:"EEE dd'/'MM '•' HH:mm"}}
+                    </span>
+                    <span class="md-body-1">
+                        <span class="md-body-2">Inicio:</span>
+                        {{participant.workshift.startTime | date:"EEE dd'/'MM '•' HH:mm"}}
+                    </span>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+        <p class="text-center"
+           ng-if="!vm.participantHistory">Cargando historial de turnos anteriores...</p>
+        <p class="text-center"
+           ng-if="vm.participantHistory.length === 0">El historial de turnos anteriores está vacío</p>
+    </md-dialog-content>
+</md-dialog>

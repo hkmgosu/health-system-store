@@ -1,0 +1,65 @@
+<md-divider ng-show="vm.timelineView.length > 0"></md-divider>
+
+<!-- Comentarios -->
+<div ng-repeat="item in vm.timelineView | orderBy:'-createdAt'"
+     class="md-padding">
+    <div ng-if="::(!item.type)"
+         layout="row"
+         layout-align="center start">
+        <div style="position:relative">
+            <ssvq-employee-avatar employee="::item.createdBy"></ssvq-employee-avatar>
+            <i class="zmdi zmdi-comment-text"></i>
+        </div>
+        <div layout-gt-xs="row"
+             class="padding-left-20"
+             style="min-height: 40px; padding-top:3px;"
+             flex>
+            <div layout="column"
+                 flex>
+                <span class="md-body-1">
+                    <ssvq-employee-profile-link id-employee="{{::item.createdBy.id}}">
+                        {{::item.createdBy.fullname}}
+                    </ssvq-employee-profile-link>
+                    escribió:
+                </span>
+                <span class="md-body-1 respect-line-break">{{::item.description}}</span>
+                <ssvq-upload-list-files mode="Viewer"
+                                        files="item.attachments"
+                                        comment-id="{{item.id}}"
+                                        ng-if="item.attachments && item.attachments.length > 0"
+                                        flex
+                                        class="tiny-files">
+                </ssvq-upload-list-files>
+            </div>
+            <p class="margin-0 md-body-1 text-right">
+                {{::(item.createdAt | date:"HH:mm '•' dd 'de' MMM")}}
+            </p>
+        </div>
+    </div>
+    <div ng-if="::(item.type)"
+         layout="row"
+         layout-align="center start">
+        <div style="position:relative">
+            <ssvq-employee-avatar employee="::item.createdBy"></ssvq-employee-avatar>
+            <i class="zmdi zmdi-edit"></i>
+        </div>
+        <div layout-gt-xs="row"
+             class="padding-left-20"
+             style="min-height: 40px; padding-top:3px;"
+             flex>
+            <div layout="column"
+                 flex>
+                <span class="md-body-1">
+                    <ssvq-employee-profile-link id-employee="{{::item.createdBy.id}}">
+                        {{::item.createdBy.fullname}}
+                    </ssvq-employee-profile-link>
+                    actualizó el estado a <b>{{::item.status.name}}</b>
+                </span>
+                <span class="md-body-1 respect-line-break">{{::item.comment}}</span>
+            </div>
+            <p class="margin-0 md-body-1 text-right">
+                {{::(item.createdAt | date:"HH:mm '•' dd 'de' MMM")}}
+            </p>
+        </div>
+    </div>
+</div>

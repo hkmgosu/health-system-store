@@ -1,0 +1,29 @@
+<md-content ssvq-infinite-load
+            next-page="vm.nextPage"
+            md-promise="vm.promise">
+    <ssvq-loading ng-show="!vm.pendingStatuses"></ssvq-loading>
+    <ssvq-no-results ng-show="vm.pendingStatuses.length == 0"></ssvq-no-results>
+
+    <md-list ng-if="vm.pendingStatuses">
+        <md-list-item ng-repeat="item in vm.pendingStatuses track by $index"
+                      ng-href="#/bodega/solicitud-productos/{{item.id}}"
+                      aria-label="#/bodega/solicitud-productos/{{item.id}}"
+                      class="md-3-line">
+            <!-- avatar -->
+            <ssvq-employee-avatar employee="vm.item.createdBy"
+                                  class="md-avatar"></ssvq-employee-avatar>
+
+            <div class="md-list-item-text">
+                <h3>ID #{{item.correlative}}
+                    &nbsp; &nbsp;
+                    <strong>{{item.originUnit.name}}</strong>
+                </h3>
+                <p>{{vm.formatDate(item.date)}} - <span class="statusParent{{item.status.statusParent}}">{{item.status.description}}</span> - <span md-highlight-text="vm.filter.searchText"
+                          md-highlight-flags="gi">{{item.glosa}}</span>
+                </p>
+                <p>Creado por: {{item.createdBy.name}}</p>
+            </div>
+            <md-divider></md-divider>
+        </md-list-item>
+    </md-list>
+</md-content>

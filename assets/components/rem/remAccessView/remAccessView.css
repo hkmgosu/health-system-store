@@ -1,0 +1,6 @@
+.tabs-rem-access{
+    height: calc(100vh - 128px) !important;
+}
+.rem-access-date .md-datepicker-input{
+    color: white !important;
+}

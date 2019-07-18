@@ -1,0 +1,13 @@
+<div layout="row"
+     layout-wrap
+     ng-if="vm.filesFile.length > 0">
+    <ssvq-upload-item-file ng-repeat="file in vm.filesFile | filter: vm.notDeleted"
+                           request-id="{{vm.requestId}}"
+                           comment-id="{{vm.commentId}}"
+                           file="file"
+                           class="archive-item animated fadeIn animation-stop"
+                           mode="{{vm.mode}}"
+                           complete="vm.completeUpload()"
+                           remove="vm.remove($index)">
+    </ssvq-upload-item-file>
+</div>

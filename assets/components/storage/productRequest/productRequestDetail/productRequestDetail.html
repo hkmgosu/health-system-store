@@ -1,0 +1,17 @@
+<md-tabs md-dynamic-height
+		 class="md-primary">
+	<md-tab label="Solicitado">
+		<div class="md-padding"
+			 ng-include="'/components/storage/productRequest/productRequestDetail/formDetail.html'"></div>
+	</md-tab>
+	<md-tab label="Envios"
+			ng-disabled="!vm.canShipping">
+		<div class="md-padding"
+			 ng-include="'/components/storage/productRequest/productRequestDetail/formShipping.html'"></div>
+	</md-tab>
+	<md-tab label="Recibidos"
+			ng-disabled="!vm.shippings.length || !vm.isCreator">
+		<div class="md-padding"
+			 ng-include="'/components/storage/productRequest/productRequestDetail/formReceived.html'"></div>
+	</md-tab>
+</md-tabs>

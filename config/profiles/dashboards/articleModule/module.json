@@ -1,0 +1,14 @@
+{
+    "name": "Módulo de publicaciones",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "icon": "fa fa-newspaper-o"
+        },
+        "_controllers": {
+            "read": []
+        }
+    }
+}

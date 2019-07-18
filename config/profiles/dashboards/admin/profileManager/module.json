@@ -1,0 +1,28 @@
+{
+    "name": "PRIVILEGES.PROFILES.NAME",
+    "description": "PRIVILEGES.PROFILES.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "delete": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.admin-profiles",
+            "url": "/perfiles",
+            "template": "<ssvq-profile-maintainer></ssvq-profile-maintainer>"
+        },
+        "_controllers": {
+            "read": [
+                "ProfileController.*"
+            ],
+            "create": [
+                "ProfileController.create"
+            ],
+            "delete": [
+                "ProfileController.delete"
+            ]
+        }
+    }
+}

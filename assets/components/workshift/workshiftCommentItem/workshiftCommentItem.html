@@ -1,0 +1,58 @@
+<md-list-item class="md-2-line">
+    <div class="md-avatar">
+        <ssvq-employee-avatar employee="vm.comment.createdBy"></ssvq-employee-avatar>
+    </div>
+    <div class="md-list-item-text">
+        <h4 style="margin-bottom: 8px;">
+            <ssvq-employee-profile-link id-employee="{{::vm.comment.createdBy.id}}">
+                {{::vm.comment.createdBy.fullname}}
+            </ssvq-employee-profile-link>
+            <span ng-if="!vm.comment.type">comentó:</span>
+            <span ng-if="vm.comment.type === 'participantAdded'">
+                agregó a
+                <ssvq-employee-profile-link id-employee="{{::vm.comment.member.id}}">
+                    {{::vm.comment.member.fullname}}
+                </ssvq-employee-profile-link>
+                <span ng-if="vm.comment.vehicle">en el vehículo <b>{{vm.comment.vehicle.name}}</b></span>
+                <span ng-if="!vm.comment.vehicle">en base</span>
+            </span>
+            <span ng-if="vm.comment.type === 'participantRemoved'">
+                removió a
+                <ssvq-employee-profile-link id-employee="{{::vm.comment.member.id}}">
+                    {{::vm.comment.member.fullname}}
+                </ssvq-employee-profile-link>
+            </span>
+            <span ng-if="vm.comment.type === 'participantMoved'">
+                movió a
+                <ssvq-employee-profile-link id-employee="{{::vm.comment.member.id}}">
+                    {{::vm.comment.member.fullname}}
+                </ssvq-employee-profile-link>
+                <span ng-if="vm.comment.vehicle">al vehículo <b>{{vm.comment.vehicle.name}}</b></span>
+                <span ng-if="!vm.comment.vehicle">a base</span>
+            </span>
+            <span ng-if="vm.comment.type === 'careTeamAdded'">
+                agregó el vehículo <b>{{vm.comment.vehicle.name}}</b>
+            </span>
+            <span ng-if="vm.comment.type === 'careTeamRemoved'">
+                removió el vehículo <b>{{vm.comment.vehicle.name}}</b>
+            </span>
+            <span ng-if="vm.comment.type === 'workshiftActivated'">
+                activó el turno
+            </span>
+            <span ng-if="vm.comment.type === 'workshiftUpdated'">
+                actualizó los datos del turno
+            </span>
+        </h4>
+        <span class="md-body-1 respect-line-break comentario"
+              ng-if="::vm.comment.description"
+              bind-html-compile="::vm.comment.description"></span>
+        <ssvq-upload-list-files mode="Viewer"
+                                files="vm.comment.attachments"
+                                comment-id="{{vm.comment.id}}"
+                                ng-if="vm.comment.attachments.length > 0"
+                                flex
+                                class="tiny-files">
+        </ssvq-upload-list-files>
+        <p class="text-right">{{::(vm.comment.createdAt | date:"HH:mm '•' dd 'de' MMM")}}</p>
+    </div>
+</md-list-item>

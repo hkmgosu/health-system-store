@@ -1,0 +1,48 @@
+<md-dialog flex="60"
+           flex-xs="100"
+           aria-label="Selección de despacho">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>
+                Selección de despacho
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button"
+                       ng-click="vm.close()"
+                       aria-label="Cancelar">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <p>Selecciona el despacho para asociar el paciente</p>
+            <md-list>
+                <md-list-item class="md-2-line"
+                              ng-click="vm.associate()">
+                    <div class="md-list-item-text md-offset"
+                         flex>
+                        <h3>Sin vehículo</h3>
+                    </div>
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item class="md-2-line"
+                              ng-repeat="remVehicle in vm.remVehicles"
+                              ng-click="vm.associate(remVehicle)">
+                    <md-icon md-font-icon="zmdi zmdi-truck"
+                             class="movil-icon"></md-icon>
+                    <div class="md-list-item-text"
+                         md-truncate
+                         flex>
+                        <h3>{{remVehicle.vehicle.name || remVehicle.particularDescription || 'Vehículo particular'}}</h3>
+                        <p md-truncate>{{remVehicle.establishment.name}}</p>
+                    </div>
+                    <md-button ng-class="remVehicle.status.type"
+                               ng-disabled="true">
+                        {{remVehicle.status.name}}
+                    </md-button>
+                </md-list-item>
+            </md-list>
+        </div>
+    </md-dialog-content>
+</md-dialog>

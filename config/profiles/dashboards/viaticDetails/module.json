@@ -1,0 +1,35 @@
+{
+    "name": "PRIVILEGES.VIATIC.DETAILS.NAME",
+    "description": "PRIVILEGES.VIATIC.DETAILS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.viatic-details",
+            "url": "/viaticos/detalles/:id",
+            "template": "<ssvq-viatic-details></ssvq-viatic-details>",
+            "params": {
+                "id": null,
+                "viatic": null
+            },
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "ViaticController.getDetails",
+                "WorkflowController.getEnabledStatusList",
+                "ViaticController.getViaticDetailPdf",
+                "ViaticController.getTimeline",
+                "ArchiveController.attachment",
+                "ArchiveController.attachmentByOwner"
+            ],
+            "update": [
+                "ViaticController.changeStatus",
+                "ViaticController.addComment",
+                "ArchiveController.uploadArchive"
+            ]
+        }
+    }
+}

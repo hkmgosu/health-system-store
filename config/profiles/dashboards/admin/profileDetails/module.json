@@ -1,0 +1,32 @@
+{
+    "name": "PRIVILEGES.PROFILE_DETAILS.NAME",
+    "description": "PRIVILEGES.PROFILE_DETAILS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "delete": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.profile-details",
+            "url": "/perfiles/detalles/:id",
+            "template": "<ssvq-profile-details></ssvq-profile-details>",
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "ProfileController.*"
+            ],
+            "delete": [
+                "ProfileController.delete"
+            ],
+            "update": [
+                "ProfileController.update",
+                "ProfileController.addEmployeeList",
+                "ProfileController.addAllEmployees",
+                "ProfileController.removeAllEmployees"
+            ]
+        }
+    }
+}

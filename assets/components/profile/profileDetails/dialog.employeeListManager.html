@@ -1,0 +1,50 @@
+<md-dialog aria-label="Agregar funcionarios al perfil"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <h4>Agregar funcionarios</h4>
+        </div>
+    </md-toolbar>
+    <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools">
+            <ssvq-employee-autocomplete on-select="vm.addEmployee"
+                                        clear-on-select="true"
+                                        label="Seleccionar funcionarios"
+                                        type="search"
+                                        flex></ssvq-employee-autocomplete>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="min-height: 300px;">
+        <md-list>
+            <md-list-item ng-repeat="employee in vm.employeeList">
+                <ssvq-employee-item-list employee="employee"
+                                         flex></ssvq-employee-item-list>
+                <md-button ng-click="vm.removeEmployee(employee)"
+                           class="md-warn md-raised">Quitar</md-button>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+        <p class="text-center"
+           ng-show="vm.employeeList.length == 0">La lista de funcionarios está vacía</p>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button ng-click="vm.cancel()"
+                   class="md-accent"
+                   aria-label="Cancelar">
+            Cancelar
+        </md-button>
+        <md-button ng-click="vm.confirm()"
+                   ng-disabled="vm.employeeList.length == 0"
+                   class="md-primary md-raised md-hue-1"
+                   aria-label="Confirmar">
+            Agregar seleccionados
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

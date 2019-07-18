@@ -1,0 +1,31 @@
+<div ng-repeat="(month, date) in vm.dates">
+    <span style="font-weight: 450"
+          class="md-subhead">{{month}}</span>
+    <md-divider class="margin-top-10"></md-divider>
+    <md-list layout="row"
+             layout-wrap>
+        <md-list-item class="md-2-line"
+                      flex-xs="100"
+                      flex-gt-xs="50"
+                      flex-gt-md="25"
+                      flex-gt-lg="20"
+                      ng-repeat="day in date">
+            <div class="md-avatar">
+                <h3>{{day.date | date:"dd"}}</h3>
+            </div>
+            <div class="md-list-item-text">
+                <h4 style="text-transform: capitalize;">
+                    {{day.date | date:"EEEE"}}
+                </h4>
+                <p ng-if="day.unity === 'day'">
+                    {{ day.quantity == 1 ? 'Día completo' : 'Día parcial ' }}
+                </p>
+                <p ng-if="day.unity === 'hour'">
+                    {{ day.quantityHuman }}
+                </p>
+            </div>
+        </md-list-item>
+    </md-list>
+    <div class="margin-10"
+         ng-if="!$last"></div>
+</div>

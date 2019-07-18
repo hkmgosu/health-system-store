@@ -1,0 +1,78 @@
+<md-dialog aria-label="Detalles de la cuenta"
+           flex="60"
+           flex-xs="100">
+    <form name="createForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 translate
+                    flex>ACCOUNT_PLAN.DIALOG.TITLE</h2>
+                <span flex></span>
+
+                <md-button class="md-icon-button"
+                           ng-click="cancel()"
+                           aria-label="Cancelar">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content class="md-padding">
+            <div layout="row">
+                <md-input-container class="md-block"
+                                    flex>
+                    <label translate>ACCOUNT_PLAN.TABLE.YEAR</label>
+                    <input ng-year
+                           name="year"
+                           type="number"
+                           ng-model="accountPlan.year"
+                           required>
+                    <div ng-messages="createForm.code.$error">
+                        <div ng-message="required">
+                            <span translate>ACCOUNT_PLAN.VALIDATOR.REQUIRED</span>
+                        </div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block"
+                                    flex>
+                    <label translate>ACCOUNT_PLAN.TABLE.CODE</label>
+                    <input ng-code
+                           name="code"
+                           type="text"
+                           ng-model="accountPlan.code"
+                           required>
+                    <div ng-messages="createForm.code.$error">
+                        <div ng-message="required">
+                            <span translate>ACCOUNT_PLAN.VALIDATOR.REQUIRED</span>
+                        </div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div>
+                <div flex
+                     layout-gt-sm="row">
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label for="description"
+                               translate>ACCOUNT_PLAN.TABLE.DESCRIPTION</label>
+                        <input type="text"
+                               name="description"
+                               ng-model="accountPlan.description"
+                               required>
+                        <div ng-messages="createForm.description.$error">
+                            <div ng-message="required">
+                                <span translate>ACCOUNT_PLAN.VALIDATOR.REQUIRED</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-raised md-primary"
+                       ng-click="confirm()"
+                       ng-disabled="createForm.$invalid"
+                       aria-label="CRUD.SAVE"
+                       translate="CRUD.SAVE"></md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

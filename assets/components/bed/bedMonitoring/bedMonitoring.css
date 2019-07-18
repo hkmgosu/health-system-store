@@ -1,0 +1,9 @@
+.bed-icon.enabled, .bed-icon .enabled, .bed-icon .enabled md-icon{
+    color: #66b346;
+}
+.bed-icon.disabled, .bed-icon .disabled, .bed-icon .disabled md-icon{
+    color: #747474;
+}
+.bed-icon.using, .bed-icon .using,.bed-icon .using md-icon{
+    color: #c95d5d;
+}

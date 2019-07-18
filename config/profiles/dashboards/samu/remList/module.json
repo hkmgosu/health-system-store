@@ -1,0 +1,34 @@
+{
+    "name": "PRIVILEGES.SAMU.REM.LIST.NAME",
+    "description": "PRIVILEGES.SAMU.REM.LIST.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "create": false,
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.rem-list",
+            "url": "/samu/incidentes",
+            "template": "<ssvq-rem-list-view></ssvq-rem-list-view>",
+            "data": {
+                "layout": {
+                    "sideMenuSize": "icon"
+                }
+            },
+            "priority": 1
+        },
+        "_controllers": {
+            "read": [
+                "RemController.getDynamic",
+                "CommuneController.getAutocomplete",
+                "WorkshiftController.getCurrentWorkshift"
+            ],
+            "create": [
+                "RemController.newRem",
+                "RemController.saveRejected"
+            ],
+            "update": []
+        }
+    }
+}

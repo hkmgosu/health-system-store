@@ -1,0 +1,14 @@
+<img style="border-radius:50%;overflow:hidden;"
+     ng-if="vm.employee.hasProfilePicture"
+     ng-src="/employee/downloadProfilePicture/{{vm.employee.id}}?{{vm.timestamp}}">
+<img style="border-radius:50%;overflow:hidden;"
+     ng-if="!vm.employee"
+     src="/assets/images/profile-avatar.png">
+<md-letter-avatar ng-if="!vm.employee.hasProfilePicture && vm.employee"
+                  length="1"
+                  font-size="18px"
+                  shape="round"
+                  data="{{vm.employee.fullname}}"
+                  layout="row"
+                  layout-align="center center">
+</md-letter-avatar>

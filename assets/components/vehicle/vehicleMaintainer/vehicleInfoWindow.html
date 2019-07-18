@@ -1,0 +1,15 @@
+<div layout="column"
+     layout-padding>
+    <span class="md-title">
+        {{parameter.vehicleSelected.name}}
+    </span>
+    <md-divider></md-divider>
+    <div layout="column">
+        <md-button class="md-primary"
+                   ng-click="parameter.showVehicle(parameter.vehicleSelected)">Ver detalles de vehículo</md-button>
+        <md-button class="md-primary"
+                   ng-if="parameter.vehicleSelected.currentRem"
+                   href="/#/samu/incidentes/{{parameter.vehicleSelected.currentRem}}"
+                   target="_BLANK">Ir al incidente actual</md-button>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<md-list-item class="md-2-line animated flipInX"
+              ng-click="vm.showVehicleDialog($event, vm.remVehicle)"
+              aria-label="Vehículo">
+    <md-icon md-font-icon="zmdi zmdi-truck"
+             class="movil-icon md-avatar-icon">
+        <div class="bottom-border"></div>
+    </md-icon>
+    <div class="md-list-item-text"
+         md-truncate
+         flex>
+        <h3>
+            <span ng-show="vm.remVehicle.isPrivate"
+                  class="private-movil-badge">p</span>
+            <span flex>{{vm.remVehicle.vehicle.name || vm.remVehicle.particularDescription || '...'}}</span>
+            <span class="rem-vehicle-type">
+                {{vm.remVehicle.deliveredType || vm.remVehicle.requestedType}}
+            </span>
+        </h3>
+        <div layout="row"
+             layout-xs="column"
+             layout-align="start start"
+             style="margin-top: 5px;">
+            <p md-truncate
+               class="margin-right-10"
+               hide-xs>{{vm.remVehicle.establishment.name || '--'}} &nbsp;•</p>
+            <ssvq-participant-list-avatar participant-list="vm.remVehicle.participantList"
+                                          avatar-class="mini-avatar"></ssvq-participant-list-avatar>
+        </div>
+    </div>
+    <md-button ng-click="vm.onStatusClick(vm.remVehicle, $event)"
+               class="md-primary"
+               ng-class="vm.remVehicle.status.type"
+               ng-disabled="vm.remVehicle.status.type === 'salidafinalizada' || vm.remVehicle.status.id == 10">
+        <span>{{vm.remVehicle.status.name}}</span>
+        <md-tooltip>Cambiar estado del despacho</md-tooltip>
+    </md-button>
+</md-list-item>

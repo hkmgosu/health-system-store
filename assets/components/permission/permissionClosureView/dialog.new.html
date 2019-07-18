@@ -1,0 +1,127 @@
+<md-dialog flex="60"
+           flex-md="80"
+           flex-sm="90"
+           flex-xs="100"
+           id="new-closure-dialog"
+           class="mobile-fullwidth-dialog"
+           aria-label="Nuevo cierre"
+           ng-form="vm.closureForm">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class='md-icon-button'
+                       ng-click='vm.close()'>
+                <md-icon md-font-icon='zmdi zmdi-arrow-left'></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <span class='md-subhead'
+                  flex>Nuevo cierre</span>
+            <md-button ng-click='vm.save()'
+                       ng-disabled="!vm.tempApproved || vm.tempApproved.length === 0">
+                Generar cierre
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-padding">
+            <md-input-container class="md-block"
+                                flex="100">
+                <label>{{ ::('Observación' | translate) }}</label>
+                <textarea rows="2"
+                          ng-model="vm.observation">{{ 'Observación' | translate }}</textarea>
+            </md-input-container>
+            <div layout="row"
+                 layout-align="space-between center"
+                 class="md-inline-form">
+                <div flex>
+                    <md-input-container>
+                        <label>Desde</label>
+                        <md-datepicker ng-model="vm.fromDate"
+                                       ng-change="vm.filter()"
+                                       md-min-date="vm.minDate"
+                                       md-max-date="vm.maxDate"
+                                       required
+                                       class="margin-top-0"></md-datepicker>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Hasta</label>
+                        <md-datepicker ng-model="vm.untilDate"
+                                       ng-change="vm.filter()"
+                                       md-min-date="vm.minDate"
+                                       md-max-date="vm.maxDate"
+                                       required
+                                       class="margin-top-0"></md-datepicker>
+                    </md-input-container>
+                </div>
+            </div>
+            <div style="overflow: auto; max-height: 264px;">
+                <md-list>
+                    <md-list-item class="md-3-line"
+                                  ng-repeat="permission in vm.tempApproved"
+                                  target="_blank"
+                                  ng-href="#/permisos/detalles/{{ ::permission.id }}">
+
+                        <ssvq-employee-avatar employee="permission.owner"
+                                              class="margin-right-10"></ssvq-employee-avatar>
+
+                        <div class="md-list-item-text"
+                             md-truncate
+                             flex>
+                            <h3 style="font-weight:500;"
+                                md-colors="{color: 'primary-hue-1'}">
+                                {{ ::permission.owner.fullname }}
+                            </h3>
+                            <h4>
+                                <!-- Unidad -->
+                                <i class="zmdi zmdi-group-work"
+                                   style="padding-right: 3px; font-size: 15px; color: #89aa81"></i>
+                                {{ ::permission.unit.name }}
+                                <span class="customBullet">•</span>
+
+                                <!-- Tipo -->
+                                <i class="zmdi zmdi-label-alt"
+                                   style="padding-right: 3px; font-size: 15px; color: #b47781"></i>
+                                {{ ::permission.type.name }}
+                            </h4>
+                            <p>
+                                #{{permission.id}}
+                                <span class="customBullet">•</span>
+                                <i class="zmdi zmdi-calendar-alt"></i>
+                                <span>{{permission.fromDate | date:"dd 'de' MMM"}}</span>
+                                <span ng-if="permission.fromDate != permission.untilDate"> al
+                                    {{permission.untilDate | date:"dd 'de' MMM"}}</span>
+                            </p>
+                        </div>
+                        <div class="md-secondary"
+                             layout="row"
+                             layout-align="center center">
+                            <span class="md-body-2">{{permission.status.name}}</span>
+                            <div style="height: 38px;
+                                   width: 1px;
+                                   margin: 0 15px;
+                                   background: #acacac63;"></div>
+                            <md-button class="md-secondary md-icon-button"
+                                       ng-click="vm.remove(permission)">
+                                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                                <md-tooltip>Quitar de la lista</md-tooltip>
+                            </md-button>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button aria-label="Cancelar"
+                   class="md-accent"
+                   ng-click="vm.close()">
+            <span>Cancelar</span>
+        </md-button>
+        <md-button aria-label="Enviar"
+                   ng-click="vm.save()"
+                   ng-disabled="vm.closureForm.$invalid"
+                   class="md-primary">
+            <span>Generar cierre</span>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

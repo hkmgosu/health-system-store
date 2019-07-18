@@ -1,0 +1,27 @@
+{
+    "name": "PRIVILEGES.ADVERSEEVENTSMANAGEMENT.SUPERVISION.NAME",
+    "description": "PRIVILEGES.ADVERSEEVENTSMANAGEMENT.SUPERVISION.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.adverse-event-supervision",
+            "url": "/eventos-adversos/supervision",
+            "template": "<ssvq-adverse-event-list-view></ssvq-adverse-event-list-view>"
+        },
+        "_controllers": {
+            "read": [
+                "AdverseEventController.*",
+                "EmployeeController.getAdverseEventSupervised",
+                "PatientController.getList",
+                "PatientController.getExternalPatient",
+                "UnitController.getAutocomplete",
+                "MedicineController.*"
+            ],
+            "create": [
+                "AdverseEventController.createEvent"
+            ]
+        }
+    }
+}

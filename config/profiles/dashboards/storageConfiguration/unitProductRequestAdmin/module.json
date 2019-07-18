@@ -1,0 +1,29 @@
+{
+    "name": "PRIVILEGES.STORAGE_UNIT_PRODUCT_REQUEST.NAME",
+    "description": "PRIVILEGES.STORAGE_UNIT_PRODUCT_REQUEST.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-unit-product-request-admin",
+            "url": "/bodega/bodegas-personal",
+            "template": "<ssvq-storage-unit-product-request-admin></ssvq-storage-unit-product-request-admin>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/UnitProductRequestController.getAll",
+                "Storage/UnitProductsManagerController.getStorages",
+                "EmployeeController.getList"
+            ],
+            "create": [
+                "Storage/UnitProductRequestController.create"
+            ],
+            "delete": [
+                "Storage/UnitProductRequestController.delete"
+            ]
+        }
+    }
+}

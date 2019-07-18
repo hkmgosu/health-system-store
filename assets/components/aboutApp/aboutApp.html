@@ -1,0 +1,116 @@
+<div layout="column"
+     layout-padding>
+    <div>
+        <h4 class="md-title">Resúmen</h4>
+        <p class="text-center padding-left-10 padding-right-10">
+            Es un proyecto informático cuya finalidad es integrar el ciclo de vida de los requerimientos que llegan al servicio de salud
+            bajo un paradigma unificado de desarrollo, ágil y motivado por la adopción transversal de buenas prácticas y
+            herramientas de vanguardia. El foco de la solución entregada atiende esencialmente al dinamismo con que van surgiendo
+            dichos requerimientos en la vida real.
+        </p>
+    </div>
+    <md-subheader class="md-primary overlay-5">Historia del Proyecto</md-subheader>
+    <div layout="row">
+        <md-card flex>
+            <md-card-content>
+                <h2>Últimos lanzamientos</h2>
+                <md-list>
+                    <md-list-item ng-click="vm.viewRelease()">
+                        v0.6.0 - algo más se hizo
+                    </md-list-item>
+                    <md-list-item ng-click="vm.viewRelease()">
+                        v0.5.0 - algo se hizo
+                    </md-list-item>
+                </md-list>
+            </md-card-content>
+        </md-card>
+        <md-card flex>
+            <md-card-content>
+                <h2>Próximos lanzamientos</h2>
+                <md-list>
+                    <md-list-item ng-click="vm.viewRelease()">
+                        vx.x.x - Módulo Rem Samu
+                    </md-list-item>
+                    <md-list-item ng-click="vm.viewRelease()">
+                        vx.x.x - Dirección sin Papel 2.0
+                    </md-list-item>
+                </md-list>
+            </md-card-content>
+        </md-card>
+        <md-card flex>
+            <md-card-content>
+                <h2>Últimos cambios</h2>
+                <md-list>
+                    <md-list-item ng-click="vm.viewRelease()">
+                        Fotos de perfil
+                    </md-list-item>
+                    <md-list-item ng-click="vm.viewRelease()">
+                        Contador de comentarios
+                    </md-list-item>
+                </md-list>
+            </md-card-content>
+        </md-card>
+    </div>
+    <md-subheader class="md-primary overlay-5">Equipo</md-subheader>
+    <div>
+        <div layout="row">
+            <md-card flex>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Pedro Hernandez Letelier</span>
+                        <span class="md-subhead">Jefe</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-sm card-media"></div>
+                    </md-card-title-media>
+                </md-card-title>
+            </md-card>
+            <md-card flex>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Jaime Cisternas Mutis</span>
+                        <span class="md-subhead">Desarrollador</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-sm card-media">
+                            <img src="https://lh3.googleusercontent.com/-0kgLGx5vQtc/AAAAAAAAAAI/AAAAAAAADNk/ZyD8WwFX1EQ/s120-c/photo.jpg">
+                        </div>
+                    </md-card-title-media>
+                </md-card-title>
+            </md-card>
+            <md-card flex>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Nicolás Albornoz</span>
+                        <span class="md-subhead">Desarrollador</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-sm card-media">
+                            <img src="https://lh6.googleusercontent.com/-HrKCDT__IoM/AAAAAAAAAAI/AAAAAAAAAAA/7Qd61B6Ij1M/s128-c-k/photo.jpg">
+                        </div>
+                    </md-card-title-media>
+                </md-card-title>
+            </md-card>
+        </div>
+    </div>
+    <md-card flex>
+        <md-card-content ng-form="vm.contactForm">
+            <h2>Contacto</h2>
+            <md-input-container class="md-block">
+                <label>Mensaje</label>
+                <textarea name="message"
+                          ng-model="vm.contact.message"
+                          rows="5"
+                          md-maxlength="1800"></textarea>
+                <div ng-messages="vm.contactForm.message.$error"
+                     role="alert">
+                    <div ng-message="md-maxlength">
+                        <span>Ha superado el máximo permitido</span>
+                    </div>
+                </div>
+            </md-input-container>
+            <md-button type="submit"
+                       class="md-primary">Enviar</md-button>
+        </md-card-content>
+    </md-card>
+</div>

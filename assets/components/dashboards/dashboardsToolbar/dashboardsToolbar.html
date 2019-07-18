@@ -1,0 +1,61 @@
+<div class="md-toolbar-tools"
+     layout="row">
+    <md-button class="md-icon-button"
+               ng-if="!vm.hideMenuButton()"
+               ng-click="vm.openSideNav('left')"
+               aria-label="side navigation">
+        <md-icon md-font-icon="zmdi zmdi-menu"></md-icon>
+    </md-button>
+    <div class="ssvq-breadcrumbs"
+         layout="column"
+         layout-align="center first"
+         flex>
+        <span ng-repeat="crumb in vm.breadcrumbs.crumbs"
+              ng-class="{'md-caption': !$last, 'md-body-2': $last}"
+              md-truncate>
+            {{crumb.name | translate}}&nbsp;
+            <md-icon md-font-icon="zmdi zmdi-chevron-right"
+                     ng-if="!$last"></md-icon>
+        </span>
+    </div>
+    <md-button class="md-icon-button toolbar-button"
+               ng-click="vm.toggleNotificationsTab(1)">
+        <md-icon md-font-icon="fa fa-bell-o"></md-icon>
+        <span class="toolbar-button-badge"
+              style="background:#ef4143;"
+              ng-show="notifications > 0">{{notifications}}</span>
+        <md-tooltip md-direction="left">Tus notificaciones</md-tooltip>
+    </md-button>
+    <!--md-button class="md-icon-button toolbar-button"
+               ng-click="vm.toggleFullScreen()"
+               aria-label="toggle fullscreen">
+        <md-icon md-font-icon=""
+                 ng-class="vm.fullScreenIcon"></md-icon>
+        <md-tooltip>Pantalla completa</md-tooltip>
+    </md-button-->
+    <md-button class="md-icon-button toolbar-button"
+               href="/contactos"
+               target="_blank"
+               aria-label="Ver contactos SSVQ">
+        <md-icon style="padding-top: 6px;"
+                 md-font-icon="fa fa-address-book-o"></md-icon>
+        <md-tooltip md-direction="left">Ver contactos SSVQ</md-tooltip>
+    </md-button>
+    <md-menu md-offset="0 2"
+             layout="row"
+             layout-align="center center"
+             class="margin-left-10">
+        <ssvq-employee-avatar ng-click="$mdOpenMenu()"
+                              employee="::vm.employee">
+        </ssvq-employee-avatar>
+        <md-menu-content width="4">
+            <md-subheader>{{vm.employee.fullname}}</md-subheader>
+            <md-menu-item>
+                <md-button href="#/mi-cuenta">Mi cuenta</md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button ng-click="vm.logout()">Salir</md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+</div>

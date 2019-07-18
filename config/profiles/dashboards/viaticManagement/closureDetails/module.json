@@ -1,0 +1,27 @@
+{
+    "name": "PRIVILEGES.VIATICMANAGEMENT.CLOSURE_DETAILS.NAME",
+    "description": "PRIVILEGES.VIATICMANAGEMENT.CLOSURE_DETAILS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.viatic-closure-details",
+            "url": "/viaticos/cierres/detalles/:id",
+            "template": "<ssvq-viatic-closure-details-view></ssvq-viatic-closure-details-view>",
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "ViaticClosureController.getDetails",
+                "EmployeeController.getProfileById",
+                "ViaticController.getViaticListPdf",
+                "ViaticController.getViaticsDetailPdfByClosure"
+            ],
+            "update": [
+                "ViaticClosureController.confirm"
+            ]
+        }
+    }
+}

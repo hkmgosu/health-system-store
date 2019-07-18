@@ -1,0 +1,65 @@
+<h4 ng-if="!vm.detail.product && vm.detail.productDescription">{{vm.detail.productDescription}}
+    <span class="badge codigo">Código: {{vm.detail.productCode}}</span>
+</h4>
+
+<div layout="row"
+     ng-if="vm.detail.product">
+    <h4 flex><b>{{vm.detail.product.productCode}}</b> : {{vm.detail.product.description}}</h4>
+    <md-button ng-click="vm.removeProduct()"
+               ng-show="vm.detail.productDescription"
+               class="md-warn margin-0">
+        <md-icon md-font-icon="fa fa-times"></md-icon>
+    </md-button>
+</div>
+
+<ssvq-product-autocomplete flex-md="100"
+                           flex="70"
+                           ng-if="!vm.detail.product"
+                           product-type-search="vm.productTypeSearch"
+                           on-select="vm.onSelectProduct">
+</ssvq-product-autocomplete>
+
+<div layout="row">
+    <md-input-container flex>
+        <label for="lot">Lote</label>
+        <input type="text"
+               name="lot"
+               ng-disabled="vm.status>1"
+               ng-model="vm.detail.lot">
+    </md-input-container>
+
+    <md-input-container flex>
+        <label for="expiration">Fecha Vencimiento</label>
+        <md-datepicker ng-model="vm.detail.expiration"
+                       ng-disabled="vm.status>1"
+                       md-aria-label="Fecha Vencimiento">
+        </md-datepicker>
+    </md-input-container>
+</div>
+
+<div layout="row">
+    <md-input-container flex>
+        <label for="quantity">Cantidad</label>
+        <input type="number"
+               name="quantity"
+               required
+               ng-disabled="vm.status>1"
+               ng-model="vm.detail.quantity">
+        <div ng-messages="formDetail.quantity.$error">
+            <div ng-message="required">
+                <span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+            </div>
+        </div>
+    </md-input-container>
+
+
+    <md-input-container flex
+                        class="md-block">
+        <label for="priceItem">Total Neto Item</label>
+        <input type="number"
+               name="priceTotal"
+               required
+               ng-disabled="vm.status>1"
+               ng-model="vm.detail.priceItem">
+    </md-input-container>
+</div>

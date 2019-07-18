@@ -1,0 +1,25 @@
+<div layout="column"
+     layout-padding>
+    <span class="md-title">
+        {{parameter.establishmentSelected.name}} {{(parameter.establishmentSelected.shortname) ? '(' + parameter.establishmentSelected.shortname + ')' : ''}}
+    </span>
+    <span class="md-subhead">{{parameter.establishmentSelected.description}}</span>
+    <div ng-show="parameter.establishmentSelected.email">
+        <md-icon md-font-icon="zmdi zmdi-email"
+                 class="margin-right-10"></md-icon>
+        <a href="mailto:{{parameter.establishmentSelected.email}}">{{parameter.establishmentSelected.email}}</a>
+    </div>
+    <div ng-show="parameter.establishmentSelected.phone">
+        <md-icon md-font-icon="zmdi zmdi-phone"
+                 class="margin-right-10"></md-icon>
+        <a href="tel:+{{parameter.establishmentSelected.phone}}">{{parameter.establishmentSelected.phone}}</a>
+    </div>
+    <div ng-show="parameter.establishmentSelected.website">
+        <md-icon md-font-icon="zmdi zmdi-globe"
+                 class="margin-right-10"></md-icon>
+        <a href="{{parameter.establishmentSelected.website}}"
+           target="_blank">
+            Ir al sitio web
+        </a>
+    </div>
+</div>

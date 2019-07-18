@@ -1,0 +1,19 @@
+md-select.md-no-underline .md-select-value {
+    border-bottom-color: transparent;
+}
+
+.priority-selector.S1{
+    color: #8B0202 !important;
+}
+.priority-selector.S2{
+    color: #B66400 !important;
+}
+.priority-selector.S3{
+    color: #C0AD01 !important;
+}
+.priority-selector.S4{
+    color: #00740F !important;
+}
+.priority-selector.S5{
+    color: #777777 !important;
+}

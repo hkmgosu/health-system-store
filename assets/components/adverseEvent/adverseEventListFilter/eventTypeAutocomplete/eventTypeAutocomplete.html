@@ -1,0 +1,30 @@
+<div flex
+     class="full-width">
+    <md-autocomplete md-delay='500'
+                     md-selected-item="vm.tempSelected"
+                     ng-attr-md-floating-label="{{vm.label || 'Buscar'}}"
+                     md-selected-item-change="vm.myOnSelect(vm.tempSelected)"
+                     md-search-text="vm.searchText"
+                     md-items="item in vm.getMatches(vm.searchText)"
+                     md-item-text="vm.selected.name"
+                     md-select-on-match="false"
+                     md-min-length="vm.minLength"
+                     md-menu-class="autocomplete-custom-template"
+                     flex>
+        <md-item-template>
+            <div layout="column"
+                 layout-align="center start"
+                 flex>
+                <span md-highlight-text="vm.searchText"
+                      md-highlight-flags="^i"
+                      class="md-padding"
+                      style="white-space: normal;">{{item.name}}</span>
+            </div>
+        </md-item-template>
+        <md-not-found>
+            <div class="md-padding">
+                <span>{{'AUTOCOMPLETE.NOMATCHFOUND' | translate}}</span>
+            </div>
+        </md-not-found>
+    </md-autocomplete>
+</div>

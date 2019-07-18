@@ -1,0 +1,24 @@
+{
+    "name": "PRIVILEGES.VIATICMANAGEMENT.CLOSURE_TESORERIA.NAME",
+    "description": "PRIVILEGES.VIATICMANAGEMENT.CLOSURE_TESORERIA.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.viatic-closure-tesoreria",
+            "url": "/viaticos/cierres/tesoreria",
+            "template": "<ssvq-viatic-closure-view type='tesoreria'></ssvq-viatic-closure-view>"
+        },
+        "_controllers": {
+            "read": [
+                "ViaticClosureController.getList",
+                "ViaticController.getList"
+            ],
+            "create": [
+                "ViaticClosureController.create"
+            ]
+        }
+    }
+}

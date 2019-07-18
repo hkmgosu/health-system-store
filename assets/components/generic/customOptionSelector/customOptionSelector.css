@@ -1,0 +1,32 @@
+div.custom-option-list-item p {
+    font-size: 1.4rem;
+    color: #000000;
+}
+div.custom-option-list-item p {
+    margin-left: 20px;
+}
+div.custom-option-list-item .active p {
+    font-weight: bold;
+}
+div.custom-option-list-item .active md-icon {
+    display: block !important;
+}
+div.custom-option-list-item .md-errors-spacer {
+    min-height: auto;
+}
+.required-selector span::after{
+    content: " *";
+    font-size: 13px;
+    vertical-align: top;
+    color: red;
+}
+
+@media screen and (max-width: 600px) {
+    div.custom-option-list-item p {
+        margin-left: 0px;
+    }
+    div.custom-option-list-item md-list-item .md-list-item-inner {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}

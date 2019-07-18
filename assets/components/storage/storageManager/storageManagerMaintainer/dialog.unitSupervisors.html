@@ -1,0 +1,88 @@
+<md-dialog flex-gt-md="50"
+           flex="70"
+           flex-xs="100"
+           aria-label="Usuarios Autorizados">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <div layout="column">
+                <span class="md-subhead">Usuarios Autorizados</span>
+                <span class="md-caption">Unidad: {{vm.unit.name}}</span>
+            </div>
+            <div layout="row"
+                 layout-align="end center"
+                 flex>
+                <md-input-container class="md-block md-padding">
+                    <md-checkbox ng-model="vm.unit.isPharmaceutical"
+                                 class="margin-0"
+                                 ng-change="vm.updateUnit()"
+                                 ng-disabled="!vm.unit.storage"
+                                 aria-label="Farmacia">
+                        Farmacia
+                    </md-checkbox>
+                </md-input-container>
+            </div>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools">
+                <ssvq-employee-autocomplete on-select="vm.addStorageManager"
+                                            type="search"
+                                            flex
+                                            clear-on-select="true"></ssvq-employee-autocomplete>
+            </div>
+        </md-toolbar>
+        <md-list>
+            <md-list-item ng-repeat="item in vm.storageManagers"
+                          ng-click="null"
+                          class="md-3-line">
+                <ssvq-employee-avatar employee="item.employee"
+                                      class="md-avatar">
+                </ssvq-employee-avatar>
+
+                <div class="md-list-item-text"
+                     layout="column">
+                    <h3 md-highlight-text="searchText"
+                        md-highlight-flags="gi">{{item.employee.fullname}}</h3>
+                    <p>
+                        <md-checkbox class="md-primary padding-0 margin-0"
+                                     ng-model="item.isAdmin"
+                                     style="transform: scale(.8);"
+                                     ng-change="vm.updateStorageManager(item)"
+                                     aria-label="jefe bodega">
+                            Jefe Bodega
+                        </md-checkbox>
+                        <md-checkbox class="md-primary padding-0 margin-0"
+                                     ng-model="item.isPharmacyBoss"
+                                     ng-if="vm.unit.isPharmaceutical"
+                                     style="transform: scale(.8);"
+                                     ng-change="vm.updateStorageManager(item)"
+                                     aria-label="jefe farmacia">
+                            Jefe de Farmacia
+                        </md-checkbox>
+                    </p>
+                </div>
+
+                <md-button class="md-warn md-secondary md-raised"
+                           ng-click="vm.rmStorageManager(item.employee)">
+                    Quitar
+                </md-button>
+            </md-list-item>
+
+        </md-list>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <p class="text-center"
+           ng-if="vm.storageManagers.length === 0 && !vm.loading">
+            No hay usuarios autorizados
+        </p>
+        <ssvq-loading ng-if="!vm.storageManagers || vm.loading"
+                      flex>
+        </ssvq-loading>
+    </md-dialog-actions>
+</md-dialog>

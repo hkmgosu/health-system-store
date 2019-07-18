@@ -1,0 +1,122 @@
+<div class="margin-bottom-10">
+    <span class="md-title">Actualiza tus datos para ingresar</span>
+</div>
+<form name="saveForm"
+      novalidate
+      ng-submit="saveForm.$valid && vm.firstUpdate(vm.temp)">
+    <div flex
+         layout-gt-sm="row">
+        <md-input-container class="md-block"
+                            flex>
+            <label for="name"
+                   translate>EPD.NAME.LABEL</label>
+            <input type="text"
+                   name="name"
+                   label="name"
+                   ng-model="vm.temp.name"
+                   required>
+            <div ng-messages="saveForm.name.$error">
+                <div ng-message="required"><span translate>EPD.NAME.REQUIRED</span></div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block"
+                            flex>
+            <label translate>EPD.LASTNAME.LABEL</label>
+            <input type="text"
+                   name="lastname"
+                   ng-model="vm.temp.lastname"
+                   required>
+            <div ng-messages="saveForm.lastname.$error">
+                <div ng-message="required"><span translate>EPD.LASTNAME.REQUIRED</span></div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block"
+                            flex>
+            <label translate>EPD.MLASTNAME.LABEL</label>
+            <input type="text"
+                   name="mlastname"
+                   ng-model="vm.temp.mlastname"
+                   required>
+        </md-input-container>
+    </div>
+    <div flex
+         layout-gt-sm="row"
+         class="md-inline-form">
+        <md-input-container class="md-block"
+                            flex-gt-sm="50">
+            <label translate>EPD.EMAIL.LABEL</label>
+            <input type="email"
+                   name="email"
+                   ng-model="vm.temp.email"
+                   unique
+                   init="{{vm.temp.email}}">
+            <div ng-messages="saveForm.email.$error">
+                <div ng-message="email"><span translate>EPD.EMAIL.INVALID_EMAIL</span></div>
+                <div ng-message="unique"><span translate>EPD.EMAIL.UNIQUE</span></div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block"
+                            flex-gt-sm="50">
+            <label translate>EPD.PERSONAL_EMAIL.LABEL</label>
+            <input type="email"
+                   name="personalEmail"
+                   ng-model="vm.temp.personalEmail">
+            <div ng-messages="saveForm.personalEmail.$error">
+                <div ng-message="email"><span translate>EPD.PERSONAL_EMAIL.INVALID_EMAIL</span></div>
+            </div>
+        </md-input-container>
+    </div>
+    <div flex
+         layout-gt-sm="row"
+         class="md-inline-form">
+        <md-input-container class="md-block"
+                            flex>
+            <label translate>EPD.ANNEXE.LABEL</label>
+            <input type="text"
+                   name="annexe"
+                   ng-model="vm.temp.annexe">
+        </md-input-container>
+    </div>
+    <div layout-gt-sm="row"
+         flex>
+        <md-input-container class="md-block"
+                            flex>
+            <label translate>EPD.PASSWORD.LABEL</label>
+            <input type="password"
+                   name="password"
+                   ng-model="vm.temp.password"
+                   ng-minlength="8"
+                   required>
+            <div ng-messages="saveForm.password.$error"
+                 ng-show="saveForm.password.$touched"
+                 md-auto-hide="false">
+                <div ng-message="required"><span translate>EPD.PASSWORD.REQUIRED</span></div>
+                <div ng-message="minlength"><span translate>EPD.PASSWORD.MINLENGTH</span></div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block"
+                            flex>
+            <label translate>EPD.PASSWORD_CONFIRM.LABEL</label>
+            <input type="password"
+                   name="confirm"
+                   ng-model="vm.temp.confirm"
+                   ng-minlength="8"
+                   tri-same-password="saveForm.password"
+                   required>
+            <div ng-messages="saveForm.confirm.$error"
+                 ng-show="saveForm.confirm.$touched"
+                 md-auto-hide="false">
+                <div ng-message="required"><span translate>EPD.PASSWORD_CONFIRM.REQUIRED</span></div>
+                <div ng-message="minlength"><span translate>EPD.PASSWORD_CONFIRM.MINLENGTH</span></div>
+                <div ng-message="samePassword"><span translate>EPD.PASSWORD_CONFIRM.SAMEPASSWORD</span></div>
+            </div>
+        </md-input-container>
+    </div>
+    <div layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.logout();">Salir</md-button>
+        <md-button type="submit"
+                   ng-disabled="saveForm.$submitted && saveForm.$invalid"
+                   class="md-primary">Actualizar mis datos</md-button>
+    </div>
+</form>

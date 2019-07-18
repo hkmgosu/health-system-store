@@ -1,0 +1,144 @@
+<md-toolbar md-theme="white">
+    <div class="md-toolbar-tools">
+        <md-icon md-font-icon="fa fa-filter"></md-icon>
+        <h2 flex>Filtros</h2>
+        <md-button ng-click="vm.cleanFilters()">Limpiar</md-button>
+    </div>
+</md-toolbar>
+<div class="padding-left-10 padding-right-10">
+    <md-input-container class="md-block ">
+        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+        <label>Buscar recurso</label>
+        <input ng-model="vm.selected.searchText">
+    </md-input-container>
+</div>
+<md-subheader>Más filtros</md-subheader>
+<md-list>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h4>Establecimiento</h4>
+            <md-chips ng-model="vm.selected.establishment"
+                      md-autocomplete-snap
+                      md-require-match="true">
+                <md-autocomplete md-selected-item="vm.filterEstablishment.selectedItem"
+                                 md-search-text="vm.filterEstablishment.searchText"
+                                 md-items="item in vm.filterEstablishment.getItems(vm.filterEstablishment.searchText)"
+                                 placeholder="Buscar"
+                                 md-item-text="item.name">
+                    <md-item-template>
+                        <div class="md-padding">
+                            <span md-highlight-text="vm.filterEstablishment.searchText"
+                                  md-highlight-flags="i">{{item.name}}</span>
+                        </div>
+                    </md-item-template>
+                </md-autocomplete>
+                <md-chip-template>
+                    <span>
+                        <strong>{{$chip.name}}</strong>
+                    </span>
+                </md-chip-template>
+            </md-chips>
+        </div>
+    </md-list-item>
+    <md-divider></md-divider>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h4>Unidad</h4>
+            <md-chips ng-model="vm.selected.units"
+                      md-autocomplete-snap
+                      md-require-match="true">
+                <md-autocomplete md-selected-item="vm.filterUnit.selectedItem"
+                                 md-search-text="vm.filterUnit.searchText"
+                                 md-items="item in vm.filterUnit.getItems(vm.filterUnit.searchText)"
+                                 md-item-text="item.name"
+                                 placeholder="Buscar">
+                    <md-item-template>
+                        <div class="md-padding">
+                            <span md-highlight-text="vm.filterUnit.searchText"
+                                  md-highlight-flags="i">{{item.name}}</span>
+                        </div>
+                    </md-item-template>
+                </md-autocomplete>
+                <md-chip-template>
+                    <span>{{$chip.name}}</span>
+                </md-chip-template>
+            </md-chips>
+        </div>
+    </md-list-item>
+    <md-divider></md-divider>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h4>Funcionario</h4>
+            <md-chips ng-model="vm.selected.employees"
+                      md-autocomplete-snap
+                      md-require-match="true">
+                <md-autocomplete md-selected-item="vm.filterEmployee.selectedItem"
+                                 md-search-text="vm.filterEmployee.searchText"
+                                 md-items="item in vm.filterEmployee.getItems(vm.filterEmployee.searchText)"
+                                 md-item-text="item.fullname"
+                                 placeholder="Buscar">
+                    <md-item-template>
+                        <ssvq-employee-item-list employee="item"></ssvq-employee-item-list>
+                    </md-item-template>
+                </md-autocomplete>
+                <md-chip-template>
+                    <span>{{$chip.fullname}}</span>
+                </md-chip-template>
+            </md-chips>
+        </div>
+    </md-list-item>
+    <md-divider></md-divider>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h4>Tipo</h4>
+            <md-chips ng-model="vm.selected.type"
+                      md-autocomplete-snap
+                      md-require-match="true">
+                <md-autocomplete md-selected-item="vm.filterType.selectedItem"
+                                 md-search-text="vm.filterType.searchText"
+                                 md-items="item in vm.filterType.getItems(vm.filterType.searchText)"
+                                 md-item-text="item.name"
+                                 md-min-length="0"
+                                 placeholder="Buscar">
+                    <md-item-template>
+                        <div class="md-padding">
+                            <span md-highlight-text="vm.filterType.searchText">{{item.name}}</span>
+                        </div>
+                    </md-item-template>
+                </md-autocomplete>
+                <md-chip-template>
+                    <span>
+                        <strong>{{$chip.name}}</strong>
+                    </span>
+                </md-chip-template>
+            </md-chips>
+        </div>
+    </md-list-item>
+    <md-divider></md-divider>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h4>Estado</h4>
+            <md-chips ng-model="vm.selected.status"
+                      md-autocomplete-snap
+                      md-require-match="true">
+                <md-autocomplete md-selected-item="vm.filterStatus.selectedItem"
+                                 md-search-text="vm.filterStatus.searchText"
+                                 md-items="item in vm.filterStatus.getItems(vm.filterStatus.searchText)"
+                                 md-item-text="item.name"
+                                 md-min-length="0"
+                                 placeholder="Buscar">
+                    <md-item-template>
+                        <div class="md-padding">
+                            <span md-highlight-text="vm.filterStatus.searchText">{{item.name}}</span>
+                        </div>
+                    </md-item-template>
+                </md-autocomplete>
+                <md-chip-template>
+                    <span>
+                        <strong>{{$chip.name}}</strong>
+                    </span>
+                </md-chip-template>
+            </md-chips>
+        </div>
+    </md-list-item>
+</md-list>

@@ -1,0 +1,19 @@
+#rem-vehicle-route-map{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#rem-vehicle-route-map .angular-google-map {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+#rem-vehicle-route-map .angular-google-map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

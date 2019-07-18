@@ -1,0 +1,160 @@
+<md-card ng-show="vm.locations.length==0"
+		 class="md-warn">
+	<md-card-content>No tiene stock de este producto</md-card-content>
+</md-card>
+
+<form name="vm.formShipping"
+	  ng-show="vm.detail.quantity > vm.detail.quantityReceived">
+	<div layout-gt-xs="row">
+		<md-input-container flex
+							class="md-block">
+			<label for="location">Ubicación</label>
+			<md-select ng-model="vm.location"
+					   name="location"
+					   required>
+				<md-option ng-repeat="location in vm.locations"
+						   ng-value="location.id">{{location.description}}</md-option>
+			</md-select>
+			<div ng-messages="vm.formShipping.location.$error">
+				<div ng-message="required">{{'PRODUCT_REQUEST.VALIDATOR.REQUIRED'|translate}}</div>
+			</div>
+		</md-input-container>
+
+		<md-autocomplete md-items="productLot in vm.productLots | filter:{location:vm.location}"
+						 md-min-length="0"
+						 md-input-name="productLot"
+						 md-no-cache="vm.noCache"
+						 md-require-match
+						 md-clear-button="true"
+						 md-item-text="'Lote: ' + productLot.lot"
+						 md-selected-item="vm.productLot"
+						 md-floating-label="Lote"
+						 class="md-block"
+						 flex
+						 required>
+			<md-item-template>
+				<div layout="row"
+					 layout-align="start center"
+					 style="color: {{productLot.expiration <= vm.currentDate ? 'red':'green'}}"
+					 flex>
+					<div flex
+						 layout="column"
+						 class="md-padding md-3-line"
+						 style="overflow: hidden;">
+						<div layout="row">
+							<div flex>Lote: {{productLot.lot}}</div>
+							<div flex>Stock: {{productLot.stock}}</div>
+						</div>
+						<div class="md-caption">
+							Vencimiento: {{productLot.expiration|date:'dd/MM/yyyy'}}
+						</div>
+						<div class="md-caption"
+							 ng-if="productLot.productPack">
+							{{productLot.productPack.fantasyName}}
+							{{productLot.productPack.packtype.description}}
+							{{productLot.productPack.quantity}}
+						</div>
+					</div>
+				</div>
+				<md-divider></md-divider>
+			</md-item-template>
+
+			<div ng-messages="vm.formShipping.productLot.$error">
+				<div ng-message="required">{{'PRODUCT_REQUEST.VALIDATOR.REQUIRED'|translate}}</div>
+				<div ng-message="md-require-match">Seleccione un Lote</div>
+			</div>
+		</md-autocomplete>
+
+		<md-input-container flex
+							class="md-block">
+			<label>Stock</label>
+			<input type="number"
+				   readonly
+				   ng-value="vm.productLot.stock">
+		</md-input-container>
+	</div>
+
+	<div layout-gt-xs="row">
+		<md-input-container flex
+							class="md-block">
+			<label for="date">Fecha Envio</label>
+			<md-datepicker required
+						   ng-model="vm.shipping.date"
+						   md-placeholder="">
+			</md-datepicker>
+			<div ng-messages="vm.formShipping.date.$error">
+				<div ng-message="required">
+					<span translate>PRODUCT_REQUEST.VALIDATOR.REQUIRED</span>
+				</div>
+			</div>
+		</md-input-container>
+
+		<md-input-container flex
+							class="md-block">
+			<label for="quantitySend">Cantidad</label>
+			<input type="number"
+				   ng-model="vm.shipping.quantitySend"
+				   name="quantitySend"
+				   min="1"
+				   ng-max="vm.maxShipping"
+				   required>
+			<div ng-messages="vm.formShipping.quantitySend.$error">
+				<div ng-message="required">
+					<span translate>PRODUCT_REQUEST.VALIDATOR.REQUIRED</span>
+				</div>
+				<div ng-message="min">Cantidad inferior a 1</div>
+				<div ng-message="max">Cantidad superior a {{vm.maxShipping}}</div>
+			</div>
+		</md-input-container>
+
+		<md-input-container flex
+							class="md-block">
+			<label>Pendientes</label>
+			<input type="number"
+				   readonly
+				   ng-value="vm.getPendientes()">
+		</md-input-container>
+
+		<md-button class="md-primary float-right"
+				   ng-disabled="vm.formShipping.$invalid || vm.waitShipping"
+				   ng-click="vm.addShipping(vm.shipping)">Agregar</md-button>
+	</div>
+</form>
+
+<md-card ng-show="!vm.shippings.length">
+	<md-card-content class="text-center">Sin Envios</md-card-content>
+</md-card>
+
+<md-list class="md-dense">
+	<md-list-item class="md-3-line md-with-secondary"
+				  ng-repeat="item in vm.shippings track by $index"
+				  ng-click="null">
+		<div layout="row"
+			 layout-align="center center">
+			<ssvq-employee-avatar employee="item.createdBy"
+								  class="md-avatar"></ssvq-employee-avatar>
+		</div>
+		<div class="md-list-item-text"
+			 layout="column">
+			<h3 style="font-weight: bold;">Cantidad: {{item.quantitySend}} &nbsp; &nbsp;
+				Lote: {{item.originProductStock.productLot.lot}} &nbsp; &nbsp;
+				Vencimiento: {{item.originProductStock.productLot.expiration|date:'dd/MM/yyyy'}}
+			</h3>
+			<p style="color: #0f69b4; font-weight: bold;"
+			   ng-show="item.quantityReceived">Recibido: {{item.quantityReceived}}</p>
+			<p layout="row">
+				<span flex>{{item.createdBy.name}} {{item.createdBy.lastname}} {{item.createdBy.mlastname}}</span>
+				<span flex
+					  class="text-right">Fecha: {{item.date|date:'dd/MM/yyyy'}}</span>
+			</p>
+		</div>
+		<div class="md-secondary-container">
+			<md-button class="md-warn md-icon-button"
+					   ng-show="!item.quantityReceived"
+					   ng-click="vm.delShipping($event, $index)">
+				<md-icon md-font-icon="fa fa-trash"></md-icon>
+			</md-button>
+		</div>
+	</md-list-item>
+	<md-divider></md-divider>
+</md-list>

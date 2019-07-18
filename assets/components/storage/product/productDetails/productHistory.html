@@ -1,0 +1,110 @@
+<md-subheader class="md-primary md-hue-1 overlay-5">Historial</md-subheader>
+<md-card>
+    <md-card-content>
+        <!-- Comentarios -->
+        <md-list>
+            <md-list-item ng-repeat="item in vm.productTimeline | orderBy:'-createdAt'">
+
+                <div layout="row"
+                     layout-align="start center"
+                     flex>
+                    <ssvq-employee-avatar employee="::item.createdBy"></ssvq-employee-avatar>
+
+                    <div flex
+                         layout="column"
+                         class="md-padding">
+
+                        <span class="md-body-2">
+                            <b ssvq-employee-profile-link
+                               id-employee="{{::item.createdBy.id}}">
+                                {{::item.createdBy.fullname || '--Usuario Desconocido--'}}
+                            </b>
+                        </span>
+
+                        <span class="md-caption"
+                              ng-if="::(item.type=='productCreated')">
+                            creó el producto:
+                        </span>
+                        <span class="md-caption"
+                              ng-if="::(item.type=='dataGeneralChanged')">
+                            modificó los datos generales:
+                        </span>
+
+                        <span class="md-caption"
+                              ng-if="::(item.type=='clasificationChanged')">
+                            modifico la clasificación:
+                        </span>
+
+                        <span class="md-caption"
+                              ng-if="::(item.type=='imageChanged')">
+                            modificó la imagen del producto:
+                        </span>
+
+                        <span class="md-caption"
+                              ng-if="::(item.type=='imageDeleted')">
+                            eliminó la imagen del producto:
+                        </span>
+
+                        <span class="md-caption"
+                              ng-if="::(item.type=='unitManagerCreated')">
+                            agregó unidad <b>{{::item.unit.name}}</b> al producto:
+                        </span>
+
+                        <span class="md-caption"
+                              ng-if="::(item.type=='unitManagerDeleted')">
+                            eliminó unidad <b>{{::item.unit.name}}</b> del producto:
+                        </span>
+
+                        <span class="md-caption"
+                              ng-if="::(item.type=='unitStockCreated')">
+                            agregó un nuevo parámetro de stock al producto de <b>{{::item.unit.name}}</b>:
+                        </span>
+
+                        <span class="md-caption"
+                              ng-if="::(item.type=='unitStockDeleted')">
+                            eliminó un parámetro de stock al producto de <b>{{::item.unit.name}}</b>:
+                        </span>
+
+                        <span class="md-caption"
+                              ng-if="::(item.type=='unitStockUpdated')">
+                            modificó un parámetro de stock al producto de <b>{{::item.unit.name}}</b>:
+                        </span>
+
+                        <span class="md-caption"
+                              ng-if="::(item.type=='productPackCreated')">
+                            agregó pack al producto
+                        </span>
+
+                        <span class="md-caption"
+                              ng-if="::(item.type=='productPackUpdated')">
+                            modificó pack al producto
+                        </span>
+
+                        <span class="md-caption"
+                              ng-if="::(item.type=='productPackDeleted')">
+                            eliminó pack al producto
+                        </span>
+
+                        <span class="md-caption respect-line-break">{{::item.description}}</span>
+
+                        <span class="margin-0 md-caption text-right">
+                            {{::(item.createdAt | date:"HH:mm '•' dd 'de' MMM")}}
+                        </span>
+                    </div>
+                </div>
+            </md-list-item>
+        </md-list>
+
+        <div layout="row"
+             layout-align="center center"
+             ng-show="vm.productLogs.length > 3 && !vm.showAllLogs">
+            <md-button aria-label="Mostrar todo"
+                       class="md-primary md-raised"
+                       ng-click="vm.showAllLogs = !vm.showAllLogs"
+                       flex="90">
+                Mostrar todo
+            </md-button>
+        </div>
+
+    </md-card-content>
+</md-card>

@@ -1,0 +1,32 @@
+{
+    "name": "PRIVILEGES.STORAGE_ACCOUNT_PLAN.NAME",
+    "description": "PRIVILEGES.STORAGE_ACCOUNT_PLAN.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-account-table",
+            "url": "/bodega/cuenta-contable",
+            "template": "<ssvq-storage-account-table></ssvq-storage-account-table>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/AccountPlanController.get",
+                "Storage/AccountPlanController.getAll"
+            ],
+            "create": [
+                "Storage/AccountPlanController.create"
+            ],
+            "update": [
+                "Storage/AccountPlanController.update"
+            ],
+            "delete": [
+                "Storage/AccountPlanController.delete"
+            ]
+        }
+    }
+}

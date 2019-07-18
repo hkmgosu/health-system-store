@@ -1,0 +1,32 @@
+{
+    "name": "PRIVILEGES.STORAGE_DOSAGE_TYPE.NAME",
+    "description": "PRIVILEGES.STORAGE_DOSAGE_TYPE.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-dosage-type-admin",
+            "url": "/bodega/tipo-dosificacion",
+            "template": "<ssvq-storage-dosage-type-admin></ssvq-storage-dosage-type-admin>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/DosageTypeController.get",
+                "Storage/DosageTypeController.getAll"
+            ],
+            "create": [
+                "Storage/DosageTypeController.create"
+            ],
+            "update": [
+                "Storage/DosageTypeController.update"
+            ],
+            "delete": [
+                "Storage/DosageTypeController.delete"
+            ]
+        }
+    }
+}

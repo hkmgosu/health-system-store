@@ -1,0 +1,20 @@
+{
+    "name": "Publicación",
+    "description": "ARTICLEDETAILS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.article-details",
+            "url": "/publicacion/:id",
+            "template": "<ssvq-article-details></ssvq-article-details>",
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "ArticleController.getDetails"
+            ]
+        }
+    }
+}

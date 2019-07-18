@@ -1,0 +1,53 @@
+<md-subheader class="md-primary">{{::('ADVERSEEVENT.DATAOCCURRENCE.TITLE' | translate)}}</md-subheader>
+<ssvq-custom-option-selector model="vm.data.originOccurrence"
+                             ng-if="vm.completed && vm.occurrenceOrigins"
+                             label="{{::('Origen de ocurrencia' | translate)}}"
+                             required-option="true"
+                             flex
+                             parametrics="::vm.occurrenceOrigins"></ssvq-custom-option-selector>
+<div class="md-dialog-content tab-dialog-content">
+    <div flex
+         layout="column"
+         layout-gt-sm="row"
+         ng-if="vm.units">
+        <md-input-container class="md-block"
+                            ng-if="vm.isIntrahospital()"
+                            flex>
+            <label>{{::('ADVERSEEVENT.DATAOCCURRENCE.OCCURRENCESERVICE' | translate)}}</label>
+            <md-select name="occurrenceService"
+                       ng-model="vm.data.occurrenceService"
+                       ng-required="true">
+                <md-option ng-repeat="item in ::vm.units | filter : {adverseEvent: true} | orderBy:'name'"
+                           value="{{::item.id}}">
+                    {{ ::item.name }}
+                </md-option>
+            </md-select>
+            <div ng-messages="vm.occurrForm.occurrenceService.$error">
+                <div ng-message="required">{{::('ADVERSEEVENT.VALIDATOR.REQUIRED' | translate)}}</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block"
+                            flex>
+            <label>{{::('ADVERSEEVENT.DATAOCCURRENCE.REPORTSERVICE' | translate)}}</label>
+            <md-select name="reportService"
+                       ng-model="vm.data.reportService"
+                       ng-required="true">
+                <md-option ng-repeat="item in ::vm.units | orderBy:'name'"
+                           value="{{::item.id}}">
+                    {{ ::item.name }}
+                </md-option>
+            </md-select>
+            <div ng-messages="vm.occurrForm.reportService.$error">
+                <div ng-message="required">{{::('ADVERSEEVENT.VALIDATOR.REQUIRED' | translate)}}</div>
+            </div>
+        </md-input-container>
+    </div>
+</div>
+<md-subheader class="md-primary">{{::('ADVERSEEVENT.DATAOCCURRENCE.TIMEDATA' | translate)}}</md-subheader>
+<div class="md-dialog-content tab-dialog-content">
+    <ssvq-timing-selector date="vm.data.occurrenceAt"
+                          required="true"
+                          min="{{::vm.min}}"
+                          max="{{::vm.max}}"
+                          now-button="false"></ssvq-timing-selector>
+</div>

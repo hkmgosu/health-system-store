@@ -1,0 +1,12 @@
+ssvq-employee-profile-link{
+    color: #174c71;
+    font-weight: 500;
+    cursor: pointer;
+}
+ssvq-employee-profile-link:hover{
+    text-decoration: underline;
+}
+
+.md-toolbar-tools ssvq-employee-profile-link{
+    color: inherit;
+}

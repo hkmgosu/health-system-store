@@ -1,0 +1,16 @@
+<div ng-if="vm.data && vm.form.damageType">
+    <ssvq-adverse-event-medication-form data="vm.data"
+                                        damage-type="vm.form.damageType"
+                                        ng-if="vm.form.nameForm === 'FormMedication'"></ssvq-adverse-event-medication-form>
+    <ssvq-adverse-event-upp-form data="vm.data"
+                                 patient="vm.patient"
+                                 origin="vm.origin"
+                                 damage-type="vm.form.damageType"
+                                 ng-if="vm.form.nameForm === 'FormUpp'"></ssvq-adverse-event-upp-form>
+    <ssvq-adverse-event-fall-form data="vm.data"
+                                  damage-type="vm.form.damageType"
+                                  ng-if="vm.form.nameForm === 'FormFall'"></ssvq-adverse-event-fall-form>
+    <ssvq-adverse-event-general-form data="vm.data"
+                                     damage-type="vm.form.damageType"
+                                     ng-if="vm.form.nameForm === 'FormGeneral'"></ssvq-adverse-event-general-form>
+</div>

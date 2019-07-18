@@ -1,0 +1,32 @@
+{
+    "name": "PRIVILEGES.STORAGE_DRUG_TYPE.NAME",
+    "description": "PRIVILEGES.STORAGE_DRUG_TYPE.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-drug-type",
+            "url": "/bodega/tipo-droga",
+            "template": "<ssvq-storage-drug-type></ssvq-storage-drug-type>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/DrugTypeController.get",
+                "Storage/DrugTypeController.getAll"
+            ],
+            "create": [
+                "Storage/DrugTypeController.create"
+            ],
+            "update": [
+                "Storage/DrugTypeController.update"
+            ],
+            "delete": [
+                "Storage/DrugTypeController.delete"
+            ]
+        }
+    }
+}

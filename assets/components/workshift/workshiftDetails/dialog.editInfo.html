@@ -1,0 +1,54 @@
+<md-dialog aria-label="Vehículo"
+           flex="60"
+           flex-xs="90">
+    <form name="saveForm"
+          ng-submit="vm.confirm()"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Volver">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                    <md-tooltip>Volver</md-tooltip>
+                </md-button>
+                <h3 flex>
+                    Editar información
+                </h3>
+                <md-button type="submit"
+                           aria-label="{{ 'CRUD.SAVE' | translate }}"
+                           ng-disabled="saveForm.$invalid || saveForm.$pristine">
+                    Confirmar edición
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-padding">
+                <md-input-container class="md-block">
+                    <label>Nombre del grupo</label>
+                    <input type="text"
+                           name="title"
+                           ng-model="vm.workshiftData.title">
+                </md-input-container>
+                <ssvq-input-range range="vm.workshiftData"
+                                  flex></ssvq-input-range>
+
+                <ssvq-workshift-validator workshift-data="vm.workshiftData"></ssvq-workshift-validator>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-accent"
+                       ng-click="vm.cancel()"
+                       aria-label="{{ 'CRUD.CANCEL' | translate }}">
+                Volver
+            </md-button>
+            <md-button class="md-primary md-raised"
+                       type="submit"
+                       aria-label="{{ 'CRUD.SAVE' | translate }}"
+                       ng-disabled="saveForm.$invalid || saveForm.$pristine">
+                Confirmar edición
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,19 @@
+.product-request-detail.solicitado {
+    color: #0f69b4 !important;
+    font-weight: bold !important;
+}
+
+.product-request-detail.enviado {
+    color: orange !important;
+    font-weight: bold !important;
+}
+
+.product-request-detail.pendiente {
+    color: red !important;
+    font-weight: bold !important;
+}
+
+.product-request-detail.recibido {
+    color: #03bb13 !important;
+    font-weight: bold !important;
+}

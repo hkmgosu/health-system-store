@@ -1,0 +1,19 @@
+{
+    "name": "Gremios",
+    "description": "Gremios",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.publications-gremios",
+            "url": "/publicaciones/gremios",
+            "template": "<ssvq-publications category='1'></ssvq-publications>"
+        },
+        "_controllers": {
+            "read": [
+                "ArticleController.getList"
+            ]
+        }
+    }
+}

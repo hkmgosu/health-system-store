@@ -1,0 +1,38 @@
+<div layout="row">
+    <div ng-repeat="day in vm.week"
+         style="border-right: 1px solid #cecece50;
+                border-left: 1px solid #cecece50;"
+         ng-style="{'background': !day.date ? 'rgba(105, 105, 105, 0.1)': ''}"
+         flex>
+        <md-tooltip ng-if="day.date && vm.editMode && day.blocked">Ya existe un viático vigente para este día, haz clic para ver en otra pestaña</md-tooltip>
+        <md-menu ng-if="day.date"
+                 md-position-mode="target-left target">
+            <md-list-item ng-click="day.blocked ? vm.showBlocked(day) : $mdMenu.open()"
+                          ng-disabled="!vm.editMode"
+                          ng-attr-title="{{day.holidayData}}"
+                          class="md-2-line"
+                          ng-class="{holiday: day.holiday, weekend: day.isWeekend}"
+                          flex>
+                <div class="md-list-item-text text-center"
+                     md-truncate>
+                    <h3><b>{{day.date | date:"dd"}}</b></h3>
+                    <p class="md-caption"
+                       md-truncate
+                       ng-style="{color: day.value.quantity ? '#0d74bc' : '#a5a5a5'}">
+                        <span>{{day.value.label}}</span>
+                    </p>
+                </div>
+            </md-list-item>
+            <md-menu-content width="4">
+                <md-menu-item ng-repeat="itemOption in vm.itemOptions">
+                    <md-button aria-label="{{ itemOption.label }}"
+                               ng-class="itemOption.quantity ? 'md-primary':'md-accent'"
+                               ng-click="vm.changeOption(day, itemOption)">
+                        {{ itemOption.label }}
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+</div>
+<md-divider></md-divider>

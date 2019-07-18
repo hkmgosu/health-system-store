@@ -1,0 +1,28 @@
+<md-dialog flex-gt-md="60"
+           flex="70"
+           flex-xs="90"
+           aria-label="Nueva publicación">
+    <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <span flex>Nueva publicación</span>
+            <md-button ng-click="vm.confirm()"
+                       ng-disabled="!vm.saveForm.$valid">Crear publicación</md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <ssvq-article-form article="vm.article"
+                           form="vm.saveForm"></ssvq-article-form>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-accent"
+                   ng-click="vm.cancel()">Cancelar</md-button>
+        <md-button class="md-primary"
+                   ng-disabled="!vm.saveForm.$valid"
+                   ng-click="vm.confirm()">Crear publicación</md-button>
+    </md-dialog-actions>
+</md-dialog>

@@ -1,0 +1,13 @@
+<div ng-if="vm.permissionList.length > 0"
+     class="animated slideInUp animation-stop"
+     ssvq-infinite-load
+     next-page="vm.nextPage">
+    <div ng-repeat="permission in vm.permissionList">
+        <ssvq-permission-item permission="permission">
+        </ssvq-permission-item>
+        <md-divider ng-if="!$last"></md-divider>
+    </div>
+</div>
+<ssvq-loading ng-if="!vm.permissionList"></ssvq-loading>
+<ssvq-no-results message="No se encontraron permisos"
+                 ng-if="vm.permissionList.length === 0"></ssvq-no-results>

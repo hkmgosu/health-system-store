@@ -1,0 +1,38 @@
+{
+    "name": "PRIVILEGES.SAMU.VEHICLES.NAME",
+    "description": "PRIVILEGES.SAMU.VEHICLES.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "create": false,
+            "read": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.samu-vehicles",
+            "url": "/samu/vehiculos/",
+            "template": "<ssvq-vehicle-maintainer></ssvq-vehicle-maintainer>",
+            "priority": 3
+        },
+        "_controllers": {
+            "read": [
+                "VehicleController.get",
+                "VehicleController.watch",
+                "VehicleController.getRemHistory",
+                "VehicleStatusController.getAll",
+                "EmployeeController.getList",
+                "VehicleController.getCurrentCareTeam"
+            ],
+            "create": [
+                "VehicleController.save"
+            ],
+            "update": [
+                "VehicleController.save",
+                "VehicleController.updateStatus"
+            ],
+            "delete": [
+                "VehicleController.delete"
+            ]
+        }
+    }
+}

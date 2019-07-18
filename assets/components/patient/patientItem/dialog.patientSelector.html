@@ -1,0 +1,58 @@
+<md-dialog aria-label="Seleccionar paciente"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <span class="md-subhead"
+                  flex>Selección paciente</span>
+            <md-button type="submit"
+                       aria-label="Seleccionar paciente">
+                Seleccionar
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div layout="column"
+             class="md-padding padding-bottom-0">
+            <ssvq-patient-autocomplete patient="vm.patient"></ssvq-patient-autocomplete>
+        </div>
+        <md-divider></md-divider>
+        <md-list>
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h4>Nombre</h4>
+                    <p>{{vm.patient.fullname}}</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h4>Edad</h4>
+                    <p>
+                        <ssvq-patient-age patient="vm.patient"></ssvq-patient-age>
+                    </p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h4>Género</h4>
+                    <p>{{vm.patient.gender | translate}}</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-warn">Volver</md-button>
+        <md-button class="md-primary"
+                   ng-click="vm.confirm()"
+                   aria-label="Seleccionar paciente">
+            Seleccionar
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

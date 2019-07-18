@@ -1,0 +1,32 @@
+{
+    "name": "PRIVILEGES.SAMU.TRANSFERSTATUS.NAME",
+    "description": "PRIVILEGES.TRANSFERSTATUS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "create": false,
+            "read": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.samu-transfer-status",
+            "url": "/samu/estado-traslados/",
+            "template": "<ssvq-rem-transfer-status-view></ssvq-rem-transfer-status-view>"
+        },
+        "_controllers": {
+            "read": [
+                "RemTransferStatusController.get",
+                "RemTransferStatusController.getAll"
+            ],
+            "create": [
+                "RemTransferStatusController.save"
+            ],
+            "update": [
+                "RemTransferStatusController.save"
+            ],
+            "delete": [
+                "RemTransferStatusController.delete"
+            ]
+        }
+    }
+}

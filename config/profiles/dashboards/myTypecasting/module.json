@@ -1,0 +1,20 @@
+{
+    "name": "PRIVILEGES.MYTYPECASTING.NAME",
+    "description": "PRIVILEGES.MYTYPECASTING.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.my-typecasting",
+            "url": "/mi-encasillamiento",
+            "template": "<ssvq-typecasting-details mode='me'></ssvq-typecasting-details>",
+            "icon": "zmdi zmdi-assignment-o"
+        },
+        "_controllers": {
+            "read": [
+                "EmployeeController.getMyTypecasting"
+            ]
+        }
+    }
+}

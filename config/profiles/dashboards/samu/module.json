@@ -1,0 +1,13 @@
+{
+    "name": "PRIVILEGES.SAMU.NAME",
+    "description": "PRIVILEGES.SAMU.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "icon": "zmdi zmdi-hospital"
+        },
+        "_controllers": {}
+    }
+}

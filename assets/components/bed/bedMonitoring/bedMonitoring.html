@@ -1,0 +1,202 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <h4 md-truncate>Monitoreo de camas</h4>
+        <span flex></span>
+        <!-- Buscar -->
+        <ssvq-search-input search-text="vm.searchText"
+                           label="Buscar pacientes"
+                           flex
+                           flex-gt-xs="50"></ssvq-search-input>
+        <span flex></span>
+        <md-button ng-click="vm.changeEstablishment($event)">
+            {{vm.currentEstablishment.name}}
+            <md-icon md-font-icon="zmdi zmdi-caret-down"></md-icon>
+            <md-tooltip>Cambiar establecimiento</md-tooltip>
+        </md-button>
+    </div>
+</md-toolbar>
+<md-section layout="row"
+            class="vehicle-map-container"
+            flex>
+    <md-sidenav class="md-sidenav-left md-whiteframe-2dp"
+                md-is-locked-open="$mdMedia('gt-xs')"
+                md-component-id="bm-room-selector">
+        <md-subheader>Resumen establecimiento</md-subheader>
+        <p class="bed-icon text-center">
+            <span class="enabled">
+                <span>18</span>
+                <md-icon md-font-icon="zmdi zmdi-hotel"></md-icon>
+                <md-tooltip>18 camas disponible</md-tooltip>
+            </span>
+            <span class="bullet">•</span>
+            <span class="using">
+                <span>30</span>
+                <md-icon md-font-icon="zmdi zmdi-hotel"></md-icon>
+                <md-tooltip>30 camas en uso</md-tooltip>
+            </span>
+            <span class="bullet">•</span>
+            <span class="disabled">
+                <span>2</span>
+                <md-icon md-font-icon="zmdi zmdi-hotel"></md-icon>
+                <md-tooltip>2 camas no disponible</md-tooltip>
+            </span>
+        </p>
+        <!-- Lista de unidades -->
+        <md-subheader>Unidades</md-subheader>
+        <md-list class="padding-0">
+            <md-list-item ng-class="{'selected': unit.id === vm.currentUnit.id }"
+                          ng-click="vm.changeUnit(unit)"
+                          ng-repeat="unit in vm.unitList track by $index">
+                <span flex>{{unit.name}}</span>
+                <md-icon md-font-icon="zmdi zmdi-chevron-right"
+                         class="md-primary"
+                         ng-show="unit.id === vm.currentUnit.id"></md-icon>
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
+    <md-content flex>
+
+        <!-- Lista de salas -->
+        <md-list ng-repeat="unit in vm.roomList track by $index"
+                 class="padding-0">
+            <md-list-item ng-click="vm.showRoomDetails($event)">
+                <span class="md-body-1"
+                      md-colors="{color:'primary'}">{{unit.name}}</span>
+                <md-icon class="md-secondary md-accent"
+                         md-font-icon="zmdi zmdi-edit"></md-icon>
+            </md-list-item>
+            <div layout="row"
+                 layout-wrap>
+                <!-- Lista de camas -->
+                <div flex="100"
+                     flex-gt-xs="50"
+                     flex-gt-sm="33"
+                     flex-gt-md="33"
+                     flex-gt-lg="20"
+                     ng-repeat="bed in unit.bedList track by $index">
+                    <md-card>
+                        <md-card-content class="padding-0">
+                            <md-list-item class="md-3-line"
+                                          ng-click="vm.setPatient(bed, $event)">
+                                <md-icon md-font-icon="zmdi zmdi-hotel"
+                                         class="bed-icon"
+                                         ng-class="{'enabled' : !bed.currentPatient, 'using' : bed.currentPatient}"></md-icon>
+                                <div class="md-list-item-text"
+                                     ng-if="bed.currentPatient">
+                                    <h3>{{bed.name}}</h3>
+                                    <h4>{{bed.currentPatient.fullname}}</h4>
+                                    <p>{{bed.time}}</p>
+                                </div>
+                                <div class="md-list-item-text"
+                                     ng-if="!bed.currentPatient">
+                                    <h3>{{bed.name}}</h3>
+                                    <h4>disponible</h4>
+                                </div>
+                                <md-button class="md-secondary md-icon-button"
+                                           ng-if="bed.currentPatient"
+                                           ng-click="vm.setCategory($event)">C1</md-button>
+                            </md-list-item>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </div>
+            <p flex
+               class="text-center"
+               ng-if="unit.bedList.length === 0">Sala sin camas</p>
+        </md-list>
+
+        <!-- Botón de acciones-->
+        <md-fab-speed-dial md-open="vm.isOpen"
+                           md-direction="up"
+                           class="md-fab-bottom-right md-fling md-hover-full"
+                           ng-mouseenter="vm.isOpen=true;"
+                           ng-mouseleave="vm.isOpen=false;"
+                           ng-cloak>
+            <md-fab-trigger>
+                <md-button aria-label="menu"
+                           class="md-raised md-primary md-fab md-hue-1"
+                           ng-click="vm.newRem($event)">
+                    <md-icon md-font-icon="zmdi zmdi-edit"
+                             class="animated rotateIn float-icon-swipeable"
+                             ng-class="!vm.isOpen? 'rotateOut' : ''"></md-icon>
+                    <md-icon md-font-icon="zmdi zmdi-plus"
+                             class="animated rotateIn float-icon-swipeable"
+                             ng-class="vm.isOpen? 'rotateOut' : ''"></md-icon>
+                    <md-tooltip md-direction="left">
+                        Nuevo incidente
+                    </md-tooltip>
+                </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+                <md-button aria-label="Nueva solicitud"
+                           class="md-fab md-raised md-mini"
+                           ng-click="vm.addRoom($event)">
+                    <md-icon md-font-icon="zmdi zmdi-bookmark"></md-icon>
+                    <md-tooltip md-direction="left">
+                        Nueva sala
+                    </md-tooltip>
+                </md-button>
+                <md-button aria-label="Nueva solicitud"
+                           class="md-fab md-raised md-mini"
+                           ng-click="vm.addBed($event)">
+                    <md-icon md-font-icon="zmdi zmdi-hotel"></md-icon>
+                    <md-tooltip md-direction="left">
+                        Nueva cama
+                    </md-tooltip>
+                </md-button>
+                <md-button aria-label="Actualizar lista"
+                           class="md-fab md-raised md-mini"
+                           ng-click="vm.updateList()">
+                    <md-icon md-font-icon="zmdi zmdi-refresh"
+                             class="md-primary"></md-icon>
+                    <md-tooltip md-direction="left">
+                        Actualizar lista
+                    </md-tooltip>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+    </md-content>
+
+    <!-- Sidebar -->
+    <md-sidenav class="md-sidenav-right md-whiteframe-2dp"
+                md-is-locked-open="true"
+                md-component-id="bm-filter">
+        <md-subheader>Solicitudes de esta unidad</md-subheader>
+        <md-list>
+            <md-list-item class="md-2-line"
+                          href="#/gestion-camas/detalle-traslado"
+                          ng-repeat="item in vm.customTransferList track by $index">
+                <div class="md-list-item-text">
+                    <h3>{{item.patient.name}}</h3>
+                    <h4>{{item.requestedUnit.name}}</h4>
+                    <p>
+                        <span am-time-ago="item.createdAt"></span>
+                    </p>
+                </div>
+                <md-button class="md-icon-button">
+                    <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                </md-button>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+        <md-subheader>Todas las solicitudes</md-subheader>
+        <md-list>
+            <md-list-item class="md-2-line"
+                          ng-click="vm.showTransferDetails(item)"
+                          ng-repeat="item in vm.transferList track by $index">
+                <div class="md-list-item-text">
+                    <h3>{{item.patient.name}}</h3>
+                    <h4>{{item.requestedUnit.name}}</h4>
+                    <p>
+                        <span class="md-caption"
+                              am-time-ago="item.createdAt"></span>
+                    </p>
+                </div>
+                <md-button class="md-icon-button">
+                    <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                </md-button>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
+</md-section>

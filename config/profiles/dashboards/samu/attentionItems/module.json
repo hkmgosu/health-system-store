@@ -1,0 +1,33 @@
+{
+    "name": "PRIVILEGES.SAMU.ATTENTIONITEMS.NAME",
+    "description": "PRIVILEGES.ATTENTIONITEMS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "create": false,
+            "read": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.samu-attention-items",
+            "url": "/samu/atenciones/",
+            "template": "<ssvq-rem-attention-items-view></ssvq-rem-attention-items-view>"
+        },
+        "_controllers": {
+            "read": [
+                "RemAttentionController.getClasses",
+                "RemAttentionController.getItems",
+                "RemAttentionController.getAllClasses"
+            ],
+            "create": [
+                "RemAttentionController.saveItem"
+            ],
+            "update": [
+                "RemAttentionController.saveItem"
+            ],
+            "delete": [
+                "RemAttentionController.deleteItem"
+            ]
+        }
+    }
+}

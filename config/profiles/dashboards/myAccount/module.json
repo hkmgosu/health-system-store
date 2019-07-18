@@ -1,0 +1,31 @@
+{
+    "name": "PRIVILEGES.MYACCOUNT.NAME",
+    "description": "PRIVILEGES.MYACCOUNT.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.admin-my-account",
+            "url": "/mi-cuenta",
+            "template": "<ssvq-employee-account></ssvq-employee-account>",
+            "icon": "zmdi zmdi-account-circle"
+        },
+        "_controllers": {
+            "read": [
+                "EmployeeController.getProfile",
+                "EmployeeController.getSharedFiles",
+                "ArchiveController.attachmentByOwner",
+                "ArchiveController.attachment",
+                "ResourceController.getMyEmployeeResourceList"
+            ],
+            "update": [
+                "EmployeeController.uploadMyProfilePicture",
+                "EmployeeController.deleteMyProfilePicture",
+                "EmployeeController.updatePersonalData",
+                "EmployeeController.updatePasswordData"
+            ]
+        }
+    }
+}

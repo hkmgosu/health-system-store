@@ -1,0 +1,121 @@
+<md-dialog aria-label="Detalles de la compañía"
+           flex="60"
+           flex-xs="100">
+    <form name="vm.createForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 translate
+                    flex>COMPANY.DIALOG.TITLE</h2>
+                <span flex></span>
+
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Cancelar">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content class="md-padding">
+            <div flex
+                 layout-gt-sm="row">
+
+                <md-input-container class="md-block"
+                                    flex="30">
+                    <label for="rut"
+                           translate>COMPANY.TABLE.RUT</label>
+                    <input type="text"
+                           name="rut"
+                           ng-model="vm.company.rut"
+                           required
+                           ng-rut>
+                    <div ng-messages="vm.createForm.rut.$error">
+                        <div ng-message="required">
+                            <span translate>COMPANY.VALIDATOR.REQUIRED</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block"
+                                    flex="60">
+                    <label for="name"
+                           translate>COMPANY.TABLE.NAME</label>
+                    <input type="text"
+                           name="name"
+                           ng-model="vm.company.name"
+                           required>
+                    <div ng-messages="vm.createForm.name.$error">
+                        <div ng-message="required">
+                            <span translate>COMPANY.VALIDATOR.REQUIRED</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block"
+                                    flex="30">
+                    <label for="email"
+                           translate>COMPANY.TABLE.EMAIL</label>
+                    <input type="email"
+                           name="email"
+                           ng-model="vm.company.email"
+                           required>
+                    <div ng-messages="vm.createForm.email.$error">
+                        <div ng-message="required">
+                            <span translate>COMPANY.VALIDATOR.REQUIRED</span>
+                        </div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <div flex
+                 layout-gt-sm="row">
+
+                <md-input-container class="md-block"
+                                    flex="70">
+                    <label for="address"
+                           translate>COMPANY.TABLE.ADDRESS</label>
+                    <input type="text"
+                           name="address"
+                           ng-model="vm.company.address"
+                           required>
+                    <div ng-messages="vm.createForm.address.$error">
+                        <div ng-message="required">
+                            <span translate>COMPANY.VALIDATOR.REQUIRED</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block"
+                                    flex="30">
+                    <label for="city"
+                           translate>COMPANY.TABLE.CITY</label>
+                    <input type="text"
+                           name="city"
+                           ng-model="vm.company.city"
+                           required>
+                    <div ng-messages="vm.createForm.city.$error">
+                        <div ng-message="required">
+                            <span translate>COMPANY.VALIDATOR.REQUIRED</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block"
+                                    flex="20">
+                    <md-switch ng-model="vm.company.isLaboratory"
+                               aria-label="COMPANY.TABLE.IS_LABORATORY"
+                               class="md-primary">
+                        {{ 'COMPANY.TABLE.IS_LABORATORY' | translate }}
+                    </md-switch>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-raised md-primary"
+                       ng-click="vm.confirm()"
+                       ng-disabled="vm.createForm.$invalid"
+                       aria-label="CRUD.SAVE"
+                       translate="CRUD.SAVE"></md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

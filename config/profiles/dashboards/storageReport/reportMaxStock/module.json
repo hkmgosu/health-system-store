@@ -1,0 +1,23 @@
+{
+    "name": "PRIVILEGES.STORAGE_REPORT.PRODUCT_MAX_STOCK.NAME",
+    "description": "PRIVILEGES.STORAGE_REPORT.PRODUCT_MAX_STOCK.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.report-max-stock",
+            "url": "/bodega/reporte-stock-maximo",
+            "template": "<ssvq-report-max-stock></ssvq-report-max-stock>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/StorageReportController.getMaxStock",
+                "Storage/ProductTypeController.getAll",
+                "Storage/ProductController.getAll",
+                "Storage/UnitProductsManagerController.getAll",
+                "Storage/UnitProductsManagerController.getAllowedUnits"
+            ]
+        }
+    }
+}

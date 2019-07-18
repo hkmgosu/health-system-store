@@ -1,0 +1,19 @@
+{
+    "name": "PRIVILEGES.SAMU_REPORTS.TRANSFERREPORT.NAME",
+    "description": "PRIVILEGES.SAMU_REPORTS.TRANSFERREPORT.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.samu-rem-transfer-report",
+            "url": "/samu/reporte-traslados-sin-paciente",
+            "template": "<ssvq-rem-transfer-report-view></ssvq-rem-transfer-report-view>"
+        },
+        "_controllers": {
+            "read": [
+                "RemController.getTransferWithoutPatientReport"
+            ]
+        }
+    }
+}

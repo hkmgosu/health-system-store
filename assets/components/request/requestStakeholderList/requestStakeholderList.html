@@ -1,0 +1,29 @@
+<ssvq-employee-autocomplete on-select="vm.addStakeholder"
+                            clear-on-select="true"></ssvq-employee-autocomplete>
+<div class="md-whiteframe-1dp overlay-10 padding-top-10 padding-bottom-10 md-margin">
+    <p class="text-center">
+        <md-icon md-font-icon="zmdi zmdi-info"></md-icon>
+        &nbsp; Utiliza el buscador para agregar funcionarios participantes
+    </p>
+</div>
+<md-list>
+    <md-list-item ng-repeat="item in vm.stakeholders track by $index">
+        <ssvq-employee-item-list employee="item.employee"
+                                 fields="::vm.fields"
+                                 flex></ssvq-employee-item-list>
+        <md-button class="md-warn md-secondary md-raised"
+                   ng-disabled="item.role!=='other'"
+                   ng-click="vm.rmStakeholder(item)">
+            Quitar
+            <md-tooltip ng-show="item.role==='other'">
+                Revocar acceso a esta solicitud
+            </md-tooltip>
+        </md-button>
+        <md-tooltip ng-show="item.role==='owner'">
+            No se puede quitar al funcionario creador de la solicitud como participante
+        </md-tooltip>
+        <md-tooltip ng-show="item.role==='assigned'">
+            No se puede quitar al funcionario asignado de la solicitud como participante
+        </md-tooltip>
+    </md-list-item>
+</md-list>

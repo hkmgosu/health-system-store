@@ -1,0 +1,33 @@
+{
+    "name": "PRIVILEGES.STORAGE_CATEGORY.NAME",
+    "description": "PRIVILEGES.STORAGE_CATEGORY.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-category-admin",
+            "url": "/bodega/categoria",
+            "template": "<ssvq-storage-category-admin></ssvq-storage-category-admin>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/CategoryController.get",
+                "Storage/CategoryController.getAll",
+                "Storage/CategoryController.getBreadcrumbs"
+            ],
+            "create": [
+                "Storage/CategoryController.create"
+            ],
+            "update": [
+                "Storage/CategoryController.update"
+            ],
+            "delete": [
+                "Storage/CategoryController.delete"
+            ]
+        }
+    }
+}

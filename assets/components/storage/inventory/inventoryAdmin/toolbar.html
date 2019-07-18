@@ -1,0 +1,23 @@
+<md-toolbar class="md-hue-1"
+            md-scroll-shrink>
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             hide-xs
+             flex>
+            <span class="md-subhead">Inventario</span>
+            <span class="md-caption">Mostrando {{vm.inventories.length}} de {{vm.found}} resultados</span>
+        </div>
+
+        <md-divider class="vertical-divider"></md-divider>
+
+        <!-- BOTON NUEVO -->
+        <md-button required-privilege="['create']"
+                   class="md-icon-button"
+                   ng-disabled="vm.allowedUnits.length == 0"
+                   ng-click="vm.showCreateInventory($event)">
+            <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+            <md-tooltip>Nuevo</md-tooltip>
+        </md-button>
+
+    </div>
+</md-toolbar>

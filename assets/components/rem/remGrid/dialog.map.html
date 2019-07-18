@@ -1,0 +1,49 @@
+<md-dialog aria-label="Mapa de incidentes"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.back()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <span class="md-subhead">
+                Mapa de incidentes
+            </span>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="rems-map">
+            <ui-gmap-google-map center="vm.map.center"
+                                zoom="vm.map.zoom"
+                                control="vm.map.control"
+                                options="vm.map.options">
+                <ui-gmap-markers models="vm.rems"
+                                 coords="'position'"
+                                 options="'options'"
+                                 click="vm.onMarkerClick"
+                                 icon="'icon'">
+                </ui-gmap-markers>
+                <!--                     <ui-gmap-window coords="vm.establishmentSelected.position"
+                                         show="vm.infoWindow.show"
+                                         options="vm.infoWindow.options"
+                                         templateUrl="'public/modules/map/infoWindow.tmpl.html'"
+                                         templateParameter="{'establishmentSelected': vm.establishmentSelected}"
+                                         control="vm.infoWindow.control"
+                                         closeclick="vm.cancel()">
+                         </ui-gmap-window> -->
+            </ui-gmap-google-map>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-primary"
+                   ng-click="vm.back()"
+                   aria-label="Volver">
+            Volver
+        </md-button>
+    </md-dialog-actions>
+    </form>
+</md-dialog>

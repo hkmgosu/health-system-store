@@ -1,0 +1,54 @@
+.adverse-event-dialog md-tabs.adverse-event-tab {
+    height: calc(100vh - 113px);
+}
+@media screen and (min-width: 600px) {
+    .adverse-event-dialog md-tabs.adverse-event-tab {
+        height: 600px;
+    }
+}
+
+i.icon-type-patient {
+    color: #919191de;
+    text-align: center;
+    font-size: 15rem!important;
+    min-width: 1em;
+    line-height: 1;
+}
+.tab-type-patient md-card {
+    cursor: pointer;
+}
+.tab-type-patient md-card.active {
+    outline: #0f69b4 solid 3px;
+}
+.active i.icon-type-patient {
+    color: #0f69b4;
+}
+.adverse-event-step-label {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+    margin-right: 8px;
+    border: 2px solid rgba(255,255,255,.4);
+}
+.md-tab.md-active .adverse-event-step-label {
+    border: 2px solid #fff;
+}
+.md-tab .adverse-event-step-label {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+    margin-right: 8px;
+    border: 2px solid rgba(255,255,255,.4);
+}
+div.event-content {
+    padding-top: 10px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+.incognito-mode {
+    background-color: #323639 !important;
+}

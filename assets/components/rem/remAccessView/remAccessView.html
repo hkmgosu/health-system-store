@@ -1,0 +1,110 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <h4 flex>Reporte de acceso</h4>
+
+        <ssvq-search-input search-text="vm.idRem"
+                           on-change="vm.updateTable"
+                           ng-show="vm.tabSelected == 0"
+                           flex="40"
+                           label="N° Incidente"></ssvq-search-input>
+        <div flex="40"
+             layout="row"
+             ng-show="vm.tabSelected == 1">
+            <ssvq-employee-autocomplete selected="vm.employee"
+                                        on-select="vm.updateEmployeeTable"
+                                        type="search"
+                                        flex></ssvq-employee-autocomplete>
+            <md-datepicker class="rem-access-date"
+                           ng-model="vm.accessDate"
+                           ng-change="vm.onDateChange()"
+                           md-open-on-focus>
+            </md-datepicker>
+        </div>
+    </div>
+</md-toolbar>
+<md-tabs class="md-primary md-hue-1 tabs-rem-access"
+         md-selected="vm.tabSelected">
+    <md-tab label="Accesos por incidente">
+        <md-content class="full-height">
+            <p ng-if="!vm.idRem"
+               class="text-center">Ingrese un número de incidente válido</p>
+            <md-table-container class="full-table-container"
+                                ng-if="vm.idRem">
+                <table md-table
+                       ng-if="vm.remAccessList.length > 0"
+                       class="animated fadeIn animation-stop">
+                    <thead md-head>
+                        <tr md-row>
+                            <th md-column>Rut</th>
+                            <th md-column>Nombre</th>
+                            <th md-column>IP</th>
+                            <th md-column>Contador</th>
+                            <th md-column>Primer ingreso</th>
+                            <th md-column>Último ingreso</th>
+                        </tr>
+                    </thead>
+                    <tbody md-body>
+                        <tr md-auto-select
+                            md-row
+                            ng-repeat="remAccess in vm.remAccessList track by $index">
+                            <td md-cell>
+                                <ssvq-employee-profile-link id-employee="{{::remAccess.employee.id}}">
+                                    {{::remAccess.employee.rut}}
+                                </ssvq-employee-profile-link>
+                            </td>
+                            <td md-cell>{{remAccess.employee.fullname}}</td>
+                            <td md-cell>{{remAccess.ip || 'Desconocida'}}</td>
+                            <td md-cell>{{remAccess.count}}</td>
+                            <td md-cell>{{remAccess.createdAt | date:"HH:mm '•' dd 'de' MMM"}}</td>
+                            <td md-cell>{{remAccess.updatedAt | date:"HH:mm '•' dd 'de' MMM"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ssvq-loading ng-show="!vm.remAccessList"></ssvq-loading>
+                <ssvq-no-results ng-show="vm.remAccessList.length == 0"></ssvq-no-results>
+            </md-table-container>
+        </md-content>
+    </md-tab>
+    <md-tab label="Accesos por funcionario">
+        <md-content class="full-height">
+            <p ng-if="!vm.employee"
+               class="text-center">Ingrese un funcionario</p>
+            <md-table-container class="full-table-container"
+                                ng-if="vm.employee">
+                <table md-table
+                       ng-if="vm.employeeAccessList.length > 0"
+                       class="animated fadeIn animation-stop">
+                    <thead md-head>
+                        <tr md-row>
+                            <th md-column>ID</th>
+                            <th md-column>Motivo de llamada</th>
+                            <th md-column>Submotivo de llamada</th>
+                            <th md-column>IP</th>
+                            <th md-column>Contador</th>
+                            <th md-column>Primer ingreso</th>
+                            <th md-column>Último ingreso</th>
+                        </tr>
+                    </thead>
+                    <tbody md-body>
+                        <tr md-auto-select
+                            md-row
+                            ng-repeat="employeeAccess in vm.employeeAccessList track by $index">
+                            <td md-cell>
+                                <a href="#/samu/incidentes/{{employeeAccess.rem.id}}"
+                                   target="_BLANK">{{employeeAccess.rem.id}}</a>
+                            </td>
+                            <td md-cell>{{employeeAccess.rem.callReason.name}}</td>
+                            <td md-cell>{{employeeAccess.rem.subCallReason.name}}</td>
+                            <td md-cell>{{employeeAccess.ip || 'Desconocida'}}</td>
+                            <td md-cell>{{employeeAccess.count}}</td>
+                            <td md-cell>{{employeeAccess.createdAt | date:"HH:mm '•' dd 'de' MMM"}}</td>
+                            <td md-cell>{{employeeAccess.updatedAt | date:"HH:mm '•' dd 'de' MMM"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ssvq-loading ng-show="!vm.employeeAccessList"></ssvq-loading>
+                <ssvq-no-results ng-show="vm.employeeAccessList.length == 0"></ssvq-no-results>
+            </md-table-container>
+        </md-content>
+    </md-tab>
+</md-tabs>

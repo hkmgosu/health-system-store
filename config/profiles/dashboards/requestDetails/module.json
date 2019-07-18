@@ -1,0 +1,52 @@
+{
+    "name": "PRIVILEGES.REQUESTS.DETAILS.NAME",
+    "description": "PRIVILEGES.REQUESTS.DETAILS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "create": false,
+            "read": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.admin-request-details",
+            "url": "/solicitudes/detalles/:id",
+            "template": "<ssvq-request-details-view></ssvq-request-details-view>",
+            "params": {
+                "id": null,
+                "request": null
+            },
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "RequestController.getDetails",
+                "RequestController.getTimeline",
+                "RequestController.unsubscribe",
+                "UnitController.getAvailableToRequest",
+                "ArchiveController.attachmentByOwner",
+                "ArchiveController.attachment",
+                "EmployeeController.get",
+                "RequestStakeholdersController.get",
+                "EmployeeController.getProfileById",
+                "EmployeeController.getList"
+            ],
+            "create": [
+                "ArchiveController.uploadArchive",
+                "RequestStakeholdersController.addStakeholder"
+            ],
+            "update": [
+                "RequestController.setUnitAssigned",
+                "RequestController.setEmployeeAssigned",
+                "RequestController.setLabel",
+                "RequestController.setDueDate",
+                "RequestController.setState",
+                "RequestController.addComment",
+                "RequestStakeholdersController.setSubscribed"
+            ],
+            "delete": [
+                "RequestStakeholdersController.rmStakeholder"
+            ]
+        }
+    }
+}

@@ -1,0 +1,91 @@
+<md-dialog aria-label=""
+           flex="60">
+    <form name="saveForm"
+          ng-submit="saveForm.$valid && vm.save(vm.attentionItem)"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>
+                    {{ ::(((!vm.attentionItem.id) ? 'ATTENTIONITEM.OTHERS.CREATETITLE' : 'ATTENTIONITEM.OTHERS.EDITTITLE') | translate) }}
+                </h2>
+                <span flex></span>
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Cancelar">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-toolbar class="md-warn"
+                    ng-show="vm.msg !== ''">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">{{ vm.msg |translate }}</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-padding"
+                 layout-wrap
+                 layout="row">
+                <md-input-container class="md-block"
+                                    flex=50>
+                    <label>{{::('ATTENTIONITEM.TABLE.NAME' | translate)}}</label>
+                    <input type="text"
+                           name="name"
+                           ng-model="vm.attentionItem.name" />
+                    <div ng-messages="saveForm.name.$error">
+                        <div ng-message="required">
+                            <span translate>ATTENTIONITEM.TABLE.REQUIRED</span>
+                        </div>
+                    </div>
+                </md-input-container>
+                <div flex="50"
+                     class="md-block padding-10">
+                    <md-switch ng-model="vm.attentionItem.hasObservation"
+                               md-invert
+                               aria-label="{{::('ATTENTIONITEM.TABLE.OBSERVATION' | translate)}}"
+                               layout-align="space-between start">
+                        <p class="margin-0">{{::('ATTENTIONITEM.TABLE.OBSERVATION' | translate)}}</p>
+                    </md-switch>
+                </div>
+                <md-input-container class="md-block"
+                                    flex=100>
+                    <label>{{ ::('ATTENTIONITEM.TABLE.DESCRIPTION' | translate) }}</label>
+                    <textarea rows="1"
+                              ng-model="vm.attentionItem.description"></textarea>
+                </md-input-container>
+                <md-input-container class="md-block"
+                                    flex="100">
+                    <label>{{::('ATTENTIONITEM.TABLE.CLASSATTENTION' | translate)}}</label>
+                    <md-select ng-model="vm.attentionItem.class">
+                        <md-optgroup label="{{'ATTENTIONITEM.TABLE.PRIMARYTYPE' | translate}}">
+                            <md-option ng-repeat="item in ::vm.attentionClasses | filter: {primary: true}"
+                                       value="{{::item.id}}">
+                                {{::item.name}}
+                            </md-option>
+                        </md-optgroup>
+                        <md-optgroup label="{{'ATTENTIONITEM.TABLE.SECONDARYTYPE' | translate}}">
+                            <md-option ng-repeat="item in ::vm.attentionClasses | filter: {primary: false}"
+                                       value="{{::item.id}}">
+                                {{::item.name}}
+                            </md-option>
+                        </md-optgroup>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-accent"
+                       ng-click="vm.cancel()"
+                       aria-label="{{ 'CRUD.CANCEL' | translate }}"
+                       translate="CRUD.CANCEL">
+            </md-button>
+            <md-button class="md-primary"
+                       type="submit"
+                       aria-label="{{ 'CRUD.SAVE' | translate }}"
+                       ng-disabled="saveForm.$submitted && saveForm.$invalid"
+                       translate="CRUD.SAVE">
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

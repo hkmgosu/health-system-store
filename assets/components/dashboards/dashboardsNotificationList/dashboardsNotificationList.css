@@ -1,0 +1,10 @@
+md-list.list-notifications {padding: 0;}
+md-list.list-notifications .color-linker {background: #3380bf !important;}
+md-list.list-notifications .icon-notifications { display:flex; justify-content: center;}
+md-list.list-notifications .icon-notifications::before { z-index: 5;}
+md-list.list-notifications .linker-dotted {width: 35px;height: 25px;border-right: 3px rgb(15, 105, 180) dashed; margin-right: 30px;}
+md-list.list-notifications .linker-solid {width: 35px;height: 25px;border-right: 3px rgb(15, 105, 180) solid; margin-right: 30px;}
+md-list.list-notifications .top-linker-notifications {width: 3px;height: 40px;position:absolute;top:-1px;left: 35px; z-index: 3;}
+md-list.list-notifications .bottom-linker-notifications {width: 3px;height: 40px;position:absolute;bottom:0;left: 35px; z-index: 3;}
+md-list.list-notifications .avatar-empty {width: 0px; height: 0px;border-radius: 10px;padding: 8px;margin-left: 12px;margin-right: 20px !important;}
+md-list.list-notifications .unreaded {background: rgb(226, 226, 226);}

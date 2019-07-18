@@ -1,0 +1,345 @@
+<div class="view-adverse-event-container">
+    <md-toolbar class="md-hue-1"
+                md-scroll-shrink="{{ vm.withShrink }}"
+                md-shrink-speed-factor="0.25">
+        <div class="md-toolbar-tools"
+             layout="row">
+            <md-button class="md-icon-button"
+                       ng-click="vm.goBack()">
+                <md-tooltip>Volver al listado</md-tooltip>
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            </md-button>
+            <div layout="column"
+                 flex>
+                <span class="md-subhead">Evento #{{vm.event.id}}</span>
+                <span class="md-caption"
+                      md-truncate>
+                    Ingresada
+                    <b>
+                        <ssvq-custom-time-ago time-at="::vm.event.createdAt"></ssvq-custom-time-ago>
+                    </b> por
+                    <ssvq-employee-profile-link ng-if="vm.event.createdBy" id-employee="{{::vm.event.createdBy.id}}">
+                        {{::vm.event.createdBy.fullname}}
+                    </ssvq-employee-profile-link>
+                    <b ng-if="!vm.event.createdBy.id">Anónimo</b>
+                </span>
+            </div>
+            <md-button class="md-icon-button"
+                       required-privilege="['update']"
+                       ng-disabled="vm.finalizedStatus.indexOf(vm.tmpStatus) !== -1"
+                       ng-click="vm.showEditEvent($event)">
+                <md-icon md-font-icon="fa fa-pencil"></md-icon>
+                <md-tooltip>Editar evento</md-tooltip>
+            </md-button>
+            <md-divider class="vertical-divider"
+                        required-privilege="['update']"></md-divider>
+            <md-input-container class="margin-left-10">
+                <md-select ng-model="vm.tmpStatus"
+                           class="md-subhead md-no-underline"
+                           ng-change="vm.statusChanged()"
+                           ng-disabled="!vm.privileges.supEstablishment || !vm.canEdit"
+                           aria-label="Estado del evento">
+                    <md-option value="{{status.id}}"
+                               ng-repeat="status in vm.status">{{ status.description }}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </md-toolbar>
+    <md-content ng-class="{'ae-height-content-full': vm.withShrink, 'ae-height-content': !vm.withShrink}">
+        <div ng-hide="vm.permissionDenied"
+             ng-if="vm.event"
+             layout-gt-sm="row"
+             layout-wrap>
+            <div flex-gt-sm="50"
+                 flex="100"
+                 ng-if="vm.event.patient">
+                <md-subheader class="md-primary md-hue-1 md-no-sticky"
+                              ng-if="vm.event.patient">
+                    <span flex>Datos del paciente</span>
+                </md-subheader>
+                <md-card>
+                    <md-list class="padding-top-0">
+                        <md-subheader class="md-no-sticky">
+                            <span flex>Datos personales</span>
+                        </md-subheader>
+                        <md-divider></md-divider>
+                        <md-list-item class="md-3-line md-long-text ae-list-details">
+                            <div class="md-list-item-text">
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Nombre paciente:</strong>
+                                    <span>{{ ::vm.event.patient.fullname || '--' }}</span>
+                                </p>
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Fecha de nacimiento:</strong>
+                                    <span>{{ ::(vm.event.patient.birthdate | date: 'mediumDate' : '+0400') || '--' }}</span>
+                                </p>
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Edad:</strong>
+                                    <span>
+                                        {{ (vm.event.patient.years) ? vm.event.patient.years : '' }} {{ (vm.event.patient.years) ? (vm.event.patient.years == 1)
+                                        ? 'PATIENT.TABLE.YEAR' : 'PATIENT.TABLE.YEARS' : '' | translate }}
+                                    </span>
+                                    <span>
+                                        {{ (vm.event.patient.months) ? vm.event.patient.months : '' }} {{ (vm.event.patient.months) ? (vm.event.patient.months ==
+                                        1) ? 'PATIENT.TABLE.MONTH' : 'PATIENT.TABLE.MONTHS' : '' | translate }}
+                                    </span>
+                                    <span>
+                                        {{ (!vm.event.patient.years) ? (vm.event.patient.days) ? vm.event.patient.days : '--' : '' }} {{ (!vm.event.patient.years)
+                                        ? (vm.event.patient.days) ? (vm.event.patient.days == 1) ? 'PATIENT.TABLE.DAY' :
+                                        'PATIENT.TABLE.DAYS' : '' : '' | translate }}
+                                    </span>
+                                </p>
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Género:</strong>
+                                    <span>{{ ::(vm.getGender(vm.event.patient.gender) | translate) || '--' }}</span>
+                                </p>
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Identificación:</strong>
+                                    <span md-truncate
+                                          ng-if="::(vm.event.patient.identificationType === 'rut')">
+                                        Rut {{ ::vm.event.patient.identificationNumber | rut }}
+                                    </span>
+                                    <span md-truncate
+                                          ng-if="::(vm.event.patient.identificationType == 'newborn')">
+                                        Paciente recién nacido
+                                    </span>
+                                    <span md-truncate
+                                          ng-if="::(vm.event.patient.identificationType == 'nn')">
+                                        Paciente sin identificación
+                                    </span>
+                                    <span md-truncate
+                                          ng-if="::(vm.event.patient.identificationType == 'dau')">
+                                        Dau {{ ::vm.event.patient.identificationNumber }}
+                                    </span>
+                                    <span md-truncate
+                                          ng-if="::(vm.event.patient.identificationType == 'passport')">
+                                        Pasaporte {{ ::vm.event.patient.identificationNumber }}
+                                    </span>
+                                    <span md-truncate
+                                          ng-if="::(vm.event.patient.identificationType == 'foreign')">
+                                        Cédula extranjera {{ ::vm.event.patient.identificationNumber }}
+                                    </span>
+                                </p>
+                                <p ng-if="::(vm.event.patient.identificationType == 'nn')">
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Fecha ingreso del paciente:</strong>
+                                    <span>{{ ::(vm.event.patient.admissionDate | date: 'mediumDate' : '-0400') || '--'}}</span>
+                                    <span>{{ ::(vm.event.patient.admissionDate | date: 'shortTime') || ''}}</span>
+                                </p>
+                            </div>
+                        </md-list-item>
+                        <div ng-if="::(vm.event.patient.identificationType == 'newborn')">
+                            <md-subheader class="md-no-sticky">
+                                <span flex>Datos del familiar del paciente</span>
+                            </md-subheader>
+                            <md-divider></md-divider>
+                            <md-list-item class="md-3-line md-long-text ae-list-details">
+                                <div class="md-list-item-text">
+                                    <p>
+                                        <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                                 class="date-icon">
+                                        </md-icon>
+                                        <strong>Nombre de la madre:</strong>
+                                        <span>{{ ::vm.event.patient.motherName || '--' }}</span>
+                                    </p>
+                                    <p>
+                                        <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                                 class="date-icon">
+                                        </md-icon>
+                                        <strong>Rut de la madre:</strong>
+                                        <span>{{ ::vm.event.patient.motherRut || '--' }}</span>
+                                    </p>
+                                </div>
+                            </md-list-item>
+                        </div>
+                        <md-subheader class="md-no-sticky">
+                            <span flex>Datos hospitalarios</span>
+                        </md-subheader>
+                        <md-divider></md-divider>
+                        <md-list-item class="md-3-line md-long-text ae-list-details">
+                            <div class="md-list-item-text">
+                                <p ng-if="vm.event.patientAdmissionAt">
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Fecha de ingreso al hospital:</strong>
+                                    <span>{{ ::(vm.event.patientAdmissionAt | date: 'mediumDate' : '+0400') || '--' }}</span>
+                                </p>
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Tipo de paciente:</strong>
+                                    <span>{{ ::(vm.getTypePatient(vm.event.typePatient) | translate) || '--' }}</span>
+                                </p>
+                                <p ng-if="::vm.event.patientDiagnostic">
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Diagnóstico médico:</strong>
+                                    <span>{{ ::vm.event.patientDiagnostic || '--' }}</span>
+                                </p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-card>
+            </div>
+            <div flex-gt-sm="50"
+                 flex="100"
+                 ng-if="vm.event">
+                <md-subheader class="md-primary md-hue-1 md-no-sticky">
+                    <span flex>Datos básicos del evento</span>
+                </md-subheader>
+                <md-card style="min-height:107px;">
+                    <md-list class="padding-top-0">
+                        <md-subheader class="md-no-sticky">
+                            <span flex>Categorización del evento</span>
+                        </md-subheader>
+                        <md-divider></md-divider>
+                        <md-list-item class="md-3-line md-long-text ae-list-details">
+                            <div class="md-list-item-text">
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Categoría del daño:</strong>
+                                    <span>{{ ::(vm.event.damageType || {}).categoryDamage || '--' }}</span>
+                                </p>
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Tipo de daño:</strong>
+                                    <span>{{ ::(vm.event.damageType || {}).name || '--' }}</span>
+                                </p>
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Tipo de evento:</strong>
+                                    <span>{{ ::(vm.event.eventType || {}).name || '--' }}</span>
+                                </p>
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Proceso asociado:</strong>
+                                    <span> {{ ::(vm.event.associatedProcess || {}).name || '--' }}</span>
+                                </p>
+                            </div>
+                        </md-list-item>
+                        <md-subheader class="md-no-sticky">
+                            <span flex>Datos de ocurrencia</span>
+                        </md-subheader>
+                        <md-divider></md-divider>
+                        <md-list-item class="md-3-line md-long-text ae-list-details">
+                            <div class="md-list-item-text">
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Establecimiento ocurrencia:</strong>
+                                    <span>{{ ::(vm.event.establishment || {}).name || '--' }}</span>
+                                </p>
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Origen de ocurrencia:</strong>
+                                    <span>{{ ::(vm.event.originOccurrence || {}).name || '--' }}</span>
+                                </p>
+                                <p ng-if="vm.event.originOccurrence == vm.intrahospitalId">
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Servicio de ocurrencia:</strong>
+                                    <span>{{ ::(vm.event.occurrenceService || {}).name || '--' }}</span>
+                                </p>
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Servicio que reporta:</strong>
+                                    <span>{{ ::(vm.event.reportService || {}).name || '--' }}</span>
+                                </p>
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Fecha y hora de la ocurrencia</strong>
+                                    <span>{{ ::(vm.event.occurrenceAt | date: 'medium') || '--' }}</span>
+                                </p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-card>
+            </div>
+            <div flex-gt-sm="{{ vm.event.patient ? '100' : '50' }}"
+                 flex="100"
+                 ng-if="vm.form">
+                <md-subheader class="md-primary md-hue-1 md-no-sticky">
+                    <span flex>Datos específicos del evento</span>
+                </md-subheader>
+                <md-card style="min-height:107px;">
+                    <ssvq-adverse-event-form-view data="::vm.form"
+                                                  form-type="vm.event.formType"></ssvq-adverse-event-form-view>
+                    <md-list class="padding-top-0">
+                        <md-subheader class="md-no-sticky">
+                            <span flex>Generalidades</span>
+                        </md-subheader>
+                        <md-divider></md-divider>
+                        <md-list-item class="md-3-line md-long-text ae-list-details">
+                            <div class="md-list-item-text">
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Descripción del evento:</strong>
+                                    <span>{{ ::vm.event.eventDescription || '--' }}</span>
+                                </p>
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Acciones Inmediatas:</strong>
+                                    <span>{{ ::vm.event.immediateActions || '--' }}</span>
+                                </p>
+                                <p ng-if="::vm.event.damagePatient">
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Daño al paciente:</strong>
+                                    <span>{{ ::vm.event.damagePatient }}</span>
+                                </p>
+                                <p>
+                                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                             class="date-icon">
+                                    </md-icon>
+                                    <strong>Paciente o representante informado:</strong>
+                                    <span>{{ ::(vm.event.notifiedPatient ? 'Si, evento informado' : 'No, evento no informado')}}</span>
+                                </p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-card>
+            </div>
+        </div>
+    </md-content>
+</div>

@@ -1,0 +1,86 @@
+<div ng-form="patientAutocompleteForm"
+     novalidate>
+    <div class="md-padding padding-bottom-0"
+         layout-gt-sm="row">
+        <md-input-container class="md-block margin-bottom-20"
+                            flex>
+            <label for="identificationType">{{::('PATIENT.TABLE.IDTYPE' | translate)}}</label>
+            <md-select name="identificationType"
+                       ng-model="vm.patient.identificationType"
+                       required
+                       ng-change="vm.onIdTypeChange()"
+                       ng-disabled="vm.isDisabled">
+                <md-option ng-repeat="identificationType in ::vm.identificationTypeList"
+                           value="{{::identificationType.value}}">
+                    {{ ::(identificationType.name | translate) }}
+                </md-option>
+            </md-select>
+            <div ng-messages="patientAutocompleteForm.identificationType.$error">
+                <div ng-message="required">{{::('PATIENT.VALIDATOR.REQUIRED' | translate)}}</div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block"
+                            flex
+                            ng-if="vm.patient.identificationType !== 'nn' && vm.patient.identificationType !== 'newborn'">
+            <label for="identificationNumber">N° Identificación</label>
+            <input ng-model="vm.patient.identificationNumber"
+                   type="text"
+                   name="identificationNumber"
+                   required
+                   ng-model-options="{ debounce: 1200 }"
+                   ng-change="vm.getMatches(vm.patient.identificationNumber)"
+                   ng-disabled="vm.isDisabled">
+            <div ng-messages="patientAutocompleteForm.identificationNumber.$error">
+                <div ng-message="required">{{::('PATIENT.VALIDATOR.REQUIRED' | translate)}}</div>
+            </div>
+        </md-input-container>
+        <input type="hidden"
+               required
+               name="validator"
+               ng-model="vm.formValid">
+    </div>
+    <div layout="row"
+         class="md-padding padding-top-0"
+         ng-if="vm.showUpdateButton()">
+        <span flex></span>
+        <md-button class="md-primary md-raised md-hue-1"
+                   ng-disabled="vm.updatingIdentify"
+                   ng-click="vm.updateIdentify()">Actualizar identificación</md-button>
+    </div>
+</div>
+<md-progress-linear md-mode="indeterminate"
+                    class="ng-hide"
+                    ng-show="vm.searching"></md-progress-linear>
+<div ng-show="vm.searchListCount"
+     style="overflow: hidden;">
+    <md-subheader class="md-primary md-hue-1"
+                  ng-show="vm.searchListCount">Seleccione un paciente para continuar</md-subheader>
+
+    <md-list class="padding-0"
+             ng-if="vm.searchListCount">
+        <md-list-item class="md-3-line animated flipInX animation-stop"
+                      ng-click="vm.selectPatient(suggestedPatient)"
+                      ng-repeat="suggestedPatient in vm.suggestedPatientList  track by $index">
+            <md-icon class="patient-icon md-avatar-icon"
+                     layout="row"
+                     layout-align="center center"
+                     md-font-icon="zmdi zmdi-account">
+            </md-icon>
+            <div class="md-list-item-text"
+                 flex>
+                <h3>{{suggestedPatient.name}} {{suggestedPatient.lastname}} {{suggestedPatient.mlastname}}</h3>
+                <h4>{{suggestedPatient.identificationNumber | rut }}</h4>
+                <p md-truncate>
+                    <span>
+                        {{ (suggestedPatient.gender | translate) || 's/género'}}
+                    </span>
+                    <span>•</span>
+                    <ssvq-patient-age patient="suggestedPatient"></ssvq-patient-age>
+                </p>
+            </div>
+            <p class="md-secondary"
+               ng-show="!suggestedPatient.id">NUEVO</p>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+</div>

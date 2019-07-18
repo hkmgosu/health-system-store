@@ -1,0 +1,47 @@
+.vehicle-status.disponible {
+    color: #1f8629 !important;
+}
+.vehicle-status.nodisponible {
+    color: #b31e16 !important;
+}
+.vehicle-status.ensalida {
+    color: #0f69b4 !important;
+}
+.vehicle-status.salidafinalizada{
+    color: #797979 !important;
+}
+
+.vehicle-maintainer-list-container {
+    height: calc(100vh - 128px);
+}
+@media (max-width: 599px){
+    .vehicle-maintainer-list-container {
+        height: calc(100vh - 112px);
+    }
+}
+
+.vehicle-pin .vehicle-name {
+    background: white;
+    color: #797979;
+    padding: 3px 5px;
+    border-radius: 20px;
+    border: 1px solid #797979;
+    min-width: 40px;
+    max-width: 40px;
+    text-align: center;
+}
+
+.vehicle-pin .vehicle-icon {
+    font-size: 20px;
+}
+
+.view-button-list{
+    position: absolute;
+    bottom: 36px;
+    right: calc( 50% - 90px );
+    z-index: 3;
+}
+
+.view-button-list .md-button{
+    margin:0;
+}

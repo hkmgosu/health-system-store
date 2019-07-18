@@ -1,0 +1,28 @@
+<md-dialog aria-label="Participantes en la solicitud"
+           flex="90"
+           flex-gt-sm="60">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 class="md-title"
+                flex>
+                Participantes en la solicitud
+            </h2>
+            <md-button class="md-icon-button"
+                       ng-click="vm.close()"
+                       aria-label="Cancelar">
+                <md-tooltip>Volver</md-tooltip>
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content class="md-padding">
+        <ssvq-request-stakeholder-list request="vm.request"
+                               stakeholders="vm.stakeholders"></ssvq-request-stakeholder-list>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button ng-click="vm.close()"
+                   class="md-primary">
+            Volver
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>,

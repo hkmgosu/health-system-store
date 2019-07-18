@@ -1,0 +1,22 @@
+{
+    "name": "PRIVILEGES.STORAGE_REPORT.EXPENSE_PER_UNIT.NAME",
+    "description": "PRIVILEGES.STORAGE_REPORT.EXPENSE_PER_UNIT.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.report-expense-per-unit",
+            "url": "/bodega/reporte-gasto-por-unidad",
+            "template": "<ssvq-report-expense-per-unit></ssvq-report-expense-per-unit>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/StorageReportController.getExpensePerUnit",
+                "Storage/ProductController.getAll",
+                "Storage/UnitProductsManagerController.getAll",
+                "Storage/UnitProductsManagerController.getAllowedUnits"
+            ]
+        }
+    }
+}

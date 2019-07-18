@@ -1,0 +1,157 @@
+<md-toolbar md-theme="white">
+    <div class="md-toolbar-tools">
+        <md-icon md-font-icon="fa fa-filter"></md-icon>
+        <h2 flex>Filtros</h2>
+        <md-button ng-click="vm.cleanFilters()">Limpiar</md-button>
+    </div>
+</md-toolbar>
+<md-content>
+    <!-- Filtrar por paciente -->
+    <md-list-item class="md-2-line"
+                  ng-disabled="vm.filterOpened == 'patient'"
+                  ng-click="vm.filterOpened = 'patient'">
+        <div class="md-list-item-text">
+            <h3>Paciente</h3>
+            <p>{{vm.filter.patient.fullname || 'Cualquiera'}}</p>
+        </div>
+        <md-button class="md-secondary md-icon-button"
+                   ng-click="vm.filter.patient = null"
+                   ng-show="vm.filter.patient">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            <md-tooltip>Limpiar filtro</md-tooltip>
+        </md-button>
+    </md-list-item>
+    <div style="padding: 0 20px;"
+         ng-show="vm.filterOpened === 'patient'">
+        <ssvq-patient-search on-select="vm.closeFilterOpen"
+                             selected="vm.filter.patient">
+        </ssvq-patient-search>
+    </div>
+    <md-divider style="width:98%; margin:auto;"></md-divider>
+    <!-- Filtrar por tipo de evento -->
+    <md-list-item class="md-2-line"
+                  ng-disabled="vm.filterOpened == 'eventType'"
+                  ng-click="vm.filterOpened = 'eventType'">
+        <div class="md-list-item-text">
+            <h3>Tipo de evento</h3>
+            <p>{{ vm.filter.eventType.name || 'Cualquiera' }}</p>
+        </div>
+        <md-button class="md-secondary md-icon-button"
+                   ng-click="vm.filter.eventType = null"
+                   ng-show="vm.filter.eventType">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            <md-tooltip>Limpiar filtro</md-tooltip>
+        </md-button>
+    </md-list-item>
+    <div style="padding: 0 20px;"
+         ng-show="vm.filterOpened === 'eventType'">
+        <ssvq-event-type-autocomplete on-select="vm.closeFilterOpen"
+                                      min-length="0"
+                                      clear-on-select="true"
+                                      selected="vm.filter.eventType">
+        </ssvq-event-type-autocomplete>
+    </div>
+    <md-divider style="width:98%; margin:auto;"></md-divider>
+    <!-- Filtrar por tipo de evento -->
+    <md-list-item class="md-2-line"
+                  ng-disabled="vm.filterOpened == 'occurrenceService'"
+                  ng-click="vm.filterOpened = 'occurrenceService'">
+        <div class="md-list-item-text">
+            <h3>Servicio de ocurrencia</h3>
+            <p>{{ vm.filter.occurrenceService.name || 'Cualquiera' }}</p>
+        </div>
+        <md-button class="md-secondary md-icon-button"
+                   ng-click="vm.filter.occurrenceService = null"
+                   ng-show="vm.filter.occurrenceService">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            <md-tooltip>Limpiar filtro</md-tooltip>
+        </md-button>
+    </md-list-item>
+    <div style="padding: 0 20px;"
+         ng-show="vm.filterOpened === 'occurrenceService'">
+        <ssvq-unit-autocomplete on-select="vm.selectOcurrence"
+                                min-length="0"
+                                clear-on-select="true"
+                                filter="{adverseEvent: true}"
+                                my-establishment="{{ vm.status !== 'adverse-event-supervision' }}"
+                                establishment="vm.supervisedEstablishmentIds">
+        </ssvq-unit-autocomplete>
+    </div>
+    <md-divider style="width:98%; margin:auto;"></md-divider>
+    <!-- Filtrar por clasificación del daño -->
+    <md-list-item class="md-2-line"
+                  ng-disabled="vm.filterOpened == 'damageCategorization'"
+                  ng-click="vm.filterOpened = 'damageCategorization'">
+        <div class="md-list-item-text">
+            <h3>Clasificación del daño</h3>
+            <p>{{ vm.categoryDamage || 'Cualquiera' }}</p>
+        </div>
+        <md-button class="md-secondary md-icon-button"
+                   ng-click="vm.filter.damageType = damageSelected = vm.categoryDamage = null;"
+                   ng-show="vm.filter.damageType">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            <md-tooltip>Limpiar filtro</md-tooltip>
+        </md-button>
+    </md-list-item>
+    <div style="padding: 0 20px;"
+         ng-show="vm.filterOpened === 'damageCategorization'">
+        <md-input-container class="md-block"
+                            flex="100">
+            <label>{{::('Seleccione opción' | translate)}}</label>
+            <md-select ng-change="vm.selectDamageCategory(damageSelected)"
+                       ng-model="damageSelected">
+                <md-option ng-repeat="item in ::vm.damageCategories"
+                           value="{{::item}}">
+                    {{ ::item.name | translate }}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <md-divider style="width:98%; margin:auto;"></md-divider>
+    <!-- Filtrar por rango fecha -->
+    <md-list-item class="md-2-line"
+                  ng-click="vm.showCreatedAtFilter($event)">
+        <div class="md-list-item-text">
+            <h3>Fecha de ocurrencia</h3>
+            <p>
+                <span ng-show="vm.filter.minDate || vm.filter.maxDate">
+                    {{(vm.filter.minDate | date : "dd MMM y") || '--'}} al {{(vm.filter.maxDate | date : "dd MMM y") ||
+                    '--'}}
+                </span>
+                <span ng-show="!vm.filter.minDate && !vm.filter.maxDate">
+                    Cualquiera
+                </span>
+            </p>
+        </div>
+        <md-button class="md-secondary md-icon-button"
+                   ng-click="vm.filter.minDate = vm.filter.maxDate = null"
+                   ng-show="vm.filter.minDate || vm.filter.maxDate">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            <md-tooltip>Limpiar filtro</md-tooltip>
+        </md-button>
+    </md-list-item>
+    <div ng-if="vm.supervisedEstablishment.length > 1 && vm.status=='adverse-event-supervision'">
+        <md-divider style="width:98%; margin:auto;"></md-divider>
+        <md-list-item>
+            Establecimientos supervisados
+        </md-list-item>
+        <md-list-item ng-repeat="item in vm.supervisedEstablishment">
+            <span class="md-body-2">{{::item.name}}</span>
+            <md-checkbox class="md-secondary md-primary"
+                         aria-label="{{::item.name}}"
+                         ng-model="item.checked"></md-checkbox>
+        </md-list-item>
+    </div>
+    <div ng-if="vm.supervisedUnit.length > 1 && vm.status=='adverse-event-supervision'">
+        <md-divider style="width:98%; margin:auto;"></md-divider>
+        <md-list-item>
+            Unidades supervisadas
+        </md-list-item>
+        <md-list-item ng-repeat="item in vm.supervisedUnit">
+            <span class="md-body-2">{{::item.name}}</span>
+            <md-checkbox class="md-secondary md-primary"
+                         aria-label="{{::item.name}}"
+                         ng-model="item.checked"></md-checkbox>
+        </md-list-item>
+    </div>
+</md-content>

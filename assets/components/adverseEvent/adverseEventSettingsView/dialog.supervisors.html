@@ -1,0 +1,37 @@
+<md-dialog aria-label="Supervisores"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.close()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            </md-button>
+            <div layout="column">
+                <span class="md-subhead">
+                    Supervisores {{ vm.establishment ? 'establecimiento' : vm.unit ? 'unidad' : '' }}
+                </span>
+                <span class="md-caption">
+                    {{vm.toSupervise.name}}
+                </span>
+            </div>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="md-padding">
+                <ssvq-employee-autocomplete on-select="vm.addSupervisor"
+                                       clear-on-select="true"></ssvq-employee-autocomplete>
+            </div>
+            <md-list-item ng-repeat="supervisor in vm.supervisors">
+                <ssvq-employee-item-list employee="supervisor"></ssvq-employee-item-list>
+                <md-button class="md-secondary md-warn md-raised"
+                           ng-click="vm.rmSupervisor(supervisor)">
+                    Quitar
+                </md-button>
+            </md-list-item>
+        </div>
+    </md-dialog-content>
+</md-dialog>

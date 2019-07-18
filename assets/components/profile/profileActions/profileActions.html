@@ -1,0 +1,16 @@
+<div layout="row">
+<!--     <md-button class="md-icon-button md-secondary"
+               ng-click="vm.createCopy()">
+        <md-icon md-font-icon="zmdi zmdi-copy"></md-icon>
+        <md-tooltip>Hacer una copia</md-tooltip>
+    </md-button> -->
+    <md-button class="md-icon-button md-secondary"
+               ng-click="vm.showDeleteDialog(profile)">
+        <md-icon required-privilege="['delete']"
+                 md-font-icon="fa fa-trash">
+            <md-tooltip>
+                <span translate>PROFILES.TOOLTIP.DELETE</span>
+            </md-tooltip>
+        </md-icon>
+    </md-button>
+</div>

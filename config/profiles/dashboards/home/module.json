@@ -1,0 +1,22 @@
+{
+    "name": "HOMEVIEW.TITLE",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.home",
+            "icon": "zmdi zmdi-home",
+            "url": "/inicio",
+            "template": "<ssvq-home-view></ssvq-home-view>",
+            "priority": 0
+        },
+        "_controllers": {
+            "read": [
+                "ArticleController.getList",
+                "ArticleCategoryController.getList",
+                "ArticleCategoryController.getDetails"
+            ]
+        }
+    }
+}

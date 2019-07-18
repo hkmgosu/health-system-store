@@ -1,0 +1,27 @@
+.view-adverse-event-container {
+    height: calc(100vh - 64px);
+    overflow:hidden;
+}
+.ae-list-details p {
+    margin-bottom: 5px !important; 
+}
+.ae-list-details span {
+    font-weight: 400;
+}
+.ae-height-content-full {
+    height: 100%;
+}
+.ae-height-content {
+    height: calc(100vh - 128px);
+}
+
+@media (max-width: 959px){
+    .view-adverse-event-container {
+        height: calc(100vh - 56px);
+    }
+}
+@media (max-width: 959px){
+    .ae-height-content {
+        height: calc(100vh - 112px);
+    }
+}

@@ -1,0 +1,105 @@
+<!-- ssvq-adverse-event-list-view -->
+<section layout="row"
+         flex>
+    <md-content flex>
+        <md-tabs md-swipe-content
+                 md-selected="vm.selectedTab"
+                 class="md-primary md-hue-1 tabs-adverse-events"
+                 style="border-radius: 0">
+            <md-tab md-on-select="null"
+                    id="open">
+                <md-tab-label>
+                    <span>{{ vm.viewSupervisor ? 'Entrada' : 'Enviados' }}</span>
+                    <span ng-if="vm.selectedTab == 0"
+                          class="ssvq-badge">{{vm.openedCount}}</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <ssvq-adverse-event-list finished="false"
+                                             filter="vm.filter"
+                                             ng-if="vm.selectedTab == 0"
+                                             count="vm.openedCount"></ssvq-adverse-event-list>
+                </md-tab-body>
+            </md-tab>
+            <md-tab md-on-select="null"
+                    id="closed">
+                <md-tab-label>
+                    <span>Validados</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <ssvq-adverse-event-list finished="true"
+                                             rejected="false"
+                                             filter="vm.filter"
+                                             ng-if="vm.selectedTab == 1"
+                                             count="vm.closedCount"></ssvq-adverse-event-list>
+                </md-tab-body>
+            </md-tab>
+            <md-tab md-on-select="null"
+                    id="closed">
+                <md-tab-label>
+                    <span>Rechazados</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <ssvq-adverse-event-list finished="true"
+                                             rejected="true"
+                                             ng-if="vm.selectedTab == 2"
+                                             filter="vm.filter"
+                                             count="vm.closedCount"></ssvq-adverse-event-list>
+                </md-tab-body>
+            </md-tab>
+            <md-tab md-on-select="null"
+                    id="all">
+                <md-tab-label>
+                    <span>Todos</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <ssvq-adverse-event-list finished="[true, false]"
+                                             ng-if="vm.selectedTab == 3"
+                                             filter="vm.filter"
+                                             count="vm.allCount"></ssvq-adverse-event-list>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+        <md-fab-speed-dial md-open="vm.isOpen"
+                           md-direction="up"
+                           class="md-fab-bottom-right md-fling md-hover-full"
+                           ng-mouseenter="vm.isOpen=true;"
+                           ng-mouseleave="vm.isOpen=false;"
+                           ng-cloak>
+            <md-fab-trigger>                
+                <md-button aria-label="Nueva notificación"
+                           class="md-raised md-primary md-fab"
+                           ng-click="vm.showNewEvent($event)"
+                           ng-disabled="!vm.availableEstablishment">
+                    <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                    <md-tooltip md-direction="left">
+                        Nueva notificación
+                    </md-tooltip>
+                </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+                <md-button aria-label="Nueva solicitud"
+                           class="md-fab md-raised md-mini md-primary"
+                           style="background: #323639"
+                           ng-click="vm.showNewEvent($event, true)">
+                    <md-icon md-font-icon="fa fa-user-secret"></md-icon>
+                    <md-tooltip md-direction="left">
+                        Nueva notificación anónima
+                    </md-tooltip>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+        <md-button class="md-fab md-mini md-accent md-fab-top-right hide-gt-md"
+                   ng-click="vm.toggleFilter()"
+                   aria-label="Filtros">
+            <md-tooltip>Ver filtros</md-tooltip>
+            <md-icon md-font-icon="zmdi zmdi-filter-list"></md-icon>
+        </md-button>
+    </md-content>
+    <md-sidenav class="md-sidenav-right md-whiteframe-1dp"
+                md-is-locked-open="$mdMedia('gt-md')"
+                md-component-id="event-filter">
+        <ssvq-adverse-event-list-filter filter="vm.filter">
+        </ssvq-adverse-event-list-filter>
+    </md-sidenav>
+</section>
+<!-- /ssvq-adverse-event-list-view -->

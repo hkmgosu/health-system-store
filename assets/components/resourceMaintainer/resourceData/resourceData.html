@@ -1,0 +1,79 @@
+<div layout="column"
+     ng-form="vm.generalDataForm"
+     flex>
+    <div layout="row"
+         flex>
+        <md-input-container flex>
+            <label>Tipo</label>
+            <md-select ng-model="vm.resource.type">
+                <md-option ng-value="resourceType.id"
+                           ng-repeat="resourceType in vm.resourceTypeList">
+                    {{resourceType.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container flex>
+            <label>Modelo</label>
+            <input type="text"
+                   ng-model="vm.resource.model">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Fabricante</label>
+            <input type="text"
+                   ng-model="vm.resource.manufacturer">
+        </md-input-container>
+    </div>
+    <div layout="row"
+         flex>
+        <md-input-container flex>
+            <label>Número de serie</label>
+            <input type="text"
+                   ng-model="vm.resource.serialNumber">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Número telefónico</label>
+            <input type="text"
+                   ng-model="vm.resource.phoneNumber">
+        </md-input-container>
+        <md-input-container flex>
+            <label>IP</label>
+            <input type="text"
+                   ng-model="vm.resource.ipAddress">
+        </md-input-container>
+        <md-input-container flex>
+            <label>MAC</label>
+            <input type="text"
+                   ng-model="vm.resource.macAddress">
+        </md-input-container>
+    </div>
+    <div layout="row"
+         flex>
+        <md-input-container flex>
+            <label>Número contrato</label>
+            <input type="text"
+                   ng-model="vm.resource.contractNumber">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Plan</label>
+            <input type="text"
+                   ng-model="vm.resource.plan">
+        </md-input-container>
+        <md-input-container flex>
+            <label>Detalle Plan</label>
+            <input type="text"
+                   ng-model="vm.resource.planDetails">
+        </md-input-container>
+    </div>
+    <md-input-container flex>
+        <label>Observaciones</label>
+        <input type="text"
+               ng-model="vm.resource.observations">
+    </md-input-container>
+    <div layout="row"
+         ng-if="vm.resource.id">
+        <span flex></span>
+        <md-button ng-click="vm.confirmUpdate()"
+                   ng-disabled="vm.generalDataForm.$pristine || vm.generalDataForm.$invalid"
+                   class="md-primary md-raised">Actualizar datos</md-button>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+{
+    "name": "PRIVILEGES.ADMIN.NAME",
+    "description": "PRIVILEGES.ADMIN.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "icon": "zmdi zmdi-home",
+            "priority": 1
+        },
+        "_controllers": {}
+    }
+}

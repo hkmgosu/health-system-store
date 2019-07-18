@@ -1,0 +1,59 @@
+<md-toolbar md-theme="white">
+    <div class="md-toolbar-tools">
+        <md-icon md-font-icon="fa fa-filter"
+                 class="md-font material-icons fa fa-filter md-white-theme"
+                 role="img"
+                 aria-label="fa fa-filter"></md-icon>
+        <h2 flex=""
+            class="flex">Filtros</h2>
+        <button class="md-button md-ink-ripple md-white-theme"
+                type="button"
+                ng-click="vm.cleanFilter()">
+            <span class="ng-scope"
+                  ng-click="vm.cleanFilter()">Limpiar</span>
+            <div class="md-ripple-container"></div>
+        </button>
+    </div>
+</md-toolbar>
+
+<md-content class="_md md-my-theme-theme">
+
+    <md-input-container md-no-float
+                        class="md-block margin-left-10 margin-right-10 margin-bottom-40 md-input-has-placeholder md-my-theme-theme">
+        <label translate>PRODUCT.TABLE.UNIT</label>
+        <md-select ng-model="vm.filter.allowUnit"
+                   ng-change="vm.setProduct()">
+            <md-option></md-option>
+            <md-option ng-repeat="allowUnit in vm.allowedUnits"
+                       ng-value="allowUnit.id">{{allowUnit.name}}</md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-input-container md-no-float
+                        class="md-block margin-left-10 margin-right-10 margin-bottom-10 md-input-has-placeholder md-my-theme-theme">
+        <ssvq-storage-report-autocomplete flex-md="100"
+                                          flex="70"
+                                          label="Buscar producto..."
+                                          on-select="vm.onSelectProduct"
+                                          units="vm.searchUnits"
+                                          product-type="vm.filter.productType">
+        </ssvq-storage-report-autocomplete>
+    </md-input-container>
+
+    <md-list-item class="md-2-line"
+                  ng-click="vm.showCreatedAtFilter($event)">
+        <div class="md-list-item-text">
+            <h3>Rango de fechas</h3>
+            <p>
+                <span ng-show="vm.filter.minDate || vm.filter.maxDate">
+                    {{(vm.filter.minDate | date : "dd MMM y") || '--'}} al {{(vm.filter.maxDate | date : "dd MMM y") || '--'}}
+                </span>
+
+            </p>
+        </div>
+    </md-list-item>
+
+
+
+
+</md-content>

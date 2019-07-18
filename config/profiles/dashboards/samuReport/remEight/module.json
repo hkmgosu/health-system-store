@@ -1,0 +1,19 @@
+{
+    "name": "PRIVILEGES.SAMU_REPORTS.REMEIGHT.NAME",
+    "description": "PRIVILEGES.SAMU_REPORTS.REMEIGHT.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.samu-rem-eight",
+            "url": "/samu/rem08",
+            "template": "<ssvq-rem-eight-view></ssvq-rem-eight-view>"
+        },
+        "_controllers": {
+            "read": [
+                "RemController.getRemEight"
+            ]
+        }
+    }
+}

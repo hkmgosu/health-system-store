@@ -1,0 +1,131 @@
+<md-toolbar class="md-hue-1"
+            md-scroll-shrink>
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             hide-xs
+             flex>
+            <span class="md-subhead"
+                  translate>PRIVILEGES.STORAGE_PRESENTATION_TYPE.NAME</span>
+            <span class="md-caption"
+                  ng-show="vm.viewMode=='list'">
+                Mostrando {{vm.presentationsType.length}} de {{vm.found}} resultados
+            </span>
+        </div>
+        <!-- Buscar -->
+        <ssvq-search-input search-text="searchText"
+                           label="Buscar Tipo"
+                           flex
+                           flex-gt-xs="50"></ssvq-search-input>
+        <span flex
+              hide-xs></span>
+
+        <md-button class="md-icon-button"
+                   ng-show="vm.viewMode == 'list'"
+                   ng-click="vm.viewChange()">
+            <md-icon md-font-icon="fa fa-table"></md-icon>
+            <md-tooltip>Ver como tabla</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button"
+                   ng-show="vm.viewMode == 'table'"
+                   ng-click="vm.viewChange()">
+            <md-icon md-font-icon="fa fa-list"></md-icon>
+            <md-tooltip>Ver como lista</md-tooltip>
+        </md-button>
+
+        <md-divider class="vertical-divider"></md-divider>
+
+        <md-button required-privilege="['create','update']"
+                   class="md-icon-button"
+                   ng-click="vm.onCreate($event)">
+            <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+            <md-tooltip>Crear nuevo tipo</md-tooltip>
+        </md-button>
+    </div>
+</md-toolbar>
+
+
+
+<!-- Modo Lista -->
+<md-content ssvq-infinite-load
+            ng-if="vm.viewMode == 'list'"
+            next-page="vm.nextPage"
+            md-promise="vm.promise">
+    <div class="ptype-list-container">
+        <ssvq-loading ng-show="!vm.presentationsType"></ssvq-loading>
+        <ssvq-no-results ng-show="vm.presentationsType.length == 0"></ssvq-no-results>
+
+        <md-list ng-if="vm.presentationsType">
+            <md-list-item ng-repeat="item in vm.presentationsType">
+
+                <div layout="row"
+                     layout-align="start center"
+                     flex>
+                    <!-- avatar -->
+                    <md-letter-avatar length="2"
+                                      font-size="18px"
+                                      shape="round"
+                                      data="{{item.description}}"
+                                      layout="row"
+                                      layout-align="center center"></md-letter-avatar>
+
+                    <div flex
+                         layout="column"
+                         class="md-padding"
+                         style="overflow: hidden;">
+                        <span class="md-body-2"
+                              md-highlight-text="searchText"
+                              md-highlight-flags="gi">
+                            {{item.description}}
+                        </span>
+                    </div>
+                </div>
+
+                <ssvq-storage-presentation-type-actions after-delete="vm.afterDelete"
+                                                        item="item"></ssvq-storage-presentation-type-actions>
+
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </div>
+</md-content>
+
+
+
+<!-- Modo Tabla -->
+<md-content ng-if="vm.viewMode == 'table'">
+    <!-- Modo Tabla -->
+    <md-table-container class="full-table-container">
+        <table md-table
+               ng-if="vm.presentationsType && vm.presentationsType.length > 0">
+            <thead md-head>
+                <tr md-row>
+                    <th md-column>{{ 'PRESENTATION_TYPE.TABLE.DESCRIPTION' | translate}}</th>
+                    <th md-column></th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-row
+                    ng-repeat="item in vm.presentationsType track by $index">
+                    <td md-cell>
+                        <span class="force-line capitalize"
+                              md-highlight-text="searchText">{{item.description}}</span>
+                    </td>
+                    <td md-cell>
+                        <ssvq-storage-presentation-type-actions after-delete="vm.afterDelete"
+                                                                item="item"></ssvq-storage-presentation-type-actions>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ssvq-loading ng-show="!vm.presentationsType"></ssvq-loading>
+        <ssvq-no-results ng-show="vm.presentationsType.length == 0"></ssvq-no-results>
+    </md-table-container>
+
+    <md-table-pagination md-limit="vm.limit"
+                         md-page="vm.page"
+                         md-total="{{vm.found}}"
+                         md-on-paginate="vm.nextTable"
+                         md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}"
+                         md-page-select></md-table-pagination>
+</md-content>

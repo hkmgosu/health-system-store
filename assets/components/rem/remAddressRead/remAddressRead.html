@@ -1,0 +1,33 @@
+<div class="md-padding"
+     ng-if="desktop">
+    <ssvq-address-form address="vm.addressFormData"
+                       opts="vm.addressFormOptions"
+                       on-save="vm.saveAddress">
+    </ssvq-address-form>
+</div>
+
+<md-list class="padding-0"
+         ng-if="mobile">
+    <md-list-item class="md-3-line md-long-text">
+        <i class="zmdi zmdi-pin custom-tiny-icon"
+           layout="row"
+           style="background: #85a9d9;"
+           layout-align="center center"></i>
+        <div class="md-list-item-text">
+            <h4>
+                <span>{{vm.data.text || '--'}}</span>
+            </h4>
+            <h4>{{vm.data.reference || '--'}}</h4>
+            <p>{{vm.data.zone || '--'}}, {{vm.data.district.name}}, {{vm.data.state.name}}</p>
+        </div>
+    </md-list-item>
+    <md-divider></md-divider>
+    <md-list-item ng-click="vm.edit()">
+        <span class="md-caption text-center"
+              md-colors="{color:'primary'}"
+              flex>
+            <i class="zmdi zmdi-edit"></i>
+            Editar ubicación
+        </span>
+    </md-list-item>
+</md-list>

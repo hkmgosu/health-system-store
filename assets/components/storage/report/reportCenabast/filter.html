@@ -1,0 +1,51 @@
+<md-toolbar md-theme="white">
+    <div class="md-toolbar-tools">
+        <md-icon md-font-icon="fa fa-filter"
+                 class="md-font material-icons fa fa-filter md-white-theme"
+                 role="img"
+                 aria-label="fa fa-filter"></md-icon>
+        <h2 flex=""
+            class="flex">Filtros</h2>
+        <button class="md-button md-ink-ripple md-white-theme"
+                type="button"
+                ng-click="vm.cleanFilter()">
+            <span class="ng-scope"
+                  ng-click="vm.cleanFilter()">Limpiar</span>
+            <div class="md-ripple-container"></div>
+        </button>
+    </div>
+</md-toolbar>
+
+<md-content class="_md md-my-theme-theme">
+
+    <md-input-container md-no-float
+                        class="md-block margin-left-10 margin-right-10 margin-bottom-40 md-input-has-placeholder md-my-theme-theme">
+        <label translate>AÑO</label>
+        <input type="number"
+               autofocus
+               ng-model="vm.filter.anio"
+               ng-change="vm.getReportFilter()">
+    </md-input-container>
+
+    <md-input-container md-no-float
+                        class="md-block margin-left-10 margin-right-10 margin-bottom-40 md-input-has-placeholder md-my-theme-theme">
+        <label translate>MES</label>
+        <md-select ng-model="vm.filter.mes"
+                   ng-change="vm.getReportFilter()">
+            <md-option></md-option>
+            <md-option ng-repeat="mes in vm.meses"
+                       ng-value="mes.id">{{mes.name}}</md-option>
+        </md-select>
+    </md-input-container>
+
+    <md-input-container md-no-float
+                        class="md-block margin-left-10 margin-right-10 margin-bottom-10 md-input-has-placeholder md-my-theme-theme">
+        <ssvq-storage-report-autocomplete flex-md="100"
+                                          flex="70"
+                                          label="Buscar producto..."
+                                          on-select="vm.onSelectProduct"
+                                          units="vm.searchUnits">
+        </ssvq-storage-report-autocomplete>
+    </md-input-container>
+
+</md-content>

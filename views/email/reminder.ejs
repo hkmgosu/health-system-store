@@ -1,0 +1,135 @@
+<!-- HEADER -->
+<table class="footer-wrap">
+    <tr>
+        <td></td>
+        <td class="container">
+            <!-- content -->
+            <div class="content">
+                <table>
+                    <tr>
+                        <td align="center">
+                            <div class="custom-border">
+                                <div class="blue-border"></div>
+                                <div class="red-border"></div>
+                            </div>
+                            <p class="ssvq-color">Mi SSVQ</p>
+                            <div class="custom-border">
+                                <div class="blue-border"></div>
+                                <div class="red-border"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- /content -->
+        </td>
+    </tr>
+</table>
+<!-- /HEADER -->
+
+
+<!-- BODY -->
+<table class="body-wrap">
+    <tr>
+        <td></td>
+        <td class="container"
+            bgcolor="#FFFFFF">
+            <div class="content">
+                <table>
+                    <tr>
+                        <td>
+                            <p class="lead">
+                                Hola, <b><%= user.name %> <%= user.lastname %></b>
+                            </p>
+                            <p>
+                                Este correo tiene como propósito informarte sobre las solicitudes vencidas y próximas a vencer.
+                            </p>
+                            <br>
+                            <% if(email.vencidas.length > 0) { %>
+                                <p class="text-center"><b>Vencidas (<%= email.vencidas.length %>)</b></p>
+                                <table class="requests-table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <p><b>Vencimiento</b></p>
+                                            </th>
+                                            <th>
+                                                <p><b>Título</b></p>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(var i=0; i < email.vencidas.length; i++) { %>
+                                            <tr>
+                                                <td>
+                                                    <p>
+                                                        <%= email.vencidas[i].formattedDueDate %>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <%= email.vencidas[i].title %>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <a href="<%= email.path %>#/solicitudes/detalles/<%= email.vencidas[i].id %>">Ir a la solicitud</a>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                    </tbody>
+                                </table>
+                                <% } %>
+
+
+                                    <% if(email.porVencer.length > 0) { %>
+                                        <p class="text-center"><b>Por vencer (<%=email.porVencer.length%>)</b></p>
+                                        <table class="requests-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <p><b>Vencimiento</b></p>
+                                                    </th>
+                                                    <th>
+                                                        <p><b>Título</b></p>
+                                                    </th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% for(var i=0; i < email.porVencer.length; i++) { %>
+                                                    <tr>
+                                                        <td>
+                                                            <p>
+                                                                <%= email.porVencer[i].formattedDueDate %>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p>
+                                                                <%= email.porVencer[i].title %>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <a href="<%= email.path %>#/solicitudes/detalles/<%= email.porVencer[i].id %>">Ir a la solicitud</a>
+                                                        </td>
+                                                    </tr>
+                                                    <% } %>
+                                            </tbody>
+                                        </table>
+                                        <% } %>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- /content -->
+
+        </td>
+        <td></td>
+    </tr>
+</table>
+<!-- /BODY -->
+
+<!-- FOOTER -->
+
+<!-- /FOOTER -->

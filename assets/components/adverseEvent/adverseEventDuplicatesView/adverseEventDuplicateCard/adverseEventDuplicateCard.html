@@ -1,0 +1,173 @@
+<md-card ng-class="{'select-border': vm.selectBorder}">
+    <md-card-header class="padding-10">
+        <md-card-avatar>
+            <md-letter-avatar length="3"
+                              color="{{ ::vm.getColor(vm.data.damageType.categoryDamage) }}"
+                              font-size="22px"
+                              shape="round"
+                              data="{{::vm.data.damageType.categoryDamage}}"
+                              layout="row"
+                              layout-align="center center">
+            </md-letter-avatar>
+        </md-card-avatar>
+        <md-card-header-text>
+            <div layout="column"
+                 style="margin: 2px 0;">
+                <h5 flex>
+                    {{::(vm.data.eventType.name || vm.data.damageType.name) }}
+                </h5>
+                <p flex>
+                    <span>#{{vm.data.id}}</span>
+                    <span class="ea-bullet">•</span>
+                    <md-icon md-font-icon="zmdi zmdi-account">
+                        <md-tooltip>Paciente</md-tooltip>
+                    </md-icon>
+                    <span>{{ ::(vm.data.patient.fullname ? vm.data.patient.fullname : '--') }}</span>
+                    <!-- <span class="ea-bullet">•</span> -->
+                    <!-- <md-icon md-font-icon="zmdi zmdi-time">
+                        <md-tooltip>Hora de ocurrencia</md-tooltip>
+                    </md-icon>
+                    <span>{{ ::((vm.data.occurrenceAt  | date : "dd MMM yyyy 'a las' HH:mm") || '--') }}</span> -->
+                </p>
+            </div>
+        </md-card-header-text>
+        <md-card-icon-actions layout="row">
+            <md-letter-avatar length="1"
+                              font-size="20px"
+                              shape="round"
+                              data="{{::vm.data.createdBy.fullname}}"
+                              layout="row"
+                              style="width: 25px;"
+                              layout-align="center center">
+                <md-tooltip>Ingresada el {{vm.data.createdAt | date: 'shortDate'}} por {{::vm.data.createdBy.fullname}}
+                </md-tooltip>
+            </md-letter-avatar>
+            <div layout="column"
+                 layout-align="center center">
+                <md-button class="md-icon-button"
+                           aria-label="link al evento"
+                           target="_blank"
+                           ng-href="#/eventos-adversos/detalles/{{::vm.data.id}}">
+                    <md-tooltip>Abrir evento en nueva pestaña</md-tooltip>
+                    <md-icon md-font-icon="fa fa-external-link"
+                             aria-hidden="true"></md-icon>
+                </md-button>
+            </div>
+        </md-card-icon-actions>
+    </md-card-header>
+    <md-divider></md-divider>
+    <md-card-content layout="column"
+                     class="padding-0">
+        <md-subheader class="md-no-sticky"
+                      flex=100>Información general del evento</md-subheader>
+        <md-list layout="row"
+                 layout-wrap>
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h4>{{vm.data.occurrenceService.name || '--'}}</h4>
+                    <p>Lugar de ocurrencia</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h4>{{ ::((vm.data.occurrenceAt  | date : "dd MMM yyyy 'a las' HH:mm") || '--') }}</h4>
+                    <p>Fecha y hora de ocurrencia</p>
+                </div>
+            </md-list-item>
+        </md-list>
+        <md-list>
+            <md-list-item class="md-2-line ea-long-text">
+                <div class="md-list-item-text">
+                    <h4>{{vm.data.patientDiagnostic || '--'}}</h4>
+                    <p>Diagnóstico médico</p>
+                </div>
+            </md-list-item>
+        </md-list>
+        <md-subheader class="md-no-sticky"
+                      flex=100>Información específica del evento</md-subheader>
+        <md-list layout="row"
+                 layout-wrap>
+            <md-list-item class="md-2-line"
+                          ng-if="vm.data.formType === 'FormFall'"
+                          flex=100
+                          flex-gt-sm=50>
+                <div class="md-list-item-text">
+                    <h4>{{vm.data.formData.placeFall.name}}</h4>
+                    <p>Donde se cayó</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line"
+                          ng-if="vm.data.formType === 'FormFall'"
+                          flex=100
+                          flex-gt-sm=50>
+                <div class="md-list-item-text">
+                    <h4>
+                        <span
+                              ng-repeat="injury in ::vm.data.formData.typesInjury">{{ ::injury.name }}{{ ::(!$last ? ', ' : '') }}</span>
+                        <span ng-if="::vm.data.formData.typesInjury.length === 0">--</span>
+                    </h4>
+                    <p>Tipo(s) de lesión</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line"
+                          ng-if="vm.data.formType === 'FormMedication'"
+                          flex=100
+                          flex-gt-sm=50>
+                <div class="md-list-item-text">
+                    <h4>{{vm.data.formData.medicine.name}}</h4>
+                    <p>Medicamento</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line"
+                          ng-if="vm.data.formType === 'FormMedication'"
+                          flex=100
+                          flex-gt-sm=50>
+                <div class="md-list-item-text">
+                    <h4>{{vm.data.formData.typeError.name}}</h4>
+                    <p>Tipo de error</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line"
+                          ng-if="vm.data.formType === 'FormMedication'"
+                          flex=100
+                          flex-gt-sm=50>
+                <div class="md-list-item-text">
+                    <h4>{{vm.data.formData.stageError.name}}</h4>
+                    <p>Etapa del error</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line"
+                          ng-if="vm.data.formType === 'FormUpp'"
+                          ng-repeat="upp in vm.data.formData.causes"
+                          flex=100
+                          flex-gt-sm=50>
+                <div class="md-list-item-text">
+                    <h4>{{upp.localization.name}}, grado {{upp.grade.name}}</h4>
+                    <p>LPP {{$index + 1}}</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line ea-long-text"
+                          flex>
+                <div class="md-list-item-text">
+                    <h4>{{vm.data.eventDescription}}</h4>
+                    <p>Descripción del evento</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-card-content>
+    <md-divider></md-divider>
+    <md-card-actions layout="row"
+                     layout-align="end center"
+                     ng-if="vm.optionButtons">
+        <md-button class="md-primary"
+                   ng-click="vm.markDuplicateEvent(vm.data.id)">
+            <md-icon md-font-icon="fa fa-files-o"></md-icon>
+            Es duplicado
+        </md-button>
+        <md-button class="md-warn"
+                   ng-click="vm.markNotDuplicateEvent(vm.data.id)">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            No es duplicado
+        </md-button>
+    </md-card-actions>
+</md-card>

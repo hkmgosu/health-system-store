@@ -1,0 +1,141 @@
+<md-subheader class="md-primary">Productos solicitados ({{vm.productRequest.details.length}} ítems)</md-subheader>
+
+<md-card ng-show="vm.isCreator && vm.productRequest.status.id == 1 && vm.productRequest.isPharmaceutical">
+    <md-card-content class="padding-0">
+        <div layout="row">
+            <md-button ng-click="vm.dialogProgram($event)"
+                       class="margin-0 flex">
+                <md-icon md-font-icon="fa fa-object-group"></md-icon>
+                Agregar programa
+            </md-button>
+        </div>
+    </md-card-content>
+</md-card>
+
+<!-- SIN PROGRAMA -->
+<md-card>
+    <md-card-header layout="row"
+                    class="padding-bottom-0">
+        <div flex>
+            <md-icon md-font-icon="fa fa-home"></md-icon>
+            <span ng-if="vm.productRequest.isPharmaceutical">Sin Programa</span>
+            <span ng-if="!vm.productRequest.isPharmaceutical">Productos</span>
+        </div>
+        <md-button ng-click="vm.newDetail($event, null)"
+                   ng-show="vm.isCreator && vm.productRequest.status.id == 1"
+                   class="md-icon-button">
+            <md-icon md-font-icon="fa fa-plus"></md-icon>
+        </md-button>
+    </md-card-header>
+    <md-card-content class="padding-top-0">
+        <md-list class="md-dense">
+            <md-list-item class="md-3-line md-with-secondary"
+                          ng-repeat="item in vm.getDetailsBySubprogram(null) track by $index"
+                          ng-click="vm.editDetail($event, item)">
+                <div layout="row"
+                     layout-align="center center">
+                    <div class="top-border"></div>
+
+                    <!-- AVATAR: PROBLEMA DE ENVIO -->
+                    <span class="md-avatar-icon text-center"
+                          style="background: orange"
+                          ng-show="item.hasProblemShipping">
+                        <md-icon md-font-icon="fa fa-exclamation-triangle"
+                                 class="text-white"
+                                 title="Item incompleto!"></md-icon>
+                    </span>
+
+                    <!-- AVATAR: LETRA -->
+                    <md-letter-avatar class="md-avatar"
+                                      ng-show="!item.product.hasProfilePicture && !item.hasProblemShipping"
+                                      length="1"
+                                      font-size="18px"
+                                      shape="round"
+                                      data="item.product.description">
+                    </md-letter-avatar>
+
+                    <!-- AVATAR: IMAGEN -->
+                    <img class="md-avatar"
+                         ng-show="item.product.hasProfilePicture && !item.hasProblemShipping"
+                         ng-src="storage/product/downloadProductProfilePicture/{{item.product.id}}?{{vm.timestamp(item.product)}}">
+
+                    <div class="bottom-border"></div>
+                </div>
+                <div class="md-list-item-text"
+                     layout="column">
+                    <h3>{{item.product.productCode}}: {{item.product.description}}</h3>
+                    <h4 ng-bind-html="'Estado: ' + vm.getStatusDetail(item)"></h4>
+                    <p>Cantidad: {{item.quantityBoss2}} / Recibido: {{item.quantityReceived}}</p>
+                </div>
+                <div class="md-secondary-container">
+                    <md-button class="md-warn md-icon-button"
+                               required-privilege="['update']"
+                               ng-show="vm.productRequest.status.id==1 && vm.isCreator"
+                               ng-click="vm.delDetail($event, item.id)">
+                        <md-icon md-font-icon="fa fa-trash"></md-icon>
+                    </md-button>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-card-content>
+</md-card>
+
+<!-- CON PROGRAMA -->
+<md-card ng-repeat="subprogram in vm.subprogramsView">
+    <md-card-header layout="row"
+                    class="padding-bottom-0">
+        <div flex
+             ng-if="!subprogram.program">
+            {{subprogram.description}}
+        </div>
+        <div flex
+             ng-if="subprogram.program">
+            {{subprogram.program.description}} / {{subprogram.description}}
+        </div>
+        <md-button ng-click="vm.newDetail($event, subprogram.id)"
+                   ng-show="vm.isCreator && vm.productRequest.status.id == 1"
+                   class="md-icon-button">
+            <md-icon md-font-icon="fa fa-plus"></md-icon>
+        </md-button>
+    </md-card-header>
+    <md-card-content class="padding-top-0">
+        <md-list class="md-dense">
+            <md-list-item class="md-3-line md-with-secondary"
+                          ng-repeat="item in vm.getDetailsBySubprogram(subprogram.id) track by $index"
+                          ng-click="vm.editDetail($event, item)">
+                <div layout="row"
+                     layout-align="center center">
+                    <div class="top-border"></div>
+                    <md-letter-avatar class="md-avatar"
+                                      ng-show="!item.product.hasProfilePicture"
+                                      length="1"
+                                      font-size="18px"
+                                      shape="round"
+                                      data="item.product.description">
+                    </md-letter-avatar>
+                    <img class="md-avatar"
+                         ng-show="item.product.hasProfilePicture"
+                         ng-src="storage/product/downloadProductProfilePicture/{{item.product.id}}?{{vm.timestamp(item.product)}}">
+
+                    <div class="bottom-border"></div>
+                </div>
+                <div class="md-list-item-text"
+                     layout="column">
+                    <h3>{{item.product.productCode}}: {{item.product.description}}</h3>
+                    <h4 ng-bind-html="'Estado: ' + vm.getStatusDetail(item)"></h4>
+                    <p>Cantidad: {{item.quantityBoss2}} / Recibido: {{item.quantityReceived}}</p>
+                </div>
+                <div class="md-secondary-container">
+                    <md-button class="md-warn md-icon-button"
+                               required-privilege="['update']"
+                               ng-show="vm.productRequest.status.id==1 && vm.isCreator"
+                               ng-click="vm.delDetail($event, item.id)">
+                        <md-icon md-font-icon="fa fa-trash"></md-icon>
+                    </md-button>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-card-content>
+</md-card>
+
+<ssvq-loading ng-show="!vm.productRequest.id"></ssvq-loading>

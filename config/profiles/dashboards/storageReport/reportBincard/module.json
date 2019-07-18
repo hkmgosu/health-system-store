@@ -1,0 +1,22 @@
+{
+    "name": "PRIVILEGES.STORAGE_REPORT.BINCARD.NAME",
+    "description": "PRIVILEGES.STORAGE_REPORT.BINCARD.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.report-bincard",
+            "url": "/bodega/reporte-bincard",
+            "template": "<ssvq-report-bincard></ssvq-report-bincard>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/StorageReportController.getBincard",
+                "Storage/ProductController.getAll",
+                "Storage/UnitProductsManagerController.getAll",
+                "Storage/UnitProductsManagerController.getAllowedUnits"
+            ]
+        }
+    }
+}

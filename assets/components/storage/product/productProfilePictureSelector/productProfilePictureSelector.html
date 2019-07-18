@@ -1,0 +1,21 @@
+<div class="profile-picture">
+    <img ng-src="storage/product/downloadProductProfilePicture/{{vm.product.id}}?{{vm.timestamp}}">
+    <div class="profile-uploader"
+         ngf-select="vm.selectFile($file)"
+         ngf-multiple="false"
+         ng-model="vm.file"
+         accept="image/*"
+         ngf-max-size="5MB"
+         layout="column"
+         layout-align="center center">
+        <span class="md-body-2 text-center">Seleccionar</span>
+    </div>
+    <md-button ng-show="vm.product.hasProfilePicture"
+               ng-click="vm.deleteProfilePicture()"
+               required-privilege="['delete']"
+               style="top:0;right:0"
+               class="md-fab md-fab-top-right md-mini md-warn delete-button">
+        <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
+        <md-tooltip>Eliminar imagen del producto</md-tooltip>
+    </md-button>
+</div>

@@ -1,0 +1,16 @@
+{
+    "name": "PRIVILEGES.ABOUTAPP.NAME",
+    "description": "PRIVILEGES.ABOUTAPP.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.about-app",
+            "url": "/acerca-de",
+            "template": "<ssvq-view-about-app></ssvq-view-about-app>",
+            "icon": "zmdi zmdi-code"
+        },
+        "_controllers": {}
+    }
+}

@@ -1,0 +1,49 @@
+ssvq-storage-product-request-admin md-list {
+    margin-bottom: 72px;
+}
+
+ssvq-storage-product-request-admin .statusParent1 .md-text,
+ssvq-storage-product-request-admin .statusParent1 {
+    color: green;
+}
+
+ssvq-storage-product-request-admin .statusParent2 .md-text,
+ssvq-storage-product-request-admin .statusParent2 {
+    color: orange;
+}
+
+ssvq-storage-product-request-admin .statusParent10 .md-text,
+ssvq-storage-product-request-admin .statusParent10 {
+    color: red;
+}
+
+table.requestDetail {
+    width: 100%;
+}
+
+table.requestDetail md-input-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+table.requestDetail input[type=number] {
+    text-align: right;
+}
+
+table.requestDetail .md-errors-spacer {
+    min-height: 0;
+}
+
+.badge {
+    background-color: #e57373;
+    color: white;
+    padding: 2px 4px;
+    border-radius: 1rem;
+    font-weight: normal;
+    font-size: 1rem;
+}
+
+ssvq-storage-product-request-admin md-letter-avatar {
+    cursor: pointer;
+}

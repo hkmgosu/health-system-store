@@ -1,0 +1,216 @@
+<md-dialog flex="60"
+           flex-md="80"
+           flex-sm="90"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog"
+           ng-form="viaticForm"
+           id="calendar-container"
+           aria-label="Nueva solicitud de viático">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Cancelar</md-tooltip>
+            </md-button>
+            <h2 flex
+                md-truncate>Nuevo viático</h2>
+            <md-button ng-if="ssvqWizard.currentStep === 1"
+                       ng-click="ssvqWizard.currentStep = 0">
+                Anterior
+            </md-button>
+
+            <md-button ng-show="ssvqWizard.currentStep === 0"
+                       ng-disabled="vm.initForm.$submitted && vm.initForm.$invalid"
+                       ng-click="vm.nextStep()">
+                Siguiente
+            </md-button>
+
+            <md-button aria-label="Enviar"
+                       ng-click="vm.save()"
+                       ng-if="ssvqWizard.currentStep === 1"
+                       ng-disabled="viaticForm.$invalid || vm.formDisabled">
+                <span>Enviar</span>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div ssvq-wizard
+             ng-init="ssvqWizard.currentStep=0">
+            <md-tabs class="md-hue-1 md-primary md-dynamic-height"
+                     md-selected="ssvqWizard.currentStep">
+                <md-tab>
+                    <md-tab-label>
+                        <span class="adverse-event-step-label">1</span>
+                        General
+                    </md-tab-label>
+                    <md-tab-body>
+                        <div layout="column"
+                             class="md-padding"
+                             ng-form="vm.initForm">
+                            <md-input-container class="md-block">
+                                <label>Tipo</label>
+                                <md-select ng-model="vm.viatic.type"
+                                           name="type"
+                                           required>
+                                    <md-option ng-value="type.id"
+                                               ng-repeat="type in vm.typeList track by $index">
+                                        {{type.name}}
+                                    </md-option>
+                                </md-select>
+                                <div ng-messages="vm.initForm.type.$error"
+                                     role="alert">
+                                    <div ng-message="required">
+                                        <span>Campo obligatorio</span>
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <ssvq-region-commune data="vm.viatic"
+                                                 opts="vm.opts"
+                                                 form="vm.addressForm"
+                                                 flex></ssvq-region-commune>
+                            <md-input-container class="md-block">
+                                <label>Motivo</label>
+                                <textarea ng-model="vm.viatic.reason"
+                                          name="reason"
+                                          required
+                                          rows="2"></textarea>
+                                <div ng-messages="vm.initForm.reason.$error"
+                                     role="alert">
+                                    <div ng-message="required">
+                                        <span>Campo obligatorio</span>
+                                    </div>
+                                </div>
+                            </md-input-container>
+
+                            <div layout-gt-xs="row"
+                                 layout-align="center center">
+                                <md-input-container flex
+                                                    class="margin-right-20">
+                                    <label>Transporte</label>
+                                    <md-select ng-model="vm.viatic.transportType">
+                                        <md-option ng-value="null">--</md-option>
+                                        <md-option ng-value="transportType.name"
+                                                   ng-repeat="transportType in vm.transportTypeList">
+                                            {{transportType.name}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+
+                                <md-checkbox ng-model="vm.viatic.requireTransport"
+                                             class="md-primary"
+                                             flex>
+                                    Derecho a pasaje
+                                </md-checkbox>
+
+                                <md-checkbox ng-model="vm.viatic.requireHotel"
+                                             class="md-primary"
+                                             flex>
+                                    Pernoctará fuera de la residencia
+                                </md-checkbox>
+                            </div>
+                        </div>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab ng-disabled="vm.initForm.$invalid">
+                    <md-tab-label>
+                        <span class="adverse-event-step-label">2</span>
+                        Periodo y montos
+                    </md-tab-label>
+                    <md-tab-body>
+                        <md-subheader class="md-primary md-hue-1">Seleccione periodo</md-subheader>
+                        <div class="md-padding padding-bottom-0">
+                            <div layout="row"
+                                 layout-xs="column">
+                                <div layout="row">
+                                    <md-input-container flex>
+                                        <label>Desde</label>
+                                        <md-datepicker name="fromDate"
+                                                       ng-model="vm.viatic.fromDate"
+                                                       ng-change="vm.onFromDateChanged(vm.viatic.fromDate)"
+                                                       required></md-datepicker>
+                                        <div ng-messages="viaticForm.fromDate.$error"
+                                             role="alert">
+                                            <div ng-message="required">
+                                                <span>Campo obligatorio</span>
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                    <md-input-container flex>
+                                        <label>Hasta</label>
+                                        <md-datepicker name="toDate"
+                                                       ng-model="vm.viatic.toDate"
+                                                       ng-change="vm.onToDateChanged(vm.viatic.toDate)"
+                                                       required></md-datepicker>
+                                        <div ng-messages="viaticForm.toDate.$error"
+                                             role="alert">
+                                            <div ng-message="required">
+                                                <span>Campo obligatorio</span>
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                </div>
+
+                                <div layout="column"
+                                     flex>
+                                    <span ng-show="vm.calendarExtraData.hasWeekendSelected"
+                                          class="text-right md-caption">
+                                        <md-icon class="zmdi zmdi-info"></md-icon>
+                                        <span>Hay días de fin de semana seleccionados</span>
+                                    </span>
+                                    <span ng-show="vm.calendarExtraData.hasHolidaysSelected"
+                                          class="text-right md-caption">
+                                        <md-icon class="zmdi zmdi-info"></md-icon>
+                                        <span>Hay días feriados seleccionados</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <ssvq-viatic-calendar ng-if="vm.viatic.fromDate && vm.viatic.toDate"
+                                                  days="vm.viatic.daysDetails"
+                                                  from-date="vm.viatic.fromDate"
+                                                  until-date="vm.viatic.toDate"
+                                                  options="vm.calendarOptions"
+                                                  item-options="vm.itemOptions"
+                                                  module="viatic"
+                                                  extra-data="vm.calendarExtraData"></ssvq-viatic-calendar>
+                        </div>
+                        <md-subheader class="md-primary md-hue-1">Montos</md-subheader>
+                        <div>
+                            <ssvq-viatic-amount-summary viatic-data="vm.viatic"
+                                                        flex="40"></ssvq-viatic-amount-summary>
+                        </div>
+                    </md-tab-body>
+                </md-tab>
+            </md-tabs>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions class="md-whiteframe-2dp">
+        <md-button aria-label="Cancelar"
+                   class="md-accent"
+                   ng-click="vm.cancel()">
+            <span>Cancelar</span>
+        </md-button>
+        <span flex></span>
+
+        <md-button class="md-accent"
+                   ng-if="ssvqWizard.currentStep === 1"
+                   ng-click="ssvqWizard.currentStep = 0">
+            Anterior
+        </md-button>
+
+        <md-button class="md-raised md-primary"
+                   ng-show="ssvqWizard.currentStep === 0"
+                   ng-disabled="vm.initForm.$submitted && vm.initForm.$invalid"
+                   ng-click="vm.nextStep()">
+            Siguiente
+        </md-button>
+
+        <md-button aria-label="Enviar"
+                   ng-click="vm.save()"
+                   ng-if="ssvqWizard.currentStep === 1"
+                   ng-disabled="viaticForm.$invalid || vm.formDisabled"
+                   class="md-raised md-primary">
+            <span>Enviar</span>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

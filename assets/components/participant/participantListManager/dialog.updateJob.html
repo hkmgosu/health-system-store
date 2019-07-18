@@ -1,0 +1,26 @@
+<md-dialog aria-label="Título"
+           style="width: 80%;"
+           class="mobile-fullwidth-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <span class="md-subhead">Cambio de cargo</span>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-padding">
+            ¿Deseas modificar el cargo de <b>{{vm.participant.member.fullname}}</b>
+            para futuros turnos?
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button ng-click="vm.cancel()">Cancelar acción</md-button>
+        <span flex></span>
+        <md-button ng-click="vm.confirm(false)">Mantener cargo actual</md-button>
+        <md-button ng-click="vm.confirm(true)">Si, modificar </md-button>
+    </md-dialog-actions>
+</md-dialog>

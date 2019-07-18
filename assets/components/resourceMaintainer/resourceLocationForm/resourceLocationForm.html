@@ -1,0 +1,68 @@
+<div layout="row">
+    <div ng-form="vm.locationForm"
+         flex>
+        <ssvq-employee-autocomplete selected="vm.resource.currentEmployee"
+                                    on-select="vm.onEmployeeSelect"
+                                    ng-init="vm.employeeAutocompleteOptions={clearButton: true}"
+                                    opts="vm.employeeAutocompleteOptions"
+                                    label="Funcionario asignado"></ssvq-employee-autocomplete>
+        <ssvq-establishment-autocomplete selected="vm.resource.establishment"
+                                         ng-init="vm.establishmentAutocompleteOptions={clearButton: true}"
+                                         opts="vm.establishmentAutocompleteOptions">
+        </ssvq-establishment-autocomplete>
+        <ssvq-unit-autocomplete selected="vm.resource.unit"
+                                establishment="vm.resource.establishment.id"></ssvq-unit-autocomplete>
+
+        <div layout="column"
+             ng-if="vm.initResource.currentEmployee.id !== vm.resource.currentEmployee.id">
+            <md-checkbox ng-model="vm.opts.notify"
+                         ng-if="vm.resource.currentEmployee.id"
+                         ng-init="vm.opts.notify=false">Notificar vinculación a
+                <b>{{vm.resource.currentEmployee.fullname}}</b> vía email</md-checkbox>
+
+            <md-checkbox ng-model="vm.opts.notifyPrev"
+                         ng-if="vm.initResource.currentEmployee.id"
+                         ng-init="vm.opts.notifyPrev=false">Notificar desvinculación a
+                <b>{{vm.initResource.currentEmployee.fullname}}</b> vía email</md-checkbox>
+        </div>
+
+        <div layout="row">
+            <span flex></span>
+            <md-button ng-click="vm.confirmLocation()"
+                       class="md-primary md-raised"
+                       ng-disabled="vm.locationForm.$pristine">Actualizar ubicación</md-button>
+        </div>
+    </div>
+    <!--     <md-card flex
+             style="max-height: 600px;"
+             ng-if="vm.resource.jsonData">
+        <md-content>
+            <md-list>
+                <md-subheader>Datos para encontrar coincidencias</md-subheader>
+                <md-list-item>
+                    <span>Nombre</span>
+                    <span class="md-secondary">{{vm.resource.jsonData.userName}}</span>
+                </md-list-item>
+                <md-list-item>
+                    <span>Email</span>
+                    <span class="md-secondary">{{vm.resource.jsonData.userMail}}</span>
+                </md-list-item>
+                <md-list-item>
+                    <span>Anexo</span>
+                    <span class="md-secondary">{{vm.resource.jsonData.userAnnexe}}</span>
+                </md-list-item>
+                <md-subheader>Coincidencias disponibles</md-subheader>
+
+                <md-list-item ng-repeat="employee in vm.assignmentCoincidences">
+                    <ssvq-employee-item-list employee="employee"
+                                             fields="{job: true, establishment: true, contact: true}">
+                    </ssvq-employee-item-list>
+                    <md-button class="md-primary md-raised md-secondary"
+                               ng-click="vm.onSuggestionSelect(employee);">Usar</md-button>
+                </md-list-item>
+                <p class="text-center md-caption"
+                   ng-if="vm.assignmentCoincidences.length === 0">No hay coincidencias</p>
+            </md-list>
+        </md-content>
+    </md-card> -->
+</div>

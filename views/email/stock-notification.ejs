@@ -1,0 +1,119 @@
+<!-- HEADER -->
+<table class="footer-wrap">
+    <tr>
+        <td class="container">
+            <!-- content -->
+            <div class="content">
+                <table>
+                    <tr>
+                        <td align="center">
+                            <div class="custom-border">
+                                <div class="blue-border"></div>
+                                <div class="red-border"></div>
+                            </div>
+                            <p class="ssvq-color">Mi SSVQ</p>
+                            <div class="custom-border">
+                                <div class="blue-border"></div>
+                                <div class="red-border"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- /content -->
+        </td>
+    </tr>
+</table>
+<!-- /HEADER -->
+
+
+<!-- BODY -->
+<table class="body-wrap">
+    <tr>
+        <td></td>
+        <td class="container"
+            bgcolor="#FFFFFF">
+            <div class="content">
+                <table>
+                    <tr>
+                        <td>
+                            <p class="lead">
+                                Hola, <b>
+                                    <%= user.name %>
+                                    <%= user.lastname %></b>
+                            </p>
+                            <p>
+                                Este correo tiene como propósito de informar sobre stock crítico.
+                            </p>
+                            <br>
+                            <% if(email.stocks.length > 0) { %>
+                            <p class="text-center"><b>Stock Críticos (
+                                    <%= email.stocks.length %>)</b></p>
+                            <table class="requests-table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <p><b>Unidad</b></p>
+                                        </th>
+                                        <th>
+                                            <p><b>Producto</b></p>
+                                        </th>
+                                        <th>
+                                            <p><b>Código Producto</b></p>
+                                        </th>
+                                        <th>
+                                            <p><b>Stock Actual</b></p>
+                                        </th>
+                                        <th>
+                                            <p><b>Stock Minimo</b></p>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(var i=0; i < email.stocks.length; i++) { %>
+                                    <tr>
+                                        <td>
+                                            <p>
+                                                <%= email.stocks[i].unidad %>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <%= email.stocks[i].producto %>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <%= email.stocks[i].cod_producto %>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <%= email.stocks[i].stock_actual %>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <%= email.stocks[i].min_stock %>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                            <% } %>
+                            <br>
+                            <p class="callout">
+                                <%- email.body %>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- /content -->
+
+        </td>
+        <td></td>
+    </tr>
+</table>
+<!-- /BODY -->

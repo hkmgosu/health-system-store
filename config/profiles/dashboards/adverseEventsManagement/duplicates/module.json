@@ -1,0 +1,27 @@
+{
+    "name": "PRIVILEGES.ADVERSEEVENTSMANAGEMENT.DUPLICATES.NAME",
+    "description": "PRIVILEGES.ADVERSEEVENTSMANAGEMENT.DUPLICATES.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.adverse-event-duplicates",
+            "url": "/eventos-adversos/duplicados",
+            "data": {
+                "layout": {
+                    "sideMenuSize": "icon"
+                }
+            },
+            "template": "<ssvq-adverse-event-duplicates-view></ssvq-adverse-event-duplicates-view>"
+        },
+        "_controllers": {
+            "read": ["AdverseEventController.getDuplicatedEvents", "MedicineController.*"],
+            "update": [
+                "AdverseEventController.markNotDuplicateEvent",
+                "AdverseEventController.markDuplicateEvent"
+            ]
+        }
+    }
+}

@@ -1,0 +1,70 @@
+<section layout="row"
+         flex>
+    <md-content flex>
+        <!-- PESTAÑAS -->
+        <md-tabs class="md-primary md-hue-1 tabs-requests md-my-theme-theme"
+                 md-selected="selectedTabMain">
+            <md-tab>
+                <md-tab-label>Abiertos
+                    <span class="badge">{{ vm.openStatuses.length }}</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <div ng-include="'/components/storage/productRequest/productRequestAdmin/tabOpen.html'"></div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Pendientes
+                    <span class="badge">{{ vm.pendingStatuses.length }}</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <div ng-include="'/components/storage/productRequest/productRequestAdmin/tabPending.html'"></div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Cerrados
+                    <span class="badge">{{ vm.closedStatuses.length }}</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <div ng-include="'/components/storage/productRequest/productRequestAdmin/tabClosed.html'"></div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-label>Todos
+                    <span class="badge">{{ vm.allStatuses.length }}</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <div ng-include="'/components/storage/productRequest/productRequestAdmin/tabAll.html'"></div>
+                </md-tab-body>
+            </md-tab>
+            <md-divider></md-divider>
+        </md-tabs>
+
+        <!-- BOTON NUEVO -->
+        <md-fab-speed-dial md-direction="up"
+                           required-privilege="['create']"
+                           class="md-fab-bottom-right md-fling md-hover-full ng-isolate-scope md-up _md-animations-ready">
+            <md-fab-trigger>
+                <md-button aria-label="menu"
+                           ng-click="vm.openCreate($event)"
+                           class="md-fab md-primary">
+                    <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                </md-button>
+            </md-fab-trigger>
+        </md-fab-speed-dial>
+
+        <!-- BOTON VER FILTRO -->
+        <md-button class="md-fab md-mini md-accent md-fab-top-right hide-gt-xs"
+                   ng-click="vm.toggleFilter()">
+            <md-tooltip>Ver filtro</md-tooltip>
+            <md-icon md-font-icon="zmdi zmdi-filter-list"></md-icon>
+        </md-button>
+    </md-content>
+
+    <!-- SECCION FILTRO -->
+    <md-sidenav class="md-sidenav-right md-whiteframe-1dp"
+                md-is-locked-open="$mdMedia('gt-xs')"
+                md-component-id='srequest-filter'>
+
+        <div ng-include="'/components/storage/productRequest/productRequestAdmin/filter.html'"></div>
+    </md-sidenav>
+</section>

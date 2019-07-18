@@ -1,0 +1,79 @@
+<!-- requestListItem -->
+<md-list-item ui-sref="triangular.mi-ssvq.admin-request-details({id:vm.request.id,request:vm.request})"
+              aria-label="{{::vm.request.title}}"
+              class="md-3-line">
+    <ssvq-employee-avatar employee="vm.request.createdBy"></ssvq-employee-avatar>
+    <div class="md-list-item-text padding-left-10"
+         style="width: calc(100% - 135px);">
+        <h3 style="font-weight:500">{{::vm.request.title}}</h3>
+        <p md-truncate>
+            #{{::vm.request.id}} ingresada
+            <span am-time-ago="vm.request.createdAt"></span> por
+            <b>{{ ::vm.request.createdBy.fullname }}</b>
+        </p>
+        <p layout="row"
+           layout-align="start center"
+           md-truncate>
+            <any layout="row"
+                 layout-align="start center">
+                <md-icon class="material-icons unit-icon"
+                         md-font-icon="zmdi zmdi-group-work">
+                </md-icon>
+                <span>
+                    {{ ::vm.request.unitAssigned.name }}
+                </span>
+            </any>
+            <any ng-show="::vm.request.dueDateDiff"
+                 layout="row"
+                 layout-align="start center">
+                <span class="bullet">•</span>
+                <md-icon md-font-icon="zmdi zmdi-time-countdown"
+                         class="material-icons dueDate-icon">
+                </md-icon>
+                <span>
+                    {{ ::vm.request.dueDateDiff }}
+                </span>
+            </any>
+            <any ng-show="::vm.request.label"
+                 layout="row"
+                 layout-align="start center">
+                <span class="bullet">•</span>
+                <md-icon md-font-icon="zmdi zmdi-label"
+                         class="material-icons label-icon">
+                </md-icon>
+                <span>{{ ::vm.request.label.name }}</span>
+            </any>
+            <any ng-show="::vm.request.commentCount"
+                 layout="row"
+                 layout-align="start center">
+                <span class="bullet">•</span>
+                <md-icon md-font-icon="zmdi zmdi-comments"
+                         class="material-icons comments-icon">
+                </md-icon>
+                <span>{{ ::vm.request.commentCount }}</span>
+                <md-tooltip>
+                    {{ ::vm.request.commentCount }} comentario{{::vm.request.commentCount > 1 ? 's' : ''}}
+                </md-tooltip>
+            </any>
+        </p>
+    </div>
+    <div hide-xs
+         layout="column"
+         layout-align="end end"
+         style="height: 61px;">
+        <ssvq-employee-avatar class="mini-avatar"
+                              ng-show="::vm.request.employeeAssigned"
+                              employee="vm.request.employeeAssigned">
+        </ssvq-employee-avatar>
+        <md-tooltip ng-if="vm.request.employeeAssigned">
+            Asignada a {{::vm.request.employeeAssigned.fullname}}
+        </md-tooltip>
+        <p class="md-caption margin-top-10 margin-bottom-0">
+            <span>{{::vm.request.state.description}}</span>
+            <span ng-class="vm.request.state.finished ? 'state-finished': 'state-unfinished'"
+                  class="md-body-2">•</span>
+        </p>
+    </div>
+    <md-divider class="margin-left-60"></md-divider>
+</md-list-item>
+<!-- end requestListItem -->

@@ -1,0 +1,28 @@
+<div layout="row"
+     layout-align="start center">
+    <ssvq-employee-avatar employee="vm.employee"></ssvq-employee-avatar>
+    <div flex
+         layout="column"
+         class="md-padding"
+         style="overflow: hidden;">
+        <span class="md-body-2"
+              md-highlight-text="searchText"
+              md-highlight-flags="gi">
+            {{vm.employee.fullname}}
+        </span>
+        <span class="md-caption"
+              ng-show="::vm.fields.job"
+              md-highlight-text="searchText"
+              md-highlight-flags="gi">
+            {{vm.employee.job.name || '--'}} en {{vm.employee.unit.name || '--'}}
+        </span>
+        <span class="md-caption"
+              ng-show="::vm.fields.establishment">
+            {{vm.employee.establishment.name || ''}}
+        </span>
+        <span class="md-caption"
+              ng-show="::(vm.fields.contact && (vm.employee.email || vm.employee.annexe))">
+            {{vm.employee.email || '--'}} • Anexo {{vm.employee.annexe || '--'}}
+        </span>
+    </div>
+</div>

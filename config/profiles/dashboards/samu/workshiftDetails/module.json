@@ -1,0 +1,47 @@
+{
+    "name": "PRIVILEGES.SAMU.WORKSHIFT_DETAILS.NAME",
+    "description": "PRIVILEGES.SAMU.WORKSHIFT_DETAILS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "create": false,
+            "read": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.samu-workshift-details",
+            "url": "/samu/turnos/detalles/:id",
+            "template": "<ssvq-workshift-details></ssvq-workshift-details>",
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "WorkshiftController.getDetails",
+                "WorkshiftController.getTimeline",
+                "WorkshiftController.getFullCareTeamList",
+                "WorkshiftController.getEstablishmentVehicleList",
+                "WorkshiftController.getEmployeeHistory",
+                "VehicleController.getAutocomplete",
+                "EmployeeController.getProfileById",
+                "WorkshiftController.remoteValidate"
+            ],
+            "create": [
+                "ArchiveController.uploadArchive",
+                "WorkshiftController.copy"
+            ],
+            "update": [
+                "WorkshiftController.addCareTeam",
+                "WorkshiftController.removeCareTeam",
+                "WorkshiftController.addComment",
+                "WorkshiftController.validate",
+                "ParticipantController.add",
+                "ParticipantController.remove",
+                "WorkshiftController.updateJob",
+                "WorkshiftController.update"
+            ],
+            "delete": [
+                "WorkshiftController.delete"
+            ]
+        }
+    }
+}

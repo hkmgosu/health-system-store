@@ -1,0 +1,33 @@
+{
+    "name": "Plan. Cenabast",
+    "description": "Planificación Cenabast",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-cenabast-admin",
+            "url": "/bodega/plan-cenabast",
+            "template": "<ssvq-storage-cenabast-admin></ssvq-storage-cenabast-admin>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/PlanCenabastController.get",
+                "Storage/PlanCenabastController.getAll",
+                "Storage/ProductController.getAll"
+            ],
+            "create": [
+                "Storage/PlanCenabastController.create"
+            ],
+            "update": [
+                "Storage/PlanCenabastController.update"
+            ],
+            "delete": [
+                "Storage/PlanCenabastController.delete"
+            ]
+        }
+    }
+}

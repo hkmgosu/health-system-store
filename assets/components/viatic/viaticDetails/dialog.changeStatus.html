@@ -1,0 +1,59 @@
+<md-dialog aria-label="Cambiar estado de viático"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <span class="md-subhead"
+                  flex>Selecciona nuevo estado</span>
+            <md-button ng-click="vm.confirm()"
+                       ng-disabled="!vm.statusSelected"
+                       aria-label="Cambiar estado">
+                Cambiar estado
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-list>
+            <md-list-item ng-repeat="status in vm.statusList | orderBy: 'order'"
+                          ng-disabled="vm.statusSelected.id === status.id"
+                          ng-class="{'item-selected': (vm.statusSelected.id == status.id)}"
+                          ng-click="vm.statusSelected = status">
+                <span ng-class="{'selected': (vm.statusSelected.id == status.id)}">
+                    {{status.name}}
+                </span>
+                <md-icon class="md-secondary zmdi"
+                         layout="row"
+                         layout-align="center center"
+                         ng-class="vm.statusSelected.id === status.id ? 'md-primary zmdi-check-square' : 'md-accent zmdi-square-o'">
+                </md-icon>
+            </md-list-item>
+        </md-list>
+        <md-divider></md-divider>
+        <div layout="row"
+             class="md-padding">
+            <md-input-container flex>
+                <label>Comentario</label>
+                <input type="text"
+                       ng-model="vm.comment">
+                <div class="hint">Opcional</div>
+            </md-input-container>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-accent"
+                   ng-click="vm.cancel()">Volver</md-button>
+        <md-button class="md-primary"
+                   ng-click="vm.confirm()"
+                   ng-disabled="!vm.statusSelected"
+                   aria-label="Solicitar traslado">
+            Cambiar estado
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

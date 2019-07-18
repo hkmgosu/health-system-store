@@ -1,0 +1,131 @@
+<md-list ng-if="vm.data"
+         class="padding-top-0">
+    <md-subheader class="md-no-sticky">
+        <span flex>Datos de la caída</span>
+    </md-subheader>
+    <md-divider></md-divider>
+    <md-list-item class="md-3-line md-long-text ae-list-details">
+        <div class="md-list-item-text">
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Donde se cayó:</strong>
+                <span>{{ (vm.data.placeFall || {}).name || '--' }}</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Desde donde se cayó:</strong>
+                <span>{{ (vm.data.fromFall || {}).name || '--' }}</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Actividad al momento de la caída:</strong>
+                <span>{{ ::(vm.data.activityFall || {}).name || '--' }}</span>
+            </p>
+        </div>
+    </md-list-item>
+    <md-subheader class="md-no-sticky"
+                  ng-if="::(vm.data.typesInjury.length > 0 || vm.data.localizationInjury)">
+        <span flex>Consecuencias del evento</span>
+    </md-subheader>
+    <md-divider ng-if="::(vm.data.typesInjury.length > 0 || vm.data.localizationInjury)"></md-divider>
+    <md-list-item class="md-3-line md-long-text ae-list-details"
+                  ng-if="::(vm.data.typesInjury.length > 0 || vm.data.localizationInjury)">
+        <div class="md-list-item-text">
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Tipo(s) de lesión:</strong>
+                <span ng-repeat="injury in ::vm.data.typesInjury">{{ ::injury.name }}{{ ::(!$last ? ', ' : '') }}</span>
+                <span ng-if="::vm.data.typesInjury.length === 0">--</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Localización de la lesión:</strong>
+                <span>{{ ::(vm.data.localizationInjury || '--') }}</span>
+            </p>
+        </div>
+    </md-list-item>
+    <md-subheader class="md-no-sticky">
+        <span flex>Medidas de prevención</span>
+    </md-subheader>
+    <md-divider></md-divider>
+    <md-list-item class="md-2-line ae-list-details">
+        <div class="md-list-item-text">
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Medida(s) al momento de la caída:</strong>
+                <span ng-repeat="preventive in ::vm.data.preventiveMeasures">{{ ::preventive.name }}{{ ::(!$last ? ', ' : '') }}</span>
+                <span ng-if="::vm.data.preventiveMeasures.length === 0">--</span>
+            </p>
+        </div>
+    </md-list-item>
+    <md-subheader class="md-no-sticky">
+        <span flex>Factores contribuyentes del evento</span>
+    </md-subheader>
+    <md-divider></md-divider>
+    <md-list-item class="md-3-line md-long-text ae-list-details">
+        <div class="md-list-item-text">
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Evaluación de riesgo:</strong>
+                <span>{{ ::(vm.data.fallRisk || {}).name || '--' }}</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Historias de caídas previas:</strong>
+                <span>{{ ::(vm.data.previousFall || {}).name || '--' }}</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Estado de conciencia:</strong>
+                <span>{{ ::(vm.data.consciousnessState || {}).name || '--' }}</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Uso de medicamentos:</strong>
+                <span ng-repeat="medication in ::vm.data.typeMedicationUsed">{{ ::medication.name }}{{ ::(!$last ? ', ' : '') }}</span>
+                <span ng-if="::vm.data.typeMedicationUsed.length === 0">--</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Alteraciones o deficit sensorial:</strong>
+                <span>{{ ::(vm.data.sensoryDeficit || {}).name || '--' }}</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Movilidad:</strong>
+                <span>{{ ::(vm.data.patientMovility || {}).name || '--' }}</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Paso o caminata:</strong>
+                <span>{{ ::(vm.data.patientWalk || {}).name || '--' }}</span>
+            </p>
+        </div>
+    </md-list-item>
+</md-list>

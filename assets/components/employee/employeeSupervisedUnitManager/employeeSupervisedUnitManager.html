@@ -1,0 +1,32 @@
+<ssvq-unit-autocomplete on-select="vm.addUnit"
+                        clear-on-select="true"
+                        flex></ssvq-unit-autocomplete>
+<div class="md-whiteframe-1dp overlay-10 padding-top-10 padding-bottom-10 md-margin">
+    <p class="text-center">
+        <md-icon md-font-icon="zmdi zmdi-info"></md-icon>
+        &nbsp; Utiliza el buscador para agregar unidades a la lista de supervisión
+    </p>
+</div>
+<div style="min-height: 200px;">
+    <md-list>
+        <md-list-item ng-repeat="item in vm.supervisedUnits track by $index">
+            <span>
+                {{item.name}}
+            </span>
+            <md-button class="md-warn md-secondary md-raised"
+                       ng-disabled="item.wip"
+                       ng-click="vm.removeUnit(item)">
+                Quitar
+            </md-button>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+    <p class="text-center"
+       ng-show="vm.supervisedUnits.length === 0">
+        La lista está vacía
+    </p>
+    <p class="text-center"
+       ng-show="!vm.supervisedUnits">
+        Cargando unidades supervisadas
+    </p>
+</div>

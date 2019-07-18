@@ -1,0 +1,27 @@
+ssvq-request-list-item .dueDate-icon{
+    color: #5383c5;
+}
+ssvq-request-list-item .label-icon{
+    color: #b66c78;
+}
+ssvq-request-list-item .unit-icon{
+    color: #75a26b;
+}
+ssvq-request-list-item .comments-icon{
+    color: #ACACAC;
+}
+ssvq-request-list-item md-icon{
+    padding-right: 4px;
+}
+ssvq-request-list-item .bullet{
+    padding: 0 6px;
+}
+ssvq-request-list-item .state-finished {
+    color: #d32f2f;
+}
+ssvq-request-list-item .state-unfinished{
+    color: #2e7b32;
+}
+ssvq-request-list-item{
+    height: 200px;
+}

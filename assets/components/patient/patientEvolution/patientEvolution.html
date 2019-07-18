@@ -1,0 +1,14 @@
+<md-subheader class="md-primary md-hue-1">
+    {{::('PATIENT.EVOLUTION.VITALSIGNS.NAME' | translate)}}
+</md-subheader>
+<div class="md-padding">
+    <ssvq-vital-signs-evolution id-rem-patient="{{vm.idRemPatient}}">
+    </ssvq-vital-signs-evolution>
+</div>
+<md-subheader class="md-primary md-hue-1">
+    {{::('PATIENT.EVOLUTION.MEDICINES.NAME' | translate)}}
+</md-subheader>
+<div class="md-padding">
+    <ssvq-medicines-evolution id-rem-patient="{{vm.idRemPatient}}">
+    </ssvq-medicines-evolution>
+</div>

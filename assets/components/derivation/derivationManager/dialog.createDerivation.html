@@ -1,0 +1,206 @@
+<md-dialog aria-label="Solicitar traslado"
+           id="patient-transfer"
+           flex="70"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <form name="vm.saveForm"
+          ng-submit="vm.saveForm.$valid && vm.save()"
+          novalidate
+          tri-wizard>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                    <md-tooltip>Volver</md-tooltip>
+                </md-button>
+                <span class="md-subhead"
+                      flex>Nueva derivación</span>
+                <md-button ng-click="triWizard.prevStep()"
+                           ng-show="triWizard.currentStep > 0"
+                           translate="Anterior"
+                           aria-label="Anterior">
+                </md-button>
+                <md-button ng-click="triWizard.nextStep()"
+                           ng-show="triWizard.currentStep < 2"
+                           ng-disabled="triWizard.nextStepDisabled()"
+                           translate="Siguiente"
+                           aria-label="Siguiente">
+                </md-button>
+                <md-button ng-click="vm.confirm()"
+                           ng-show="triWizard.currentStep == 2"
+                           ng-disabled="vm.saveForm.$invalid"
+                           translate="Enviar"
+                           aria-label="Enviar">
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-tabs class="md-primary md-hue-1"
+                     md-selected="triWizard.currentStep"
+                     style="min-height:80vh;">
+                <md-tab>
+                    <md-tab-label>
+                        <span class="derivation-step-label">1</span>
+                        Inicio
+                    </md-tab-label>
+                    <md-tab-body>
+                        <ng-form name="initialForm"
+                                 tri-wizard-form>
+                            <div class="md-padding"
+                                 layout="column">
+                                <md-input-container flex>
+                                    <label>Título</label>
+                                    <input name="title"
+                                           ng-model="vm.derivation.title"
+                                           required
+                                           type="text">
+                                </md-input-container>
+                                <md-input-container flex>
+                                    <label>Descripción</label>
+                                    <textarea name="description"
+                                              ng-model="vm.derivation.description"
+                                              rows="2"
+                                              required
+                                              md-maxlength="1800"></textarea>
+                                </md-input-container>
+                                <div layout="row">
+                                    <md-input-container flex>
+                                        <label>Diagnóstico</label>
+                                        <input name="diagnostic"
+                                               ng-model="vm.derivation.diagnostic"
+                                               required
+                                               type="text">
+                                    </md-input-container>
+                                    <md-input-container>
+                                        <label>CUDYR</label>
+                                        <md-select name="type"
+                                                   ng-model="vm.derivation.risk"
+                                                   required>
+                                            <md-option ng-value="risk"
+                                                       ng-repeat="risk in vm.riskList">
+                                                {{risk}}
+                                            </md-option>
+                                        </md-select>
+                                    </md-input-container>
+                                </div>
+
+                                <!-- Objetos requeridos -->
+                                <md-chips ng-model="vm.derivation.requiredEquipment"
+                                          md-autocomplete-snap
+                                          ng-init="vm.derivation.requiredEquipment=[]"
+                                          md-transform-chip="vm.transformChip($chip)"
+                                          name="hashtags"
+                                          md-removable="true"
+                                          class="margin-bottom-20">
+                                    <md-autocomplete md-selected-item="vm.selectedItem"
+                                                     md-search-text="vm.searchText"
+                                                     md-items="item in vm.getRequiredEquipmentList(vm.searchText)"
+                                                     md-item-text="item.name"
+                                                     placeholder="Cuidados de enfermería">
+                                        <md-item-template>
+                                            <div class="md-padding">
+                                                <span class="md-body-1"
+                                                      md-highlight-text="vm.searchText">
+                                                    {{item.name}}
+                                                </span>
+                                            </div>
+                                        </md-item-template>
+                                    </md-autocomplete>
+                                    <md-chip-template>
+                                        {{$chip.name}}
+                                    </md-chip-template>
+                                </md-chips>
+
+                                <!-- Archivos adjuntos -->
+
+                                <p class="md-body-1">Archivos adjuntos</p>
+                                <ssvq-upload-list-files mode="Manager"
+                                                        files="vm.derivation.attachments"
+                                                        upload-files="vm.uploadFiles">
+                                </ssvq-upload-list-files>
+
+                                <md-button class="md-accent"
+                                           ngf-select="vm.uploadFiles($files)"
+                                           ngf-multiple="true"
+                                           aria-label="Adjuntar">
+                                    <md-icon md-font-icon="zmdi zmdi-attachment-alt"></md-icon>
+                                    <span>Agregar archivos adjuntos</span>
+                                </md-button>
+
+                            </div>
+                        </ng-form>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab ng-disabled="initialForm.$invalid">
+                    <md-tab-label>
+                        <span class="derivation-step-label">2</span>
+                        Paciente
+                    </md-tab-label>
+                    <md-tab-body>
+                        <ng-form name="patientForm"
+                                 tri-wizard-form>
+                            <ssvq-patient-form patient="vm.derivation.patient"></ssvq-patient-form>
+                        </ng-form>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab ng-disabled="initialForm.$invalid || patientForm.$invalid">
+                    <md-tab-label>
+                        <span class="derivation-step-label">3</span>
+                        Establecimientos
+                    </md-tab-label>
+                    <md-tab-body>
+                        <ng-form name="establishmentForm"
+                                 tri-wizard-form>
+                            <md-subheader class="md-primary">Origen</md-subheader>
+                            <div class="md-padding">
+                                <ssvq-establishment-autocomplete selected="vm.derivation.fromEstablishment"
+                                                                 locals="vm.mySupervisedEstablishmentList"
+                                                                 required="true"
+                                                                 label="Establecimiento origen"></ssvq-establishment-autocomplete>
+                                <ssvq-unit-autocomplete selected="vm.derivation.fromUnit"
+                                                        establishment="{{vm.derivation.fromEstablishment.id}}"
+                                                        required="true"
+                                                        label="Unidad origen"></ssvq-unit-autocomplete>
+                            </div>
+                            <md-subheader class="md-primary">Destino</md-subheader>
+                            <div class="md-padding">
+                                <ssvq-establishment-autocomplete selected="vm.derivation.toEstablishment"
+                                                                 filter="{bedManagementModuleAvailable: true}"
+                                                                 required="true"
+                                                                 label="Establecimiento destino"></ssvq-establishment-autocomplete>
+                                <ssvq-unit-autocomplete selected="vm.derivation.toUnit"
+                                                        establishment="{{vm.derivation.toEstablishment.id}}"
+                                                        required="true"
+                                                        label="Unidad destino"></ssvq-unit-autocomplete>
+                            </div>
+                        </ng-form>
+                    </md-tab-body>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-accent"
+                       ng-click="triWizard.prevStep()"
+                       ng-show="triWizard.currentStep > 0"
+                       translate="Anterior"
+                       aria-label="Anterior">
+            </md-button>
+            <md-button class="md-primary"
+                       ng-click="triWizard.nextStep()"
+                       ng-show="triWizard.currentStep < 2"
+                       ng-disabled="triWizard.nextStepDisabled()"
+                       translate="Siguiente"
+                       aria-label="Siguiente">
+            </md-button>
+            <md-button class="md-primary"
+                       ng-click="vm.confirm()"
+                       ng-show="triWizard.currentStep == 2"
+                       ng-disabled="vm.saveForm.$invalid"
+                       translate="Enviar"
+                       aria-label="Enviar">
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

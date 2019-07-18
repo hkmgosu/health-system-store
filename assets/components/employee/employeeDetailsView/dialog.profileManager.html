@@ -1,0 +1,40 @@
+<md-dialog aria-label="Administrar perfiles del funcionario"
+           flex="50"
+           flex-sm="70"
+           flex-xs="100">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <div layout="column"
+                 hide-xs
+                 flex>
+                <span class="md-subhead">Perfiles del funcionario</span>
+                <span class="md-caption">{{vm.employee.fullname}}</span>
+            </div>
+        </div>
+    </md-toolbar>
+    <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools">
+            <ssvq-profile-autocomplete on-select="vm.addProfile"
+                                       flex></ssvq-profile-autocomplete>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div style="min-height: 300px;">
+            <md-list>
+                <md-list-item ng-repeat="profile in vm.employee.profileList">
+                    <div class="md-list-item-text">{{profile.name}}</div>
+                    <md-button class="md-raised md-warn md-secondary"
+                               ng-click="vm.removeProfile(profile)">Quitar</md-button>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+            </md-list>
+            <p class="text-center"
+               ng-if="vm.employee.profileList.length === 0">No hay perfiles asociados</p>
+        </div>
+    </md-dialog-content>
+</md-dialog>

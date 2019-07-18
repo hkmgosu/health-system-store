@@ -1,0 +1,43 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             flex>
+            <span class="md-body-1">Reporte base</span>
+            <span class="md-caption">{{vm.baseReport.length}} ítems</span>
+        </div>
+        <ssvq-date-range-selector on-change="vm.updateReport"></ssvq-date-range-selector>
+        <md-button class="md-icon-button"
+                   ng-click="vm.downloadReport()">
+            <md-icon md-font-icon="fa fa-file-excel-o"></md-icon>
+            <md-tooltip>Descargar reporte como excel</md-tooltip>
+        </md-button>
+    </div>
+</md-toolbar>
+
+
+<md-content>
+    <md-table-container style="height: calc(100vh - 185px);">
+        <table md-table>
+            <thead md-head>
+                <tr md-row>
+                        <th md-column ng-repeat="(header, value) in vm.baseReport[0] track by $index">{{header}}</th> 
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-row ng-repeat="row in vm.baseReport | limitTo: vm.limit: (vm.page - 1) * vm.limit track by $index">
+                    <td md-cell><a href="#/samu/incidentes/{{row.Id}}"
+                            target="_BLANK">Ir</a></td>
+                    <td md-cell  ng-repeat="cell in row track by $index" ng-hide="$first">
+                            <span class="force-line">{{cell}}</span>
+                    </td>   
+                </tr>
+            </tbody>
+        </table>
+    </md-table-container>
+    <md-table-pagination md-limit="vm.limit"
+                         md-page="vm.page"
+                         md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}"
+                         md-limit-options="[50, 100]"
+                         md-total="{{vm.baseReport.length}}"
+                         md-page-select></md-table-pagination>
+</md-content>

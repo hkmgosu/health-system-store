@@ -1,0 +1,1592 @@
+{
+    "HIDEMENU": "Ocultar",
+    "SHOWMENU": "Mostrar Menú",
+    "REPORT": {
+        "EFFICIENCYREPORTBYVEHICLE": "Eficiencia por Vehículo",
+        "FIND": "Buscar",
+        "TOEXCEL": "Excel",
+        "PRINT": "Imprimir",
+        "VEHICLELIST": "Vehículos",
+        "TABLE": {
+            "VEHICLE": "Vehículo",
+            "PACKETS": {
+                "TOTAL": "total",
+                "DELIVERED": "Entregados",
+                "EFFICIENCY": "Efectividad",
+                "RETURNED": {
+                    "TOTAL": "Devueltos",
+                    "PERCENT": {
+                        "TOTAL": "% Devueltos",
+                        "OTHERS": "% Otros",
+                        "NOCLIENT": "% Sin cliente",
+                        "NOTIME": "% Sin tiempo",
+                        "BADADDRESS": "% Dirección Errónea"
+                    }
+                }
+            }
+        }
+    },
+    "ADMIN": {
+        "TOOLBAR": {
+            "WELCOME": "Hola!",
+            "LOGOUT": "Cerrar sesión"
+        }
+    },
+    "NOTIFICATION": {
+        "MENU": {
+            "TITLE": "Notificaciones"
+        },
+        "MARK_AS_READ": "Marcar como leído",
+        "BACK": "Atrás"
+    },
+    "MENU": {
+        "ADMIN": {
+            "ADMIN": "Administración",
+            "EMPLOYEES": "Funcionarios",
+            "ESTABLISHMENTS": "Establecimientos"
+        }
+    },
+    "OFFICIAL": {
+        "PARAMS": {
+            "RUT": "Rut",
+            "NAME": "Nombre",
+            "LASTNAME": "Apellido",
+            "EMAIL": "Correo",
+            "BIRTHDATE": "Fecha nacimiento",
+            "JOB": "Cargo",
+            "DEPARTMENT": "Departamento",
+            "HEALTHCARE": "Salud",
+            "AFP": "AFP",
+            "LEVEL": "Grado",
+            "LEGALQUALITY": "Calidad jurídica"
+        },
+        "BUTTONS": {
+            "CREATE": "Crear",
+            "EDIT": "Editar",
+            "DELETE": "Eliminar",
+            "CANCEL": "Cancelar",
+            "SAVE": "Guardar"
+        }
+    },
+    "EMPLOYEE": {
+        "TITLE": "Gestión de Funcionarios",
+        "CREATETITLE": "Nuevo funcionario",
+        "EDITTITLE": "Editar funcionario",
+        "PROFILETITLE": "Perfil de funcionario",
+        "SEARCH": "Buscar",
+        "CANCEL": "Cancelar",
+        "CONFIRM": "Eliminar",
+        "TAB": {
+            "PERSONAL": "Datos personales",
+            "JOB": "Datos laborales",
+            "RESOURCES": "Recursos asociados"
+        },
+        "JOB": {
+            "JOBS": "Cargos",
+            "GENERAL": "General",
+            "PRIMARY": "Cargo Principal",
+            "OTHERS": "Otros Cargos"
+        },
+        "TABLE": {
+            "RUT": "Rut",
+            "NAME": "Nombre",
+            "LASTNAME": "Apellido Paterno",
+            "MLASTNAME": "Apellido Materno",
+            "EMAIL": "Correo",
+            "PHONE": "Teléfono",
+            "BIRTHDATE": "Fecha nacimiento",
+            "ESTABLISHMENT": "Establecimiento",
+            "HEALTHCARE": "Salud",
+            "AFP": "AFP",
+            "LEGALQUALITY": "Calidad jurídica",
+            "LEVEL": "Grado",
+            "JOB": "Cargo",
+            "UNIT": "Unidad",
+            "ANNEXE": "Anexo",
+            "PASSWORD": "Contraseña",
+            "PROFILE": "Perfil",
+            "PLANT": "Planta",
+            "RESOURCE": {
+                "TITLE": "Recursos",
+                "NAME": "Nombre",
+                "VALUE": "Valor",
+                "EDITABLE": "Editable"
+            },
+            "MANAGEDBYUNIT": "Solicita permisos a unidad"
+        },
+        "BUTTONS": {
+            "CREATE": "Crear",
+            "EDIT": "Editar",
+            "DELETE": "Eliminar",
+            "CANCEL": "Cancelar",
+            "SAVE": "Guardar"
+        },
+        "CREATE": {
+            "EMAIL": "Correo electrónico",
+            "NAME": "Nombre",
+            "LASTNAME": "Apellido",
+            "PASS": "Contraseña",
+            "CONFIRMPASS": "Confirmar Contraseña",
+            "TYPE": "Tipo de usuario",
+            "PROFILE": "Perfil"
+        },
+        "TOOLTIP": {
+            "ORG": "Mostrar organigrama",
+            "SET_SUPERVISED_UNITS": "Supervisar unidades administrativas",
+            "EDIT": "Editar",
+            "SETPASSWORD": "Cambiar contraseña",
+            "DELETE": "Eliminar"
+        },
+        "ERROR": {
+            "SAVE": "Error al guardar funcionario",
+            "DELETE": "Error al eliminar funcionario",
+            "SET_SUPERVISED_UNITS": "Error al actualizar la Supervisión de Unidades"
+        },
+        "SUCCESS": {
+            "SAVE": "Funcionario guardado con éxito",
+            "DELETE": "Funcionario eliminado con éxito",
+            "SET_SUPERVISED_UNITS": "Supervisión de Unidades actualizado con éxito"
+        },
+        "DELETE": {
+            "TITLE": "Confirmación de eliminación",
+            "TEXTCONTENT": "¿Desea eliminar el funcionario seleccionado?",
+            "OK": "Confirmar",
+            "CANCEL": "Cancelar"
+        },
+        "OTHERS": {
+            "TITLE": "Gestión de Funcionarios",
+            "CREATETITLE": "Nuevo Funcionario",
+            "EDITTITLE": "Editar Funcionario",
+            "SAVING": "Guardando funcionario...",
+            "SAVING_SUPERVISED_UNITS": "Editando supervisión de unidades...",
+            "DELETING": "Eliminando funcionario..."
+        },
+        "VALIDATOR": {
+            "URL": "URL inválida",
+            "REQUIRED": "Campo obligatorio",
+            "EMAIL": "Correo electrónico inválido",
+            "RUT": "RUT inválido",
+            "DATE": "Fecha inválida",
+            "UNIQUE": "Correo electrónico existente"
+        },
+        "PASSWORD": {
+            "TITLE": "Restaurar contraseña de funcionario",
+            "PASSWORD": "Contraseña",
+            "REPEAT": "Confirmar contraseña",
+            "CANCEL": "Cancelar",
+            "CHANGE": "Cambiar"
+        },
+        "SUPERVISED_UNITS": {
+            "TITLE": "Unidades Supervisadas",
+            "ADD": "Agregar otra",
+            "REMOVE": "Quitar Unidad",
+            "CANCEL": "Cancelar",
+            "ACCEPT": "Aceptar"
+        }
+    },
+    "ADDRESS": {
+        "TITLE": "Direcciones",
+        "NEW": "Nueva dirección",
+        "ADDRESS": "Dirección",
+        "NUMBER": "Número",
+        "TOWER": "Torre",
+        "BLOCK": "Bloque",
+        "DEPARTMENT": "Departamento",
+        "ADDRESSES": "Direcciones",
+        "CLIENT-ADDRESS": "Seleccionar dirección"
+    },
+    "CLIENT": {
+        "TITLE": "Clientes",
+        "OUT": "Salir",
+        "SAVE": "Guardar",
+        "TABLE": {
+            "NAME": "Nombre",
+            "LASTNAME": "Apellido",
+            "RUT": "rut",
+            "PHONE": "Teléfono",
+            "CELLPHONE": "Móvil",
+            "ADDRESS": "Dirección",
+            "STATE": "Estado",
+            "BUTTONS": {
+                "EDIT": "Editar",
+                "DELETE": "Eliminar"
+            }
+        },
+        "TAB": {
+            "CLIENT": "Cliente",
+            "ADDRESS": "Dirección"
+        },
+        "NEWCLIENTE": "Nuevo cliente",
+        "CREATETITLE": "Crear cliente",
+        "EDITTITLE": "Editar cliente",
+        "CREATE": {
+            "NAME": "Nombre",
+            "LASTNAME": "Apellido",
+            "RUT": "RUT",
+            "PHONE": "Teléfono",
+            "CELLPHONE": "Celular",
+            "ADDRESS": "Dirección",
+            "EMAIL": "Correo"
+        }
+    },
+    "PROFILE": {
+        "RUT": {
+            "LABEL": "Rut"
+        },
+        "NAME": {
+            "LABEL": "Nombre",
+            "ERROR": "ingrese un nombre"
+        },
+        "LASTNAME": {
+            "LABEL": "Apellido",
+            "ERROR": "Ingrese apellido"
+        },
+        "EMAIL": {
+            "LABEL": "Correo",
+            "ERROR": "Correo no válido"
+        },
+        "PHONE": {
+            "LABEL": "Teléfono"
+        },
+        "CELLPHONE": {
+            "LABEL": "Celular",
+            "ERROR": "ingrese un numero"
+        }
+    },
+    "PROFILES": {
+        "SEARCH": "Perfil a buscar",
+        "FIND": "Buscar",
+        "DESCRIPTION": "Descripción",
+        "MODULES": "Módulos",
+        "PRIVILEGES": "Permisos",
+        "VIEWS": "Vistas",
+        "CAN": {
+            "VIEW": "Ver",
+            "READ": "Leer",
+            "CREATE": "Crear",
+            "UPDATE": "Actualizar",
+            "DELETE": "Borrar"
+        },
+        "DATA": {
+            "NAME": "Nombre",
+            "DESCRIPTION": "Descripción"
+        },
+        "CREATE": {
+            "TITLE": "Nuevo perfil",
+            "BUTTONS": {
+                "CANCEL": "Cancelar",
+                "SAVE": "Guardar"
+            }
+        },
+        "EDIT": {
+            "TITLE": "Editar perfil",
+            "BUTTONS": {
+                "CANCEL": "Cancelar",
+                "SAVE": "Guardar"
+            }
+        },
+        "TABLE": {
+            "NAMEPROFILE": "Perfil",
+            "DESCRIPTION": "Descripción",
+            "CREATEDAT": "Fecha creación",
+            "UPDATEDAT": "Última modificación",
+            "PRIVILEGES": "Módulos",
+            "EDIT": "Editar",
+            "DELETE": "Eliminar"
+        },
+        "NEWPROFILE": "Nuevo",
+        "TOOLTIP": {
+            "EDIT": "Editar perfil",
+            "DELETE": "Eliminar perfil"
+        },
+        "SUCCESS": {
+            "SAVE": "Perfil guardado",
+            "DELETE": "Perfil eliminado"
+        },
+        "ERROR": {
+            "SAVE": "Error al guardar perfil",
+            "DELETE": "Error al eliminar perfil"
+        },
+        "DELETE": {
+            "TITLE": "Eliminar perfil",
+            "MESSAGE": "¿Está seguro de eliminar el perfil?",
+            "NAME": "Nombre",
+            "DESCRIPTION": "Descripción",
+            "BUTTONS": {
+                "CANCEL": "Cancelar",
+                "CONFIRM": "Eliminar"
+            }
+        },
+        "OTHERS": {
+            "TITLE": "Perfiles de Sistema"
+        }
+    },
+    "PRIVILEGES": {
+        "DASHBOARDS": {
+            "NAME": "Administrador",
+            "DESCRIPTION": "Visualizar Administrador"
+        },
+        "CPAN": {
+            "NAME": "Panel de control",
+            "DESCRIPTION": "Visualizar Panel de control"
+        },
+        "ADMIN": {
+            "NAME": "Administrador",
+            "DESCRIPTION": "Visualizar administrador"
+        },
+        "ESTABLISHMENTS": {
+            "NAME": "Establecimientos",
+            "DESCRIPTION": "Visualizar establecimientos"
+        },
+        "ESTABLISHMENTSTYPES": {
+            "NAME": "Tipos de Establecimientos",
+            "DESCRIPTION": "Visualizar tipos de establecimientos"
+        },
+        "UNIT": {
+            "NAME": "Unidades Administrativas",
+            "DESCRIPTION": "Visualizar unidades administrativas"
+        },
+        "PROFILE_DETAILS": {
+            "NAME": "Detalle del perfil",
+            "DESCRIPTION": "Detalle del perfil"
+        },
+        "REQUESTS": {
+            "NAME": "Solicitudes",
+            "DESCRIPTION": "Visualizar solicitudes",
+            "REPORTS": {
+                "NAME": "Reportes",
+                "DESCRIPTION": "Visualizar reportes"
+            },
+            "NEW": {
+                "NAME": "Nueva",
+                "DESCRIPTION": "Nueva solicitud"
+            },
+            "DETAILS": {
+                "NAME": "Detalles solicitud",
+                "DESCRIPTION": "Detalles de solicitud"
+            },
+            "SUPERVISION": {
+                "NAME": "Supervisión de unidades",
+                "DESCRIPTION": "Supervisión de unidades"
+            },
+            "SETTINGS": {
+                "NAME": "Configuraciones",
+                "DESCRIPTION": "Configuraciones"
+            },
+            "MANAGEMENT": {
+                "NAME": "Gestión de solicitudes",
+                "DESCRIPTION": "Gestión de solicitudes"
+            }
+        },
+        "DSP": {
+            "NAME": "Gestión DSP",
+            "DESCRIPTION": "Gestión DSP",
+            "MANAGERSUNIT": {
+                "NAME": "Gestores de unidad",
+                "DESCRIPTION": "Gestores de unidad"
+            }
+        },
+        "NOTIFICATIONS": {
+            "NAME": "Notificaciones",
+            "DESCRIPTION": "Visualizar notificaciones"
+        },
+        "EMPLOYEES": {
+            "NAME": "Funcionarios",
+            "DESCRIPTION": "Administrar funcionarios"
+        },
+        "EMPLOYEE_DETAILS": {
+            "NAME": "Perfil de Funcionario",
+            "DESCRIPTION": "Perfil de Funcionario"
+        },
+        "PROFILES": {
+            "NAME": "Perfiles",
+            "DESCRIPTION": "Administrar perfiles"
+        },
+        "PUBLIC": {
+            "NAME": "Búsquedas públicas",
+            "DESCRIPTION": "Búsquedas públicas"
+        },
+        "SEARCH": {
+            "NAME": "Búsqueda",
+            "DESCRIPTION": "Búsqueda"
+        },
+        "JOB": {
+            "NAME": "Cargos",
+            "DESCRIPTION": "Cargos"
+        },
+        "AREAS": {
+            "NAME": "Áreas",
+            "DESCRIPTION": "Áreas"
+        },
+        "MYACCOUNT": {
+            "NAME": "Mi cuenta",
+            "DESCRIPTION": "Mi cuenta"
+        },
+        "TYPECASTING": {
+            "NAME": "Encasillamiento",
+            "DESCRIPTION": "Encasillamiento"
+        },
+        "MYTYPECASTING": {
+            "NAME": "Mi Encasillamiento",
+            "DESCRIPTION": "Mi Encasillamiento"
+        },
+        "AUTOCONSULTA": {
+            "NAME": "Autoconsulta",
+            "DESCRIPTION": "Autoconsulta"
+        },
+        "ABOUTAPP": {
+            "NAME": "Acerca de Mi SSVQ",
+            "DESCRIPTION": "Acerca de Mi SSVQ"
+        },
+        "SAMU": {
+            "NAME": "SAMU",
+            "DESCRIPTION": "SAMU",
+            "REM": {
+                "LIST": {
+                    "NAME": "Incidentes",
+                    "DESCRIPTION": "Incidentes"
+                },
+                "DETAILS": {
+                    "NAME": "Detalles incidente",
+                    "DESCRIPTION": "Detalles incidente"
+                }
+            },
+            "VEHICLES": {
+                "NAME": "Vehículos",
+                "DESCRIPTION": "Mantenedor de Vehículos"
+            },
+            "PATIENTS": {
+                "NAME": "Pacientes",
+                "DESCRIPTION": "Mantenedor de Pacientes"
+            },
+            "ATTENTIONITEMS": {
+                "NAME": "Atenciones",
+                "DESCRIPTION": "Mantenedor de Atenciones"
+            },
+            "ATTENTIONCLASSES": {
+                "NAME": "Clases de Atención",
+                "DESCRIPTION": "Mantenedor de Clases de Atención"
+            },
+            "TRANSFERSTATUS": {
+                "NAME": "Estados de Traslado",
+                "DESCRIPTION": "Mantenedor de estados de traslado"
+            },
+            "MEDICINES": {
+                "NAME": "Medicamentos",
+                "DESCRIPTION": "Mantenedor de medicamentos"
+            },
+            "REM_SETTINGS": {
+                "NAME": "Configuraciones",
+                "DESCRIPTION": "Configuraciones"
+            },
+            "WORKSHIFT": {
+                "NAME": "Libro de turnos",
+                "DESCRIPTION": "Libro de turnos"
+            },
+            "WORKSHIFT_DETAILS": {
+                "NAME": "Detalle de turno",
+                "DESCRIPTION": "Detalle de turno"
+            },
+            "MY_WORKSHIFT": {
+                "NAME": "Mi turno",
+                "DESCRIPTION": "Mi turno"
+            }
+        },
+        "SAMU_REPORTS": {
+            "NAME": "Reportes SAMU",
+            "DESCRIPTION": "Reportes SAMU",
+            "DASHBOARD": {
+                "NAME": "Dashboard",
+                "DESCRIPTION": "Dashboard"
+            },
+            "BASEREPORT": {
+                "NAME": "Reporte Base",
+                "DESCRIPTION": "Reporte Base"
+            },
+            "TRANSFERREPORT": {
+                "NAME": "Traslados sin paciente",
+                "DESCRIPTION": "Traslados sin paciente"
+            },
+            "REMEIGHT": {
+                "NAME": "REM 08",
+                "DESCRIPTION": "REM 08"
+            },
+            "REM_ACCESS": {
+                "NAME": "Reporte de acceso",
+                "DESCRIPTION": "Reporte de acceso"
+            }
+        },
+
+        "STORAGE_REPORT": {
+            "NAME": "Reportes bodega",
+            "DESCRIPTION": "Reportes bodega",
+            "DASHBOARD": {
+                "NAME": "Dashboard",
+                "DESCRIPTION": "Dashboard"
+            },
+            "WEIGTHEDPRICE": {
+                "NAME": "Precio ponderado",
+                "DESCRIPTION": "Reporte precio ponderado"
+            },
+            "INPUTOUTPUTPRODUCT": {
+                "NAME": "Movimientos por producto",
+                "DESCRIPTION": "Reporte entrada y salida por producto"
+            },
+            "PRODUCT_STOCK_LOT": {
+                "NAME": "Stock por Lote",
+                "DESCRIPTION": "Reporte stock de productos por lote"
+            },
+            "PRODUCT_STOCK_EXPIRATION": {
+                "NAME": "Stock por Vencimiento",
+                "DESCRIPTION": "Reporte stock de productos por fecha de vencimiento"
+            },
+            "CRITICAL_STOCK": {
+                "NAME": "Stock crítico",
+                "DESCRIPTION": "Reporte stock crítico"
+            },
+            "PRODUCT_MAX_STOCK": {
+                "NAME": "Stock máximo",
+                "DESCRIPTION": "Reporte stock máximo"
+            },
+            "MOST_REQUESTED_PRODUCTS": {
+                "NAME": "Productos más solicitados",
+                "DESCRIPTION": "Reporte productos más solicitados"
+            },
+            "PRODUCTS": {
+                "NAME": "Productos",
+                "DESCRIPTION": "Reporte productos"
+            },
+            "PURCHASES_FROM_SUPPLIERS": {
+                "NAME": "Compras a proveedores",
+                "DESCRIPTION": "Reporte compras a proveedores"
+            },
+            "BINCARD": {
+                "NAME": "Bincard",
+                "DESCRIPTION": "Reporte bincard"
+            },
+            "CENABAST": {
+                "NAME": "Cenabast",
+                "DESCRIPTION": "Reporte Cenabast"
+            },
+            "EXPENSE_PER_UNIT": {
+                "NAME": "Gasto por unidad",
+                "DESCRIPTION": "Reporte gasto por unidad"
+            },
+            "REMEIGHT": {
+                "NAME": "REM 08",
+                "DESCRIPTION": "REM 08"
+            },
+            "REM_ACCESS": {
+                "NAME": "Reporte de acceso",
+                "DESCRIPTION": "Reporte de acceso"
+            }
+        },
+
+        "RESOURCE_MAINTAINER": {
+            "NAME": "Recursos",
+            "DESCRIPTION": "Recursos"
+        },
+        "BED_MANAGER": {
+            "NAME": "Gestión de Camas",
+            "DESCRIPTION": "Gestión de Camas",
+            "MONITORING": {
+                "NAME": "Monitoreo",
+                "DESCRIPTION": "Monitoreo"
+            },
+            "PATIENT_TRANSFER_MANAGER": {
+                "NAME": "Derivaciones",
+                "DESCRIPTION": "Derivaciones"
+            },
+            "PATIENT_TRANSFER_DETAILS": {
+                "NAME": "Detalle Derivación",
+                "DESCRIPTION": "Detalle Derivación"
+            },
+            "CONTINGENCY_MANAGER": {
+                "NAME": "Contingencia",
+                "DESCRIPTION": "Contingencia"
+            },
+            "DERIVATION_SETTINGS": {
+                "NAME": "Configuraciones",
+                "DESCRIPTION": "Configuraciones"
+            }
+        },
+        "ADVERSEEVENTS": {
+            "NAME": "Eventos adversos",
+            "DESCRIPTION": "Visualizar eventos adversos",
+            "DETAILS": {
+                "NAME": "Detalles del evento",
+                "DESCRIPTION": "Detalles del evento"
+            }
+        },
+        "ADVERSEEVENTSMANAGEMENT": {
+            "NAME": "Gestión de eventos",
+            "DESCRIPTION": "Gestión de eventos",
+            "SUPERVISION": {
+                "NAME": "Supervisión de eventos",
+                "DESCRIPTION": "Supervisión de eventos"
+            },
+            "SETTINGS": {
+                "NAME": "Configuraciones",
+                "DESCRIPTION": "Configuraciones de eventos adversos"
+            },
+            "DUPLICATES": {
+                "NAME": "Eventos duplicados",
+                "DESCRIPTION": "Mantenedor de eventos duplicados"
+            }
+        },
+        "PERMISSION": {
+            "NAME": "Permisos",
+            "DESCRIPTION": "Módulo de Permisos",
+            "DETAILS": {
+                "NAME": "Detalles permiso",
+                "DESCRIPTION": "Detalles permiso"
+            }
+        },
+        "PERMISSIONMANAGEMENT": {
+            "NAME": "Gestión permisos",
+            "DESCRIPTION": "Gestión módulo de permisos",
+            "SETTINGS": {
+                "NAME": "Configuraciones",
+                "DESCRIPTION": "Configuraciones"
+            },
+            "SUPERVISION": {
+                "NAME": "Supervisión",
+                "DESCRIPTION": "Supervisión de permisos"
+            },
+            "CLOSURE": {
+                "NAME": "Cierres",
+                "DESCRIPTION": "Cierre de permisos"
+            },
+            "CLOSUREDETAILS": {
+                "NAME": "Detalle cierre",
+                "DESCRIPTION": "Detalle cierre de permisos"
+            }
+        },
+        "VIATIC": {
+            "NAME": "Viáticos",
+            "DESCRIPTION": "Módulo de viáticos",
+            "DETAILS": {
+                "NAME": "Detalles viático",
+                "DESCRIPTION": "Detalles viático"
+            }
+        },
+        "VIATICMANAGEMENT": {
+            "NAME": "Gestión viáticos",
+            "DESCRIPTION": "Gestión módulo de viáticos",
+            "SETTINGS": {
+                "NAME": "Configuraciones",
+                "DESCRIPTION": "Configuraciones"
+            },
+            "SUPERVISION": {
+                "NAME": "Supervisión",
+                "DESCRIPTION": "Supervisión de viáticos"
+            },
+            "CLOSURE_PARTES": {
+                "NAME": "Cierres partes",
+                "DESCRIPTION": "Cierres"
+            },
+            "CLOSURE_CONTABILIDAD": {
+                "NAME": "Cierres contabilidad",
+                "DESCRIPTION": "Cierres"
+            },
+            "CLOSURE_TESORERIA": {
+                "NAME": "Cierres tesorería",
+                "DESCRIPTION": "Cierres tesorería"
+            },
+            "CLOSURE_DETAILS": {
+                "NAME": "Detalle de cierre",
+                "DESCRIPTION": "Detalle de cierre"
+            }
+        },
+        "STORAGE": {
+            "NAME": "Bodega",
+            "DESCRIPTION": "Bodega de Almacenamiento",
+            "PRODUCT_TYPE": {
+                "NAME": "Tipos de Producto",
+                "DESCRIPTION": "Tipos de Producto",
+                "LIST": {
+                    "NAME": "Tipos de Producto",
+                    "DESCRIPTION": "Tipos de Producto"
+                },
+                "DETAILS": {
+                    "NAME": "Tipos de Producto",
+                    "DESCRIPTION": "Tipos de Producto"
+                }
+            }
+        },
+        "STORAGE_MAINTAINERS": {
+            "NAME": "Configuración de Bodega",
+            "DESCRIPTION": "Modulo Configuración de Bodega"
+        },
+        "STORAGE_ACCOUNT_PLAN": {
+            "NAME": "Plan de Cuenta",
+            "DESCRIPTION": "Mantenedor de Cuenta Contable"
+        },
+        "STORAGE_ACCOUNT_DETAILS": {
+            "NAME": "Cuenta Contable Detalle",
+            "DESCRIPTION": "Mantenedor de Cuenta Contable"
+        },
+        "STORAGE_PRESENTATION_TYPE": {
+            "NAME": "Tipos de Presentación",
+            "DESCRIPTION": "Mantenedor de Tipos de Presentación"
+        },
+        "STORAGE_ADMINISTRATION_WAY": {
+            "NAME": "Vias de Administración",
+            "DESCRIPTION": "Mantenedor de Vias de Administración"
+        },
+        "STORAGE_DOSAGE_TYPE": {
+            "NAME": "Tipos de Dosificación",
+            "DESCRIPTION": "Mantenedor de Tipos de Dosificación"
+        },
+        "STORAGE_MOVEMENT_TYPE": {
+            "NAME": "Tipo de Movimiento",
+            "DESCRIPTION": "Mantenedor de Tipo de Movimiento"
+        },
+        "STORAGE_ACTIVE_COMPONENT": {
+            "NAME": "Componentes Activos",
+            "DESCRIPTION": "Mantenedor de Componentes Activos"
+        },
+        "STORAGE_DRUG_TYPE": {
+            "NAME": "Tipos de Droga",
+            "DESCRIPTION": "Mantenedor de Tipos de Droga"
+        },
+        "STORAGE_COST_CENTER": {
+            "NAME": "Centro de Costos",
+            "DESCRIPTION": "Mantenedor de Centro de Costos"
+        },
+        "STORAGE_PROGRAM": {
+            "NAME": "Programa / Subprograma",
+            "DESCRIPTION": "Mantenedor de Programa/Subprograma"
+        },
+        "STORAGE_CATEGORY": {
+            "NAME": "Categoría / Subcategoría",
+            "DESCRIPTION": "Mantenedor de Categoría / Subcategoría"
+        },
+        "STORAGE_PRODUCT": {
+            "NAME": "Productos",
+            "DESCRIPTION": "Mantenedor de Productos",
+            "EDIT_NAME": "Productos:: Editar",
+            "EDIT_DESCRIPTION": "Mantenedor Detalle de Producto"
+        },
+        "STORAGE_REQUEST": {
+            "NAME": "Solicitudes",
+            "DESCRIPTION": "Mantenedor de Solicitudes",
+            "EDIT_NAME": "Solicitudes:: Editar",
+            "EDIT_DESCRIPTION": "Editar Solicitud"
+        },
+        "STORAGE_MOVEMENT": {
+            "NAME": "Movimiento",
+            "DESCRIPTION": "Mantenedor de Movimientos",
+            "EDIT_NAME": "Movimiento:: Editar",
+            "EDIT_DESCRIPTION": "Editar Movimiento"
+        },
+        "COMPANY": {
+            "NAME": "Proveedor",
+            "DESCRIPTION": "Mantenedor de Proveedores"
+        },
+        "STORAGE_MANAGER": {
+            "NAME": "Configuraciones",
+            "DESCRIPTION": "Mantenedor de Configuraciones de Bodega"
+        },
+        "STORAGE_LOCATION": {
+            "NAME": "Ubicaciones en Bodegas",
+            "DESCRIPTION": "Mantenedor de Ubicaciones"
+        },
+        "STORAGE_UNIT_PRODUCT_REQUEST": {
+            "NAME": "Bodegas donde Solicitar",
+            "DESCRIPTION": "Mantenedor bodegas donde Solicitar"
+        },
+        "STORAGE_CENABAST": {
+            "NAME": "Plan. Cenabast",
+            "DESCRIPTION": "Mantenedor Planificación Cenabast"
+        }
+    },
+    "ESTABLISHMENT": {
+        "NAME": "Nombre",
+        "SHORTNAME": "Abreviatura",
+        "TYPE": "Tipo",
+        "DESCRIPTION": "Descripción",
+        "ADDRESS": "Dirección",
+        "PHONO": "Teléfono",
+        "EMAIL": "Correo electrónico",
+        "WEBSITE": "Sitio web",
+        "OTHERS": {
+            "TITLE": "Gestión de Establecimientos",
+            "CREATETITLE": "Nuevo Establecimiento",
+            "EDITTITLE": "Editar Establecimiento",
+            "SAVING": "Guardando establecimiento...",
+            "DELETING": "Eliminando establecimiento...",
+            "SEARCH": "Buscar un establecimiento"
+        },
+        "DELETE": {
+            "TITLE": "Eliminar establecimiento",
+            "TEXTCONTENT": "¿Desea eliminar el establecimiento seleccionado?",
+            "OK": "Confirmar",
+            "CANCEL": "Cancelar"
+        },
+        "SUCCESS": {
+            "SAVE": "Establecimiento guardado con éxito",
+            "DELETE": "Establecimiento eliminado con éxito"
+        },
+        "ERROR": {
+            "SAVE": "Error al guardar establecimiento",
+            "DELETE": "Error al eliminar establecimiento"
+        },
+        "VALIDATOR": {
+            "URL": "URL inválida",
+            "REQUIRED": "Campo obligatorio",
+            "EMAIL": "Correo electrónico inválido"
+        }
+    },
+    "ESTABLISHMENTTYPE": {
+        "NAME": "Nombre",
+        "SHORTNAME": "Abreviatura",
+        "ICON": "Ícono",
+        "OTHERS": {
+            "TITLE": "Gestión de Tipos de Establecimientos",
+            "CREATETITLE": "Nuevo Tipo de Establecimiento",
+            "EDITTITLE": "Editar Tipo de Establecimiento",
+            "SAVING": "Guardando tipo de establecimiento...",
+            "DELETING": "Eliminando tipo de establecimiento..."
+        },
+        "DELETE": {
+            "TITLE": "Eliminar tipo de establecimiento",
+            "TEXTCONTENT": "¿Desea eliminar el tipo de establecimiento seleccionado?",
+            "OK": "Confirmar",
+            "CANCEL": "Cancelar"
+        },
+        "SUCCESS": {
+            "SAVE": "Tipo de establecimiento guardado con éxito",
+            "DELETE": "Tipo de establecimiento eliminado con éxito"
+        },
+        "ERROR": {
+            "SAVE": "Error al guardar tipo de establecimiento",
+            "DELETE": "Error al eliminar tipo de establecimiento"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Campo obligatorio"
+        }
+    },
+    "JOB": {
+        "NAME": "Nombre",
+        "DESCRIPTION": "Descripción",
+        "OTHERS": {
+            "TITLE": "Gestión de Cargos",
+            "CREATETITLE": "Nuevo Cargo",
+            "EDITTITLE": "Editar Cargo",
+            "SAVING": "Guardando cargo...",
+            "DELETING": "Eliminando cargo..."
+        },
+        "DELETE": {
+            "TITLE": "Eliminar cargo",
+            "TEXTCONTENT": "¿Desea eliminar el cargo seleccionado?",
+            "OK": "Confirmar",
+            "CANCEL": "Cancelar"
+        },
+        "SUCCESS": {
+            "SAVE": "Cargo guardado con éxito",
+            "DELETE": "Cargo eliminado con éxito"
+        },
+        "ERROR": {
+            "SAVE": "Error al guardar cargo",
+            "DELETE": "Error al eliminar cargo"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Campo obligatorio"
+        }
+    },
+    "UNIT": {
+        "NAME": "Nombre",
+        "DESCRIPTION": "Descripción",
+        "ESTABLISHMENT": "Establecimiento",
+        "PARENT": "Unidad Dependiente",
+        "TYPE": "Tipo",
+        "HIERARCHICALVALUE": "Valor Jerárquico",
+        "OTHERS": {
+            "TITLE": "Gestión de unidades administrativas",
+            "CREATETITLE": "Nueva unidad administrativa",
+            "EDITTITLE": "Editar unidad administrativa",
+            "SAVING": "Guardando unidad administrativa...",
+            "DELETING": "Eliminando unidad administrativa...",
+            "EMPLOYEESTITLE": "Gestión de Funcionarios"
+        },
+        "DELETE": {
+            "TITLE": "Eliminar unidad administrativa",
+            "TEXTCONTENT": "¿Desea eliminar la unidad administrativa seleccionada?",
+            "OK": "Confirmar",
+            "CANCEL": "Cancelar"
+        },
+        "SUCCESS": {
+            "SAVE": "Unidad Administrativa guardada con éxito",
+            "DELETE": "Unidad Administrativa eliminada con éxito"
+        },
+        "ERROR": {
+            "SAVE": "Error al guardar la unidad administrativa",
+            "DELETE": "Error al eliminar la unidad administrativa"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Campo obligatorio"
+        },
+        "ORGCHART": {
+            "UPDATE": {
+                "START": "Actualizar vínculo",
+                "SUCCESS": "Vínculo actualizado correctamente",
+                "ERROR": "Error actualizando vínculo"
+            },
+            "CREATE": "Generar vínculo para insertar en mi sitio web",
+            "PREVIEW": "Vista previa",
+            "SHARE": "Insertar vínculo",
+            "URL": "Vínculo"
+        }
+    },
+    "AREA": {
+        "TITLE": "Áreas",
+        "AREALIST": "Lista de áreas",
+        "DELETE": "Borrar área",
+        "EDIT": "Editar área",
+        "HIDE": "Ocultar área",
+        "NAME": "Nombre",
+        "COLOR": "Color",
+        "CANCEL": "Cancelar",
+        "SAVE": "Guardar",
+        "NEWAREA": "Nueva área",
+        "CONFIRMNEWDIALOG": {
+            "TITLE": "Nueva área",
+            "TEXT": "Esta seguro de cancelar nueva área",
+            "CANCEL": "Cancelar",
+            "OK": "Aceptar"
+        },
+        "CONFIRMDELETEDIALOG": {
+            "TITLE": "Borrar área",
+            "TEXT": "Esta seguro de borrar el área",
+            "CANCEL": "Cancelar",
+            "OK": "Aceptar"
+        },
+        "SUCCESS": {
+            "CREATE": "Área guardada con éxito",
+            "UPDATE": "Área editada con éxito",
+            "DELETE": "Área borrada con éxito"
+        },
+        "ERROR": {
+            "CREATE": "Error al crear área",
+            "UPDATE": "Error al editar área",
+            "INVALIDID": "Error al editar área, no existe registro",
+            "DELETE": "Error al eliminar área"
+        }
+    },
+    "CRUD": {
+        "SEARCH": "Buscar",
+        "ACCEPT": "Aceptar",
+        "CREATE": "Nuevo",
+        "UPDATE": "Editar",
+        "DELETE": "Eliminar",
+        "SAVE": "Guardar",
+        "CANCEL": "Cancelar",
+        "SENDING": "Enviando...",
+        "BACK": "Volver",
+        "SAVEANDCLOSE": "Guardar y Cerrar"
+    },
+    "ERROR": {
+        "PERMISSIONDENIED": "Operación no autorizada"
+    },
+    "TABLE": {
+        "TOOLTIP": {
+            "EDIT": "Editar",
+            "DELETE": "Eliminar"
+        }
+    },
+    "AUTOCOMPLETE": {
+        "NOMATCHFOUND": "No se encontraron resultados"
+    },
+    "REQUEST": {
+        "NEW": {
+            "TITLE": "Título",
+            "DESCRIPTION": "Descripción",
+            "SEND": "Enviar",
+            "REQUIRED": "Campo requerido",
+            "SUBMITTED": "Enviando solicitud...",
+            "SUBMIT": {
+                "SUCCESS": "Solicitud enviada",
+                "ERROR": "Error al enviar solicitud"
+            }
+        }
+    },
+    "STORAGE": {
+        "NAME": "Bodega",
+        "DESCRIPTION": "Bodega de Almacenamiento",
+        "PRODUCT_TYPE": {
+            "NAME": "Tipos de Producto",
+            "DESCRIPTION": "Tipos de Producto",
+            "ATTRIBUTES": {
+                "DESCRIPTION": "Descripción"
+            },
+            "INDEX": {
+                "TITLE": "Tipos de Producto",
+                "NEW": "Nuevo Tipo Producto"
+            },
+            "NEW": {
+                "TITLE": "Nuevo Tipo de Producto",
+                "OK": "Crear",
+                "CANCEL": "Cancelar"
+            },
+            "EDIT": {
+                "TITLE": "Editar Tipo de Producto",
+                "OK": "Actualizar",
+                "CANCEL": "Cancelar"
+            },
+            "DELETE": {
+                "TITLE": "Confirmación de eliminación",
+                "TEXT_CONTENT": "¿Desea eliminar el tipo de producto seleccionado?",
+                "OK": "Confirmar",
+                "CANCEL": "Cancelar"
+            },
+            "VALIDATOR": {
+                "INVALID_DESCRIPTION": "Descripción Invalida",
+                "REQUIRED": "Campo obligatorio"
+            },
+            "OTHERS": {
+                "SAVING": "Guardando tipo de producto...",
+                "SAVED": "Tipo de Producto guardado",
+                "SAVE_FAILED": "No se pudo guardar el tipo de producto",
+                "DELETING": "Eliminando tipo de producto...",
+                "DELETED": "Tipo de producto eliminado",
+                "DELETE_FAILED": "No se pudo eliminar el tipo de producto"
+            }
+        }
+    },
+    "ACCOUNT_PLAN": {
+        "NAME": "Cuenta Contable",
+        "TABLE": {
+            "YEAR": "Año",
+            "CODE": "Código",
+            "DESCRIPTION": "Descripción"
+        },
+        "SEARCH": {
+            "ERROR": "No existen cuentas",
+            "FOUND": "Cuentas encontradas"
+        },
+        "DIALOG": {
+            "TITLE": "Cuenta contable",
+            "DELETE_MESSAGE": "Desea eliminar la cuenta",
+            "DELETE_OK": "Eliminar",
+            "CANCEL": "Cancelar"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Valor requerido"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar cuenta",
+            "DELETE": "Eliminar cuenta"
+        }
+    },
+    "PRESENTATION_TYPE": {
+        "NAME": "Tipo de presentación",
+        "TABLE": {
+            "DESCRIPTION": "Descripción"
+        },
+        "SEARCH": {
+            "ERROR": "No existen tipos de presentación",
+            "FOUND": "Tipos encontrados"
+        },
+        "DIALOG": {
+            "TITLE": "Tipo de presentación",
+            "DELETE_MESSAGE": "Desea eliminar el tipo",
+            "DELETE_OK": "Eliminar",
+            "CANCEL": "Cancelar"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Valor requerido"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar tipo",
+            "DELETE": "Eliminar tipo"
+        }
+    },
+    "ADMINISTRATION_WAY": {
+        "NAME": "Via de Administración",
+        "TABLE": {
+            "DESCRIPTION": "Descripción"
+        },
+        "SEARCH": {
+            "ERROR": "No existen las vias de administración",
+            "FOUND": "vias de administración encontrados"
+        },
+        "DIALOG": {
+            "TITLE": "Via de Administración",
+            "DELETE_MESSAGE": "Desea eliminar la via de administración",
+            "ERROR": "No existen tipos de dosificación",
+            "FOUND": "Tipos encontrados",
+            "DELETE_OK": "Eliminar",
+            "CANCEL": "Cancelar"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar Via",
+            "DELETE": "Eliminar Via"
+        }
+    },
+    "DOSAGE_TYPE": {
+        "NAME": "Tipo de dosificación",
+        "TABLE": {
+            "DESCRIPTION": "Descripción"
+        },
+        "SEARCH": {
+            "ERROR": "No existen tipos de dosificacion",
+            "FOUND": "tipos de dosificación encontrados"
+        },
+        "DIALOG": {
+            "TITLE": "Tipo de dosificación",
+            "DELETE_MESSAGE": "Desea eliminar el tipo",
+            "DELETE_OK": "Eliminar",
+            "CANCEL": "Cancelar"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Valor requerido"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar tipo",
+            "DELETE": "Eliminar tipo"
+        }
+    },
+    "ACTIVE_COMPONENT": {
+        "NAME": "Componente activo",
+        "TABLE": {
+            "DESCRIPTION": "Descripción"
+        },
+        "SEARCH": {
+            "ERROR": "No se encontraron componentes",
+            "FOUND": "componentes activos encontrados"
+        },
+        "DIALOG": {
+            "TITLE": "Componente activo",
+            "DELETE_MESSAGE": "Desea eliminar el componente",
+            "DELETE_OK": "Eliminar",
+            "CANCEL": "Cancelar"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Valor requerido"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar componente",
+            "DELETE": "Eliminar componente"
+        }
+    },
+    "DRUG_TYPE": {
+        "NAME": "Tipo de Droga",
+        "TABLE": {
+            "DESCRIPTION": "Descripción"
+        },
+        "SEARCH": {
+            "ERROR": "No existen los Tipos de Droga",
+            "FOUND": "Tipos de Droga encontrados"
+        },
+        "DIALOG": {
+            "TITLE": "Tipo de Droga",
+            "DELETE_MESSAGE": "¿Desea eliminar el tipo de droga?",
+            "DELETE_OK": "Eliminar",
+            "CANCEL": "Cancelar"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar tipo de droga",
+            "DELETE": "Eliminar tipo de droga"
+        }
+    },
+    "MOVEMENT_TYPE": {
+        "NAME": "Tipo de Movimiento",
+        "TABLE": {
+            "DESCRIPTION": "Descripción"
+        },
+        "SEARCH": {
+            "ERROR": "No se encontraron tipos",
+            "FOUND": "Tipos encontradas"
+        },
+        "DIALOG": {
+            "TITLE": "Tipo de movimiento",
+            "DELETE_MESSAGE": "Desea eliminar el tipo",
+            "DELETE_OK": "Eliminar",
+            "CANCEL": "Cancelar"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Valor requerido"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar tipo",
+            "DELETE": "Eliminar tipo"
+        }
+    },
+    "COST_CENTER": {
+        "NAME": "Centro de Costos",
+        "TABLE": {
+            "DESCRIPTION": "Descripción"
+        },
+        "SEARCH": {
+            "ERROR": "No existen los Centros de Costo",
+            "FOUND": "Centro de Costos encontrados"
+        },
+        "DIALOG": {
+            "TITLE": "Centro de Costos",
+            "DELETE_MESSAGE": "¿Desea eliminar el centro de costo?",
+            "DELETE_OK": "Eliminar",
+            "CANCEL": "Cancelar"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar centro de costo",
+            "DELETE": "Eliminar centro de costo"
+        }
+    },
+    "PROGRAM": {
+        "NAME": "Programa",
+        "TABLE": {
+            "DESCRIPTION": "Descripción",
+            "ACTIVE": "Activo",
+            "PROGRAM": "Programa"
+        },
+        "SEARCH": {
+            "ERROR": "No se encontraron programas",
+            "FOUND": "programas encontrados"
+        },
+        "DIALOG": {
+            "TITLE": "Programa",
+            "DELETE_MESSAGE": "Desea eliminar el programa",
+            "DELETE_OK": "Eliminar",
+            "CANCEL": "Cancelar"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Valor requerido"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar programa",
+            "DELETE": "Eliminar programa"
+        }
+    },
+    "CATEGORY": {
+        "NAME": "Categoría",
+        "TABLE": {
+            "DESCRIPTION": "Descripción"
+        },
+        "SEARCH": {
+            "ERROR": "No se encontraron categorías",
+            "FOUND": "categorías encontradas"
+        },
+        "DIALOG": {
+            "TITLE": "Categoría",
+            "DELETE_MESSAGE": "Desea eliminar la categoría",
+            "DELETE_OK": "Eliminar",
+            "CANCEL": "Cancelar"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Valor requerido"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar categoría",
+            "DELETE": "Eliminar categoría"
+        }
+    },
+    "PRODUCT": {
+        "NAME": "Producto",
+        "TABLE": {
+            "DESCRIPTION": "Descripción",
+            "PRODUCT_TYPE": "Tipo de Producto",
+            "DRUG_TYPE": "Tipo de Droga",
+            "PRODUCT_CODE": "Código del Producto",
+            "DOSAGE": "Dosificación",
+            "DOSAGE_TYPE": "Tipo de Dosificación",
+            "ADMINISTRATION_WAY": "Vía de Administración",
+            "PRESENTATION_TYPE": "Tipo de Presentación",
+            "CATEGORY": "Categoría",
+            "SUB_CATEGORY": "SubCategoría",
+            "COMPANY": "Laboratorio",
+            "MAX_STOCK": "Stock Max",
+            "MIN_STOCK": "Stock Min",
+            "UNIT": "Unidad Administrativa",
+            "PACK_CODE": "Codigo",
+            "PACK_TYPE": "Tipo de Pack",
+            "PACK_QUANTITY": "Cantidad",
+            "TYPE_UNIT_MEASURE": "Tipo de Unidad de Medida",
+            "PACK_PRICEPP": "Precio PP",
+            "PACK_INDICATORCONTAINER": "Indicador de Container"
+
+        },
+        "SEARCH": {
+            "ERROR": "No existen los productos buscados",
+            "FOUND": "Productos encontrados"
+        },
+        "DIALOG": {
+            "CREATE_TITLE": "Nuevo producto",
+            "DELETE_TITLE": "Eliminar Producto",
+            "DELETE_MESSAGE": "¿Desea eliminar el producto?",
+            "DELETE_OK": "Eliminar",
+            "CANCEL": "Cancelar"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Valor requerido"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar producto",
+            "DELETE": "Eliminar producto",
+            "ADD_STOCK_PARAMETER": "administrar parámetros de stock",
+            "ADD_UNIT_PRODUCT_MANAGER": "administrar unidades del producto",
+            "ADD_PRODUCT_PACK": "administrar pack del producto"
+        }
+    },
+    "PRODUCT_REQUEST": {
+        "NAME": "Solicitud de Producto",
+        "TABLE": {
+            "COST_CENTER": "Centro de Costo",
+            "SUBPROGRAM": "Subprograma",
+            "ORIGIN_UNIT": "Unidad",
+            "DESTINY_UNIT": "Bodega",
+            "MOVEMENT_TYPE": "Tipo de movimiento",
+            "DATE": "Fecha",
+            "GLOSA": "Glosa",
+            "STATUS": "Estado",
+            "DATE_FROM": "Desde",
+            "DATE_TO": "Hasta"
+        },
+        "SEARCH": {
+            "ERROR": "No se encontraron solicitudes",
+            "FOUND": "Solicitudes encontradas"
+        },
+        "DIALOG": {
+            "TITLE": "Solicitud de Producto",
+            "TAB1": "Propiedades",
+            "TAB2": "Detalle",
+            "DELETE_MESSAGE": "Desea eliminar la solicitud",
+            "DELETE_OK": "Eliminar",
+            "CHOICE_UNIT": "Seleccione la unidad administrativa",
+            "NEXT": "Siguiente",
+            "CANCEL": "Cancelar",
+            "DETAILS": "Productos",
+            "SAVE_ALL": "Guardar Todo"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Valor requerido"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar solicitud",
+            "DELETE": "Eliminar solicitud"
+        }
+    },
+    "PRODUCT_REQUEST_DETAIL": {
+        "NAME": "Detalle de solicitud de producto",
+        "TABLE": {
+            "PRODUCT": "Producto",
+            "QUANTITY": "Cantidad",
+            "QUANTITY_RECEIVED": "Cant.Recibida",
+            "PRODUCT_REQUEST": "Solicitud de producto"
+        }
+    },
+    "COMPANY": {
+        "NAME": "Proveedor",
+        "DESCRIPTION": "Mantenedor de Proveedores",
+        "TABLE": {
+            "RUT": "Rut",
+            "NAME": "Nombre de la compañía",
+            "ADDRESS": "Dirección",
+            "MOVEMENT_TYPE": "Tipo de movimiento",
+            "CITY": "Ciudad",
+            "IS_LABORATORY": "Es laboratorio",
+            "EMAIL": "Correo electrónico"
+        },
+        "SEARCH": {
+            "ERROR": "No se encontraron compañías",
+            "FOUND": "Compañías encontradas"
+        },
+        "DIALOG": {
+            "TITLE": "Compañía",
+            "DELETE_MESSAGE": "Desea eliminar la compañía",
+            "DELETE_OK": "Eliminar",
+            "CANCEL": "Cancelar"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Valor requerido"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar compañía",
+            "DELETE": "Eliminar compañía"
+        }
+    },
+    "SHIPPING_ORDER": {
+        "NAME": "Orden de Envío",
+        "NAME_EDIT": "Orden de Envío:: Editar",
+        "DESCRIPTION": "Gestión de Guías de Despacho",
+        "DESCRIPTION_EDIT": "Editar Orden de Envío",
+        "DIALOG": {
+            "CREATE_TITLE": "Nueva Orden de Envío",
+            "EDIT_TITLE": "Editar Orden de Envío"
+        },
+        "TABLE": {
+            "FOLIO": "Folio",
+            "DATE": "Fecha",
+            "GLOSA": "Glosa",
+            "CREATED_BY": "Creado por",
+            "STATUS": "Estado",
+            "ADDRESS": "Dirección",
+            "UNIT": "Bodega",
+            "PRODUCT_REQUEST": "Solicitud de Producto"
+        },
+        "STATUS": {
+            "draft": "Borrador",
+            "send": "Enviado",
+            "received": "Recibido",
+            "lost": "Perdido",
+            "canceled": "Anulado"
+        },
+        "SEARCH": {
+            "ERROR": "No se encontraron ordenes de envió",
+            "FOUND": "Ordenes de envío encontradas"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Valor requerido"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar Orden",
+            "DELETE": "Eliminar Orden"
+        }
+    },
+
+    "STORAGE_MOVEMENT": {
+        "NAME": "Movimiento",
+        "DESCRIPTION": "Mantenedor de Movimientos",
+        "EDIT_NAME": "Movimiento:: Editar",
+        "EDIT_DESCRIPTION": "Editar Movimiento",
+        "TABLE": {
+            "MOVEMENT_TYPE": "Tipo de Movimiento",
+            "UNIT": "Bodega",
+            "COMPANY": "Proveedor",
+            "DESTINY_UNIT": "Entidad Externa",
+            "NUM_REQUEST": "Nro. Solicitud",
+            "NUM_SHIPPING_ORDER": "Nro. Despacho",
+            "NUM_DONATION": "Nro. Donación",
+            "NUM_INVOICE": "Nro. Factura",
+            "NUM_PURCHASE_ORDER": "Nro. Orden de Compra",
+            "YEAR_PURCHASE_ORDER": "Año Orden de Compra",
+            "ID_CHILE_COMPRA": "Id Chile Compra",
+            "DONATED_BY": "Donado por...",
+            "PRODUCT": "Producto",
+            "LOT": "Lote",
+            "QUANTITY": "Cantidad",
+            "EXPIRATION": "Vencimiento",
+            "LOCATION": "Ubicación",
+            "CREATED_AT": "Creado el",
+            "IN": "Entrada",
+            "OUT": "Salida"
+        },
+        "DIALOG": {
+            "TITLE": "Nuevo Movimiento de Productos",
+            "TITLE_DETAIL": "Nuevo Item de Movimiento"
+        },
+        "SEARCH": {
+            "ERROR": "No se encontraron resultados",
+            "FOUND": "Movimientos encontrados"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Valor requerido"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar movimiento",
+            "DELETE": "Eliminar movimiento"
+        }
+    },
+
+    "STORAGE_LOCATION": {
+        "NAME": "Ubicaciones en Bodegas",
+        "DESCRIPTION": "Mantenedor de Ubicaciones",
+        "TABLE": {
+            "DESCRIPTION": "Descripción",
+            "UNIT": "Bodega"
+        },
+        "SEARCH": {
+            "ERROR": "No se encontraron resultados",
+            "FOUND": "Ubicaciones encontradas"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Valor requerido"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar ubicación",
+            "DELETE": "Eliminar ubicación"
+        }
+    },
+
+    "STORAGE_UNIT_PRODUCT_REQUEST": {
+        "NAME": "Bodegas donde Solicitar",
+        "DESCRIPTION": "Mantenedor bodegas donde Solicitar"
+    },
+
+    "STORAGE_CENABAST": {
+        "NAME": "Plan. Cenabast",
+        "DESCRIPTION": "Mantenedor Planificación Cenabast",
+        "TABLE": {},
+        "VALIDATOR": {
+            "REQUIRED": "Valor requerido"
+        },
+        "TOOLTIP": {
+            "EDIT": "Editar plan",
+            "DELETE": "Eliminar plan"
+        }
+    },
+    "STORAGE_MAINTAINERS": {
+        "NAME": "Configuración de Bodega",
+        "DESCRIPTION": "Modulo Configuración de Bodega"
+    },
+    "STORAGE_ACCOUNT_PLAN": {
+        "NAME": "Plan de Cuenta",
+        "DESCRIPTION": "Mantenedor de Cuenta Contable"
+    },
+    "STORAGE_ACCOUNT_DETAILS": {
+        "NAME": "Cuenta Contable Detalle",
+        "DESCRIPTION": "Mantenedor de Cuenta Contable"
+    },
+    "STORAGE_PRESENTATION_TYPE": {
+        "NAME": "Tipos de Presentación",
+        "DESCRIPTION": "Mantenedor de Tipos de Presentación"
+    },
+    "STORAGE_ADMINISTRATION_WAY": {
+        "NAME": "Vias de Administración",
+        "DESCRIPTION": "Mantenedor de Vias de Administración"
+    },
+    "STORAGE_DOSAGE_TYPE": {
+        "NAME": "Tipos de Dosificación",
+        "DESCRIPTION": "Mantenedor de Tipos de Dosificación"
+    },
+    "STORAGE_MOVEMENT_TYPE": {
+        "NAME": "Tipo de Movimiento",
+        "DESCRIPTION": "Mantenedor de Tipo de Movimiento"
+    },
+    "STORAGE_ACTIVE_COMPONENT": {
+        "NAME": "Componentes Activos",
+        "DESCRIPTION": "Mantenedor de Componentes Activos"
+    },
+    "STORAGE_DRUG_TYPE": {
+        "NAME": "Tipos de Droga",
+        "DESCRIPTION": "Mantenedor de Tipos de Droga"
+    },
+    "STORAGE_COST_CENTER": {
+        "NAME": "Centro de Costos",
+        "DESCRIPTION": "Mantenedor de Centro de Costos"
+    },
+    "STORAGE_PROGRAM": {
+        "NAME": "Programa / Subprograma",
+        "DESCRIPTION": "Mantenedor de Programa/Subprograma"
+    },
+    "STORAGE_CATEGORY": {
+        "NAME": "Categoría / Subcategoría",
+        "DESCRIPTION": "Mantenedor de Categoría / Subcategoría"
+    },
+    "STORAGE_PRODUCT": {
+        "NAME": "Productos",
+        "DESCRIPTION": "Mantenedor de Productos",
+        "EDIT_NAME": "Productos:: Editar",
+        "EDIT_DESCRIPTION": "Mantenedor Detalle de Producto"
+    },
+    "STORAGE_REQUEST": {
+        "NAME": "Solicitudes",
+        "DESCRIPTION": "Mantenedor de Solicitudes",
+        "EDIT_NAME": "Solicitudes:: Editar",
+        "EDIT_DESCRIPTION": "Editar Solicitud"
+    },
+    "STORAGE_MANAGER": {
+        "NAME": "Configuraciones",
+        "DESCRIPTION": "Mantenedor de Configuraciones de Bodega"
+    }
+}

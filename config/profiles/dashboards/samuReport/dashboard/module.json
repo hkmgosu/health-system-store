@@ -1,0 +1,22 @@
+{
+    "name": "PRIVILEGES.SAMU_REPORTS.DASHBOARD.NAME",
+    "description": "PRIVILEGES.SAMU_REPORTS.DASHBOARD.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.samu-rem-dashboard",
+            "url": "/samu/dashboard",
+            "template": "<ssvq-rem-dashboard-view></ssvq-rem-dashboard-view>"
+        },
+        "_controllers": {
+            "read": [
+                "RemController.getHeatMap",
+                "RemController.getReportByCallReason",
+                "RemController.getCallReport",
+                "RemController.getTransferReport"
+            ]
+        }
+    }
+}

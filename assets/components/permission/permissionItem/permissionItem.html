@@ -1,0 +1,45 @@
+<md-list-item class="md-3-line"
+              layout="row"
+              ng-href="#/permisos/detalles/{{ ::vm.permission.id }}">
+    <ssvq-employee-avatar employee="vm.permission.owner"
+                          class="margin-right-10"></ssvq-employee-avatar>
+    <div class="md-list-item-text"
+         md-truncate
+         flex>
+        <h3 style="font-weight:500;"
+            md-colors="{color: 'primary-hue-1'}">
+            {{ ::vm.permission.owner.fullname }}
+        </h3>
+        <h4>
+            <!-- Unidad -->
+            <i class="zmdi zmdi-group-work"
+               style="padding-right: 3px; font-size: 15px; color: #89aa81"></i>
+            {{ ::vm.permission.unit.name }}
+            <span class="customBullet">•</span>
+
+            <!-- Tipo -->
+            <i class="zmdi zmdi-label-alt"
+               style="padding-right: 3px; font-size: 15px; color: #b47781"></i>
+            {{ ::vm.permission.type.name }}
+        </h4>
+        <p>
+            #{{vm.permission.id}}
+            <span class="customBullet">•</span>
+            <i class="zmdi zmdi-calendar-alt"></i>
+            <span>{{vm.permission.fromDate | date:"dd 'de' MMM"}}</span>
+            <span ng-if="vm.permission.fromDate != vm.permission.untilDate"> al
+                {{vm.permission.untilDate | date:"dd 'de' MMM"}}</span>
+        </p>
+    </div>
+    <div>
+        <div>
+            <span class="md-body-2">
+                {{vm.permission.status.name}}
+            </span>
+            <span class="md-body-2 {{ 'dot-status-' + vm.permission.status.type }}">•</span>
+        </div>
+        <div ng-if="vm.permission.correlativeNumber">
+            <span class="md-caption">#Corr. {{vm.permission.correlativeNumber}}</span>
+        </div>
+    </div>
+</md-list-item>

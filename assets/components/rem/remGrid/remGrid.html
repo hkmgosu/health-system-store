@@ -1,0 +1,155 @@
+<md-content class="full-height">
+    <ssvq-loading ng-show="!vm.remList"></ssvq-loading>
+    <ssvq-no-results ng-show="vm.remList.length === 0"></ssvq-no-results>
+    <md-content layout="row"
+                layout-align="start start"
+                ng-if="vm.remList && vm.remList.length > 0"
+                class="full-height animated slideInUp animation-stop"
+                ssvq-infinite-load
+                next-page="vm.nextPage"
+                layout-wrap>
+        <div ng-repeat="rem in vm.remList"
+             flex="100"
+             flex-gt-xs="50"
+             flex-gt-sm="33"
+             flex-gt-md="25">
+            <a ng-href="#/samu/incidentes/{{rem.id}}"
+               class="rem-link">
+                <md-card class="rem-card">
+                    <md-card-content class="padding-bottom-0 padding-top-0 md-ink-ripple"
+                                     style="min-height:260px;">
+                        <div layout="row"
+                             layout-align="center center">
+                            <div>
+                                <div class="priority"
+                                     layout="row"
+                                     layout-align="center center"
+                                     ng-show="rem.priority"
+                                     ng-class="rem.priority">
+                                    <span>
+                                        {{rem.priority}}
+                                    </span>
+                                </div>
+                            </div>
+                            <md-list-item class="md-2-line padding-right-0"
+                                          flex>
+                                <div class="md-list-item-text">
+                                    <h4 md-truncate>
+                                        <b>{{rem.description || '--'}}</b>
+                                    </h4>
+                                    <md-tooltip ng-show="rem.description">{{rem.description}}</md-tooltip>
+                                    <p class="md-caption"
+                                       layout="row">
+                                        <span>#{{rem.id}}</span>
+                                        <span flex></span>
+                                        <span class="padding-right-10">
+                                            <span
+                                                  ng-class="rem.status.finished ? 'status-finished': 'status-unfinished'">•</span>
+                                            {{rem.status.description || '--'}}
+                                        </span>
+                                    </p>
+                                </div>
+                            </md-list-item>
+                        </div>
+                        <md-divider class="padding-bottom-10"></md-divider>
+                        <div class="rem-item">
+                            <div layout="row"
+                                 layout-align="center start">
+                                <md-icon md-font-icon="zmdi zmdi-account">
+                                </md-icon>
+                                <div flex
+                                     style="min-height:50px;"
+                                     layout="row"
+                                     layout-align="start center">
+                                    <div ng-if="rem.patients.length === 0"
+                                         flex>
+                                        <p class="md-body-1">Sin pacientes</p>
+                                    </div>
+                                    <div ng-if="rem.patients.length === 1"
+                                         flex>
+                                        <div ng-repeat="patient in rem.patients">
+                                            <p class="md-body-1"
+                                               md-truncate>
+                                                <span>{{patient.name}} {{patient.lastname}}</span>
+                                                <span ng-if="!patient.name && !patient.lastname">s/nombre</span>
+                                            </p>
+                                            <p class="md-caption">
+                                                <span>
+                                                    {{ (patient.gender | translate) || 's/género'}}
+                                                </span>
+                                                <span>•</span>
+                                                <ssvq-patient-age patient="patient"></ssvq-patient-age>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div ng-if="rem.patients.length > 1"
+                                         flex>
+                                        <p class="md-body-1 margin-10">
+                                            {{rem.patients.length}} pacientes
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div layout="row">
+                                <md-icon md-font-icon="zmdi zmdi-truck"
+                                         class="vehicles-icon"></md-icon>
+                                <p class="md-body-1 margin-10"
+                                   md-truncate
+                                   layout="row"
+                                   flex>
+                                    <span ng-repeat="remVehicle in rem.remVehicles"
+                                          layout="row">
+                                        <span>{{remVehicle.vehicle.name || '...'}}</span>
+                                        <span class="rem-vehicle-type">
+                                            {{remVehicle.deliveredType || remVehicle.requestedType}}
+                                        </span>
+                                        <span ng-if="!$last"
+                                              style="padding: 0 5px;">•</span>
+                                    </span>
+                                    <span ng-if="rem.remVehicles.length == 0">
+                                        s/despachos
+                                    </span>
+                                </p>
+                            </div>
+                            <div layout="row">
+                                <md-icon md-font-icon="zmdi zmdi-label"
+                                         class="material-icons callReason-icon">
+                                </md-icon>
+                                <p class="md-body-1 margin-10"
+                                   flex
+                                   md-truncate>
+                                    <span>
+                                        {{rem.callReason.name}} • {{rem.subCallReason.name}}
+                                    </span>
+                                    <md-tooltip ng-show="rem.callReason && rem.subCallReason">
+                                        {{rem.callReason.name}} • {{rem.subCallReason.name}}
+                                    </md-tooltip>
+                                </p>
+                            </div>
+                            <div layout="row">
+                                <md-icon md-font-icon="zmdi zmdi-calendar"
+                                         class="date-icon">
+                                </md-icon>
+                                <p class="md-body-1 margin-10"
+                                   md-truncate
+                                   flex>
+                                    {{rem.createdAt | date:"dd MMM yyyy 'a las' HH:mm"}}
+                                </p>
+                            </div>
+                            <div layout="row">
+                                <md-icon md-font-icon="zmdi zmdi-pin"
+                                         class="address-icon">
+                                </md-icon>
+                                <p class="md-body-1 margin-10"
+                                   md-truncate
+                                   flex>
+                                    {{rem.originAddress.zone || '--'}}, {{rem.originAddress.district.name || '--'}}
+                                </p>
+                            </div>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </a>
+        </div>
+    </md-content>
+</md-content>

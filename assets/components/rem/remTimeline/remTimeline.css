@@ -1,0 +1,46 @@
+ssvq-rem-timeline i{
+    font-size: 14px !important;
+    background: rgba(255, 255, 255, 0.959);
+    color: #c7c7c7 !important;
+    width: 24px;
+    border-radius: 50%;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    display: flex !important;
+    border:1px solid #b6b6b6;
+    position: absolute;
+    bottom: -7px;
+    right: -10px;
+}
+
+ssvq-rem-timeline i.zmdi.zmdi-account {
+    color: #24a0d0 !important;
+    border-color: #24a0d0;
+}
+
+ssvq-rem-timeline i.zmdi.zmdi-truck {
+    color: #93aa2c !important;
+    border-color: #93aa2c;
+}
+
+ssvq-rem-timeline i.zmdi.zmdi-comment {
+    color: #678794 !important;
+    border-color: #678794;
+}
+
+ssvq-rem-timeline i.zmdi.zmdi-info {
+    color: #1a7e47 !important;
+    border-color: #1a7e47;
+}
+
+ssvq-rem-timeline i.zmdi.zmdi-pin {
+    color: #c5671b !important;
+    border-color: #c5671b;
+}
+
+.comentario{
+    padding: 8px 7px;
+    background: whitesmoke;
+    border-radius: 5px;
+}

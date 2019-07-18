@@ -1,0 +1,117 @@
+<form name="vm.form">
+    <div layout="column"
+         class="md-padding">
+        <md-autocomplete md-delay="500"
+                         md-selected-item="vm.article.category"
+                         md-search-text="vm.categoryAutocomplete.searchText"
+                         md-items="item in vm.getCategoryList(vm.categoryAutocomplete.searchText)"
+                         md-input-name="categoryAutocomplete"
+                         md-item-text="item.name"
+                         md-autocomplete-required="true"
+                         md-min-length="0"
+                         required
+                         md-floating-label="Categoría">
+            <md-item-template>
+                <div class="md-padding">
+                    <span class="md-body-1"
+                          md-highlight-text="vm.categoryAutocomplete.searchText">
+                        {{item.name}}
+                    </span>
+                </div>
+            </md-item-template>
+            <div ng-messages="vm.form.categoryAutocomplete.$error"
+                 role="alert">
+                <div ng-message="selectedItem">
+                    <span>Campo obligatorio</span>
+                </div>
+            </div>
+            <md-not-found>
+                <div class="md-padding">
+                    <span>{{'AUTOCOMPLETE.NOMATCHFOUND' | translate}}</span>
+                </div>
+            </md-not-found>
+        </md-autocomplete>
+        <md-input-container>
+            <label>Título</label>
+            <textarea name="title"
+                      ng-model="vm.article.title"
+                      required></textarea>
+            <div ng-messages="vm.form.title.$error"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Campo obligatorio</span>
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container>
+            <label>Cuerpo</label>
+            <textarea name="body"
+                      ng-model="vm.article.body"
+                      rows="4"
+                      required></textarea>
+            <div ng-messages="vm.form.body.$error"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Campo obligatorio</span>
+                </div>
+            </div>
+        </md-input-container>
+        <md-chips ng-model="vm.article.tagList"
+                  md-autocomplete-snap
+                  md-transform-chip="vm.transformChip($chip)"
+                  name="Tags"
+                  md-removable="true">
+            <md-autocomplete md-selected-item="vm.selectedTag"
+                             md-search-text="vm.searchText"
+                             md-items="item in vm.getTagList(vm.searchText)"
+                             md-item-text="item.name"
+                             md-min-length="0"
+                             placeholder="Tags">
+                <md-item-template>
+                    <div class="md-padding">
+                        <span class="md-body-1"
+                              md-highlight-text="vm.searchText">
+                            #{{item.name}}
+                        </span>
+                    </div>
+                </md-item-template>
+            </md-autocomplete>
+            <md-chip-template>
+                #{{$chip.name}}
+            </md-chip-template>
+        </md-chips>
+        <br>
+
+        <p>
+            <md-icon md-font-icon="zmdi zmdi-collection-image-o"></md-icon>
+            <span>Galería</span>
+        </p>
+        <ssvq-upload-list-files upload-files="vm.uploadPicture"
+                                ng-if="vm.article.pictures"
+                                mode="Manager"
+                                on-change="vm.onFileListChange"
+                                files="vm.article.pictures"></ssvq-upload-list-files>
+        <p class="md-caption text-center"
+           ng-if="vm.article.pictures.length === 0">No hay imágenes cargadas en la galería</p>
+        <md-button class="md-raised md-accent"
+                   ngf-select="vm.uploadPicture($files)"
+                   ngf-pattern="'image/*'"
+                   ngf-multiple="true">Agregar imágenes a la galería</md-button>
+
+        <p>
+            <md-icon md-font-icon="zmdi zmdi-attachment"></md-icon>
+            <span>Archivos adjuntos</span>
+        </p>
+        <ssvq-upload-list-files upload-files="vm.uploadFiles"
+                                ng-if="vm.article.attachments"
+                                mode="Manager"
+                                on-change="vm.onFileListChange"
+                                files="vm.article.attachments"></ssvq-upload-list-files>
+        <p class="md-caption text-center"
+           ng-if="vm.article.attachments.length === 0">No hay archivos adjuntos cargados</p>
+        <md-button class="md-raised md-accent"
+                   ngf-select="vm.uploadFiles($files)"
+                   ngf-multiple="true">Agregar archivos adjuntos</md-button>
+
+    </div>
+</form>

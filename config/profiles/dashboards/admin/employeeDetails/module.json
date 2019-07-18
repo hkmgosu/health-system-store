@@ -1,0 +1,48 @@
+{
+    "name": "PRIVILEGES.EMPLOYEE_DETAILS.NAME",
+    "description": "PRIVILEGES.EMPLOYEE_DETAILS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.employee-details",
+            "url": "/funcionarios/detalles/:id",
+            "template": "<ssvq-employee-details-view></ssvq-employee-details-view>",
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "EmployeeController.get",
+                "EmployeeController.getParams",
+                "UnitController.getAutocomplete",
+                "EstablishmentController.get",
+                "JobController.get",
+                "EmployeeController.getSupervisedUnits",
+                "ResourceController.getEmployeeResourceList",
+                "EmployeeController.syncFromApi",
+                "ProfileController.getList",
+                "WorkflowController.getUnitReported"
+            ],
+            "create": [
+                "EmployeeController.save"
+            ],
+            "update": [
+                "EmployeeController.save",
+                "EmployeeController.setPassword",
+                "EmployeeController.addSupervisedUnit",
+                "EmployeeController.removeSupervisedUnit",
+                "EmployeeController.uploadProfilePicture",
+                "EmployeeController.deleteProfilePicture",
+                "EmployeeController.addProfile",
+                "EmployeeController.removeProfile"
+            ],
+            "delete": [
+                "EmployeeController.delete"
+            ]
+        }
+    }
+}

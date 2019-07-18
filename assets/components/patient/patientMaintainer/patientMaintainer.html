@@ -1,0 +1,91 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             hide-xs
+             flex>
+            <span class="md-subhead">{{::('PATIENT.OTHERS.TITLE' | translate)}}</span>
+            <span class="md-caption">{{vm.found}} resultados</span>
+        </div>
+        <!-- Buscar -->
+        <ssvq-search-input search-text="vm.searchText"
+                           label="Buscar"
+                           flex
+                           flex-gt-xs="50"></ssvq-search-input>
+        <span flex
+              hide-xs></span>
+    </div>
+</md-toolbar>
+<md-button required-privilege="['create','update']"
+           class="md-fab md-fab-top-right md-primary"
+           ng-click="vm.showPatientDialog({},$event)">
+    <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+    <md-tooltip md-direction="bottom">
+        <span>{{::('CRUD.CREATE' | translate)}}</span>
+    </md-tooltip>
+</md-button>
+<md-content>
+    <md-table-container class="full-table-container">
+        <table md-table
+               ng-if="vm.patients.length > 0"
+               class="animated fadeIn animation-stop">
+            <thead md-head>
+                <tr md-row>
+                    <th md-column>{{ ::('PATIENT.TABLE.IDNUMBER' | translate)}}</th>
+                    <th md-column>{{ ::('PATIENT.TABLE.NAME' | translate)}}</th>
+                    <th md-column></th>
+                    <th md-column>{{ ::('PATIENT.TABLE.AGE' | translate)}}</th>
+                    <th md-column>{{ ::('PATIENT.TABLE.GENDER' | translate)}}</th>
+
+                    <th md-column>{{ ::('PATIENT.TABLE.ADDRESS' | translate)}}</th>
+                    <th md-column>{{ ::('PATIENT.TABLE.PHONE' | translate)}}</th>
+                    <th md-column></th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-auto-select
+                    md-row
+                    ng-repeat="item in ::vm.patients track by $index">
+                    <td md-cell>{{ ::vm.findIdType(item.identificationType) | translate}} {{ item.identificationNumber }}</td>
+                    <td md-cell>
+                        <span class="force-line capitalize"
+                              md-highlight-text="searchText">{{ item.fullname }}</span>
+                    </td>
+                    <td md-cell>
+                        <md-icon md-font-icon="zmdi zmdi-alert-triangle"
+                                 ng-show="!item.birthdate"
+                                 class="md-warn">
+                            <md-tooltip md-direction="top">
+                                <span>{{::('PATIENT.TABLE.ESTIMATEDATE' | translate)}}</span>
+                            </md-tooltip>
+                        </md-icon>
+                    </td>
+                    <td md-cell>
+                        <ssvq-patient-age patient="item"></ssvq-patient-age>
+                    </td>
+                    <td md-cell>{{ ::vm.findGender(item.gender) | translate }}</td>
+                    <td md-cell>{{ item.address.text }}</td>
+                    <td md-cell>{{ item.phone }}</td>
+                    <td md-cell>
+                        <md-button class="md-icon-button"
+                                   required-privilege="['update']"
+                                   ng-click="vm.showPatientDialog(item, $event)">
+                            <md-icon md-font-icon="fa fa-pencil">
+                                <md-tooltip md-direction="top">
+                                    <span>{{::('TABLE.TOOLTIP.EDIT' | translate)}}</span>
+                                </md-tooltip>
+                            </md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ssvq-loading ng-show="!vm.patients"></ssvq-loading>
+        <ssvq-no-results ng-show="vm.patients.length == 0"></ssvq-no-results>
+    </md-table-container>
+    <md-table-pagination md-limit="vm.limit"
+                         md-page="vm.page"
+                         md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}"
+                         md-total="{{vm.found}}"
+                         md-on-paginate="vm.get"
+                         md-page-select></md-table-pagination>
+</md-content>

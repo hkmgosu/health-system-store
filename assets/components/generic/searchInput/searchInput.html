@@ -1,0 +1,25 @@
+<div class="custom-search-box"
+     layout="row">
+    <md-button class="md-icon-button">
+        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+        <md-tooltip>Buscar</md-tooltip>
+    </md-button>
+    <md-input-container md-no-float
+                        class="margin-0"
+                        layout="column"
+                        layout-align="center center"
+                        flex>
+        <input ng-model="vm.searchText"
+               ng-model-options="{ debounce: 800 }"
+               type="search"
+               id="search"
+               autofocus
+               placeholder="{{ vm.label || 'Buscar' }}">
+    </md-input-container>
+    <md-button class="md-icon-button"
+               ng-click="vm.searchText=''"
+               ng-show="vm.searchText">
+        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+        <md-tooltip>Limpiar</md-tooltip>
+    </md-button>
+</div>

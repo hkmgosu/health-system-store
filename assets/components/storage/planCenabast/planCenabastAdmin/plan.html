@@ -1,0 +1,29 @@
+<md-list class="animated slideInDown animation-stop padding-0 md-dense"
+         hide-xs
+         flex>
+    <md-list-item class="md-2-line"
+                  ng-repeat="month in vm.months track by $index"
+                  ng-click="vm.onSelectMonth(month)">
+
+        <md-icon md-font-icon="fa fa-calendar"
+                 class="text-center"></md-icon>
+
+        <div class="md-list-item-text">
+            <h3 class="md-body-2">{{month[1]}}</h3>
+        </div>
+        <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
+</md-list>
+
+<md-input-container class="md-block padding-20"
+                    style="padding-top: 0;"
+                    hide
+                    show-xs>
+    <md-select ng-model="vm.month"
+               ng-change="vm.onSelectMonth(vm.month)"
+               aria-label="Mes"
+               placeholder="Mes">
+        <md-option ng-repeat="month in vm.months track by $index"
+                   ng-value="month">{{month[1]}}</md-option>
+    </md-select>
+</md-input-container>

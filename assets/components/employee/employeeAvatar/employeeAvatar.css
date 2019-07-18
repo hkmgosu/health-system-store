@@ -1,0 +1,15 @@
+ssvq-employee-avatar, ssvq-employee-avatar img {
+    width: 40px !important;
+    height: 40px !important;
+    display: flex;
+}
+
+ssvq-employee-avatar.mini-avatar, ssvq-employee-avatar.mini-avatar img {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+ssvq-employee-avatar.mega-avatar, ssvq-employee-avatar.mega-avatar img {
+    width: 160px !important;
+    height: 160px !important;
+}

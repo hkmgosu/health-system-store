@@ -1,0 +1,13 @@
+.ae-config-tabs {
+    height: calc(100vh - 128px);
+}
+.ae-config-panel {
+    height: calc(100vh - 176px);
+}
+.ae-list-units {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.activeListItem {
+    background: #ccc;
+}

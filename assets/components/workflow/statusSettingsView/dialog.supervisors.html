@@ -1,0 +1,40 @@
+<md-dialog aria-label="Supervisores"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.close()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            </md-button>
+            <div layout="column">
+                <span class="md-subhead">
+                    Supervisores de estado workflow
+                </span>
+                <span class="md-caption">
+                    {{vm.status.name}}
+                </span>
+            </div>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <div class="md-padding">
+                <ssvq-employee-autocomplete on-select="vm.addSupervisor"
+                                            clear-on-select="true"></ssvq-employee-autocomplete>
+            </div>
+            <md-list-item ng-repeat="supervisor in vm.supervisors">
+                <ssvq-employee-item-list employee="supervisor"></ssvq-employee-item-list>
+                <md-button class="md-secondary md-warn md-raised"
+                           ng-click="vm.rmSupervisor(supervisor)">
+                    Quitar
+                </md-button>
+            </md-list-item>
+            <md-list-item ng-if="vm.status.supervisorsCount === 0">
+                <p><i>sin supervisores</i></p>
+            </md-list-item>
+        </div>
+    </md-dialog-content>
+</md-dialog>

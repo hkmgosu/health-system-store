@@ -1,0 +1,42 @@
+{
+    "name": "PRIVILEGES.UNIT.NAME",
+    "description": "PRIVILEGES.UNIT.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.admin-units",
+            "url": "/unidades-administrativas",
+            "template": "<ssvq-unit-maintainer></ssvq-unit-maintainer>",
+            "priority": 3
+        },
+        "_controllers": {
+            "read": [
+                "UnitController.get",
+                "UnitController.getAll",
+                "EmployeeController.getPerUnit",
+                "UnitController.getAutocomplete",
+                "UnitController.getMembersUnit"
+            ],
+            "create": [
+                "UnitController.save",
+                "UnitController.exportOrgChart"
+            ],
+            "update": [
+                "UnitController.save",
+                "UnitController.exportOrgChart",
+                "EmployeeController.setUnit",
+                "UnitController.mapEstablishment",
+                "UnitController.setMember",
+                "UnitController.removeMember"
+            ],
+            "delete": [
+                "UnitController.delete"
+            ]
+        }
+    }
+}

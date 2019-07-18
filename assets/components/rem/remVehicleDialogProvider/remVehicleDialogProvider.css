@@ -1,0 +1,9 @@
+.vehicle-dialog {
+    height: calc(90vh - 64px);
+    overflow:hidden;
+}
+@media (max-width: 599px){
+    .vehicle-dialog {
+        height: calc(100vh - 56px);
+    }
+}

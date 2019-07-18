@@ -1,0 +1,130 @@
+<md-subheader class="md-primary md-hue-1">
+    {{::('PATIENT.REGULATOR.NEWOBSERVATION' | translate)}}
+</md-subheader>
+<div class="md-padding">
+    <ng-form name="vm.commentForm"
+             novalidate>
+        <div layout="column"
+             layout-gt-sm="row"
+             layout-wrap>
+            <md-checkbox ng-model="vm.temp.coordination"
+                         class="md-primary"
+                         aria-label="{{::('PATIENT.REGULATOR.COORDINATION' | translate)}}"
+                         flex>
+                {{::('PATIENT.REGULATOR.COORDINATION' | translate)}}
+            </md-checkbox>
+            <md-checkbox ng-model="vm.temp.nurseAdvice"
+                         class="md-primary"
+                         aria-label="{{::('PATIENT.REGULATOR.NURSEADVICE' | translate)}}"
+                         flex>
+                {{::('PATIENT.REGULATOR.NURSEADVICE' | translate)}}
+            </md-checkbox>
+            <md-checkbox ng-model="vm.temp.medicalAdvice"
+                         class="md-primary"
+                         aria-label="{{::('PATIENT.REGULATOR.MEDICALADVICE' | translate)}}"
+                         flex>
+                {{::('PATIENT.REGULATOR.MEDICALADVICE' | translate)}}
+            </md-checkbox>
+        </div>
+        <md-input-container class="md-block"
+                            flex="100">
+            <label>{{ ::('PATIENT.REGULATOR.MEDICAL' | translate) }}</label>
+            <textarea rows="3"
+                      md-maxlength="1000"
+                      name="medical"
+                      ng-model="vm.temp.medical"
+                      ng-required="(vm.temp.diagnostic === '' || !vm.temp.diagnostic) && (vm.temp.administrative === '' || !vm.temp.administrative)">{{ ::('PATIENT.REGULATOR.MEDICAL' | translate) }}</textarea>
+            <div ng-messages="vm.commentForm.medical.$error"
+                 role="alert">
+                <div ng-message="required">
+                    <span>Debes ingresar a lo menos una observación</span>
+                </div>
+                <div ng-message="md-maxlength">
+                    <span>Tu observación supera el máximo permitido</span>
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block"
+                            flex="100">
+            <label>{{ ::('PATIENT.REGULATOR.DIAGNOSTIC' | translate) }}</label>
+            <textarea rows="1"
+                      md-maxlength="100"
+                      ng-model="vm.temp.diagnostic">{{ ::('PATIENT.REGULATOR.DIAGNOSTIC' | translate) }}</textarea>
+        </md-input-container>
+        <md-input-container class="md-block"
+                            flex="100">
+            <label>{{ ::('PATIENT.REGULATOR.ADMINISTRATIVE' | translate) }}</label>
+            <textarea rows="2"
+                      md-maxlength="1000"
+                      ng-model="vm.temp.administrative">{{ ::('PATIENT.REGULATOR.ADMINISTRATIVE' | translate) }}</textarea>
+        </md-input-container>
+        <div layout="row"
+             layout-align="end center">
+            <md-button type="button"
+                       class="md-primary button-comment md-raised"
+                       ng-click="vm.addComment()"
+                       ng-disabled="(vm.commentForm.$submitted && vm.commentForm.$invalid) || vm.commentForm.$pristine">
+                {{ ::('PATIENT.REGULATOR.ADDOBS' | translate) }}
+            </md-button>
+        </div>
+    </ng-form>
+</div>
+
+<md-subheader class="md-primary md-hue-1">
+    {{ ::('PATIENT.REGULATOR.OBSERVATIONS' | translate) }}
+</md-subheader>
+<div class="md-padding"
+     layout="column">
+    <div ng-repeat="item in vm.observations | orderBy:'-createdAt'"
+         class="fade">
+        <div>
+            <div style="width:44px; height:44px; float:left;">
+                <ssvq-employee-avatar employee="item.createdBy"></ssvq-employee-avatar>
+            </div>
+            <div layout="column"
+                 class="padding-left-10">
+                <span class="md-body-1">
+                    <b ssvq-employee-profile-link
+                       id-employee="{{item.createdBy.id}}">{{item.createdBy.fullname}}</b> agregó la observación:
+                </span>
+                <div ng-if="item.coordination || item.nurseAdvice || item.medicalAdvice">
+                    <hr style="margin:2px auto;border:0">
+                    <span class="md-body-1">
+                        <b>{{ ::('PATIENT.REGULATOR.BENEFITS' | translate) }}: </b>
+                        {{ item.coordination ? 'PATIENT.REGULATOR.COORDINATION' : '' | translate}} {{ item.coordination && item.nurseAdvice ? '-'
+                        : ''}} {{ item.nurseAdvice ? 'PATIENT.REGULATOR.NURSEADVICE' : '' | translate}} {{ (item.nurseAdvice
+                        || item.nurseAdvice) && item.medicalAdvice ? '-' : ''}} {{ item.medicalAdvice ? 'PATIENT.REGULATOR.MEDICALADVICE'
+                        : '' | translate}}
+                    </span>
+                </div>
+                <div ng-if="item.medical">
+                    <hr style="margin:2px auto;border:0">
+                    <span class="md-body-1">
+                        <b>{{ ::('PATIENT.REGULATOR.MEDICAL' | translate) }}</b>
+                    </span>
+                    <md-divider></md-divider>
+                    <span class="md-body-1 respect-line-break">{{item.medical}}</span>
+                </div>
+                <div ng-if="item.diagnostic">
+                    <hr style="margin:2px auto;border:0">
+                    <span class="md-body-1">
+                        <b>{{ ::('PATIENT.REGULATOR.DIAGNOSTIC' | translate) }}</b>
+                    </span>
+                    <md-divider></md-divider>
+                    <span class="md-body-1 respect-line-break">{{item.diagnostic}}</span>
+                </div>
+                <div ng-if="item.administrative">
+                    <hr style="margin:2px auto;border:0">
+                    <span class="md-body-1">
+                        <b>{{ ::('PATIENT.REGULATOR.ADMINISTRATIVE' | translate) }}</b>
+                    </span>
+                    <md-divider></md-divider>
+                    <span class="md-body-1 respect-line-break">{{item.administrative}}</span>
+                </div>
+                <p class="text-right md-body-1">{{::(item.createdAt | date:"HH:mm '•' dd 'de' MMM")}}</p>
+            </div>
+        </div>
+    </div>
+    <p class="text-center"
+       ng-if="vm.observations.length === 0">Sin observaciones agregadas</p>
+</div>

@@ -1,0 +1,55 @@
+<md-toolbar class="md-hue-1"
+            md-scroll-shrink>
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             hide-xs
+             flex>
+            <span class="md-subhead"
+                  translate>PRIVILEGES.STORAGE_MOVEMENT.NAME</span>
+            <span class="md-caption"
+                  ng-show="vm.viewMode=='list'">Mostrando {{vm.movements.length}} de {{vm.found}} resultados</span>
+        </div>
+
+        <md-divider class="vertical-divider"></md-divider>
+
+        <!-- LISTA/TABLA -->
+        <md-button class="md-icon-button"
+                   ng-show="vm.viewMode == 'list'"
+                   ng-click="vm.viewChange()">
+            <md-icon md-font-icon="fa fa-table"></md-icon>
+            <md-tooltip>Ver como tabla</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button"
+                   ng-show="vm.viewMode == 'table'"
+                   ng-click="vm.viewChange()">
+            <md-icon md-font-icon="fa fa-list"></md-icon>
+            <md-tooltip>Ver como lista</md-tooltip>
+        </md-button>
+
+        <!-- BOTON NUEVO -->
+        <md-menu>
+            <md-button required-privilege="['create']"
+                       class="md-icon-button"
+                       ng-disabled="vm.allowedUnits.length == 0"
+                       ng-click="$mdMenu.open($event)">
+                <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                <md-tooltip>Crear nuevo tipo</md-tooltip>
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item layout-align="start center"
+                              ng-click="vm.onCreate({ isInput:true, isOutput:false },$event)">
+                    <md-icon md-font-icon="fa fa-arrow-up"
+                             md-menu-align-target></md-icon>
+                    Ingreso de Productos
+                </md-menu-item>
+                <md-menu-item layout-align="start center"
+                              ng-click="vm.onCreate({ isInput:false, isOutput:true },$event)">
+                    <md-icon md-font-icon="fa fa-arrow-down"
+                             md-menu-align-target></md-icon>
+                    Salida de Productos
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+
+    </div>
+</md-toolbar>

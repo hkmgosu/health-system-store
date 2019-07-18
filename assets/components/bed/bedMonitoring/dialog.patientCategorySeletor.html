@@ -1,0 +1,52 @@
+<md-dialog aria-label="Categorización de paciente"
+           id="establishment-selector-dialog"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <form name="vm.saveForm"
+          ng-submit="vm.saveForm.$valid && vm.save()"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                Categorización de paciente
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div layout="row">
+                <div layout="column">
+                    <span></span>
+                </div>
+                <div layout="column">
+                    <span></span>
+                </div>
+                <div layout="column">
+                    <span></span>
+                </div>
+                <div layout="column">
+                    <span></span>
+                </div>
+            </div>
+            <md-list>
+                <md-list-item class="md-2-line"
+                              ng-class="{'selected': category.selected}"
+                              ng-click="vm.selectCategory(category)"
+                              ng-repeat="category in vm.categoryList track by $index">
+                    <div class="md-list-item-text">
+                        <h3>{{category.name}}</h3>
+                    </div>
+                    <md-icon ng-show="category.selected"
+                             class="md-primary"
+                             md-font-icon="zmdi zmdi-check-circle"></md-icon>
+                </md-list-item>
+            </md-list>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-primary"
+                       type="submit"
+                       aria-label="Categorizar paciente">
+                Categorizar paciente
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

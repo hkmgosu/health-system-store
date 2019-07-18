@@ -1,0 +1,34 @@
+<form name="patientForm">
+    <md-subheader class="md-primary">Identificación</md-subheader>
+    <div class="padding-bottom-0"
+         style="min-height: 96px;">
+        <ssvq-patient-autocomplete patient="vm.patient"
+                                   search-list-count="vm.searchListCount"
+                                   on-update="vm.onIdentifyDataUpdate"
+                                   opts="{showButtons: vm.opts.showButtons, idTypeVisibility: vm.opts.idTypeVisibility}">
+        </ssvq-patient-autocomplete>
+    </div>
+    <div ng-if="!vm.searchListCount">
+        <md-subheader class="md-primary">
+            Datos básicos
+        </md-subheader>
+        <div class="md-padding"
+             style="min-height: 282px;">
+            <ssvq-patient-personal-data personal-data="vm.patient"
+                                        opts="{showButtons: vm.opts.showButtons, required: vm.opts.required}"
+                                        on-update="vm.onPersonalDataUpdate">
+            </ssvq-patient-personal-data>
+        </div>
+    </div>
+    <div ng-if="!vm.searchListCount && !vm.opts.hideAddressInfo">
+        <md-subheader class="md-primary">
+            Dirección del paciente
+        </md-subheader>
+        <div class="md-padding">
+            <ssvq-address-form address="vm.patient.address"
+                               on-save="vm.saveAddress"
+                               opts="{hideMap: true, showConfirmButton: vm.opts.showButtons, confirmText: 'Actualizar dirección'}">
+            </ssvq-address-form>
+        </div>
+    </div>
+</form>

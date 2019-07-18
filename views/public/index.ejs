@@ -1,0 +1,583 @@
+<!doctype html>
+<html ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <title>Mi SSVQ</title>
+    <meta name="description"
+          content="">
+    <meta name="viewport"
+          content="initial-scale=1, maximum-scale=1" />
+    <%- include ../generic-meta.ejs %>
+
+    <!-- load fonts   -->
+    <link rel="stylesheet"
+          href="//fonts.googleapis.com/css?family=RobotoDraft:100,100italic,300,300italic,400,500,700,900,400italic">
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/bower_components/angular-material-data-table/dist/md-data-table.min.css">
+    <link rel="stylesheet" href="/bower_components/fullcalendar/dist/fullcalendar.min.css">
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/bower_components/textAngular/src/textAngular.css">
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="/bower_components/triangular/triangular.min.css">
+    <link rel="stylesheet" href="/bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/bower_components/ng-img-crop/compile/unminified/ng-img-crop.css">
+    <link rel="stylesheet" href="/bower_components/swiper/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="/bower_components/leaflet/dist/leaflet.css">
+    <link rel="stylesheet" href="/bower_components/leaflet-draw/dist/leaflet.draw.css">
+    <link rel="stylesheet" href="/leaflet.iconlabel.css">
+    <link rel="stylesheet" href="/custom.css">
+    <link rel="stylesheet" href="/preloader.css">
+    <link rel="stylesheet" href="/components/addressForm/addressForm.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventDetailsView/adverseEventDetailsView.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventDialog/adverseEventDamageType/adverseEventDamageType.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventDialog/adverseEventDialog.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventDuplicatesView/adverseEventDuplicatesView.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventForm/uppForm/uppForm.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventListItem/adverseEventListItem.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventListView/adverseEventListView.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventSettingsView/adverseEventSettingsView.css">
+    <link rel="stylesheet" href="/components/archive/uploadItemFile/uploadItemFile.css">
+    <link rel="stylesheet" href="/components/article/articleList/articleList.css">
+    <link rel="stylesheet" href="/components/bed/bedContingency/bmContingencyManager.css">
+    <link rel="stylesheet" href="/components/bed/bedDerivationSettings/bmDerivationSettings.css">
+    <link rel="stylesheet" href="/components/bed/bedMonitoring/bedMonitoring.css">
+    <link rel="stylesheet" href="/components/dashboards/dashboardsNotificationList/dashboardsNotificationList.css">
+    <link rel="stylesheet" href="/components/dashboards/dashboardsNotificationSidebar/dashboardsNotificationSidebar.css">
+    <link rel="stylesheet" href="/components/dashboards/dashboardsToolbar/dashboardsToolbar.css">
+    <link rel="stylesheet" href="/components/derivation/derivationList/derivationList.css">
+    <link rel="stylesheet" href="/components/derivation/derivationManager/derivationManager.css">
+    <link rel="stylesheet" href="/components/employee/employeeAvatar/employeeAvatar.css">
+    <link rel="stylesheet" href="/components/employee/employeeItemList/employeeItemList.css">
+    <link rel="stylesheet" href="/components/employee/employeeMaintainer/employeeMaintainer.css">
+    <link rel="stylesheet" href="/components/employee/employeeProfileLink/employeeProfileLink.css">
+    <link rel="stylesheet" href="/components/employee/employeeProfilePictureSelector/employeeProfilePictureSelector.css">
+    <link rel="stylesheet" href="/components/generic/commentBox/commentBox.css">
+    <link rel="stylesheet" href="/components/generic/customCheckboxSelector/customCheckBoxSelector.css">
+    <link rel="stylesheet" href="/components/generic/customOptionSelector/customOptionSelector.css">
+    <link rel="stylesheet" href="/components/generic/logComparison/logComparison.css">
+    <link rel="stylesheet" href="/components/generic/searchInput/searchInput.css">
+    <link rel="stylesheet" href="/components/patient/patientAutocomplete/patientAutocomplete.css">
+    <link rel="stylesheet" href="/components/patient/patientClinicalHistory/patientClinicalHistory.css">
+    <link rel="stylesheet" href="/components/patient/patientEvolution/basicEvolution/basicEvolution.css">
+    <link rel="stylesheet" href="/components/patient/patientEvolution/vitalSignsEvolution/vitalSignsEvolution.css">
+    <link rel="stylesheet" href="/components/patient/patientIntervention/patientIntervention.css">
+    <link rel="stylesheet" href="/components/patient/patientItemList/patientItemList.css">
+    <link rel="stylesheet" href="/components/patient/patientPersonalData/patientPersonalData.css">
+    <link rel="stylesheet" href="/components/permission/permissionItem/permissionItem.css">
+    <link rel="stylesheet" href="/components/permission/permissionListView/permissionListView.css">
+    <link rel="stylesheet" href="/components/permission/permissionTimeline/permissionTimeline.css">
+    <link rel="stylesheet" href="/components/profile/profileDetails/profileDetails.css">
+    <link rel="stylesheet" href="/components/profile/profileMaintainer/profileMaintainer.css">
+    <link rel="stylesheet" href="/components/rem/remAccessView/remAccessView.css">
+    <link rel="stylesheet" href="/components/rem/remAddressRead/remAddressRead.css">
+    <link rel="stylesheet" href="/components/rem/remBasicInformation/remBasicInformation.css">
+    <link rel="stylesheet" href="/components/rem/remDetailsView/remDetailsView.css">
+    <link rel="stylesheet" href="/components/rem/remGrid/remGrid.css">
+    <link rel="stylesheet" href="/components/rem/remListFilter/remListFilter.css">
+    <link rel="stylesheet" href="/components/rem/remPatientDialogProvider/remPatientDialogProvider.css">
+    <link rel="stylesheet" href="/components/rem/remPatientItem/remPatientItem.css">
+    <link rel="stylesheet" href="/components/rem/remPatientVehicle/remPatientVehicle.css">
+    <link rel="stylesheet" href="/components/rem/remSettings/remSettings.css">
+    <link rel="stylesheet" href="/components/rem/remTimeline/remTimeline.css">
+    <link rel="stylesheet" href="/components/rem/remVehicleDialogProvider/remVehicleDialogProvider.css">
+    <link rel="stylesheet" href="/components/rem/remVehicleRoute/remVehicleRoute.css">
+    <link rel="stylesheet" href="/components/request/requestListItem/requestListItem.css">
+    <link rel="stylesheet" href="/components/request/requestListView/requestListView.css">
+    <link rel="stylesheet" href="/components/resourceMaintainer/resourceMaintainer.css">
+    <link rel="stylesheet" href="/components/storage/activeComponent/activeComponentAdmin/activeComponentAdmin.css">
+    <link rel="stylesheet" href="/components/storage/administrationWay/administrationWayAdmin/administrationWayAdmin.css">
+    <link rel="stylesheet" href="/components/storage/category/categoryAdmin/categoryAdmin.css">
+    <link rel="stylesheet" href="/components/storage/company/companyAdmin/companyAdmin.css">
+    <link rel="stylesheet" href="/components/storage/costCenter/costCenterMaintainer/costCenterMaintainer.css">
+    <link rel="stylesheet" href="/components/storage/dosageType/dosageTypeAdmin/dosageTypeAdmin.css">
+    <link rel="stylesheet" href="/components/storage/drugType/drugTypeMaintainer/drugTypeMaintainer.css">
+    <link rel="stylesheet" href="/components/storage/expressIncome/expressIncomeEdit/expressIncomeEdit.css">
+    <link rel="stylesheet" href="/components/storage/movement/movementEdit/movementEdit.css">
+    <link rel="stylesheet" href="/components/storage/movementType/movementTypeAdmin/movementTypeAdmin.css">
+    <link rel="stylesheet" href="/components/storage/presentationType/presentationTypeAdmin/presentationTypeAdmin.css">
+    <link rel="stylesheet" href="/components/storage/product/productAutocomplete/productAutocomplete.css">
+    <link rel="stylesheet" href="/components/storage/product/productMaintainer/productMaintainer.css">
+    <link rel="stylesheet" href="/components/storage/product/productMaintainerSimple/productMaintainer.css">
+    <link rel="stylesheet" href="/components/storage/product/productProfilePictureSelector/productProfilePictureSelector.css">
+    <link rel="stylesheet" href="/components/storage/productRequest/productRequestAdmin/productRequestAdmin.css">
+    <link rel="stylesheet" href="/components/storage/productRequest/productRequestEdit/productRequestEdit.css">
+    <link rel="stylesheet" href="/components/storage/productType/productTypeItemList/productTypeItemList.css">
+    <link rel="stylesheet" href="/components/storage/productType/productTypeMaintainer/productTypeMaintainer.css">
+    <link rel="stylesheet" href="/components/storage/program/programAdmin/programAdmin.css">
+    <link rel="stylesheet" href="/components/storage/report/reportAutocomplete/reportAutocomplete.css">
+    <link rel="stylesheet" href="/components/typecasting/typecastingDetails/typecastingDetails.css">
+    <link rel="stylesheet" href="/components/unit/unitEmployees/unitEmployees.css">
+    <link rel="stylesheet" href="/components/unit/unitMaintainer/unitMaintainer.css">
+    <link rel="stylesheet" href="/components/unit/unitManagers/unitManagers.css">
+    <link rel="stylesheet" href="/components/unit/unitSupervisors/unitSupervisors.css">
+    <link rel="stylesheet" href="/components/vehicle/vehicleAutocomplete/vehicleAutocomplete.css">
+    <link rel="stylesheet" href="/components/vehicle/vehicleMaintainer/vehicleMaintainer.css">
+    <link rel="stylesheet" href="/components/viatic/viaticCalendar/viaticCalendar.css">
+    <link rel="stylesheet" href="/components/viatic/viaticDetails/viaticDetails.css">
+    <link rel="stylesheet" href="/components/viatic/viaticItem/viaticItem.css">
+    <link rel="stylesheet" href="/components/viatic/viaticTimeline/viaticTimeline.css">
+    <link rel="stylesheet" href="/views/public/modules/sidebar-left/sidebar-left.css">
+    <!--STYLES END-->
+
+    <!-- Manifest.json  -->
+    <link href="/manifest.json"
+          rel="manifest">
+</head>
+
+<body translate-cloak
+      ng-class="bodyClasses"
+      class="public-view">
+    <!-- main app view  -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <div class="full-height"
+         ui-view></div>
+
+    <script>
+        var employee = <%- JSON.stringify(employee) %>;
+        var version = "<%= appVersion %>";
+    </script>
+    <script type="text/javascript"
+            src="/sails.io.js"></script>
+    <script>io.sails.transports=['websocket']</script>
+    <!--SCRIPTS-->
+    <script src="/service-worker-registration.js" defer></script>
+    <script src="/utils.js" defer></script>
+    <script src="/bower_components/jquery/dist/jquery.min.js" defer></script>
+    <script src="/bower_components/lodash/dist/lodash.min.js" defer></script>
+    <script src="/bower_components/async/dist/async.js" defer></script>
+    <script src="/bower_components/angular/angular.js" defer></script>
+    <script src="/bower_components/angular-filter/dist/angular-filter.js" defer></script>
+    <script src="/bower_components/angular-animate/angular-animate.min.js" defer></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.min.js" defer></script>
+    <script src="/bower_components/angular-digest-hud/digest-hud.js" defer></script>
+    <script src="/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js" defer></script>
+    <script src="/bower_components/angular-linkify/angular-linkify.min.js" defer></script>
+    <script src="/bower_components/angular-local-storage/dist/angular-local-storage.min.js" defer></script>
+    <script src="/bower_components/angular-aria/angular-aria.js" defer></script>
+    <script src="/bower_components/angular-material/angular-material.js" defer></script>
+    <script src="/bower_components/triangular/triangular.js" defer></script>
+    <script src="/bower_components/angular-messages/angular-messages.min.js" defer></script>
+    <script src="/bower_components/moment/min/moment.min.js" defer></script>
+    <script src="/bower_components/moment/locale/es.js" defer></script>
+    <script src="/bower_components/angular-moment/angular-moment.min.js" defer></script>
+    <script src="/bower_components/angular-resource/angular-resource.js" defer></script>
+    <script src="/bower_components/angular-translate/angular-translate.js" defer></script>
+    <script src="/bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js" defer></script>
+    <script src="/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js" defer></script>
+    <script src="/bower_components/angular-translate-storage-local/angular-translate-storage-local.js" defer></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js" defer></script>
+    <script src="/bower_components/rangy/rangy-core.min.js" defer></script>
+    <script src="/bower_components/rangy/rangy-classapplier.min.js" defer></script>
+    <script src="/bower_components/rangy/rangy-highlighter.min.js" defer></script>
+    <script src="/bower_components/rangy/rangy-selectionsaverestore.min.js" defer></script>
+    <script src="/bower_components/rangy/rangy-serializer.min.js" defer></script>
+    <script src="/bower_components/rangy/rangy-textrange.min.js" defer></script>
+    <script src="/bower_components/textAngular/src/textAngular-sanitize.js" defer></script>
+    <script src="/bower_components/angulartics/dist/angulartics.min.js" defer></script>
+    <script src="/bower_components/angulartics-google-analytics/dist/angulartics-ga.min.js" defer></script>
+    <script src="/bower_components/ng-file-upload/ng-file-upload-shim.min.js" defer></script>
+    <script src="/bower_components/ng-file-upload/ng-file-upload.min.js" defer></script>
+    <script src="/bower_components/ng-img-crop/compile/unminified/ng-img-crop.js" defer></script>
+    <script src="/bower_components/angular-i18n/angular-locale_es-es.js" defer></script>
+    <script src="/bower_components/Chart.js/Chart.min.js" defer></script>
+    <script src="/bower_components/angular-chart.js/dist/angular-chart.min.js" defer></script>
+    <script src="/bower_components/angular-material-data-table/dist/md-data-table.min.js" defer></script>
+    <script src="/bower_components/angular-rut/dist/angular-rut.js" defer></script>
+    <script src="/bower_components/md-letter-avatar/md-letter-avatar.js" defer></script>
+    <script src="/bower_components/fullcalendar/dist/fullcalendar.js" defer></script>
+    <script src="/bower_components/angular-ui-calendar/src/calendar.js" defer></script>
+    <script src="/bower_components/ngjs-color-picker/dist/ngjs-color-picker.js" defer></script>
+    <script src="/bower_components/js-xlsx/dist/xlsx.full.min.js" defer></script>
+    <script src="/bower_components/swiper/dist/js/swiper.js" defer></script>
+    <script src="/bower_components/angular-swiper/dist/angular-swiper.js" defer></script>
+    <script src="/bower_components/leaflet/dist/leaflet.js" defer></script>
+    <script src="/bower_components/ment.io/dist/mentio.min.js" defer></script>
+    <script src="/bower_components/ment.io/dist/templates.js" defer></script>
+    <script src="/bower_components/angular-media-queries/match-media.js" defer></script>
+    <script src="/bower_components/angular-bind-html-compile/angular-bind-html-compile.js" defer></script>
+    <script src="/leaflet.iconlabel.js" defer></script>
+    <script src="/bower_components/leaflet-draw/dist/leaflet.draw.js" defer></script>
+    <script src="/leaflet.markercluster-src.js" defer></script>
+    <script src="/Edit.Poly.js" defer></script>
+    <script src="/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js" defer></script>
+    <script src="/bower_components/pdfmake/build/pdfmake.min.js" defer></script>
+    <script src="/bower_components/pdfmake/build/vfs_fonts.js" defer></script>
+    <script src="/app.js" defer></script>
+    <script src="/config/configSettings.js" defer></script>
+    <script src="/config/configThemes.js" defer></script>
+    <script src="/config/configTranslate.js" defer></script>
+    <!--SCRIPTS END-->
+
+    <!--SCRIPTS PUBLIC-->
+    <script src="/views/public/configLayout.js" defer></script>
+    <script src="/views/public/configRoute.js" defer></script>
+    <script src="/views/public/configRun.js" defer></script>
+    <script src="/views/public/modules/map/map.js" defer></script>
+    <script src="/views/public/modules/sidebar-left/sidebar-left.js" defer></script>
+    <script src="/views/public/modules/toolbar/toolbar.js" defer></script>
+    <script src="/components/aboutApp/aboutApp.js" defer></script>
+    <script src="/components/addressForm/addressForm.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventDetailsView/adverseEventDetailsView.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventDialog/adverseEventDamageType/adverseEventDamageType.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventDialog/adverseEventDialog.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventDialog/adverseEventOccurrence/adverseEventOccurrence.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventDialog/adverseEventPatient/adverseEventPatient.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventDialog/adverseEventType/adverseEventType.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventDuplicatesView/adverseEventDuplicateCard/adverseEventDuplicateCard.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventDuplicatesView/adverseEventDuplicatesView.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventForm/adverseEventForm.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventForm/fallForm/fallForm.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventForm/generalForm/generalForm.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventForm/medicationForm/medicationForm.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventForm/uppForm/uppForm.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventFormView/adverseEventFormView.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventFormView/fallFormView/fallFormView.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventFormView/medicationFormView/medicationFormView.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventFormView/uppFormView/uppFormView.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventList/adverseEventList.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventListFilter/adverseEventListFilter.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventListFilter/eventTypeAutocomplete/eventTypeAutocomplete.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventListItem/adverseEventListItem.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventListView/adverseEventListView.js" defer></script>
+    <script src="/components/adverseEvent/adverseEventSettingsView/adverseEventSettingsView.js" defer></script>
+    <script src="/components/archive/uploadItemFile/uploadItemFile.js" defer></script>
+    <script src="/components/archive/uploadListFiles/uploadListFiles.js" defer></script>
+    <script src="/components/areaMaintainer/areaMaintainer.js" defer></script>
+    <script src="/components/article/articleCategoryManager/articleCategoryManager.js" defer></script>
+    <script src="/components/article/articleCategoryManagerItem/articleCategoryManagerItem.js" defer></script>
+    <script src="/components/article/articleCategorySelector/articleCategorySelector.js" defer></script>
+    <script src="/components/article/articleDetails/articleDetails.js" defer></script>
+    <script src="/components/article/articleForm/articleForm.js" defer></script>
+    <script src="/components/article/articleItem/articleItem.js" defer></script>
+    <script src="/components/article/articleList/articleList.js" defer></script>
+    <script src="/components/article/articleManagerView/articleManagerView.js" defer></script>
+    <script src="/components/bed/bedContingency/bmContingencyManager.js" defer></script>
+    <script src="/components/bed/bedDerivationSettings/bmDerivationSettings.js" defer></script>
+    <script src="/components/bed/bedMonitoring/bedMonitoring.js" defer></script>
+    <script src="/components/dashboards/dashboardsMenuSidebar/dashboardsMenuSidebar.js" defer></script>
+    <script src="/components/dashboards/dashboardsNotificationList/dashboardsNotificationList.js" defer></script>
+    <script src="/components/dashboards/dashboardsNotificationSidebar/dashboardsNotificationSidebar.js" defer></script>
+    <script src="/components/dashboards/dashboardsToolbar/dashboardsToolbar.js" defer></script>
+    <script src="/components/derivation/derivationDetails/derivationDetails.js" defer></script>
+    <script src="/components/derivation/derivationList/derivationList.js" defer></script>
+    <script src="/components/derivation/derivationManager/derivationManager.js" defer></script>
+    <script src="/components/derivation/derivationTimeline/derivationTimeline.js" defer></script>
+    <script src="/components/employee/employee-personal-data/employee-personal-data.controller.js" defer></script>
+    <script src="/components/employee/employeeAccount/employeeAccount.js" defer></script>
+    <script src="/components/employee/employeeActions/employeeActions.js" defer></script>
+    <script src="/components/employee/employeeAutocomplete/employeeAutocomplete.js" defer></script>
+    <script src="/components/employee/employeeAvatar/employeeAvatar.js" defer></script>
+    <script src="/components/employee/employeeDetailsView/employeeDetailsView.js" defer></script>
+    <script src="/components/employee/employeeItemList/employeeItemList.js" defer></script>
+    <script src="/components/employee/employeeMaintainer/emailValidation.js" defer></script>
+    <script src="/components/employee/employeeMaintainer/employeeMaintainer.js" defer></script>
+    <script src="/components/employee/employeeProfileLink/employeeProfileLink.js" defer></script>
+    <script src="/components/employee/employeeProfilePictureSelector/employeeProfilePictureSelector.js" defer></script>
+    <script src="/components/employee/employeeSupervisedUnitManager/employeeSupervisedUnitManager.js" defer></script>
+    <script src="/components/establishment/establishmentAutocomplete/establishmentAutocomplete.js" defer></script>
+    <script src="/components/establishment/establishmentMaintainer/establishmentMaintainer.js" defer></script>
+    <script src="/components/establishment/establishmentTypeMaintainer/establishmentTypeMaintainer.js" defer></script>
+    <script src="/components/generic/autocomplete-validate/validate.js" defer></script>
+    <script src="/components/generic/commentBox/commentBox.js" defer></script>
+    <script src="/components/generic/contentEditable/contentEditable.js" defer></script>
+    <script src="/components/generic/customCheckboxSelector/customCheckboxSelector.js" defer></script>
+    <script src="/components/generic/customOptionSelector/customOptionSelector.js" defer></script>
+    <script src="/components/generic/customTimeAgo/customTimeAgo.js" defer></script>
+    <script src="/components/generic/dateInput/dateInput.js" defer></script>
+    <script src="/components/generic/dateRangeSelector/dateRangeSelector.js" defer></script>
+    <script src="/components/generic/dateRangeSelectorDialog/dateRangeSelectorDialog.js" defer></script>
+    <script src="/components/generic/infiniteLoad/infiniteLoad.js" defer></script>
+    <script src="/components/generic/inputRange/inputRange.js" defer></script>
+    <script src="/components/generic/loading/loading.js" defer></script>
+    <script src="/components/generic/logComparison/logComparison.js" defer></script>
+    <script src="/components/generic/noResults/noResults.js" defer></script>
+    <script src="/components/generic/privilege/privilege.js" defer></script>
+    <script src="/components/generic/regionCommune/regionCommune.js" defer></script>
+    <script src="/components/generic/searchInput/searchInput.js" defer></script>
+    <script src="/components/generic/timingSelector/timingSelector.js" defer></script>
+    <script src="/components/generic/truncate/truncate.js" defer></script>
+    <script src="/components/generic/wizard/wizard.js" defer></script>
+    <script src="/components/homeView/homeView.js" defer></script>
+    <script src="/components/intranet/autoconsultaFrame/autoconsultaFrame.js" defer></script>
+    <script src="/components/job/jobAutocomplete/jobAutocomplete.js" defer></script>
+    <script src="/components/job/jobMaintainer/jobMaintainer.js" defer></script>
+    <script src="/components/job/jobSelector/jobSelector.js" defer></script>
+    <script src="/components/medicine/medicineAutocomplete/medicineAutocomplete.js" defer></script>
+    <script src="/components/medicine/medicineMaintainer/medicineMaintainer.js" defer></script>
+    <script src="/components/medicine/medicineServiceAutocomplete/medicineServiceAutocomplete.js" defer></script>
+    <script src="/components/participant/participantListAvatar/participantListAvatar.js" defer></script>
+    <script src="/components/participant/participantListManager/participantListManager.js" defer></script>
+    <script src="/components/patient/patientAge/patientAge.js" defer></script>
+    <script src="/components/patient/patientAutocomplete/patientAutocomplete.js" defer></script>
+    <script src="/components/patient/patientClinicalHistory/patientClinicalHistory.js" defer></script>
+    <script src="/components/patient/patientClinicalHistoryItemDetails/patientClinicalHistoryItemDetails.js" defer></script>
+    <script src="/components/patient/patientEvolution/basicEvolution/basicEvolution.js" defer></script>
+    <script src="/components/patient/patientEvolution/medicinesEvolution/medicinesEvolution.js" defer></script>
+    <script src="/components/patient/patientEvolution/patientEvolution.js" defer></script>
+    <script src="/components/patient/patientEvolution/vitalSignsEvolution/vitalSignsEvolution.js" defer></script>
+    <script src="/components/patient/patientForm/patientForm.js" defer></script>
+    <script src="/components/patient/patientIntervention/patientIntervention.js" defer></script>
+    <script src="/components/patient/patientItem/patientItem.js" defer></script>
+    <script src="/components/patient/patientItemList/patientItemList.js" defer></script>
+    <script src="/components/patient/patientMaintainer/patientMaintainer.js" defer></script>
+    <script src="/components/patient/patientPersonalData/patientPersonalData.js" defer></script>
+    <script src="/components/patient/patientProfile/patientProfile.js" defer></script>
+    <script src="/components/patient/patientRegulator/patientRegulator.js" defer></script>
+    <script src="/components/patient/patientSearch/patientSearch.js" defer></script>
+    <script src="/components/permission/permissionClosureDetails/permissionClosureDetails.js" defer></script>
+    <script src="/components/permission/permissionClosureList/permissionClosureList.js" defer></script>
+    <script src="/components/permission/permissionClosureView/permissionClosureView.js" defer></script>
+    <script src="/components/permission/permissionDetails/permissionDetails.js" defer></script>
+    <script src="/components/permission/permissionDetailsSidebar/permissionDetailsSidebar.js" defer></script>
+    <script src="/components/permission/permissionItem/permissionItem.js" defer></script>
+    <script src="/components/permission/permissionList/permissionList.js" defer></script>
+    <script src="/components/permission/permissionListFilter/permissionListFilter.js" defer></script>
+    <script src="/components/permission/permissionListView/permissionListView.js" defer></script>
+    <script src="/components/permission/permissionTimeline/permissionTimeline.js" defer></script>
+    <script src="/components/profile/profileActions/profileActions.js" defer></script>
+    <script src="/components/profile/profileAutocomplete/profileAutocomplete.js" defer></script>
+    <script src="/components/profile/profileDetails/profileDetails.js" defer></script>
+    <script src="/components/profile/profileMaintainer/profileMaintainer.js" defer></script>
+    <script src="/components/publications/publications.js" defer></script>
+    <script src="/components/rem/remAccessView/remAccessView.js" defer></script>
+    <script src="/components/rem/remAddressRead/remAddressRead.js" defer></script>
+    <script src="/components/rem/remAttentionClassesView/remAttentionClassesView.js" defer></script>
+    <script src="/components/rem/remAttentionItemsView/remAttentionItemsView.js" defer></script>
+    <script src="/components/rem/remBaseReportView/remBaseReportView.js" defer></script>
+    <script src="/components/rem/remBasicInformation/remBasicInformation.js" defer></script>
+    <script src="/components/rem/remBasicInformationRead/remBasicInformationRead.js" defer></script>
+    <script src="/components/rem/remDashboardView/remDashboardView.js" defer></script>
+    <script src="/components/rem/remDetailsView/remDetailsView.js" defer></script>
+    <script src="/components/rem/remEightView/RemEightView.js" defer></script>
+    <script src="/components/rem/remGrid/remGrid.js" defer></script>
+    <script src="/components/rem/remListFilter/remListFilter.js" defer></script>
+    <script src="/components/rem/remListView/remListView.js" defer></script>
+    <script src="/components/rem/remPatientDialogProvider/remPatientDialogProvider.js" defer></script>
+    <script src="/components/rem/remPatientItem/remPatientItem.js" defer></script>
+    <script src="/components/rem/remPatientVehicle/remPatientVehicle.js" defer></script>
+    <script src="/components/rem/remSettings/remSettings.js" defer></script>
+    <script src="/components/rem/remTimeline/remTimeline.js" defer></script>
+    <script src="/components/rem/remTransferReportView/remTransferReportView.js" defer></script>
+    <script src="/components/rem/remTransferStatusView/remTransferStatusView.js" defer></script>
+    <script src="/components/rem/remVehicleDialogProvider/remVehicleDialogProvider.js" defer></script>
+    <script src="/components/rem/remVehicleItem/remVehicleItem.js" defer></script>
+    <script src="/components/rem/remVehicleRoute/remVehicleRoute.js" defer></script>
+    <script src="/components/request/requestDetailSidebar/requestDetailSidebar.js" defer></script>
+    <script src="/components/request/requestDetailsView/requestDetailsView.js" defer></script>
+    <script src="/components/request/requestList/requestList.js" defer></script>
+    <script src="/components/request/requestListFilter/requestListFilter.js" defer></script>
+    <script src="/components/request/requestListItem/requestListItem.js" defer></script>
+    <script src="/components/request/requestListView/requestListView.js" defer></script>
+    <script src="/components/request/requestReport/requestReport.js" defer></script>
+    <script src="/components/request/requestSettingsView/requestSettingsView.js" defer></script>
+    <script src="/components/request/requestStakeholderList/requestStakeholderList.js" defer></script>
+    <script src="/components/request/requestTimeline/requestTimeline.js" defer></script>
+    <script src="/components/resource/resourceItemList/resourceItemList.js" defer></script>
+    <script src="/components/resourceMaintainer/resourceData/resourceData.js" defer></script>
+    <script src="/components/resourceMaintainer/resourceLocationForm/resourceLocationForm.js" defer></script>
+    <script src="/components/resourceMaintainer/resourceMaintainer.js" defer></script>
+    <script src="/components/resourceMaintainer/resourceMaintainerFilter/resourceMaintainerFilter.js" defer></script>
+    <script src="/components/resourceMaintainer/resourceStatus/resourceStatus.js" defer></script>
+    <script src="/components/storage/accountPlan/accountPlanActions/accountActions.js" defer></script>
+    <script src="/components/storage/accountPlan/accountPlanDetails/accountDetails.js" defer></script>
+    <script src="/components/storage/accountPlan/accountPlanTable/accountTable.js" defer></script>
+    <script src="/components/storage/activeComponent/activeComponentActions/activeComponentActions.js" defer></script>
+    <script src="/components/storage/activeComponent/activeComponentAdmin/activeComponentAdmin.js" defer></script>
+    <script src="/components/storage/administrationWay/administrationWayActions/administrationWayActions.js" defer></script>
+    <script src="/components/storage/administrationWay/administrationWayAdmin/administrationWayAdmin.js" defer></script>
+    <script src="/components/storage/category/categoryAdmin/categoryAdmin.js" defer></script>
+    <script src="/components/storage/company/companyActions/companyActions.js" defer></script>
+    <script src="/components/storage/company/companyAdmin/companyAdmin.js" defer></script>
+    <script src="/components/storage/costCenter/costCenterActions/costCenterActions.js" defer></script>
+    <script src="/components/storage/costCenter/costCenterMaintainer/costCenterMaintainer.js" defer></script>
+    <script src="/components/storage/dosageType/dosageTypeActions/dosageTypeActions.js" defer></script>
+    <script src="/components/storage/dosageType/dosageTypeAdmin/dosageTypeAdmin.js" defer></script>
+    <script src="/components/storage/drugType/drugTypeActions/drugTypeActions.js" defer></script>
+    <script src="/components/storage/drugType/drugTypeMaintainer/drugTypeMaintainer.js" defer></script>
+    <script src="/components/storage/expressIncome/expressIncomeAdmin/expressIncomeAdmin.js" defer></script>
+    <script src="/components/storage/expressIncome/expressIncomeEdit/expressIncomeEdit.js" defer></script>
+    <script src="/components/storage/expressIncome/reportExpressIncomeInput/reportExpressIncomeInput.js" defer></script>
+    <script src="/components/storage/expressIncome/reportExpressIncomeOutput/reportExpressIncomeOutput.js" defer></script>
+    <script src="/components/storage/inventory/inventoryAdmin/inventoryAdmin.js" defer></script>
+    <script src="/components/storage/inventory/inventoryDetails/inventoryDetails.js" defer></script>
+    <script src="/components/storage/location/locationAdmin/locationAdmin.js" defer></script>
+    <script src="/components/storage/movement/movementAdmin/movementAdmin.js" defer></script>
+    <script src="/components/storage/movement/movementEdit/movementEdit.js" defer></script>
+    <script src="/components/storage/movement/reportMovementInput/reportMovementInput.js" defer></script>
+    <script src="/components/storage/movement/reportMovementOutput/reportMovementOutput.js" defer></script>
+    <script src="/components/storage/movementType/movementTypeActions/movementTypeActions.js" defer></script>
+    <script src="/components/storage/movementType/movementTypeAdmin/movementTypeAdmin.js" defer></script>
+    <script src="/components/storage/planCenabast/planCenabastAdmin/planCenabastAdmin.js" defer></script>
+    <script src="/components/storage/presentationType/presentationTypeActions/presentationTypeActions.js" defer></script>
+    <script src="/components/storage/presentationType/presentationTypeAdmin/presentationTypeAdmin.js" defer></script>
+    <script src="/components/storage/product/productActions/productActions.js" defer></script>
+    <script src="/components/storage/product/productActiveComponents/productActiveComponents.js" defer></script>
+    <script src="/components/storage/product/productAutocomplete/productAutocomplete.js" defer></script>
+    <script src="/components/storage/product/productBincard/productBincard.js" defer></script>
+    <script src="/components/storage/product/productDetails/productDetails.js" defer></script>
+    <script src="/components/storage/product/productDetailsSimple/productDetails.js" defer></script>
+    <script src="/components/storage/product/productMaintainer/productMaintainer.js" defer></script>
+    <script src="/components/storage/product/productMaintainerSimple/productMaintainer.js" defer></script>
+    <script src="/components/storage/product/productPackManager/productPackManager.js" defer></script>
+    <script src="/components/storage/product/productProfilePictureSelector/productProfilePictureSelector.js" defer></script>
+    <script src="/components/storage/product/productStock/productStock.js" defer></script>
+    <script src="/components/storage/product/productStockParameterManager/productStockParameterManager.js" defer></script>
+    <script src="/components/storage/product/unitProductsManager/unitProductsManager.js" defer></script>
+    <script src="/components/storage/productRequest/productRequestAdmin/productRequestAdmin.js" defer></script>
+    <script src="/components/storage/productRequest/productRequestDetail/productRequestDetail.js" defer></script>
+    <script src="/components/storage/productRequest/productRequestEdit/productRequestEdit.js" defer></script>
+    <script src="/components/storage/productRequest/reportProductsReceived/reportProductsReceived.js" defer></script>
+    <script src="/components/storage/productRequest/reportProductsSend/reportProductsSend.js" defer></script>
+    <script src="/components/storage/productType/productTypeActions/productTypeActions.js" defer></script>
+    <script src="/components/storage/productType/productTypeItemList/productTypeItemList.js" defer></script>
+    <script src="/components/storage/productType/productTypeMaintainer/productTypeMaintainer.js" defer></script>
+    <script src="/components/storage/program/programAdmin/programAdmin.js" defer></script>
+    <script src="/components/storage/report/reportAutocomplete/reportAutocomplete.js" defer></script>
+    <script src="/components/storage/report/reportBincard/reportBincard.js" defer></script>
+    <script src="/components/storage/report/reportCenabast/reportCenabast.js" defer></script>
+    <script src="/components/storage/report/reportConsolidatedProducts/reportConsolidatedProducts.js" defer></script>
+    <script src="/components/storage/report/reportCriticalStock/reportCriticalStock.js" defer></script>
+    <script src="/components/storage/report/reportExpensePerUnit/reportExpensePerUnit.js" defer></script>
+    <script src="/components/storage/report/reportInputOutputProduct/reportInputOutputProduct.js" defer></script>
+    <script src="/components/storage/report/reportMaxStock/reportMaxStock.js" defer></script>
+    <script src="/components/storage/report/reportMostRequestedProducts/reportMostRequestedProducts.js" defer></script>
+    <script src="/components/storage/report/reportProductStockExpiration/reportProductStockExpiration.js" defer></script>
+    <script src="/components/storage/report/reportProductStockLot/reportProductStockLot.js" defer></script>
+    <script src="/components/storage/report/reportProducts/reportProducts.js" defer></script>
+    <script src="/components/storage/report/reportPurchasesFromSuppliers/reportPurchasesFromSuppliers.js" defer></script>
+    <script src="/components/storage/report/reportWeightedPrice/reportWeightedPrice.js" defer></script>
+    <script src="/components/storage/storageManager/storageManagerMaintainer/storageManager.js" defer></script>
+    <script src="/components/storage/unitProductRequest/unitProductRequestAdmin/unitProductRequestAdmin.js" defer></script>
+    <script src="/components/typecasting/typecastingDetails/typecastingDetails.js" defer></script>
+    <script src="/components/typecasting/typecastingHeader/typecastingHeader.js" defer></script>
+    <script src="/components/typecasting/typecastingHistoryInfo/typecastingHistoryInfo.js" defer></script>
+    <script src="/components/typecasting/typecastingPriorityInfo/typecastingPriorityInfo.js" defer></script>
+    <script src="/components/typecasting/typecastingScoreInfo/typecastingScoreInfo.js" defer></script>
+    <script src="/components/typecasting/typecastingSearch/typecastingSearch.js" defer></script>
+    <script src="/components/unit/unitAutocomplete/unitAutocomplete.js" defer></script>
+    <script src="/components/unit/unitEmployees/unitEmployees.js" defer></script>
+    <script src="/components/unit/unitMaintainer/unitMaintainer.js" defer></script>
+    <script src="/components/unit/unitManagers/unitManagers.js" defer></script>
+    <script src="/components/unit/unitOrgChart/unitOrgChart.js" defer></script>
+    <script src="/components/unit/unitSupervisors/unitSupervisors.js" defer></script>
+    <script src="/components/vehicle/vehicleAutocomplete/vehicleAutocomplete.js" defer></script>
+    <script src="/components/vehicle/vehicleMaintainer/vehicleMaintainer.js" defer></script>
+    <script src="/components/viatic/viaticAmountSummary/viaticAmountSummary.js" defer></script>
+    <script src="/components/viatic/viaticCalendar/viaticCalendar.js" defer></script>
+    <script src="/components/viatic/viaticCalendarWeek/viaticCalendarWeek.js" defer></script>
+    <script src="/components/viatic/viaticClosureDetailsView/viaticClosureDetailsView.js" defer></script>
+    <script src="/components/viatic/viaticClosureView/viaticClosureView.js" defer></script>
+    <script src="/components/viatic/viaticDayDetails/viaticDayDetails.js" defer></script>
+    <script src="/components/viatic/viaticDetails/viaticDetails.js" defer></script>
+    <script src="/components/viatic/viaticItem/viaticItem.js" defer></script>
+    <script src="/components/viatic/viaticList/viaticList.js" defer></script>
+    <script src="/components/viatic/viaticListFilter/viaticListFilter.js" defer></script>
+    <script src="/components/viatic/viaticListView/viaticListView.js" defer></script>
+    <script src="/components/viatic/viaticTimeline/viaticTimeline.js" defer></script>
+    <script src="/components/workflow/statusSettingsView/statusSettingsView.js" defer></script>
+    <script src="/components/workshift/myWorkshift/myWorkshift.js" defer></script>
+    <script src="/components/workshift/workshiftCareTeamList/workshiftCareTeamList.js" defer></script>
+    <script src="/components/workshift/workshiftCommentItem/workshiftCommentItem.js" defer></script>
+    <script src="/components/workshift/workshiftDetails/workshiftDetails.js" defer></script>
+    <script src="/components/workshift/workshiftManager/workshiftManager.js" defer></script>
+    <script src="/components/workshift/workshiftValidator/workshiftValidator.js" defer></script>
+    <script src="/factories/address.js" defer></script>
+    <script src="/factories/adverseEvent.js" defer></script>
+    <script src="/factories/area.js" defer></script>
+    <script src="/factories/article.js" defer></script>
+    <script src="/factories/articleCategory.js" defer></script>
+    <script src="/factories/bed.js" defer></script>
+    <script src="/factories/commune.js" defer></script>
+    <script src="/factories/derivation.js" defer></script>
+    <script src="/factories/derivationStatus.js" defer></script>
+    <script src="/factories/employee.js" defer></script>
+    <script src="/factories/establishment.js" defer></script>
+    <script src="/factories/establishmentType.js" defer></script>
+    <script src="/factories/gender.js" defer></script>
+    <script src="/factories/holiday.js" defer></script>
+    <script src="/factories/idType.js" defer></script>
+    <script src="/factories/job.js" defer></script>
+    <script src="/factories/medicine.js" defer></script>
+    <script src="/factories/participant.js" defer></script>
+    <script src="/factories/patient.js" defer></script>
+    <script src="/factories/permission.js" defer></script>
+    <script src="/factories/permissionClosure.js" defer></script>
+    <script src="/factories/profile.js" defer></script>
+    <script src="/factories/region.js" defer></script>
+    <script src="/factories/rem.js" defer></script>
+    <script src="/factories/remAttention.js" defer></script>
+    <script src="/factories/remPatient.js" defer></script>
+    <script src="/factories/remStatus.js" defer></script>
+    <script src="/factories/remTransferStatus.js" defer></script>
+    <script src="/factories/remVehicle.js" defer></script>
+    <script src="/factories/remaccess.js" defer></script>
+    <script src="/factories/request.js" defer></script>
+    <script src="/factories/requestStakeholders.js" defer></script>
+    <script src="/factories/resource.js" defer></script>
+    <script src="/factories/storage/accountFactory.js" defer></script>
+    <script src="/factories/storage/activeComponent.js" defer></script>
+    <script src="/factories/storage/administrationWay.js" defer></script>
+    <script src="/factories/storage/categoryFactory.js" defer></script>
+    <script src="/factories/storage/companyFactory.js" defer></script>
+    <script src="/factories/storage/costCenter.js" defer></script>
+    <script src="/factories/storage/dosageType.js" defer></script>
+    <script src="/factories/storage/drugType.js" defer></script>
+    <script src="/factories/storage/expressIncomeFactory.js" defer></script>
+    <script src="/factories/storage/inventoryFactory.js" defer></script>
+    <script src="/factories/storage/locationFactory.js" defer></script>
+    <script src="/factories/storage/maintainersFactory.js" defer></script>
+    <script src="/factories/storage/movementFactory.js" defer></script>
+    <script src="/factories/storage/movementTypeFactory.js" defer></script>
+    <script src="/factories/storage/planCenabastFactory.js" defer></script>
+    <script src="/factories/storage/presentationType.js" defer></script>
+    <script src="/factories/storage/productFactory.js" defer></script>
+    <script src="/factories/storage/productRequestFactory.js" defer></script>
+    <script src="/factories/storage/productRequestStatusFactory.js" defer></script>
+    <script src="/factories/storage/productType.js" defer></script>
+    <script src="/factories/storage/programFactory.js" defer></script>
+    <script src="/factories/storage/stockParameter.js" defer></script>
+    <script src="/factories/storage/storageManager.js" defer></script>
+    <script src="/factories/storage/storageReportFactory.js" defer></script>
+    <script src="/factories/storage/unitProductRequestFactory.js" defer></script>
+    <script src="/factories/storage/unitProductsManager.js" defer></script>
+    <script src="/factories/unit.js" defer></script>
+    <script src="/factories/unitType.js" defer></script>
+    <script src="/factories/utilities.js" defer></script>
+    <script src="/factories/vehicle.js" defer></script>
+    <script src="/factories/vehicleStatus.js" defer></script>
+    <script src="/factories/viatic.js" defer></script>
+    <script src="/factories/viaticClosure.js" defer></script>
+    <script src="/factories/workflow.js" defer></script>
+    <script src="/factories/workshift.js" defer></script>
+    <!--SCRIPTS PUBLIC END-->
+
+    <% if (environment === 'production') { %>
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-96143660-1', 'none');
+    </script>
+    <% } %>
+
+    <noscript>
+        Javascript se encuentra desactivado!
+    </noscript>
+</body>
+
+</html>

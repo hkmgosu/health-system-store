@@ -1,0 +1,48 @@
+<form name="vehicleAutocompleteForm">
+    <md-autocomplete md-delay='900'
+                     md-selected-item="vm.selected"
+                     ng-attr-md-floating-label="{{vm.label || 'Buscar'}}"
+                     md-search-text="vm.searchText"
+                     md-selected-item-change="vm.myOnSelect(vm.selected)"
+                     md-items="item in vm.getMatches(vm.searchText)"
+                     md-item-text="vm.selected.name"
+                     md-select-on-match="false"
+                     md-min-length="0"
+                     md-no-cache
+                     ng-disabled="vm.isDisabled == 'true'"
+                     md-input-name="vehicleAutocomplete"
+                     flex>
+        <md-item-template>
+            <div class="padding-bottom-10 padding-top-10 vehicle-autocomplete-item"
+                 layout="row">
+                <div layout="column"
+                     flex>
+                    <span flex
+                          class="md-body-2">
+                        {{item.name}}
+                    </span>
+                    <span class="md-caption"
+                          md-truncate>
+                        {{item.establishment.name || '--'}}
+                    </span>
+                </div>
+                <div layout="row"
+                     layout-align="center center">
+                    <span class="vehicle-status md-caption"
+                          ng-class="item.status.type"
+                          ng-if="item.status"
+                          style="min-width: 100px;text-align:center;">
+                        {{ item.status.name }}
+                    </span>
+                </div>
+            </div>
+        </md-item-template>
+        <md-not-found>
+            <span class="md-padding">No se encontraron resultados</span>
+        </md-not-found>
+        <div ng-messages="vehicleAutocompleteForm.vehicleAutocomplete.$error"
+             ng-show="vehicleAutocompleteForm.vehicleAutocomplete.$touched">
+            <div ng-message="selectedItem">Selecciona un vehículo</div>
+        </div>
+    </md-autocomplete>
+</form>

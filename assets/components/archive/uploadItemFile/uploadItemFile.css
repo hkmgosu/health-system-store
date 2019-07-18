@@ -1,0 +1,28 @@
+.upload-item-file {
+    cursor: pointer;
+}
+.upload-item-file:hover {
+    background: #f0f0f0;
+}
+.tiny-files .hide-tiny{
+    display: none;
+}
+
+.upload-item-file .word-file {
+    color: #2c5898;
+}
+.upload-item-file .excel-file {
+    color: #02723b;
+}
+.upload-item-file .powerpoint-file {
+    color: #d04727;
+}
+.upload-item-file .pdf-file {
+    color: #bb0706;
+}
+.upload-item-file .archive-file {
+    color: #9e9e9e;
+}
+.upload-item-file .image-file {
+    color: #ff9800;
+}

@@ -1,0 +1,58 @@
+#duplicated-managed-view .duplicate-body-content {
+    z-index: 3;
+}
+#duplicated-managed-view .duplicate-body-content h3.lighter{
+    font-weight: lighter;
+    color: #3c3c3c;
+}
+#duplicated-managed-view .event-avatar-tiny {
+    margin: 18px auto;
+}
+#duplicated-managed-view .event-avatar-tiny img {
+    width: 35px;
+    height: 35px;
+}
+#duplicated-managed-view .list-ea-item md-icon {
+    font-size: 1.7rem;
+    min-width: 0;
+    min-height: 0;
+    margin-right: 5px;
+}
+#duplicated-managed-view .ea-bullet {
+    margin: 0 5px;
+}
+#duplicated-managed-view .select {
+    background: #d7d7d7;
+}
+#duplicated-managed-view md-card-avatar {
+    margin: 6px;
+    margin-right: 12px;
+}
+#duplicated-managed-view md-card-header-text {
+    max-height: 52px;
+}
+#duplicated-managed-view md-card-header-text h5 {
+    font-size: 1.65rem;
+    font-weight: 400;
+    margin: 0;
+}
+#duplicated-managed-view md-card-header-text p {
+    font-size: 1.40rem;
+    margin: 0;
+    font-weight: 500;
+}
+#duplicated-managed-view md-card-header md-icon {
+    min-width: 0;
+    margin-right: 3px;
+}
+#duplicated-managed-view .ea-long-text h4 {
+    text-overflow: unset;
+    white-space: normal;
+}
+#duplicated-managed-view .duplicate-cant-ea p, #duplicated-managed-view .duplicate-cant-ea md-icon {
+    font-size: 0.9em;
+}
+#duplicated-managed-view md-card.select-border {
+    margin: 0;
+    border-left: 5px solid #0f66b7;
+}

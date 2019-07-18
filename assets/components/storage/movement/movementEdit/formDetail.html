@@ -1,0 +1,144 @@
+<h4 ng-if="!vm.detail.product && vm.detail.productDescription">{{vm.detail.productDescription}}
+	<span class="badge codigo">Código: {{vm.detail.productCode}}</span>
+</h4>
+
+<div layout="row"
+	 ng-if="vm.detail.product">
+	<h4 flex><b>{{vm.detail.product.productCode}}</b> : {{vm.detail.product.description}}</h4>
+	<md-button ng-click="vm.removeProduct()"
+			   ng-show="vm.detail.productDescription"
+			   class="md-warn margin-0">
+		<md-icon md-font-icon="fa fa-times"></md-icon>
+	</md-button>
+</div>
+
+<ssvq-product-autocomplete flex-md="100"
+						   flex="70"
+						   ng-if="!vm.detail.product"
+						   product-type-search="vm.productTypeSearch"
+						   selected="vm.product"
+						   filter-units="vm.unitMovement"
+						   on-select="vm.onSelectProduct">
+</ssvq-product-autocomplete>
+
+<div layout="row">
+	<!-- Cuando es salida, el lote es seleccionable -->
+	<md-autocomplete flex
+					 md-items="item in vm.productLots"
+					 md-select-on-match="true"
+					 md-autoselect="false"
+					 md-no-cache="true"
+					 md-min-length="0"
+					 md-require-match="vm.movement.isOutput"
+					 md-clear-button="1 == (vm.status||1)"
+					 md-input-name="autocompleteLot"
+					 md-item-text="item.lot"
+					 md-search-text="vm.detail.lot"
+					 md-selected-item="vm.productLotSelected"
+					 md-floating-label="{{'STORAGE_MOVEMENT.TABLE.LOT'|translate}}"
+					 md-match-case-insensitive="true"
+					 md-selected-item-change="vm.onSelectLot(item)"
+					 ng-disabled="vm.status>1"
+					 required>
+		<md-item-template>
+			<div layout="row"
+				 layout-align="start center"
+				 style="color: {{item.expiration <= vm.currentDate ? 'red':'green'}}"
+				 flex>
+				<div flex
+					 layout="column"
+					 class="md-padding md-3-line"
+					 style="overflow: hidden;">
+					<div layout="row">
+						<div flex>Lote: {{item.lot}}</div>
+						<div flex
+							 ng-if="item.stock">Stock: {{item.stock}}</div>
+					</div>
+					<div class="md-caption">
+						Venc.: {{item.expiration|date:'dd/MM/yyyy'}}
+					</div>
+					<div class="md-caption"
+						 ng-if="item.productPack">
+						{{item.productPack.fantasyName}}
+						{{item.productPack.packtype.description}}
+						{{item.productPack.quantity}}
+					</div>
+				</div>
+			</div>
+			<md-divider></md-divider>
+		</md-item-template>
+	</md-autocomplete>
+
+	<md-input-container flex>
+		<label for="productPack">Pack presentación</label>
+		<md-select name="productPack"
+				   ng-model="vm.detail.productPack"
+				   ng-disabled="vm.status>1 || vm.movement.isOutput">
+			<md-option ng-repeat="productPack in vm.productPacks"
+					   ng-value="productPack.id">
+				{{productPack.fantasyName}}
+				{{productPack.packtype.description}}
+				{{productPack.quantity}}
+			</md-option>
+		</md-select>
+	</md-input-container>
+
+	<md-input-container flex>
+		<label for="location">{{'STORAGE_MOVEMENT.TABLE.LOCATION'|translate}}</label>
+		<md-select name="location"
+				   ng-model="vm.detail.location"
+				   ng-change="vm.reloadProductLots()"
+				   ng-disabled="vm.status>1"
+				   required>
+			<md-option ng-repeat="location in vm.locations"
+					   ng-value="location.id">{{location.description}}</md-option>
+		</md-select>
+		<div ng-messages="formDetail.location.$error">
+			<div ng-message="required">
+				<span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+			</div>
+		</div>
+	</md-input-container>
+</div>
+<div layout="row">
+	<md-input-container flex>
+		<label for="quantity">{{'STORAGE_MOVEMENT.TABLE.QUANTITY'|translate}}</label>
+		<input type="number"
+			   name="quantity"
+			   required
+			   ng-disabled="vm.status>1"
+			   ng-min="1"
+			   ng-max="vm.movement.isOutput ? vm.maxQuantity : null"
+			   ng-change="vm.detail.priceItem = (vm.detail.quantity || 0) * vm.weightedPrice;"
+			   ng-model="vm.detail.quantity">
+		<div ng-messages="formDetail.quantity.$error">
+			<div ng-message="required">
+				<span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+			</div>
+			<div ng-message="min">Cantidad no valida</div>
+			<div ng-message="max">Cantidad maxima {{vm.maxQuantity}}</div>
+		</div>
+	</md-input-container>
+
+	<md-input-container flex>
+		<label for="expiration">{{'STORAGE_MOVEMENT.TABLE.EXPIRATION'|translate}}</label>
+		<md-datepicker ng-model="vm.detail.expiration"
+					   ng-disabled="vm.status>1"
+					   md-aria-label="{{'STORAGE_MOVEMENT.TABLE.EXPIRATION'|translate}}">
+		</md-datepicker>
+		<div ng-messages="formDetail.expiration.$error">
+			<div ng-message="required">
+				<span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+			</div>
+		</div>
+	</md-input-container>
+
+	<md-input-container flex
+						class="md-block">
+		<label for="priceItem">Total Neto Item</label>
+		<input type="number"
+			   name="priceTotal"
+			   ng-disabled="vm.status>1"
+			   ng-model="vm.detail.priceItem">
+	</md-input-container>
+</div>

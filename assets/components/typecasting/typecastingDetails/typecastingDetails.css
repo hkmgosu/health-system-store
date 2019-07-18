@@ -1,0 +1,138 @@
+md-tooltip .md-content {
+    height: auto;
+}
+.show-print, .show-print-table {
+    display: none !important;
+}
+@media print {
+    body {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+    }
+    .show-print {
+        display: block !important;
+    }
+    .show-print-table {
+        display: table-row !important;
+        border: 1px solid #2f5496;
+        margin-top: 10px !important;
+    }
+    .show-print-table td {
+        background: transparent !important;
+        color: #2f5496 !important;
+    }
+    .show-print-table span {
+        color: #2f5496 !important;
+    }
+    .hidden-print {
+        display: none !important;
+    }
+    md-button, md-tooltip {
+        display: none !important;
+    }
+    th {
+        white-space: normal !important;
+    }
+    md-toolbar{
+        display: none;
+    }
+    md-card {
+        margin: 0;
+    }
+    md-card-content {
+        padding: 0 !important;
+    }
+    .overlay-10 {
+        background: #d9e2f3 !important;
+    }
+    .overlay-10:before {
+        background: transparent !important;
+    }
+    td {
+        background: white !important;
+    }
+    th:not(:first-child), td:not(:first-child) {
+        border-left: 1px solid #00b0f0 !important;
+    }
+    th:not(:last-child), td:not(:last-child) {
+        border-right: 1px solid #00b0f0 !important;
+    }
+    th {
+        background: #2f5496 !important;
+    }
+    th > * {
+        text-align: center;
+        color: white !important;
+    }
+    td.custom-td{
+        background-color: #0070c0;
+    }
+    #employee-info .md-body-2{
+        margin: 0 5px;
+        background: white !important;
+        border: 1px solid #0070c0 !important;
+    }
+    #employee-info .md-body-1, #employee-info .md-caption, #employee-info .md-subhead, #employee-info .md-title{
+        color: #0070c0 !important;
+    }
+    td.especial-td {
+        color: #0673c1 !important;
+        background: #deeaf6 !important;
+    }
+    @page {
+        size: A4 portrait;
+        margin: 5px 0; 
+    }
+    td {
+        padding-top: 0 !important;
+    }
+    table[md-data-table]>thead:not([md-table-progress])>tr>th>div {
+        height: 39px;
+    }
+
+    table[md-data-table]>tbody>tr {
+        height: 35px;
+    }
+    md-list-item {
+        min-height: initial;
+    }
+    md-card {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .gob-iso{
+        width: 180px !important;
+        height: 10px !important;
+    }
+    .gob-iso .blue{
+        height: 10px !important;
+        background-color: rgb(15,105,180) !important;
+    }
+    .gob-iso .red{
+        height: 10px !important;
+        background-color: rgb(230,60,70) !important;
+    }
+}
+.history-table .ng-binding.ng-scope {
+    display: none !important;
+}
+.history-table td {
+    white-space: nowrap;
+}
+.gob-iso{
+    width: 202px;
+    height: 10px;
+}
+.gob-iso .blue{
+    height: 10px;
+    background-color: rgb(15,105,180);
+}
+.gob-iso .red{
+    height: 10px;
+    background-color: rgb(230,60,70);
+}
+
+.ssvq-typecasting table th > div{ 
+    text-align: center;
+}

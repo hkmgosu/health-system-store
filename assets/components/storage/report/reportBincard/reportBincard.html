@@ -1,0 +1,81 @@
+<section layout="row"
+         flex>
+
+    <md-content flex>
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools">
+                <div layout="column"
+                     flex>
+                    <span class="md-body-1">Reporte Bincard</span>
+                    <span class="md-caption">{{vm.found}} ítems</span>
+                </div>
+
+                <md-button class="md-icon-button"
+                           ng-click="vm.downloadReport()"
+                           ng-disabled="vm.loading">
+                    <md-icon md-font-icon="fa fa-file-excel-o"></md-icon>
+                    <md-tooltip>Descargar reporte como excel</md-tooltip>
+                </md-button>
+
+                <md-button class="md-icon-button"
+                           ng-click="vm.downloadReportPdf()"
+                           ng-disabled="vm.loading">
+                    <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
+                    <md-tooltip>Descargar reporte como pdf</md-tooltip>
+                </md-button>
+                <div flex="10"></div>
+            </div>
+        </md-toolbar>
+
+        <md-table-container style="height: calc(100vh - 185px);">
+            <md-button class="md-fab md-mini md-accent md-fab-top-right"
+                       ng-click="vm.toggleFilter()"
+                       aria-label="Filtros">
+                <md-tooltip>Ver filtros</md-tooltip>
+                <md-icon md-font-icon="zmdi zmdi-filter-list"></md-icon>
+            </md-button>
+
+            <table md-table>
+                <thead md-head>
+                    <tr md-row>
+                        <th md-column
+                            ng-repeat="(header, value) in vm.requests[0] track by $index">{{vm.colTitles[header]}}</th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row
+                        ng-repeat="row in vm.requests track by $index">
+
+                        <td md-cell
+                            ng-repeat="cell in row track by $index">
+                            <span class="force-line">{{cell}}</span>
+
+                            <!-- <span class="force-line"
+                                  ng-if="field=='Fecha'">{{cell | date:"dd-mm-yyyy"}}</span>
+                            <span class="force-line"
+                                  ng-if="field!='Fecha'">{{cell}}</span> -->
+                        </td>
+                    </tr>
+
+                    <ssvq-loading ng-show="!vm.requests"></ssvq-loading>
+                    <ssvq-no-results ng-show="vm.requests.length == 0"></ssvq-no-results>
+                </tbody>
+            </table>
+
+        </md-table-container>
+        <md-table-pagination md-limit="vm.limit"
+                             md-page="vm.page"
+                             md-total="{{vm.found}}"
+                             md-on-paginate="vm.nextPage"
+                             md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}"
+                             md-page-select></md-table-pagination>
+    </md-content>
+
+    <!-- SECCION FILTRO -->
+    <md-sidenav class="md-sidenav-right md-whiteframe-1dp"
+                md-component-id='srequest-filter'>
+
+        <div ng-include="'/components/storage/report/reportBincard/filter.html'"></div>
+    </md-sidenav>
+
+</section>

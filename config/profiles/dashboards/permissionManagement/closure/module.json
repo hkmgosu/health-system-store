@@ -1,0 +1,28 @@
+{
+    "name": "PRIVILEGES.PERMISSIONMANAGEMENT.CLOSURE.NAME",
+    "description": "PRIVILEGES.PERMISSIONMANAGEMENT.CLOSURE.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.permission-closure",
+            "url": "/permisos/cierres",
+            "template": "<ssvq-permission-closure-view></ssvq-permission-closure-view>"
+        },
+        "_controllers": {
+            "read": [
+                "PermissionClosureController.getClosures",
+                "PermissionController.getSupervised"
+            ],
+            "create": [
+                "PermissionClosureController.createClosure"
+            ],
+            "update": [
+                "PermissionClosureController.createClosure"
+            ]
+        }
+    }
+}

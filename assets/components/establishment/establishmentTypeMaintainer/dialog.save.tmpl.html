@@ -1,0 +1,107 @@
+<md-dialog aria-label=""
+           flex="60">
+    <form name="saveForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>
+                    {{ ( (!temp.id)? 'ESTABLISHMENTTYPE.OTHERS.CREATETITLE' : 'ESTABLISHMENTTYPE.OTHERS.EDITTITLE' ) | translate }}
+                </h2>
+                <span flex></span>
+                <md-button class="md-icon-button"
+                           ng-click="cancel()"
+                           aria-label="Cancelar">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-toolbar class="md-warn"
+                    ng-show="msg !== ''">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">{{msg|translate}}</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content"
+                 layout-padding>
+                <div flex>
+                    <div flex>
+                        <md-input-container class="md-block">
+                            <label translate>ESTABLISHMENTTYPE.NAME</label>
+                            <input type="text"
+                                   name="name"
+                                   ng-model="temp.name"
+                                   md-autofocus
+                                   required>
+                            <div ng-messages="saveForm.name.$error">
+                                <div ng-message="required"><span translate>ESTABLISHMENTTYPE.VALIDATOR.REQUIRED</span></div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div flex>
+                        <md-input-container class="md-block">
+                            <label translate>ESTABLISHMENTTYPE.SHORTNAME</label>
+                            <input type="text"
+                                   name="shortname"
+                                   ng-model="temp.shortname"
+                                   required>
+                            <div ng-messages="saveForm.shortname.$error">
+                                <div ng-message="required"><span translate>ESTABLISHMENTTYPE.VALIDATOR.REQUIRED</span></div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div layout="row"
+                     layout-padding>
+                    <div ng-show="temp.hasIcon"
+                         layout="column"
+                         class="margin-right-40">
+                        <p>Actual ícono</p>
+                        <img ng-src="{{'/establishmentType/icon?id=' + temp.id + '&reload=' +  temp.updatedAt}}"
+                             class="margin-top-20"
+                             width="128"
+                             height="128" />
+                    </div>
+                    <div layout="column">
+                        <p>Nuevo ícono</p>
+                        <div class="drop-box margin-top-20"
+                             ngf-drop
+                             type="file"
+                             name="file"
+                             ngf-select="selectFile(file)"
+                             ng-model="file"
+                             accept="image/*"
+                             ngf-max-size="5MB"
+                             ngf-keep="true"
+                             layout="column"
+                             layout-align="center center">
+                            <span ng-show="!file"
+                                  class="md-body-1 text-center">Seleccionar</span>
+                            <span ng-show="file"
+                                  class="md-title">{{file.name}}</span>
+                            <span ng-show="progress"
+                                  class="md-body-2">{{progress}} %</span>
+                            <img ngf-src="!file[0].$error && file[0]"
+                                 width="128"
+                                 height="128">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-accent"
+                       ng-click="cancel()"
+                       aria-label="{{ 'CRUD.CANCEL' | translate }}"
+                       translate="CRUD.CANCEL">
+            </md-button>
+            <md-button ng-click="save(temp)"
+                       type="submit"
+                       class="md-primary"
+                       aria-label="{{ 'CRUD.SAVE' | translate }}"
+                       ng-disabled="saveForm.$submitted && saveForm.$invalid"
+                       translate="CRUD.SAVE">
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

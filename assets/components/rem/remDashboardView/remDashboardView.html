@@ -1,0 +1,61 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <h4 flex>Reportes</h4>
+        <ssvq-date-range-selector on-change="vm.updateReports"></ssvq-date-range-selector>
+    </div>
+</md-toolbar>
+
+<div layout="row">
+    <md-card flex="50">
+        <md-card-content>
+            <md-card-header>
+                <md-card-header-text>
+                    <span class="md-title">Motivos de llamada</span>
+                </md-card-header-text>
+            </md-card-header>
+            <canvas id="bar"
+                    class="chart chart-bar"
+                    chart-data="vm.callReasonReport.data"
+                    chart-labels="vm.callReasonReport.labels"
+                    chart-series="vm.callReasonReport.series">
+            </canvas>
+        </md-card-content>
+    </md-card>
+    <md-card flex>
+        <md-card-header>
+            <md-card-header-text>
+                <span class="md-title">Conteo de llamadas</span>
+            </md-card-header-text>
+        </md-card-header>
+        <md-card-content layout="column">
+            <canvas id="doughnut"
+                    class="chart chart-doughnut"
+                    chart-data="vm.callReport.data"
+                    chart-labels="vm.callReport.labels">
+            </canvas>
+            <div>
+                <p ng-repeat="callReportData in vm.callReportData track by $index">
+                    {{callReportData.name}}: {{callReportData.count}}
+                </p>
+            </div>
+        </md-card-content>
+    </md-card>
+</div>
+
+<div layout="row">
+    <md-card flex>
+        <md-card-content>
+            <md-card-header>
+                <md-card-header-text>
+                    <span class="md-title">Traslados</span>
+                </md-card-header-text>
+            </md-card-header>
+            <canvas id="bar-rem-vehicle"
+                    class="chart chart-bar"
+                    chart-data="vm.transferReport.data"
+                    chart-labels="vm.transferReport.labels"
+                    chart-series="vm.transferReport.series">
+            </canvas>
+        </md-card-content>
+    </md-card>
+</div>

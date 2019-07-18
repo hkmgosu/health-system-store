@@ -1,0 +1,32 @@
+{
+    "name": "PRIVILEGES.STORAGE_ADMINISTRATION_WAY.NAME",
+    "description": "PRIVILEGES.STORAGE_ADMINISTRATION_WAY.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-administration-way-admin",
+            "url": "/bodega/via-administracion",
+            "template": "<ssvq-storage-administration-way-admin></ssvq-storage-administration-way-admin>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/AdministrationWayController.get",
+                "Storage/AdministrationWayController.getAll"
+            ],
+            "create": [
+                "Storage/AdministrationWayController.create"
+            ],
+            "update": [
+                "Storage/AdministrationWayController.update"
+            ],
+            "delete": [
+                "Storage/AdministrationWayController.delete"
+            ]
+        }
+    }
+}

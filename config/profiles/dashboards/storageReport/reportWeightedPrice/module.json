@@ -1,0 +1,23 @@
+{
+    "name": "PRIVILEGES.STORAGE_REPORT.WEIGTHEDPRICE.NAME",
+    "description": "PRIVILEGES.STORAGE_REPORT.WEIGTHEDPRICE.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.report-weighted-price",
+            "url": "/bodega/reporte-ponderacion",
+            "template": "<ssvq-report-weighted-price></ssvq-report-weighted-price>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/StorageReportController.getWeightedPrice",
+                "Storage/ProductTypeController.getAll",
+                "Storage/ProductController.getAll",
+                "Storage/UnitProductsManagerController.getAll",
+                "Storage/UnitProductsManagerController.getAllowedUnits"
+            ]
+        }
+    }
+}

@@ -1,0 +1,29 @@
+<div hide-xs
+     layout="row">
+    <md-button required-privilege="['delete']"
+               ng-if="!vm.hiddenDelete"
+               ng-click="vm.onDeleteItem()"
+               class="md-icon-button">
+        <md-icon md-font-icon="fa fa-trash"></md-icon>
+        <md-tooltip>
+            <span translate>PRODUCT.TOOLTIP.DELETE</span>
+        </md-tooltip>
+    </md-button>
+</div>
+
+<md-menu hide-gt-xs>
+    <md-button class="md-icon-button"
+               ng-click="$mdMenu.open()">
+        <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+    </md-button>
+
+    <md-menu-content width="1">
+        <md-menu-item ng-if="!vm.hiddenDelete">
+            <md-button required-privilege="['delete']"
+                       ng-click="vm.onDeleteItem()">
+                <md-icon md-font-icon="fa fa-trash"></md-icon>
+                <span translate>PRODUCT.TOOLTIP.DELETE</span>
+            </md-button>
+        </md-menu-item>
+    </md-menu-content>
+</md-menu>

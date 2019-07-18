@@ -1,0 +1,44 @@
+<div hide-xs
+     layout="row">
+    <md-button required-privilege="['update']"
+               ng-if="!vm.hiddenEdit"
+               ng-click="vm.onEditItem()"
+               class="md-icon-button">
+        <md-icon md-font-icon="fa fa-pencil"></md-icon>
+        <md-tooltip><span translate>DRUG_TYPE.TOOLTIP.EDIT</span></md-tooltip>
+    </md-button>
+
+    <md-button required-privilege="['delete']"
+               ng-if="!vm.hiddenDelete"
+               ng-click="vm.onDeleteItem()"
+               class="md-icon-button">
+        <md-icon md-font-icon="fa fa-trash"></md-icon>
+        <md-tooltip><span translate>DRUG_TYPE.TOOLTIP.DELETE</span></md-tooltip>
+    </md-button>
+</div>
+
+
+<md-menu hide-gt-xs>
+    <md-button class="md-icon-button"
+               ng-click="$mdMenu.open()">
+        <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+    </md-button>
+
+    <md-menu-content width="4">
+        <md-menu-item ng-if="!vm.hiddenEdit">
+            <md-button required-privilege="['update']"
+                       ng-click="vm.onEditItem()">
+                <md-icon md-font-icon="fa fa-pencil"></md-icon>
+                <span translate>DRUG_TYPE.TOOLTIP.EDIT</span> {{hiddenEdit}}
+            </md-button>
+        </md-menu-item>
+
+        <md-menu-item ng-if="!vm.hiddenDelete">
+            <md-button required-privilege="['delete']"
+                       ng-click="vm.onDeleteItem()">
+                <md-icon md-font-icon="fa fa-trash"></md-icon>
+                <span translate>DRUG_TYPE.TOOLTIP.DELETE</span>
+            </md-button>
+        </md-menu-item>
+    </md-menu-content>
+</md-menu>

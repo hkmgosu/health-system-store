@@ -1,0 +1,68 @@
+<div layout="row"
+     flex
+     layout-padding
+     layout-fill
+     layout-align="center start"
+     layout-align-xs="center center">
+    <div flex-lg="30"
+         flex-md="40"
+         flex-xs="100">
+        <md-card>
+            <md-toolbar class="padding-10">
+                <div layout="row"
+                     layout-align="center center">
+                    <h3 translate>FORGOT.TITLE</h3>
+                </div>
+            </md-toolbar>
+
+            <md-content class="md-padding">
+                <form name="forgot"
+                      ng-show="!vm.sent"
+                      layout="column">
+                    <div layout="row">
+                        <md-input-container flex>
+                            <label for="rut">Rut</label>
+                            <input id="rut"
+                                   name="rut"
+                                   type="text"
+                                   ng-rut
+                                   ng-model="vm.rut"
+                                   required/>
+                            <div ng-messages="forgot.rut.$error"
+                                 ng-if="forgot.rut.$dirty">
+                                <div ng-message
+                                     when="required">
+                                    <span translate>Campo vacío</span>
+                                </div>
+                                <div ng-message
+                                     when="rut">
+                                    <span translate>Ingresa un rut válido</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <md-button class="md-raised md-primary"
+                               flex
+                               ng-click="vm.resetClick()"
+                               ng-disabled="forgot.$invalid || vm.sending"
+                               aria-label="{{'FORGOT.RESET' | translate}}">
+                        Solicitar restauración
+                    </md-button>
+
+                    <md-button class="md-accent"
+                               flex
+                               href="#/login"
+                               translate="FORGOT.LOGIN"
+                               aria-label="{{'FORGOT.LOGIN' | translate}}"></md-button>
+                </form>
+                <div ng-if="vm.sent">
+                    <p class="md-body-2 text-center"
+                       ng-show="vm.recoveryStatus">Revisa tu correo {{vm.mail}} para restaurar la contraseña</p>
+                    <p class="md-body-2 text-center"
+                       ng-show="!vm.recoveryStatus">No se ha podido envíar el correo de restauración</p>
+                </div>
+            </md-content>
+        </md-card>
+
+    </div>
+</div>

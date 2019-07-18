@@ -1,0 +1,13 @@
+{
+    "name": "PRIVILEGES.SAMU_REPORTS.NAME",
+    "description": "PRIVILEGES.SAMU_REPORTS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "icon": "zmdi zmdi-chart"
+        },
+        "_controllers": {}
+    }
+}

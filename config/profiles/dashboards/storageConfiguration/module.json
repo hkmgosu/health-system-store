@@ -1,0 +1,13 @@
+{
+    "name": "PRIVILEGES.STORAGE_MAINTAINERS.NAME",
+    "description": "PRIVILEGES.STORAGE_MAINTAINERS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "icon": "fa fa-cogs"
+        },
+        "_controllers": {}
+    }
+}

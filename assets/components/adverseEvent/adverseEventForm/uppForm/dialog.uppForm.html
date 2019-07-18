@@ -1,0 +1,131 @@
+<md-dialog aria-label="Ingreso de LPP"
+           flex="50"
+           flex-sm="60"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <md-subheader class="md-primary">{{::('ADVERSEEVENT.UPPFORM.UPPDATA' | translate)}}</md-subheader>
+    <form name="vm.saveForm">
+        <div ssvq-wizard>
+            <md-tabs class="md-hue-1 dialog-without-label md-dynamic-height"
+                     md-selected="ssvqWizard.currentStep">
+                <md-tab ng-if="vm.prevUpps.length > 0 && vm.tempData == undefined">
+                    <md-tab-body>
+                        <md-list>
+                            <md-subheader>
+                                {{::('La LPP a ingresar ¿es progresión de alguna de las siguientes LPPs? seleccione si corresponde' | translate)}}
+                            </md-subheader>
+                            <md-list-item ng-repeat="upp in vm.prevUpps"
+                                          class="md-2-line"
+                                          ng-click="vm.selectUpp(upp, ssvqWizard)">
+                                <div class="md-list-item-text">
+                                    <h3>{{ upp.localization.name }}, grado {{ upp.grade.name }}</h3>
+                                    <p>Ingresada {{ upp.createdAt | date }}</p>
+                                </div>
+                                <md-divider ng-if="!$last"></md-divider>
+                            </md-list-item>
+                        </md-list>
+                        <div layout="column"
+                             layout-align="center right">
+                            <md-subheader>
+                                {{::('Si la LPP ha ingresar no corresponde a una progresión del listado anterior, seleccione nueva' | translate)}}
+                            </md-subheader>
+                            <div layout="row">
+                                <md-button type="button"
+                                           ng-click="vm.cancel()"
+                                           translate="Cancelar"
+                                           flex
+                                           aria-label="Cancelar">
+                                </md-button>
+                                <md-button class="md-raised md-primary"
+                                           flex
+                                           ng-click="ssvqWizard.currentStep = 2">
+                                    Nueva
+                                </md-button>
+                            </div>
+                        </div>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab>
+                    <md-tab-body>
+                        <div flex
+                             layout="column"
+                             class="md-padding">
+                            <div layout="row"
+                                 layout-wrap
+                                 class="margin-10">
+                                <md-input-container class="md-block"
+                                                    flex="100"
+                                                    flex-gt-sm="50">
+                                    <label>{{::('ADVERSEEVENT.UPPFORM.BODYAREA' | translate)}}</label>
+                                    <md-select ng-model="vm.area"
+                                               ng-disabled="vm.tempData.tracingUpp === 2">
+                                        <md-option ng-repeat="item in ::vm.parametrics.uppAreas"
+                                                   value="{{::item.value}}">
+                                            {{ ::item.name | translate }}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container class="md-block"
+                                                    flex="100"
+                                                    flex-gt-sm="50">
+                                    <label>{{::('ADVERSEEVENT.UPPFORM.LOCALIZATION' | translate)}}</label>
+                                    <md-select ng-model="vm.tempData.localization"
+                                               required
+                                               ng-disabled="!vm.area || vm.tempData.tracingUpp === 2">
+                                        <md-option ng-repeat="item in vm.parametrics.localizationsUpp | filter: {'area': vm.area} | orderBy:'name'"
+                                                   ng-value="{{::item.id}}">
+                                            {{ ::item.name | translate }}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container class="md-block"
+                                                    flex="100">
+                                    <label>{{::('ADVERSEEVENT.UPPFORM.GRADE' | translate)}}</label>
+                                    <md-select ng-model="vm.tempData.grade"
+                                               required>
+                                        <md-option ng-repeat="item in ::vm.parametrics.gradesUpp | orderBy: 'id'"
+                                                   ng-value="{{::item.id}}">
+                                            {{ ::item.name | translate }}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <ssvq-custom-option-selector model="vm.tempData.causedByDevice"
+                                                         label="{{::('ADVERSEEVENT.UPPFORM.DEVICECAUSED' | translate)}}"
+                                                         required-option="true"
+                                                         parametrics="vm.booleanOptions"></ssvq-custom-option-selector>
+                        </div>
+                    </md-tab-body>
+                </md-tab>
+            </md-tabs>
+        </div>
+        <md-dialog-actions layout="row"
+                           layout-align="end center"
+                           ng-if="ssvqWizard.currentStep == 1 || vm.tempData !== undefined">
+            <md-button type="button"
+                       ng-click="vm.cancel()"
+                       translate="Cancelar"
+                       flex
+                       aria-label="Cancelar">
+            </md-button>
+            <md-button class="md-primary"
+                       type="button"
+                       ng-click="vm.addUpp()"
+                       ng-disabled="vm.saveForm.$invalid"
+                       ng-if="!vm.data"
+                       translate="Agregar"
+                       flex
+                       aria-label="Agregar">
+            </md-button>
+            <md-button class="md-primary"
+                       type="button"
+                       ng-click="vm.saveUpp()"
+                       ng-disabled="vm.saveForm.$invalid"
+                       ng-if="vm.data"
+                       translate="Guardar"
+                       flex
+                       aria-label="Guardar">
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

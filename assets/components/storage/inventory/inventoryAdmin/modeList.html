@@ -1,0 +1,45 @@
+<!-- Modo Lista -->
+<md-content class="product-list-container"
+            ssvq-infinite-load
+            next-page="vm.nextPage"
+            md-promise="vm.promise">
+
+    <ssvq-loading ng-show="!vm.inventories"></ssvq-loading>
+    <ssvq-no-results ng-show="vm.inventories.length == 0"></ssvq-no-results>
+
+    <md-list class="animated slideInDown animation-stop padding-0"
+             ng-if="vm.inventories">
+        <md-list-item ng-repeat="item in vm.inventories"
+                      ng-href="#/bodega/inventarios/{{item.id}}"
+                      class="md-2-line">
+
+            <div layout="row"
+                 class="md-padding"
+                 flex>
+                <div class="margin-right-10">
+                    <md-icon md-font-icon="fa fa-calendar"
+                             class="md-avatar-icon text-center margin-0"
+                             ng-if="item.isValid"
+                             style="background: green;"></md-icon>
+                    <md-icon md-font-icon="fa fa-calendar"
+                             class="md-avatar-icon text-center margin-0"
+                             ng-if="!item.isValid"
+                             style="background: red;"></md-icon>
+                </div>
+                <div layout="column"
+                     class="md-2-line"
+                     flex>
+                    <span class="md-body-2">
+                        <span md-highlight-text="vm.searchText"
+                              md-highlight-flags="gi">{{item.createdAt | date:"dd/MM/yyyy 'a las' HH:mm" }}</span>
+                    </span>
+                    <span class="md-caption">
+                        <span md-highlight-text="vm.searchText"
+                              md-highlight-flags="gi">{{item.unit.name}}</span>
+                    </span>
+                </div>
+            </div>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+</md-content>

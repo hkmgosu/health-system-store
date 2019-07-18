@@ -1,0 +1,27 @@
+<md-list ng-show="vm.timeline.length > 0">
+    <md-list-item ng-repeat="item in vm.timeline | orderBy:'-createdAt'"
+                  class="md-2-line">
+        <div class="md-avatar">
+            <ssvq-employee-avatar employee="item.createdBy"></ssvq-employee-avatar>
+        </div>
+        <div class="md-list-item-text"
+             style="margin-top: 16px;">
+            <h4>
+                <b ssvq-employee-profile-link
+                   id-employee="{{::item.createdBy.id}}">{{item.createdBy.fullname}}</b>
+                <span ng-show="item.type=='comment'">escribió:</span>
+                <span ng-show="item.type=='toEstablishmentUpdated'">actualizó el destino de la derivación</span>
+                <span ng-show="item.type=='fromEstablishmentUpdated'">actualizó el origen de la derivación</span>
+                <span ng-show="item.type=='statusUpdated'">actualizó el estado de la derivación a
+                    <b>{{item.obj.name}}</b>
+                </span>
+            </h4>
+            <span class="md-body-1 respect-line-break">{{item.comment}}</span>
+            <p class="text-right">{{::(item.createdAt | date:"HH:mm '•' dd 'de' MMM")}}</p>
+        </div>
+    </md-list-item>
+</md-list>
+<p ng-show="!vm.timeline"
+   class="text-center">Cargando actividad reciente...</p>
+<p ng-show="vm.timeline.length === 0"
+   class="text-center">No hay actividad reciente</p>

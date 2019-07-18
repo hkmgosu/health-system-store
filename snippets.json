@@ -1,0 +1,67 @@
+{
+    "Directive": {
+        "prefix": "directive-tmpl",
+        "body": [
+            "(() => {",
+            "    'use strict';",
+            "    /**",
+            "      * Example",
+            "      * <ssvq-${1:my-directive}></ssvq-${1:my-directive}>",
+            "      */",
+            "    app.directive('ssvq${3:MyDirective}', function() {",
+            "        return {",
+            "            controller: ComponentController,",
+            "            controllerAs: 'vm',",
+            "            bindToController: {},",
+            "            restrict: 'E',",
+            "            templateUrl: '${6:templateUrl}'",
+            "        };",
+            "    });",
+            "",
+            "    /* @ngInject */",
+            "    function ComponentController() {",
+            "        var vm = this;",
+            "    }",
+            "})();"
+        ],
+        "description": "Directive template"
+    },
+    "Factory": {
+        "prefix": "factory-tmpl",
+        "body": [
+            "(function () {",
+            "    'use strict';",
+            "    app.factory('${3:name}Factory', FactoryController);",
+            "",
+            "    /* @ngInject */",
+            "    function FactoryController($$q) {",
+            "        var urlBase = '/${4:url_base}/';",
+            "        return {",
+            "            get: () => {",
+            "            }",
+            "        };",
+            "    }",
+            "})();"
+        ],
+        "description": "Factory template"
+    },
+    "Filter": {
+        "prefix": "filter-tmpl",
+        "body": [
+            "(function () {",
+            "    'use strict';",
+            "    app.filter('${3:name}Filter', FilterController);",
+            "",
+            "    /* @ngInject */",
+            "    function FilterController($$q) {",
+            "        var urlBase = '/${4:url_base}/';",
+            "        return {",
+            "            get: () => {",
+            "            }",
+            "        };",
+            "    }",
+            "})();"
+        ],
+        "description": "Filter template"
+    }
+}

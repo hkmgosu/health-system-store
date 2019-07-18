@@ -1,0 +1,214 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button"
+                   ng-href="#/viaticos/cierres/{{vm.viaticClosure.type}}">
+            <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            <md-tooltip>Volver</md-tooltip>
+        </md-button>
+        <div layout="column"
+             layout-align="center start"
+             flex>
+            <span class="md-subhead">Cierre {{vm.viaticClosure.type}}</span>
+            <span class="md-caption">
+                <span>#{{vm.viaticClosure.id}}</span>
+                <span>Creado por <ssvq-employee-profile-link employee="::vm.viaticClosure.createdBy">
+                    </ssvq-employee-profile-link></span>
+                <ssvq-custom-time-ago time-at="::vm.viaticClosure.createdAt"></ssvq-custom-time-ago>
+            </span>
+        </div>
+        <md-menu md-position-mode="target-right target"
+                 style="margin-right: 5px;">
+            <md-button class="md-icon-button"
+                       ng-click="$mdMenu.open()">
+                <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                <md-tooltip>Ver más opciones</md-tooltip>
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item>
+                    <md-button ng-href="/viatic/getviaticlistpdf?id={{vm.viaticClosure.id}}"
+                               download>
+                        <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
+                        Descargar a pdf
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-href="/viatic/getViaticsDetailPdfByClosure?id={{vm.viaticClosure.id}}"
+                               download>
+                        <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
+                        Descargar detalle a pdf
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="vm.downloadReport()">
+                        <md-icon md-font-icon="fa fa-file-excel-o"></md-icon>
+                        Descargar a excel
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+</md-toolbar>
+<md-content style="height: calc(100vh - 128px);"
+            layout="row">
+    <div flex="60">
+        <md-subheader class="md-primary md-hue-1">Viáticos</md-subheader>
+        <md-card>
+            <md-card-content class="padding-0">
+                <md-content style="height: calc(100vh - 270px);">
+                    <md-list>
+                        <md-list-item ng-repeat="viatic in vm.viaticClosure.viaticList | orderBy: 'id'"
+                                      ng-href="#/viaticos/detalles/{{ viatic.id }}"
+                                      aria-label="Ítem viático"
+                                      target="_BLANK"
+                                      class="md-3-line">
+                            <div class="md-avatar">
+                                <ssvq-employee-avatar employee="viatic.owner"
+                                                      class="margin-right-10"></ssvq-employee-avatar>
+                            </div>
+                            <div class="md-list-item-text"
+                                 md-truncate
+                                 flex>
+                                <h3 style="font-weight:500;"
+                                    md-colors="{color: 'primary-hue-1'}">
+                                    {{ ::viatic.owner.fullname }}
+                                </h3>
+                                <h4>
+                                    <!-- Unidad -->
+                                    <i class="zmdi zmdi-group-work"
+                                       style="padding-right: 3px; font-size: 15px; color: #89aa81"></i>
+                                    {{ ::viatic.unit.name }}
+                                    <span class="customBullet">•</span>
+
+                                    <!-- Tipo -->
+                                    <i class="zmdi zmdi-label-alt"
+                                       style="padding-right: 3px; font-size: 15px; color: #b47781"></i>
+                                    {{ ::viatic.type.name }}
+                                    <span class="customBullet">•</span>
+
+                                    <!-- Ubicación -->
+                                    <i class="zmdi zmdi-pin"
+                                       style="padding-right: 3px; font-size: 15px; color: #7199c7"></i>
+                                    {{ ::viatic.commune.name }}, {{ ::viatic.region.name }}
+                                </h4>
+                                <p>
+                                    #{{viatic.id}}
+                                    <span class="customBullet">•</span>
+                                    <i class="zmdi zmdi-calendar-alt"></i>
+                                    <span>{{viatic.fromDate | date:"dd 'de' MMM"}}</span>
+                                    <span ng-if="viatic.fromDate != viatic.toDate"> al
+                                        {{viatic.toDate | date:"dd 'de' MMM"}}</span>
+                                    <span class="customBullet">•</span>
+                                    ${{viatic.totalAmount | number}}
+                                </p>
+                            </div>
+                            <div class="md-secondary"
+                                 layout="row"
+                                 layout-align="center center">
+                                <span class="md-body-2">{{viatic.status.name}}</span>
+                                <div style="height: 38px;
+                                        width: 1px;
+                                        margin: 0 15px;
+                                        background: #acacac63;"></div>
+                                <div layout="column"
+                                     layout-align="center center"
+                                     ng-if="vm.viaticClosure.type === 'partes'">
+                                    <span class="md-caption">Res. Exenta</span>
+                                    <span class="md-body-2">
+                                        {{viatic.numResExenta || '--'}} /
+                                        {{(viatic.dateResExenta | date : 'dd-MM-yyyy') || '--'}}</span>
+                                </div>
+
+
+                                <div layout="column"
+                                     layout-align="center center"
+                                     ng-if="vm.viaticClosure.type === 'contabilidad'">
+                                    <span class="md-caption">Nº Folio SIGFE</span>
+                                    <span class="md-body-2">{{ viatic.numFolio || '--' }}</span>
+                                </div>
+
+                                <div layout="column"
+                                     layout-align="center center"
+                                     ng-if="vm.viaticClosure.type === 'tesoreria'">
+                                    <span class="md-caption">Nº Folio SIGFE</span>
+                                    <span class="md-body-2">{{ viatic.numFolioTesoreria || '--' }}</span>
+                                </div>
+                            </div>
+
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+                        <md-divider ng-if="vm.viaticClosure.type !== 'partes'"></md-divider>
+                    </md-list>
+                </md-content>
+                <md-list-item class="md-2-line md-whiteframe-1dp"
+                              ng-if="vm.viaticClosure.type !== 'partes'">
+                    <div class="md-list-item-text">
+                        <h4>Total</h4>
+                        <p>{{ vm.viaticClosure.viaticCount }} viáticos</p>
+                    </div>
+                    <span class="md-secondary md-body-2">${{vm.viaticClosure.totalAmount | number}}</span>
+                </md-list-item>
+            </md-card-content>
+        </md-card>
+    </div>
+    <div flex>
+        <md-subheader class="md-primary md-hue-1">Confirmación</md-subheader>
+        <md-card ng-form="vm.form">
+            <md-card-content>
+                <div layout="column"
+                     ng-if="!vm.viaticClosure.confirmed">
+                    <md-input-container class="md-block">
+                        <label>{{ vm.viaticClosure.type === 'partes' ? 'Nº Res. Exenta': 'Nº Folio SIGFE'}}</label>
+                        <md-icon md-font-icon="fa fa-hashtag"
+                                 class="md-accent"></md-icon>
+                        <input ng-model="vm.num"
+                               name="num"
+                               ng-change="vm.onChange(vm.num)"
+                               required>
+                        <div ng-messages="vm.form.num.$error"
+                             role="alert">
+                            <div ng-message="required">
+                                <span>
+                                    Ingrese un
+                                    {{ vm.viaticClosure.type === 'partes' ? 'Nº Res. Exenta': 'Nº Folio SIGFE'}} para
+                                    confirmar
+                                </span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        ng-if="vm.viaticClosure.type === 'partes'">
+                        <label>Fecha resolución</label>
+                        <md-icon md-font-icon="zmdi zmdi-calendar"
+                                 class="md-accent"></md-icon>
+                        <input type="date"
+                               name="resExDate"
+                               ng-model="vm.date"
+                               ng-change="vm.onDateChange(vm.date)"
+                               required>
+                        <div ng-messages="vm.form.resExDate.$error">
+                            <div ng-message="required">
+                                <span>Ingrese una fecha de resolución</span>
+                            </div>
+                            <div ng-message="date">
+                                <span>Ingrese una fecha de resolución válida</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <div layout="row">
+                        <span flex></span>
+                        <md-button ng-click="vm.onConfirm()"
+                                   ng-disabled="vm.form.$invalid"
+                                   class="md-raised md-primary">Confirmar</md-button>
+                    </div>
+                </div>
+                <div ng-if="vm.viaticClosure.confirmed"
+                     layout="column"
+                     layout-align="center center">
+                    <md-icon md-font-icon="zmdi zmdi-check"
+                             style="color:green;"></md-icon>
+                    <p class="text-center md-body-2">El cierre ya está confirmado</p>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+</md-content>

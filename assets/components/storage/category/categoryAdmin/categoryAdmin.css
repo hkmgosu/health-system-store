@@ -1,0 +1,9 @@
+.category-list-container {
+    height: calc(100vh - 128px);
+}
+
+@media (max-width: 599px) {
+    .category-list-container {
+        height: calc(100vh - 112px);
+    }
+}

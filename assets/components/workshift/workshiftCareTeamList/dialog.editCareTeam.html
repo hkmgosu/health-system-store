@@ -1,0 +1,27 @@
+<md-dialog aria-label="Listado de funcionarios"
+           flex="60"
+           flex-sm="60"
+           flex-xs="90"
+           id="care-team-edit"
+           class="mobile-fullwidth-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()"
+                       aria-label="Volver">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <div layout="column"
+                 flex>
+                <span class="md-body-1">Selección de participantes</span>
+                <span class="md-caption">{{vm.careTeam.vehicle.name || 'En base'}}</span>
+            </div>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="min-height: 200px;">
+        <ssvq-participant-list-manager participant-list="vm.careTeam.participantList"
+                                       opts="vm.participantListOpts"
+                                       filter="vm.filter"></ssvq-participant-list-manager>
+    </md-dialog-content>
+</md-dialog>

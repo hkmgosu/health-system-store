@@ -1,0 +1,26 @@
+<md-card>
+    <md-list class="padding-0">
+        <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+                <h4>Diarios</h4>
+                <p>{{ vm.viatic.completeDayQuantity || 0 }} x ${{ vm.viatic.completeDayUnitValue | number }}</p>
+            </div>
+            <span class="md-secondary">${{ (vm.viatic.completeDayAmount || 0) | number }}</span>
+            <md-divider></md-divider>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+                <h4>Parciales</h4>
+                <p>{{ vm.viatic.partialDayQuantity || 0 }} x ${{vm.viatic.partialDayUnitValue | number}}</p>
+            </div>
+            <span class="md-secondary">${{ (vm.viatic.partialDayAmount || 0) | number }}</span>
+            <md-divider></md-divider>
+        </md-list-item>
+        <md-list-item>
+            <span>Total</span>
+            <span class="md-secondary">
+                ${{ (vm.viatic.totalAmount || 0) | number }}
+            </span>
+        </md-list-item>
+    </md-list>
+</md-card>

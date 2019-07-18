@@ -1,0 +1,189 @@
+<form name="vm.interventionForm"
+      novalidate>
+    <md-subheader class="md-primary md-hue-1">
+        Inicio
+    </md-subheader>
+    <md-list>
+        <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+                <h4>Tipo de intervención</h4>
+                <p class="md-caption">Indicar tipo de intervención</p>
+            </div>
+            <md-button class="md-secondary md-hue-1 md-raised"
+                       ng-click="vm.remPatient.hasIntervention = true; vm.remPatient.criticalIntervention = false"
+                       ng-class="{'md-primary': vm.remPatient.hasIntervention && !vm.remPatient.criticalIntervention}"
+                       flex>Básica</md-button>
+            <md-button class="md-secondary md-hue-1 md-raised"
+                       ng-click="vm.remPatient.criticalIntervention = true"
+                       ng-class="{'md-primary': vm.remPatient.criticalIntervention}"
+                       flex>Crítica</md-button>
+        </md-list-item>
+        <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+                <h4>Llamada ad-hoc</h4>
+                <p class="md-caption">Indicar si la llamada es ad-hoc</p>
+            </div>
+            <md-checkbox class="md-secondary md-primary"
+                         ng-model="vm.remPatient.adhocCall"></md-checkbox>
+        </md-list-item>
+    </md-list>
+    <md-subheader class="md-primary md-hue-1">
+        Historia Clínica
+    </md-subheader>
+    <div class="md-padding">
+        <md-input-container class="md-block"
+                            flex="100">
+            <label>{{ ::('PATIENT.INTERVENTION.DESCRIPTION' | translate) }}</label>
+            <textarea rows="5"
+                      md-maxlength="1000"
+                      ng-model="vm.remPatient.descriptionIntervention">{{ ::('PATIENT.REGULATOR.DESCRIPTION' | translate) }}</textarea>
+        </md-input-container>
+        <md-input-container class="md-block"
+                            flex="100">
+            <label>{{ ::('PATIENT.INTERVENTION.DIAGNOSTIC' | translate) }}</label>
+            <textarea rows="1"
+                      md-maxlength="100"
+                      ng-model="vm.remPatient.diagnosticIntervention">{{ ::('PATIENT.INTERVENTION.DIAGNOSTIC' | translate) }}</textarea>
+        </md-input-container>
+    </div>
+    <md-subheader class="md-primary md-hue-1">
+        Tipo de Prestación
+    </md-subheader>
+    <div class="md-padding">
+
+        <!-- Selector tipo de prestación -->
+        <md-radio-group ng-model="vm.remPatient.typeTransfer"
+                        ng-init="vm.remPatient.typeTransfer = vm.remPatient.typeTransfer ? vm.remPatient.typeTransfer : 'primary'"
+                        layout="row">
+            <md-radio-button value="primary"
+                             flex>Prestación Primaria</md-radio-button>
+            <md-radio-button value="secondary"
+                             flex>Prestación Secundaria</md-radio-button>
+        </md-radio-group>
+
+        <!-- Prestaciones primarias -->
+        <div ng-if="vm.remPatient.typeTransfer === 'primary'"
+             style="margin: 20px 0;">
+            <div ng-repeat="class in vm.attentionClassList | filter: {primary: true}">
+                <div layout="row"
+                     ng-click="class.show = !class.show"
+                     class="list-intervention"
+                     layout-align="space-between center">
+                    <p>{{ class.name }}</p>
+                    <md-button class="md-primary md-icon-button"
+                               aria-label="Desplegar sección">
+                        <md-icon ng-show="class.show"
+                                 md-font-icon="zmdi zmdi-chevron-up"></md-icon>
+                        <md-icon ng-show="!class.show"
+                                 md-font-icon="zmdi zmdi-chevron-down"></md-icon>
+                    </md-button>
+                </div>
+                <div layout="row"
+                     layout-align="start center"
+                     class="checkboxes-intervention animated fadeIn"
+                     layout-wrap
+                     ng-class="class.show ? '' : 'hide-area'">
+                    <div flex="100"
+                         flex-gt-sm="25"
+                         layout="row"
+                         ng-repeat="item in class.items">
+                        <md-checkbox ng-model="item.remPatientAttention.deleted"
+                                     aria-label="{{ item.name }}"
+                                     ng-true-value="false"
+                                     ng-false-value="true"
+                                     flex="{{ item.hasObservation ? '12': '100' }}">
+                            {{ item.hasObservation ? '' : item.name }}
+                        </md-checkbox>
+                        <md-input-container class="md-block"
+                                            style="margin: 10px 10px 0 0;"
+                                            flex="88"
+                                            ng-if="item.hasObservation">
+                            <label>{{ item.name }}</label>
+                            <input type="text"
+                                   ng-model="item.remPatientAttention.observation"
+                                   ng-disabled="item.remPatientAttention.deleted === false ? false : true" />
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prestaciones secundarias -->
+        <div ng-if="vm.remPatient.typeTransfer === 'secondary'"
+             style="margin: 20px 0;">
+            <div ng-repeat="class in vm.attentionClassList | filter: {primary: false}">
+                <div layout="row"
+                     ng-click="class.show = !class.show"
+                     class="list-intervention"
+                     layout-align="space-between center">
+                    <p>{{ class.name }}</p>
+                    <md-button class="md-primary md-icon-button"
+                               aria-label="Desplegar sección">
+                        <md-icon ng-show="class.show"
+                                 md-font-icon="zmdi zmdi-chevron-up"></md-icon>
+                        <md-icon ng-show="!class.show"
+                                 md-font-icon="zmdi zmdi-chevron-down"></md-icon>
+                    </md-button>
+                </div>
+                <div layout="row"
+                     layout-align="start center"
+                     class="checkboxes-intervention animated fadeIn"
+                     layout-wrap
+                     ng-class="class.show ? '' : 'hide-area'">
+                    <div flex="100"
+                         flex-gt-sm="25"
+                         layout="row"
+                         ng-repeat="item in class.items">
+                        <md-checkbox ng-model="item.remPatientAttention.deleted"
+                                     aria-label="{{ item.name }}"
+                                     ng-true-value="false"
+                                     ng-false-value="true"
+                                     flex="{{ item.hasObservation ? '12': '100' }}">
+                            {{ item.hasObservation ? '' : item.name }}
+                        </md-checkbox>
+                        <md-input-container class="md-block"
+                                            style="margin: 10px 10px 0 0;"
+                                            flex="88"
+                                            ng-if="item.hasObservation">
+                            <label>{{ item.name }}</label>
+                            <input type="text"
+                                   ng-model="item.remPatientAttention.observation"
+                                   ng-disabled="item.remPatientAttention.deleted === false ? false : true" />
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <md-subheader class="md-primary md-hue-1">
+        Estado del Traslado
+    </md-subheader>
+
+    <!-- Estado del Traslado-->
+    <div layout="row"
+         layout-align="start center"
+         class="checkboxes-intervention"
+         layout-wrap>
+        <div ng-if="vm.transferStatusList && vm.transferStatusList.length > 0"
+             ng-repeat="transferStatus in vm.transferStatusList"
+             flex="100"
+             flex-gt-sm="25">
+            <md-checkbox ng-model="transferStatus.currentValue"
+                         aria-label="{{ transferStatus.name }}">
+                {{ transferStatus.name }}
+            </md-checkbox>
+        </div>
+    </div>
+
+    <!-- Guardar datos de intervención -->
+    <div class="md-button-content md-padding padding-top-0"
+         layout="row"
+         layout-align="end center">
+        <md-button class="md-primary md-raised"
+                   aria-label="{{ ::('PATIENT.INTERVENTION.SAVE' | translate) }}"
+                   ng-click="vm.interventionForm.$submitted = true; vm.interventionForm.$valid && vm.saveIntervention(vm)"
+                   ng-disabled="(vm.interventionForm.$submitted && vm.interventionForm.$invalid) || vm.interventionForm.$pristine">
+            {{::('PATIENT.INTERVENTION.SAVE' | translate)}}
+        </md-button>
+    </div>
+</form>

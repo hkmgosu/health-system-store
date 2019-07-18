@@ -1,0 +1,34 @@
+{
+    "name": "ARTICLEMANAGER.TITLE",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.articlemanager",
+            "url": "/gestion-publicaciones",
+            "template": "<ssvq-article-manager-view></ssvq-article-manager-view>"
+        },
+        "_controllers": {
+            "read": [
+                "ArticleController.getDetails",
+                "ArticleController.getManagedList",
+                "ArticleController.getTagList",
+                "ArticleCategoryController.getDetails",
+                "ArticleCategoryController.getManagedList"
+            ],
+            "create": [
+                "ArticleController.create"
+            ],
+            "update": [
+                "ArticleController.edit"
+            ],
+            "delete": [
+                "ArticleController.delete"
+            ]
+        }
+    }
+}

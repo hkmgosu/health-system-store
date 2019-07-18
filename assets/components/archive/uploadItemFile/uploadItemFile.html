@@ -1,0 +1,38 @@
+<md-content style="width:220px;"
+            class="md-margin upload-item-file overlay-5"
+            md-ink-ripple="#f0f0f0"
+            layout="row"
+            layout-align="center center"
+            style="width:220px;"
+            md-whiteframe="1">
+    <md-icon md-font-icon="fa fa-file-{{ vm.file.class }}-o"
+             ng-class="vm.file.class + '-file'"
+             ng-click="!vm.progress && vm.downloadFile(false)"
+             class="margin-right-10 margin-left-10"></md-icon>
+    <div layout="column"
+         style="padding:5px 0"
+         ng-click="!vm.progress && vm.downloadFile(false)"
+         class="not-outline"
+         flex>
+        <span class="md-body-1"
+              md-truncate>{{vm.file.name}}</span>
+        <span class="md-caption hide-tiny">{{vm.file.sizeHuman}}</span>
+    </div>
+    <md-button ng-show="vm.mode === 'Manager'"
+               class="md-icon-button"
+               ng-click="vm.removeFile()"
+               aria-label="{{ 'ARCHIVE.REMOVE' | translate }}">
+        <md-icon md-font-icon="zmdi zmdi-close-circle-o"></md-icon>
+    </md-button>
+    <md-button ng-show="vm.mode === 'Viewer'"
+               class="md-icon-button"
+               ng-click="vm.downloadFile(true)"
+               aria-label="{{ 'ARCHIVE.REMOVE' | translate }}">
+        <md-icon md-font-icon="zmdi zmdi-download"></md-icon>
+    </md-button>
+    <md-progress-linear md-mode="determinate"
+                        value="{{ vm.progress }}"
+                        ng-show="vm.progress !== null"
+                        style="position:absolute;bottom:0;"></md-progress-linear>
+    <md-tooltip>{{vm.file.name}} ({{vm.file.sizeHuman}})</md-tooltip>
+</md-content>

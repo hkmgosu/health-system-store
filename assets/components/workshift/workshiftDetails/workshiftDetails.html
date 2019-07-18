@@ -1,0 +1,136 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button"
+                   href="#/samu/turnos"
+                   aria-label="Volver">
+            <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            <md-tooltip>Volver</md-tooltip>
+        </md-button>
+        <div layout="column"
+             flex>
+            <span class="md-body-1">{{vm.workshiftData.title || '--'}}</span>
+            <span class="md-caption">
+                <span>Ingresado por </span>
+                <ssvq-employee-profile-link id-employee="{{::vm.workshiftData.createdBy.id}}">
+                    {{::vm.workshiftData.createdBy.fullname}}
+                </ssvq-employee-profile-link>
+            </span>
+        </div>
+        <md-menu md-position-mode="target-right target">
+            <md-button class="md-icon-button"
+                       ng-click="$mdMenu.open()">
+                <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                <md-tooltip>Acciones</md-tooltip>
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item ng-if="!vm.workshiftData.validated">
+                    <md-button ng-click="vm.showValidateWorkshiftDialog($event)"
+                               aria-label="Activar turno">
+                        <md-icon md-font-icon="zmdi zmdi-power"></md-icon>
+                        Activar turno
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="vm.showCopyDialog($event)"
+                               aria-label="Copiar turno">
+                        <md-icon md-font-icon="zmdi zmdi-copy"></md-icon>
+                        Copiar turno
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="vm.showEditDialog($event)"
+                               ng-disabled="vm.workshiftData.validated">
+                        <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                        Editar la información
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="vm.showDeleteWorkshiftDialog($event)"
+                               ng-disabled="vm.workshiftData.validated"
+                               aria-label="Eliminar turno">
+                        <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
+                        Eliminar turno
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+</md-toolbar>
+<md-content style="height: calc(100vh - 128px);">
+    <div layout-gt-sm="row">
+        <div flex-gt-sm="60">
+            <md-subheader class="md-primary md-hue-1">Detalles del turno</md-subheader>
+            <md-card>
+                <md-card-content layout-gt-xs="row">
+                    <md-list-item class="md-2-line">
+                        <md-icon md-font-icon="zmdi zmdi-home"
+                                 class="md-avatar-icon"
+                                 layout="row"
+                                 layout-align="center center"
+                                 md-colors="{background: 'primary-hue-1'}"></md-icon>
+                        <div class="md-list-item-text">
+                            <h4>Base</h4>
+                            <p>{{vm.workshiftData.establishment.name}}</p>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-icon md-font-icon="zmdi zmdi-time"
+                                 class="md-avatar-icon"
+                                 layout="row"
+                                 layout-align="center center"
+                                 md-colors="{background: 'primary-hue-1'}"></md-icon>
+                        <div class="md-list-item-text">
+                            <h4>Inicio</h4>
+                            <p>{{vm.workshiftData.startTime | date:"EEE dd'/'MM '•' HH:mm"}}</p>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-icon md-font-icon="zmdi zmdi-time"
+                                 class="md-avatar-icon"
+                                 layout="row"
+                                 layout-align="center center"
+                                 md-colors="{background: 'primary-hue-1'}"></md-icon>
+                        <div class="md-list-item-text">
+                            <h4>Término</h4>
+                            <p>{{vm.workshiftData.endTime | date:"EEE dd'/'MM '•' HH:mm"}}</p>
+                        </div>
+                    </md-list-item>
+                </md-card-content>
+            </md-card>
+            <md-subheader class="md-primary md-hue-1">Comentarios</md-subheader>
+            <md-card>
+                <md-card-content class="padding-0">
+                    <ssvq-comment-box on-create="vm.sendComment"></ssvq-comment-box>
+                    <md-divider></md-divider>
+                    <md-list>
+                        <ssvq-workshift-comment-item comment="comment"
+                                                     ng-repeat="comment in vm.commentList | orderBy:'-createdAt'">
+                        </ssvq-workshift-comment-item>
+                    </md-list>
+                    <p class="text-center md-caption"
+                       ng-if="vm.commentList.length === 0">
+                        No hay comentarios aún
+                    </p>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div flex>
+            <md-subheader class="md-primary md-hue-1">Equipos de trabajo</md-subheader>
+            <md-card>
+                <md-card-content class="padding-0">
+                    <div layout="row"
+                         layout-align="center center">
+                        <md-button class="md-accent margin-0 padding-top-10 padding-bottom-10"
+                                   ng-click="vm.addVehicleDialog($event)"
+                                   aria-label="Agregar vehículo"
+                                   flex>
+                            <md-icon md-font-icon="zmdi zmdi-truck"></md-icon>
+                            Agregar vehículo
+                        </md-button>
+                    </div>
+                </md-card-content>
+            </md-card>
+            <ssvq-workshift-care-team-list care-team-list="vm.careTeamList"></ssvq-workshift-care-team-list>
+        </div>
+    </div>
+</md-content>

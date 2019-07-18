@@ -1,0 +1,69 @@
+<md-toolbar md-theme="white">
+    <div class="md-toolbar-tools">
+        <md-icon md-font-icon="fa fa-filter"
+                 class="md-font material-icons fa fa-filter md-white-theme"
+                 role="img"
+                 aria-label="fa fa-filter"></md-icon>
+        <h2 flex=""
+            class="flex">Filtros</h2>
+        <button class="md-button md-ink-ripple md-white-theme"
+                type="button"
+                ng-click="vm.cleanSearch()">
+            <span class="ng-scope">Limpiar</span>
+            <div class="md-ripple-container"></div>
+        </button>
+    </div>
+</md-toolbar>
+
+<md-content class="_md md-my-theme-theme">
+    <md-input-container md-no-float
+                        class="md-block margin-left-10 margin-right-10 margin-bottom-0 md-icon-left md-input-has-placeholder md-my-theme-theme">
+        <md-icon md-font-icon="zmdi zmdi-search"
+                 class="md-my-theme-theme md-font material-icons zmdi zmdi-search"
+                 role="img"
+                 aria-label="zmdi zmdi-search"></md-icon>
+
+        <input type="search"
+               autofocus
+               ng-model="vm.searchText"
+               aria-label="Buscar">
+    </md-input-container>
+
+    <md-list-item class="md-2-line"
+                  ng-click="vm.showCreatedAtFilter($event)">
+        <div class="md-list-item-text">
+            <h3>Fecha de creación</h3>
+            <p>
+                <span ng-show="vm.minDate || vm.maxDate">
+                    {{(vm.minDate | date : "dd MMM y") || '--'}} al {{(vm.maxDate | date : "dd MMM y") || '--'}}
+                </span>
+                <span ng-show="!vm.minDate && !vm.maxDate">
+                    Cualquiera
+                </span>
+            </p>
+        </div>
+        <md-button class="md-secondary md-icon-button"
+                   ng-click="vm.minDate = vm.maxDate = null; vm.refreshSearch();"
+                   ng-show="vm.minDate || vm.maxDate">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            <md-tooltip>Limpiar filtro</md-tooltip>
+        </md-button>
+    </md-list-item>
+
+    <fieldset class="md-block margin-left-10 margin-right-10"
+              ng-show="vm.movementTypes">
+        <legend>Tipo de Movimiento</legend>
+
+        <ssvq-no-results ng-show="vm.movementTypes.length == 0"></ssvq-no-results>
+
+        <md-input-container md-no-float
+                            ng-repeat="type in vm.movementTypes"
+                            class="md-block margin-0 md-input-has-placeholder md-my-theme-theme">
+            <md-checkbox aria-label="type.description"
+                         ng-click="vm.toggleType(type.id)"
+                         ng-checked="vm.searchTypes.indexOf(type.id) > -1"
+                         flex>{{type.description}}
+            </md-checkbox>
+        </md-input-container>
+    </fieldset>
+</md-content>

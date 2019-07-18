@@ -1,0 +1,21 @@
+.tabs-transferManager {
+    height: calc(100vh - 64px);
+}
+@media (max-width: 599px){
+    .tabs-transferManager {
+        height: calc(100vh - 56px);
+    }
+}
+.derivation-step-label{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+    margin-right: 8px;
+    border: 2px solid rgba(255,255,255,.4);
+}
+
+ssvq-derivation-manager .md-chips .md-chip-input-container {
+    width: 100%;
+}

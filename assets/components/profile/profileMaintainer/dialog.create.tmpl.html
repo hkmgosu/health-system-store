@@ -1,0 +1,60 @@
+<md-dialog aria-label="Nuevo perfil"
+           flex="60"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()"
+                       aria-label="Cancelar">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Cancelar</md-tooltip>
+            </md-button>
+            <h3 flex>
+                {{ 'PROFILES.CREATE.TITLE' | translate }}
+            </h3>
+            <md-button class="md-icon-button"
+                       ng-click="vm.confirm()"
+                       ng-disabled="!vm.dataForm.$valid"
+                       aria-label="Guardar">
+                <md-icon md-font-icon="zmdi zmdi-check"></md-icon>
+                <md-tooltip>Guardar</md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content ng-form="vm.dataForm">
+        <div class="md-dialog-content">
+            <md-input-container class="md-block">
+                <label translate>PROFILES.DATA.NAME</label>
+                <input type="text"
+                       md-autofocus
+                       required
+                       name="name"
+                       ng-model="vm.profile.name">
+                <div ng-messages="vm.dataForm.name.$error">
+                    <div ng-message="required">
+                        <span>Ingrese un nombre</span>
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label translate>PROFILES.DATA.DESCRIPTION</label>
+                <textarea ng-model="vm.profile.description"></textarea>
+            </md-input-container>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="vm.cancel()"
+                   class="md-accent"
+                   aria-label="{{ 'PROFILES.CREATE.BUTTONS.CANCEL' | translate }}"
+                   translate="PROFILES.CREATE.BUTTONS.CANCEL">
+        </md-button>
+        <md-button class="md-primary md-raised"
+                   ng-click="vm.confirm()"
+                   ng-disabled="!vm.dataForm.$valid"
+                   aria-label="{{ 'PROFILES.CREATE.BUTTONS.SAVE' | translate }}"
+                   translate="PROFILES.CREATE.BUTTONS.SAVE">
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

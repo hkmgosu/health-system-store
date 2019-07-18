@@ -1,0 +1,79 @@
+<md-toolbar class="md-hue-1 md-tall">
+    <div class="md-toolbar-tools"
+         flex>
+        <md-button class="md-icon-button"
+                   ng-click="vm.goBack()">
+            <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            <md-tooltip>Volver</md-tooltip>
+        </md-button>
+    </div>
+    <div class="md-toolbar-tools"
+         layout="column"
+         layout-align="center start">
+        <span class="md-title">{{vm.articleData.title}}</span>
+        <span class="md-caption">{{vm.articleData.createdBy.fullname}} - {{vm.articleData.createdAt | date: 'short'}}</span>
+    </div>
+</md-toolbar>
+<md-card>
+    <md-card-content>
+        <div layout="column">
+            <span class="md-body-2">{{vm.articleData.category.name}}</span>
+            <span class="md-body-1 respect-line-break">
+                {{vm.articleData.body}}
+            </span>
+
+            <md-divider class="margin-top-10 margin-bottom-10"></md-divider>
+
+            <div layout="row"
+                 layout-align="center center">
+                <md-card style="max-width:500px"
+                         class="md-whiteframe-2dp">
+                    <md-card-content class="padding-0">
+                        <ks-swiper-container loop="false"
+                                             slides-per-view="1"
+                                             pagination-is-active="true"
+                                             ng-if="vm.articleData.pictures.length > 0"
+                                             style="height: 300px;">
+                            <ks-swiper-slide class="swiper-slide"
+                                             ng-repeat="picture in vm.articleData.pictures">
+                                <div layout="row"
+                                     layout-align="center center"
+                                     style="height:300px;background-color:#d6d6d6;">
+                                    <img ng-src="/archive/attachment?id={{picture.id}}">
+                                </div>
+                            </ks-swiper-slide>
+                        </ks-swiper-container>
+                    </md-card-content>
+                </md-card>
+            </div>
+
+            <!-- Tags-->
+            <div ng-if="vm.articleData.tagList.length > 0">
+                <md-divider></md-divider>
+                <p>Tags</p>
+                <md-chips flex
+                          ng-model="vm.articleData.tagList"
+                          readonly="true"
+                          class="md-no-underline md-primary">
+                    <md-chip-template>
+                        #{{$chip.name}}
+                    </md-chip-template>
+                </md-chips>
+            </div>
+
+            <!--Archivos adjuntos -->
+            <div ng-if="vm.articleData.attachments.length > 0">
+                <md-divider></md-divider>
+                <p>Archivos adjuntos</p>
+                <ssvq-upload-list-files files="vm.articleData.attachments"
+                                        mode="Viewer"
+                                        class="tiny-files"></ssvq-upload-list-files>
+            </div>
+
+        </div>
+
+    </md-card-content>
+</md-card>
+
+<p class="text-center"
+   ng-if="vm.notFound">La publicación solicitada no se ha encontrado</p>

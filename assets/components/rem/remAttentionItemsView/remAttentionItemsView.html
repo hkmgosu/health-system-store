@@ -1,0 +1,88 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             hide-xs
+             flex>
+            <span class="md-subhead">{{::('ATTENTIONITEM.OTHERS.TITLE' | translate)}}</span>
+            <span class="md-caption">{{vm.found}} resultados</span>
+        </div>
+        <!-- Buscar -->
+        <ssvq-search-input search-text="vm.searchText"
+                           label="Buscar"
+                           flex
+                           flex-gt-xs="50"></ssvq-search-input>
+        <span flex
+              hide-xs></span>
+    </div>
+</md-toolbar>
+
+<md-button required-privilege="['create','update']"
+           class="md-fab md-fab-top-right md-primary"
+           ng-click="vm.showEditDialog($event, {})">
+    <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+    <md-tooltip md-direction="top">
+        <span>{{::('CRUD.CREATE' | translate)}}</span>
+    </md-tooltip>
+</md-button>
+<md-content>
+    <md-table-container class="full-table-container">
+        <table md-table
+               class="animated fadeIn animation-stop"
+               ng-if="vm.attentionItems.length > 0">
+            <thead md-head>
+                <tr md-row>
+                    <th md-column>{{ ::('ATTENTIONITEM.TABLE.NAME' | translate)}}</th>
+                    <th md-column>{{ ::('ATTENTIONITEM.TABLE.DESCRIPTION' | translate)}}</th>
+                    <th md-column>{{ ::('ATTENTIONITEM.TABLE.CLASSATTENTION' | translate)}}</th>
+                    <th md-column>{{ ::('ATTENTIONITEM.TABLE.TYPEATTENTION' | translate)}}</th>
+                    <th md-column></th>
+                    <th md-column></th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-auto-select
+                    md-row
+                    ng-repeat="item in ::vm.attentionItems track by $index">
+                    <td md-cell>
+                        <span class="force-line capitalize"
+                              md-highlight-text="searchText">{{ item.name }}</span>
+                    </td>
+                    <td md-cell>{{ item.description }}</td>
+                    <td md-cell>{{ item.classView.name }}</td>
+                    <td md-cell>{{ (item.classView.primary ? 'ATTENTIONITEM.TABLE.PRIMARY' : 'ATTENTIONITEM.TABLE.SECONDARY') | translate
+                        }}
+                    </td>
+                    <td md-cell>
+                        <md-button class="md-icon-button"
+                                   required-privilege="['update']"
+                                   ng-click="vm.showEditDialog($event, item)">
+                            <md-icon md-font-icon="fa fa-pencil">
+                                <md-tooltip md-direction="top">
+                                    <span>{{::('TABLE.TOOLTIP.EDIT' | translate)}}</span>
+                                </md-tooltip>
+                            </md-icon>
+                        </md-button>
+                    </td>
+                    <td md-cell>
+                        <md-button class="md-icon-button"
+                                   required-privilege="['delete']"
+                                   ng-click="vm.showDeleteConfirm(item)">
+                            <md-icon md-font-icon="fa fa-trash">
+                                <md-tooltip md-direction="top">
+                                    <span>{{::('TABLE.TOOLTIP.DELETE' | translate)}}</span>
+                                </md-tooltip>
+                            </md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ssvq-loading ng-show="!vm.attentionItems"></ssvq-loading>
+        <ssvq-no-results ng-show="vm.attentionItems.length == 0"></ssvq-no-results>
+    </md-table-container>
+    <md-table-pagination md-limit="vm.limit"
+                         md-page="vm.page"
+                         md-total="{{vm.found}}"
+                         md-on-paginate="vm.get"
+                         md-page-select></md-table-pagination>
+</md-content>

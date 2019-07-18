@@ -1,0 +1,35 @@
+<div ng-form="autocompleteForm">
+    <md-autocomplete md-delay="500"
+                     md-floating-label="{{vm.label || 'Cargo'}}"
+                     md-selected-item="vm.selected"
+                     md-search-text="vm.searchText"
+                     md-items="item in vm.getMatches(vm.searchText)"
+                     md-selected-item-change="vm.localOnSelect(item)"
+                     md-item-text="vm.selected.name"
+                     md-select-on-match="false"
+                     md-min-length="3"
+                     md-input-name="autocomplete"
+                     md-autocomplete-required="{{required}}"
+                     flex>
+        <md-item-template>
+            <div layout="row"
+                 layout-align="start center">
+                <div layout="column"
+                     class="md-padding">
+                    <span class="md-body-2"
+                          md-highlight-text="vm.searchText"
+                          md-highlight-flags="^i">{{item.name}}</span>
+                </div>
+            </div>
+        </md-item-template>
+        <div ng-messages="autocompleteForm.autocomplete.$error"
+             ng-show="autocompleteForm.autocomplete.$touched">
+            <div ng-message="selectedItem">{{'JOB.AUTOCOMPLETE.REQUIRED' | translate}}</div>
+        </div>
+        <md-not-found>
+            <div class="md-padding">
+                <span>{{'AUTOCOMPLETE.NOMATCHFOUND' | translate}}</span>
+            </div>
+        </md-not-found>
+    </md-autocomplete>
+</div>

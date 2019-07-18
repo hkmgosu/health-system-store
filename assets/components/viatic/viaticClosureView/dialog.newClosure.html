@@ -1,0 +1,116 @@
+<md-dialog aria-label='Título'
+           flex='60'
+           flex-sm='80'
+           flex-xs='100'
+           class='mobile-fullwidth-dialog'>
+    <md-toolbar>
+        <div class='md-toolbar-tools'>
+            <md-button class='md-icon-button'
+                       ng-click='vm.cancel()'>
+                <md-icon md-font-icon='zmdi zmdi-arrow-left'></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <span class='md-subhead'
+                  flex>Nuevo cierre de {{vm.type}}</span>
+            <md-button ng-click='vm.confirm()'
+                       ng-disabled="!vm.closure.viaticCount">
+                Crear cierre
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="min-height: 400px;"
+                       layout="column"
+                       layout-align="center center">
+        <div flex
+             ng-if="vm.closure.viaticList.length > 0"
+             layout="column"
+             class="full-width animated fadeIn animation-stop">
+            <md-list flex>
+                <md-list-item>
+                    <span>{{ vm.allSelected ? 'Deseleccionar todos' : 'Seleccionar todos'}}</span>
+                    <md-checkbox class="md-secondary"
+                                 ng-model="vm.allSelected"
+                                 ng-change="vm.changeAllSelected(vm.allSelected)"></md-checkbox>
+                    <md-divider></md-divider>
+                </md-list-item>
+                <md-list-item ng-repeat="viatic in vm.closure.viaticList"
+                              class="md-2-line">
+                    <div class="md-avatar">
+                        <ssvq-employee-avatar employee="viatic.owner"
+                                              class="margin-right-10"></ssvq-employee-avatar>
+                    </div>
+                    <div class="md-list-item-text"
+                         md-truncate
+                         flex>
+                        <h3 style="font-weight:500;"
+                            md-colors="{color: 'primary-hue-1'}">
+                            {{ ::viatic.owner.fullname }}
+                        </h3>
+                        <h4>
+                            <!-- Unidad -->
+                            <i class="zmdi zmdi-group-work"
+                               style="padding-right: 3px; font-size: 15px; color: #89aa81"></i>
+                            {{ ::viatic.unit.name }}
+                            <span class="customBullet">•</span>
+
+                            <!-- Tipo -->
+                            <i class="zmdi zmdi-label-alt"
+                               style="padding-right: 3px; font-size: 15px; color: #b47781"></i>
+                            {{ ::viatic.type.name }}
+                            <span class="customBullet">•</span>
+
+                            <!-- Ubicación -->
+                            <i class="zmdi zmdi-pin"
+                               style="padding-right: 3px; font-size: 15px; color: #7199c7"></i>
+                            {{ ::viatic.commune.name }}, {{ ::viatic.region.name }}
+                        </h4>
+                        <p>
+                            #{{viatic.id}}
+                            <span class="customBullet">•</span>
+                            <i class="zmdi zmdi-calendar-alt"></i>
+                            <span>{{viatic.fromDate | date:"dd 'de' MMM"}}</span>
+                            <span ng-if="viatic.fromDate != viatic.toDate"> al
+                                {{viatic.toDate | date:"dd 'de' MMM"}}</span>
+                            <span class="customBullet">•</span>
+                            ${{viatic.totalAmount | number}}
+                        </p>
+                    </div>
+                    <div class="md-secondary"
+                         layout="row"
+                         layout-align="center center">
+                        <span class="md-body-2">{{viatic.status.name}}</span>
+                        <div style="height: 38px;
+                          width: 1px;
+                          margin: 0 15px;
+                          background: #acacac63;"></div>
+                        <md-checkbox ng-model="viatic.selected"
+                                     ng-init="viatic.selected = true"></md-checkbox>
+                    </div>
+
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list-item>
+
+            </md-list>
+
+            <md-list ng-if="vm.type !== 'partes'">
+                <md-divider></md-divider>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <h4>Total</h4>
+                        <p>{{ vm.closure.viaticCount }} viáticos</p>
+                    </div>
+                    <span class="md-secondary md-body-2">${{vm.closure.totalAmount | number}}</span>
+                </md-list-item>
+            </md-list>
+
+        </div>
+
+        <p ng-if="!vm.closure.viaticList"
+           class="text-center">
+            Buscando viáticos...
+        </p>
+
+        <ssvq-no-results ng-if="vm.closure.viaticList.length === 0"
+                         message="No hay viáticos disponibles para generar cierre"></ssvq-no-results>
+    </md-dialog-content>
+</md-dialog>

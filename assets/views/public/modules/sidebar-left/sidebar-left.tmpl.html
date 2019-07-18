@@ -1,0 +1,81 @@
+<md-toolbar md-theme="white"
+            class="app-toolbar">
+    <div class="custom-border full-width"
+         layout="row">
+        <div flex="40"
+             class="blue"></div>
+        <div flex="60"
+             class="red"></div>
+    </div>
+    <a class="md-toolbar-tools"
+       ng-href="/">
+        <md-icon md-font-icon="zmdi zmdi-cloud-outline-alt"
+                 class="padding-right-10"></md-icon>
+        <span class="md-title"
+              flex>Mi SSVQ</span>
+    </a>
+</md-toolbar>
+
+<md-divider></md-divider>
+
+<!-- Buscador -->
+<div class="md-padding padding-bottom-0"
+     md-border-bottom
+     layout="row">
+    <md-input-container md-no-float
+                        class="md-block margin-bottom-0 margin-top-0"
+                        flex>
+        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+        <input type="text"
+               ng-model="vm.searchTextEstablishments"
+               ng-model-options="{debounce: 600}"
+               placeholder="Buscar establecimientos">
+    </md-input-container>
+    <md-button class="md-icon-button"
+               ng-show="vm.searchTextEstablishments"
+               ng-click="vm.searchTextEstablishments = ''">
+        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+    </md-button>
+</div>
+<md-divider></md-divider>
+
+<md-content flex
+            style="height: calc(100vh - 140px);">
+
+    <!-- Lista de establecimientos -->
+    <div ng-repeat="establishmentType in vm.establishmentTypeList">
+        <md-list-item class="md-2-line type-list-item"
+                      ng-click="vm.toggleTypeVisibility(establishmentType);">
+            <img ng-src="{{::('/establishmentType/iconPublic?id=' + establishmentType.id + '&reload=' +  establishmentType.updatedAt)}}"
+                 width="44"
+                 height="44"
+                 class="margin-right-10">
+            <div class="md-list-item-text">
+                <h3 md-truncate
+                    style="font-weight: 500;">
+                    {{::establishmentType.name}}
+                </h3>
+                <p md-truncate
+                   class="md-caption">{{::establishmentType.shortname}}</p>
+            </div>
+            <md-icon md-font-icon="zmdi zmdi-eye-off"
+                     ng-if="!establishmentType.visible"></md-icon>
+            <md-tooltip>{{::establishmentType.name}}</md-tooltip>
+        </md-list-item>
+
+        <md-list class="padding-top-0 padding-bottom-0"
+                 ng-show="establishmentType.visible">
+            <md-list-item class="md-2-line establishment-list-item"
+                          ng-repeat="establishment in vm.establishmentList | filter: {type: establishmentType.id}:true"
+                          ng-click="vm.viewDetails(establishment)">
+                <div class="md-list-item-text padding-left-20">
+                    <h3 md-truncate>
+                        {{::establishment.name}}
+                    </h3>
+                    <p md-truncate>{{::establishment.address.text}}</p>
+                </div>
+                <md-tooltip>{{::establishment.name}}</md-tooltip>
+            </md-list-item>
+        </md-list>
+    </div>
+</md-content>

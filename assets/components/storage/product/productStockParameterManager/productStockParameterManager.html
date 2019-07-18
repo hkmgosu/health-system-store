@@ -1,0 +1,175 @@
+<div layout="row"
+     layout-xs="column">
+    <!-- Lista de packs -->
+    <div layout="column"
+         layout-fill
+         flex="50"
+         flex-xs="100">
+        <md-subheader class="md-primary md-hue-1 overlay-5">
+            Parámetros de Stock
+        </md-subheader>
+        <md-card>
+            <md-card-content>
+                <div layout="column"
+                     layout-fill
+                     flex
+                     ng-if="vm.stockParameterList.length > 0">
+                    <md-list style="min-height: 23vh;">
+                        <md-list-item ng-class="{'selected': vm.stockParameterSelected.id == item.id }"
+                                      ng-repeat="item in vm.stockParameterList"
+                                      ng-click="vm.selectStockParameter(item)">
+                            <div layout="row"
+                                 layout-align="start center"
+                                 flex>
+                                <span>{{item.unit.name}}</span>
+                            </div>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+                    </md-list>
+                </div>
+                <ssvq-no-results ng-if="vm.stockParameterList.length == 0"
+                                 flex></ssvq-no-results>
+                <ssvq-loading ng-if="!vm.stockParameterList"
+                              flex></ssvq-loading>
+                <div layout="column"
+                     layout-fill
+                     layout-align="end end"
+                     flex>
+                    <md-button aria-label="Nuevo Parámetro de stock"
+                               class="md-raised md-primary md-fab"
+                               ng-click="vm.showCreateStockParameterForm()">
+                        <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                        <md-tooltip md-direction="top">
+                            {{ vm.createStockParameterMode ? 'Limpiar' : 'Nuevo' }}
+                        </md-tooltip>
+                    </md-button>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+    <!-- Contenido -->
+    <div layout="row"
+         flex="50"
+         flex-xs="100">
+        <div layout="column"
+             layout-fill
+             flex>
+            <md-subheader class="md-primary md-hue-1 overlay-5"
+                          ng-if="!vm.createStockParameterMode && !vm.editStockParameterMode">
+                Información
+            </md-subheader>
+            <md-subheader class="md-primary md-hue-1 overlay-5"
+                          ng-if="!vm.createStockParameterMode && vm.editStockParameterMode">
+                Editar: {{ vm.stockParameterSelected.unit.name}}
+            </md-subheader>
+            <md-subheader class="md-primary md-hue-1 overlay-5"
+                          ng-if="vm.createStockParameterMode && !vm.editStockParameterMode">
+                Ingresar Información
+            </md-subheader>
+            <md-card>
+                <md-card-content style="min-height: 29vh;">
+                    <div layout="column"
+                         layout-fill
+                         layout-align="center center"
+                         style="min-height: 34vh;"
+                         ng-if="!vm.createStockParameterMode && !vm.editStockParameterMode">
+                        <div class="md-whiteframe-1dp overlay-5 padding-top-10 padding-bottom-10 md-margin">
+                            <p class="text-center md-padding"
+                               flex>
+                                <md-icon md-font-icon="zmdi zmdi-info"></md-icon>
+                                &nbsp; Crea o selecciona parámetros de stock por unidad.
+                            </p>
+                        </div>
+                    </div>
+                    <div ng-if="vm.createStockParameterMode || vm.editStockParameterMode"
+                         flex
+                         layout="column"
+                         layout-fill>
+                        <ng-form name="vm.stockParameterForm">
+                            <div flex
+                                 layout-gt-sm="row"
+                                 class="md-padding">
+                                <md-input-container class="md-block"
+                                                    flex>
+                                    <label for="unit"
+                                           translate>PRODUCT.TABLE.UNIT</label>
+                                    <md-select ng-model="vm.stockParameter.unit"
+                                               name="unit"
+                                               required>
+                                        <md-option ng-value="item.id"
+                                                   ng-repeat="item in vm.parametricData.units">
+                                            {{item.name}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="vm.stockParameterForm.unit.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <div flex
+                                 layout-gt-sm="row"
+                                 class="md-padding">
+                                <md-input-container flex
+                                                    class="md-block">
+                                    <label for="minStock"
+                                           translate>PRODUCT.TABLE.MIN_STOCK</label>
+                                    <input type="number"
+                                           name="minStock"
+                                           ng-model="vm.stockParameter.minStock"
+                                           ng-change="vm.validateRangeStock()"
+                                           ng-minlength="1"
+                                           min="0"
+                                           required>
+                                    <div ng-messages="vm.stockParameterForm.minStock.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                    <div ng-messages="vm.stockParameterForm.minStock.$error">
+                                        <div ng-message="minlength">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block"
+                                                    flex>
+                                    <label for="maxStock"
+                                           translate>PRODUCT.TABLE.MAX_STOCK</label>
+                                    <input type="number"
+                                           name="maxStock"
+                                           ng-model="vm.stockParameter.maxStock"
+                                           min="0"
+                                           ng-minlength="1"
+                                           ng-change="vm.validateRangeStock()"
+                                           required>
+                                    <div ng-messages="vm.stockParameterForm.maxStock.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                    <div ng-messages="vm.stockParameterForm.maxStock.$error">
+                                        <div ng-message="minlength">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <div layout="row" class="md-padding">
+                                <md-button ng-if="!vm.createStockParameterMode && vm.editStockParameterMode"
+                                           class="md-raised md-warn"
+                                           ng-disabled="vm.loading"
+                                           ng-click="vm.onDeleteStockParameter()">Eliminar</md-button>
+                                <md-button ng-if="vm.createStockParameterMode || vm.editStockParameterMode"
+                                           ng-disabled="vm.stockParameterForm.$invalid || vm.loading"
+                                           ng-click="vm.saveStockParameter()"
+                                           class="md-raised md-primary">Guardar</md-button>
+                            </div>
+                        </ng-form>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+</div>

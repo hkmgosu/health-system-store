@@ -1,0 +1,38 @@
+<md-dialog aria-label="Selector de permisos"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <div layout="column"
+                     flex>
+                    <span class="md-body-1">Permisos del módulo</span>
+                    <span class="md-caption">{{vm.moduleItem.name | translate}}</span>
+                </div>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-list>
+                <md-list-item ng-repeat="(privilege, value) in vm.moduleItem.config.privileges">
+                    <p>{{"PROFILES.CAN." + privilege.toUpperCase() | translate}}</p>
+                    <md-checkbox class="md-primary"
+                                 ng-disabled="privilege === 'read'"
+                                 ng-model="vm.moduleItem.config.privileges[privilege]"></md-checkbox>
+                </md-list-item>
+            </md-list>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button ng-click="vm.cancel()"
+                       class="md-accent"
+                       aria-label="Cancelar">
+                Cancelar
+            </md-button>
+            <md-button ng-click="vm.confirm()"
+                       class="md-primary md-raised md-hue-1"
+                       aria-label="Confirmar">
+                Confirmar
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

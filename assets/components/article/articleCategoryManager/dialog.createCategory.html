@@ -1,0 +1,48 @@
+<md-dialog flex-gt-md="40"
+           flex="70"
+           flex-xs="90"
+           aria-label="Nueva categoría">
+    <form name="vm.saveForm">
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                    <md-tooltip>Volver</md-tooltip>
+                </md-button>
+                <span flex>{{vm.category.id ? 'Editar categoría' : 'Nueva categoría'}}</span>
+                <md-button ng-click="vm.confirm()">{{vm.category.id ? 'Editar categoría' : 'Crear categoría'}}</md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div layout="column"
+                 class="md-padding">
+                <md-input-container>
+                    <label>Nombre</label>
+                    <input name="name"
+                           type="text"
+                           ng-model="vm.category.name"
+                           required/>
+                    <div ng-messages="vm.saveForm.name.$error"
+                         role="alert">
+                        <div ng-message="required">
+                            <span>Campo obligatorio</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-checkbox class="md-primary"
+                             ng-model="vm.category.private">
+                    Es una categoría privada
+                </md-checkbox>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-accent"
+                       ng-click="vm.cancel()">Cancelar</md-button>
+            <md-button class="md-primary"
+                       ng-disabled="!vm.saveForm.$valid"
+                       ng-click="vm.confirm()">{{vm.category.id ? 'Editar categoría' : 'Crear categoría'}}</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

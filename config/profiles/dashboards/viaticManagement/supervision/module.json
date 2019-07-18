@@ -1,0 +1,26 @@
+{
+    "name": "PRIVILEGES.VIATICMANAGEMENT.SUPERVISION.NAME",
+    "description": "PRIVILEGES.VIATICMANAGEMENT.SUPERVISION.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.viatic-supervision",
+            "url": "/viaticos/supervision",
+            "template": "<ssvq-viatic-list-view></ssvq-viatic-list-view>"
+        },
+        "_controllers": {
+            "read": [
+                "ViaticController.getSupervised",
+                "HolidayController.getHolidays",
+                "EmployeeController.getList",
+                "ViaticController.getStatusList"
+            ],
+            "create": [
+                "ViaticController.create"
+            ]
+        }
+    }
+}

@@ -1,0 +1,106 @@
+<form name="formGeneral">
+    <div flex
+         layout-gt-sm="row">
+
+        <md-input-container class="md-block"
+                            flex>
+            <label for="originUnit">Unidad Solicitante</label>
+            <md-select name="originUnit"
+                       ng-model="vm.productRequest.originUnit"
+                       ng-disabled="vm.productRequest.id"
+                       required>
+                <md-option ng-repeat="unit in vm.originUnits"
+                           ng-value="unit.id">{{unit.name}}</md-option>
+            </md-select>
+            <div ng-messages="formGeneral.originUnit.$error">
+                <div ng-message="required">{{'PRODUCT_REQUEST.VALIDATOR.REQUIRED'|translate}}</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block"
+                            flex>
+            <label for="destinyUnit">Bodega</label>
+            <md-select name="destinyUnit"
+                       required
+                       ng-disabled="vm.productRequest.id"
+                       ng-model="vm.productRequest.destinyUnit">
+                <md-option ng-repeat="unit in vm.destinyUnits"
+                           ng-value="unit.id">{{unit.name}}</md-option>
+            </md-select>
+            <div ng-messages="formGeneral.destinyUnit.$error">
+                <div ng-message="required">{{'PRODUCT_REQUEST.VALIDATOR.REQUIRED'|translate}}</div>
+            </div>
+        </md-input-container>
+    </div>
+
+    <div flex
+         layout-gt-sm="row"
+         ng-show="vm.productRequest.isPharmaceutical">
+        <md-switch class="md-block md-primary"
+                   flex
+                   ng-disabled="vm.productRequest.id"
+                   ng-show="vm.productRequest.isPharmaceutical"
+                   ng-model="vm.productRequest.isControlled"
+                   aria-label="Medicamentos Controlados">Medicamentos Controlados
+        </md-switch>
+    </div>
+
+    <div flex
+         layout-gt-sm="row">
+
+        <md-input-container class="md-block"
+                            flex>
+            <label for="costCenter">{{'PRODUCT_REQUEST.TABLE.COST_CENTER'|translate}}</label>
+
+            <md-select name="costCenter"
+                       ng-disabled="vm.productRequest.status.id > 1"
+                       ng-model="vm.productRequest.costCenter">
+                <md-option ng-repeat="costCenter in vm.costCenters"
+                           ng-value="costCenter.id">{{ costCenter.description
+                    }}</md-option>
+            </md-select>
+            <div ng-messages="formGeneral.costCenter.$error">
+                <div ng-message="required">{{'PRODUCT_REQUEST.VALIDATOR.REQUIRED'|translate}}</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block"
+                            flex>
+            <label for="date">{{'PRODUCT_REQUEST.TABLE.DATE'|translate}}</label>
+            <md-datepicker required
+                           name="date"
+                           class="md-block"
+                           ng-disabled="vm.productRequest.status.id > 1"
+                           ng-model="vm.productRequest.date"
+                           md-placeholder="{{ 'PRODUCT_REQUEST.TABLE.DATE' | translate }}">
+            </md-datepicker>
+            <div ng-messages="formGeneral.date.$error">
+                <div ng-message="required">{{'PRODUCT_REQUEST.VALIDATOR.REQUIRED'|translate}}</div>
+            </div>
+        </md-input-container>
+    </div>
+
+    <md-input-container class="md-block"
+                        flex>
+        <label for="glosa">{{'PRODUCT_REQUEST.TABLE.GLOSA'|translate}}</label>
+
+        <textarea name="glosa"
+                  ng-disabled="vm.productRequest.status.id > 1"
+                  ng-model="vm.productRequest.glosa"
+                  md-maxlength="3000"></textarea>
+        <div ng-messages="formGeneral.glosa.$error">
+            <div ng-message="required">{{'PRODUCT_REQUEST.VALIDATOR.REQUIRED'|translate}}</div>
+        </div>
+    </md-input-container>
+
+    <div class="text-right"
+         ng-show="vm.productRequest.status.id==1">
+        <md-button class="md-primary md-raised md-my-theme-theme"
+                   aria-label="CRUD.SAVE"
+                   translate="CRUD.SAVE"
+                   ng-disabled="formGeneral.$invalid"
+                   ng-click="vm.saveGeneral()"
+                   required-privilege="['create']">
+        </md-button>
+    </div>
+</form>

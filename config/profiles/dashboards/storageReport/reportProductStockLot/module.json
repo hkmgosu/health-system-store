@@ -1,0 +1,23 @@
+{
+    "name": "PRIVILEGES.STORAGE_REPORT.PRODUCT_STOCK_LOT.NAME",
+    "description": "PRIVILEGES.STORAGE_REPORT.PRODUCT_STOCK_LOT.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.report-product-stock-lot",
+            "url": "/bodega/reporte-stock-productos-lote",
+            "template": "<ssvq-report-product-stock-lot></ssvq-report-product-stock-lot>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/StorageReportController.getStockLot",
+                "Storage/ProductTypeController.getAll",
+                "Storage/ProductController.getAll",
+                "Storage/UnitProductsManagerController.getAll",
+                "Storage/UnitProductsManagerController.getAllowedUnits"
+            ]
+        }
+    }
+}

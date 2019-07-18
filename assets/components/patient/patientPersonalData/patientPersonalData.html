@@ -1,0 +1,170 @@
+<div ng-form="patientPersonalDataForm">
+    <div flex
+         layout-gt-sm="row">
+        <md-input-container class="md-block"
+                            flex>
+            <label for="name">{{::('PATIENT.TABLE.NAME' | translate)}}</label>
+            <input type="text"
+                   name="name"
+                   ng-model="vm.personalData.name"
+                   ng-required="vm.opts.required.name"
+                   ng-disabled="vm.personalData.validated" />
+        </md-input-container>
+        <md-input-container class="md-block"
+                            flex>
+            <label for="lastname">{{::('PATIENT.TABLE.LASTNAME' | translate)}}</label>
+            <input type="text"
+                   name="lastname"
+                   ng-model="vm.personalData.lastname"
+                   ng-required="vm.opts.required.lastname"
+                   ng-disabled="vm.personalData.validated">
+        </md-input-container>
+        <md-input-container class="md-block"
+                            flex>
+            <label for="lastname">{{::('PATIENT.TABLE.MLASTNAME' | translate)}}</label>
+            <input type="text"
+                   name="mlastname"
+                   ng-model="vm.personalData.mlastname"
+                   ng-required="vm.opts.required.mlastname"
+                   ng-disabled="vm.personalData.validated">
+        </md-input-container>
+    </div>
+    <div flex
+         layout-gt-sm="row">
+        <!-- Género -->
+        <md-input-container class="md-block"
+                            flex>
+            <label translate>Género</label>
+            <md-select ng-model="vm.personalData.gender"
+                       ng-disabled="vm.personalData.validated"
+                       ng-required="vm.opts.required.gender"
+                       name="gender">
+                <md-option ng-value="gender.value"
+                           ng-repeat="gender in ::vm.gender">{{ ::gender.name | translate }}</md-option>
+            </md-select>
+        </md-input-container>
+        <!-- Fecha de nacimiento -->
+        <md-input-container class="md-block"
+                            flex>
+            <label>{{::('PATIENT.TABLE.BIRTHDATE' | translate)}}</label>
+            <input type="date"
+                   ssvq-date-input
+                   name="birthdate"
+                   max="{{::vm.today}}"
+                   ng-model="vm.personalData.birthdate"
+                   ng-disabled="vm.personalData.validated"
+                   ng-model-options="{ debounce: 800 }"
+                   ng-change="vm.onBirthdateChange(vm.personalData.birthdate)">
+            <div ng-messages="patientPersonalDataForm.birthdate.$error">
+                <div ng-message="date">
+                    <span>{{::('PATIENT.VALIDATOR.DATE' | translate)}}</span>
+                </div>
+                <div ng-message="max">
+                    <span>{{::('PATIENT.VALIDATOR.MAXDATE' | translate)}}</span>
+                </div>
+            </div>
+        </md-input-container>
+        <!-- Edad  -->
+        <div layout="row"
+             layout-align="center center"
+             style="position:relative;"
+             flex>
+            <div class="float-age-text"
+                 layout="row"
+                 layout-align="center center">
+                <div flex
+                     layout="column"
+                     class="my-divider"></div>
+                <p class="text-center md-caption margin-0"
+                   flex="33">
+                    Edad {{ vm.personalData.birthdate ? '' : 'estimada'}}
+                </p>
+                <div flex
+                     layout="column"
+                     class="my-divider"></div>
+            </div>
+            <md-input-container class="md-block"
+                                flex>
+                <label for="years">{{::('PATIENT.TABLE.YEARS' | translate)}}</label>
+                <input type="number"
+                       name="years"
+                       ng-model="vm.personalData.estimatedYears"
+                       ng-disabled="vm.personalData.birthdate"
+                       min="0">
+                <div ng-messages="patientPersonalDataForm.years.$error">
+                    <div ng-message="min">
+                        <span>{{::('PATIENT.VALIDATOR.MINYEAR' | translate)}}</span>
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block"
+                                flex>
+                <label for="months">{{::('PATIENT.TABLE.MONTHS' | translate)}}</label>
+                <input type="number"
+                       name="months"
+                       ng-model="vm.personalData.estimatedMonths"
+                       ng-disabled="vm.personalData.birthdate"
+                       min="0"
+                       max="12">
+                <div ng-messages="patientPersonalDataForm.months.$error">
+                    <div ng-message="min">
+                        <span>{{::('PATIENT.VALIDATOR.MINMONTH' | translate)}}</span>
+                    </div>
+                    <div ng-message="max">
+                        <span>{{::('PATIENT.VALIDATOR.MAXMONTH' | translate)}}</span>
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block"
+                                flex>
+                <label for="days">{{::('PATIENT.TABLE.DAYS' | translate)}}</label>
+                <input type="number"
+                       name="days"
+                       ng-model="vm.personalData.estimatedDays"
+                       ng-disabled="vm.personalData.birthdate"
+                       min="0"
+                       max="30">
+                <div ng-messages="patientPersonalDataForm.days.$error">
+                    <div ng-message="min">
+                        <span>{{::('PATIENT.VALIDATOR.MINDAY' | translate)}}</span>
+                    </div>
+                    <div ng-message="max">
+                        <span>{{::('PATIENT.VALIDATOR.MAXDAY' | translate)}}</span>
+                    </div>
+                </div>
+            </md-input-container>
+        </div>
+    </div>
+    <div flex
+         layout-gt-sm="row"
+         ng-if="vm.mode === 'complete'">
+        <md-input-container class="md-block"
+                            flex>
+            <label for="phone">{{::('PATIENT.TABLE.PHONE' | translate)}}</label>
+            <input type="text"
+                   name="phone"
+                   ng-model="vm.personalData.phone">
+        </md-input-container>
+        <md-input-container class="md-block"
+                            flex>
+            <label>{{::('PATIENT.TABLE.OTHERS' | translate)}}</label>
+            <textarea rows="1"
+                      ng-model="vm.personalData.description">{{vm.personalData.description}}</textarea>
+        </md-input-container>
+    </div>
+    <div layout="row"
+         layout-align="end center"
+         ng-if="vm.opts.showButtons">
+        <md-button class="md-accent md-raised"
+                   ng-click="vm.syncPatient()"
+                   ng-disabled="vm.autocompleteInProcess"
+                   ng-if="vm.canAutocomplete()">
+            <span>{{vm.autocompleteInProcess ? 'Buscando datos...' : 'Autocompletar'}}</span>
+            <md-icon md-font-icon="zmdi zmdi-search-replace"></md-icon>
+            <md-tooltip>Sincronizar datos con fuente externa</md-tooltip>
+        </md-button>
+        <md-button class="md-primary md-raised"
+                   ng-disabled="patientPersonalDataForm.$pristine || vm.loading"
+                   ng-click="vm.onConfirm()">Actualizar datos básicos</md-button>
+    </div>
+</div>

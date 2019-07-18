@@ -1,0 +1,28 @@
+<md-dialog aria-label="Detalles del INVENTARIO"
+           flex-gt-xs="40"
+           flex="100">
+    <form name="vm.updateInventoryDetailForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 flex>Confirmar Stock: {{vm.inventoryDetail.product.description}}</h2>
+                <span flex="10"></span>
+
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Cancelar">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div ng-include="'/components/storage/inventory/inventoryDetails/formDetail.html'"></div>
+        </md-dialog-content>
+        <md-dialog-actions class="text-right">
+            <md-button class="md-raised md-primary"
+                       ng-click="vm.confirm()"
+                       ng-disabled="vm.updateInventoryDetailForm.$invalid || vm.updateInventoryDetailForm.$pristine"
+                       aria-label="CRUD.SAVE"
+                       translate="CRUD.SAVE"></md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

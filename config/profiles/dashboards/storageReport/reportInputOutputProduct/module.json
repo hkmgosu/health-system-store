@@ -1,0 +1,22 @@
+{
+    "name": "PRIVILEGES.STORAGE_REPORT.INPUTOUTPUTPRODUCT.NAME",
+    "description": "PRIVILEGES.STORAGE_REPORT.INPUTOUTPUTPRODUCT.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.report-input-output-product",
+            "url": "/bodega/reporte-entrada-salida-producto",
+            "template": "<ssvq-report-input-output-product></ssvq-report-input-output-product>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/StorageReportController.getInputOutputProduct",
+                "Storage/ProductController.getAll",
+                "Storage/UnitProductsManagerController.getAll",
+                "Storage/UnitProductsManagerController.getAllowedUnits"
+            ]
+        }
+    }
+}

@@ -1,0 +1,165 @@
+<md-dialog aria-label="Nueva solicitud"
+           flex="70"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <form name="vm.saveForm"
+          ng-submit="vm.save(vm.request)"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                    <md-tooltip>Volver</md-tooltip>
+                </md-button>
+                <span class="md-subhead">
+                    {{vm.selfAssigned? 'Nueva solicitud autoasignada' : 'Nueva solicitud'}}
+                </span>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div ng-if="!canAutoassign && selfAssigned"
+                 class="padding-bottom-0"
+                 layout="row"
+                 layout-padding>
+                <md-card flex="100"
+                         class="margin-bottom-0">
+                    <md-card-content layout="row"
+                                     layout-align="center start">
+                        <md-icon md-font-icon="zmdi zmdi-alert-circle-o"
+                                 md-theme-color="accent"
+                                 class="md-accent"></md-icon>
+                        <span flex
+                              class="md-body-2 padding-left-10"
+                              md-theme-color="accent">
+                            Tu unidad y la unidad dependiente no tienen supervisores, por lo que no es posible realizar la solicitud autoasignada
+                        </span>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <div layout-gt-xs="row"
+                 layout-align="center start"
+                 layout-padding>
+
+                <!-- Sidebar -->
+                <div flex-gt-xs="30"
+                     flex-order-gt-xs="3"
+                     flex="100">
+                    <!-- Selector de unidad -->
+                    <ssvq-unit-autocomplete selected="vm.request.unitAssigned"
+                                            ng-if="!vm.selfAssigned"
+                                            filter-supervised="true"
+                                            required="true"></ssvq-unit-autocomplete>
+
+                    <!-- Selector de tipo -->
+                    <md-input-container class="md-block margin-bottom-40">
+                        <label>Tipo</label>
+                        <md-select ng-model="vm.request.label"
+                                   ng-model-options="{trackBy: '$value.id'}">
+                            <md-option>...</md-option>
+                            <md-option ng-value="label"
+                                       ng-repeat="label in vm.labels track by $index">{{label.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <!-- Selector de fecha vencimiento -->
+                    <md-input-container>
+                        <label>Vencimiento</label>
+                        <md-datepicker ng-model="vm.request.dueDate"
+                                       name="dueDate"
+                                       md-min-date="vm.now"
+                                       md-hide-icons="calendar"
+                                       md-open-on-focus></md-datepicker>
+                        <div ng-messages="vm.saveForm.dueDate.$error">
+                            <div ng-message="valid">La fecha ingresada no es válida</div>
+                        </div>
+                    </md-input-container>
+                </div>
+
+                <div flex-gt-xs="70"
+                     flex-order-gt-xs="1"
+                     flex="100">
+                    <div layout="column">
+                        <md-input-container>
+                            <label translate>REQUEST.NEW.TITLE</label>
+                            <input type="text"
+                                   name="title"
+                                   ng-model="vm.request.title"
+                                   autofocus
+                                   required>
+                            <div ng-messages="vm.saveForm.title.$error">
+                                <div ng-message="required">
+                                    <span translate>REQUEST.NEW.REQUIRED</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container>
+                            <label translate>REQUEST.NEW.DESCRIPTION</label>
+                            <textarea name="description"
+                                      ng-model="vm.request.description"
+                                      id="description-input"
+                                      rows="4"
+                                      md-maxlength="1800"></textarea>
+                            <div ng-messages="vm.saveForm.description.$error"
+                                 role="alert">
+                                <div ng-message="md-maxlength">
+                                    <span>Ha superado el máximo permitido</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <md-chips ng-model="vm.request.tagsCollection"
+                                  md-autocomplete-snap
+                                  ng-init="vm.request.tagsCollection=[]"
+                                  md-transform-chip="vm.transformChip($chip)"
+                                  name="hashtags"
+                                  md-removable="true"
+                                  class="margin-bottom-20">
+                            <md-autocomplete md-selected-item="vm.selectedItem"
+                                             md-search-text="vm.searchText"
+                                             md-items="item in vm.querySearch(vm.searchText)"
+                                             md-item-text="item.name"
+                                             placeholder="Tags">
+                                <md-item-template>
+                                    <div class="md-padding">
+                                        <span class="md-body-1"
+                                              md-highlight-text="vm.searchText">
+                                            #{{item.name}}
+                                        </span>
+                                    </div>
+                                </md-item-template>
+                            </md-autocomplete>
+                            <md-chip-template>
+                                #{{$chip.name}}
+                            </md-chip-template>
+                        </md-chips>
+                    </div>
+                    <ssvq-upload-list-files mode="Manager"
+                                            files="vm.request.files"
+                                            upload-files="vm.uploadFiles"
+                                            layout="column"></ssvq-upload-list-files>
+                    <div layout="row"
+                         layout-align="space-between"
+                         class="margin-bottom-10 margin-top-10">
+                        <md-button class="md-raised md-primary upload-button button-comment"
+                                   ngf-select="vm.uploadFiles($files)"
+                                   ngf-multiple="true"
+                                   aria-label="{{ 'ARCHIVE.UPLOAD' | translate }}">
+                            <md-icon md-font-icon
+                                     class="zmdi zmdi-attachment-alt"></md-icon>
+                        </md-button>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button type="submit"
+                       ng-disabled="(vm.saveForm.$submitted && vm.saveForm.$invalid) || (selfAssigned && !canAutoassign) || vm.inProgress"
+        
+                       class="md-primary"
+                       aria-label="{{'REQUEST.NEW.SEND' | translate}}">
+                {{ vm.inProgress ? ' Subiendo archivos, Espere...' : 'Enviar solicitud' }}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

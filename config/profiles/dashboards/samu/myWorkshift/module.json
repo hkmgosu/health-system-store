@@ -1,0 +1,33 @@
+{
+    "name": "PRIVILEGES.SAMU.MY_WORKSHIFT.NAME",
+    "description": "PRIVILEGES.SAMU.MY_WORKSHIFT.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "create": false,
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.samu-my-workshift",
+            "url": "/samu/miturno",
+            "template": "<ssvq-my-workshift></ssvq-my-workshift>"
+        },
+        "_controllers": {
+            "read": [
+                "WorkshiftController.getDetails",
+                "WorkshiftController.getTimeline",
+                "WorkshiftController.getFullCareTeamList",
+                "WorkshiftController.getEstablishmentVehicleList",
+                "WorkshiftController.getCurrentWorkshift",
+                "WorkshiftController.getEmployeeHistory",
+                "EmployeeController.getProfileById"
+            ],
+            "create": [
+                "ArchiveController.uploadArchive"
+            ],
+            "update": [
+                "WorkshiftController.addComment"
+            ]
+        }
+    }
+}

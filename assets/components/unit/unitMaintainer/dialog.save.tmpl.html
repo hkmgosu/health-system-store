@@ -1,0 +1,84 @@
+<md-dialog aria-label=""
+           flex="60">
+    <form name="saveForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>
+                    {{ ( (!temp.id)? 'UNIT.OTHERS.CREATETITLE' : 'UNIT.OTHERS.EDITTITLE' ) | translate }}
+                </h2>
+                <span flex></span>
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Cancelar">
+                    <md-tooltip>Volver</md-tooltip>
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div flex>
+                    <md-input-container class="md-block">
+                        <label translate>UNIT.NAME</label>
+                        <input type="text"
+                               name="name"
+                               ng-model="vm.unit.name"
+                               required>
+                        <div ng-messages="saveForm.name.$error">
+                            <div ng-message="required">
+                                <span translate>UNIT.VALIDATOR.REQUIRED</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label translate>UNIT.DESCRIPTION</label>
+                        <input type="text"
+                               name="description"
+                               ng-model="vm.unit.description">
+                    </md-input-container>
+                </div>
+                <div flex>
+                    <ssvq-establishment-autocomplete selected="vm.unit.establishment">
+                    </ssvq-establishment-autocomplete>
+                </div>
+
+                <div flex>
+                    <md-input-container class="md-block">
+                        <label translate>UNIT.TYPE</label>
+                        <md-select ng-model="vm.unit.type">
+                            <md-option ng-value="type.id"
+                                       ng-repeat="type in types">
+                                {{type.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <md-list>
+                    <md-list-item class="md-2-line">
+                        <div class="md-list-item-text">
+                            <h4>Unidad VIP</h4>
+                            <p>Sólo recibe permisos y viáticos de empleados pertenecientes a subunidad directa</p>
+                        </div>
+                        <md-switch class="md-primary md-secondary"
+                                   ng-model="vm.unit.vipUnit"
+                                   aria-label="Unidad VIP">
+                        </md-switch>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="vm.cancel()"
+                       aria-label="{{ 'CRUD.CANCEL' | translate }}"
+                       translate="CRUD.CANCEL">
+            </md-button>
+            <md-button ng-click="vm.save()"
+                       class="md-primary"
+                       aria-label="{{ 'CRUD.SAVE' | translate }}"
+                       ng-disabled="saveForm.$invalid"
+                       translate="CRUD.SAVE">
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

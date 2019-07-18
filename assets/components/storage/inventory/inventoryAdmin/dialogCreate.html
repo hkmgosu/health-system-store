@@ -1,0 +1,89 @@
+<md-dialog aria-label="Detalles del item"
+           flex-gt-xs="40"
+           flex="100">
+    <form name="inventoryForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 flex>Crear Inventario</h2>
+                <span flex></span>
+
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Cancelar">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div ng-form="vm.createInventoryForm">
+                <div layout="column"
+                     class="md-padding"
+                     flex>
+                    <div layout="row">
+                        <md-input-container class="md-block"
+                                            flex>
+                            <label for="unit"
+                                   translate>PRODUCT.TABLE.UNIT</label>
+                            <md-select ng-model="vm.inventory.unit"
+                                       required
+                                       name="unit">
+                                <md-option ng-value="item.id"
+                                           ng-repeat="item in vm.allowedUnits">
+                                    {{item.name}}
+                                </md-option>
+                            </md-select>
+                            <div ng-messages="vm.createInventoryForm.unit.$error">
+                                <div ng-message="required">
+                                    <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-input-container class="md-block"
+                                            flex="40">
+                            <md-switch class="md-primary margin-0"
+                                       aria-label="Inventario al Azar"
+                                       ng-model="vm.inventory.isRandom">
+                                Inventario al azar
+                            </md-switch>
+                        </md-input-container>
+                        <md-input-container class="md-block"
+                                            ng-show="vm.inventory.isRandom"
+                                            flex="60">
+                            <label for="randomQuantity">N° Productos al azar</label>
+                            <input type="number"
+                                   min="1"
+                                   name="randomQuantity"
+                                   ng-model="vm.inventory.randomQuantity"
+                                   ng-required="vm.inventory.isRandom">
+                            <div ng-messages="vm.createInventoryForm.randomQuantity.$error">
+                                <div ng-message="required">
+                                    <span>Campo Requerido</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-input-container class="md-block"
+                                            flex>
+                            <label for="observation">Observaciones</label>
+                            <textarea ng-model="vm.inventory.observation"
+                                      md-maxlength="100"
+                                      rows="3"
+                                      md-select-on-focus></textarea>
+
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions class="text-right">
+            <md-button class="md-raised md-primary"
+                       ng-click="vm.confirm()"
+                       ng-disabled="vm.createInventoryForm.$invalid || vm.createInventoryForm.$pristine"
+                       aria-label="CRUD.SAVE"
+                       translate="CRUD.SAVE"></md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

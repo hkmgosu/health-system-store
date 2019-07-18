@@ -1,0 +1,8 @@
+ssvq-article-list{
+    height: calc(100vh - 128px);
+}
+@media (max-width: 599px){
+    ssvq-article-list{
+        height: calc(100vh - 112px);
+    }
+}

@@ -1,0 +1,68 @@
+<div layout="row">
+    <md-input-container flex>
+        <label for="movementType">{{'STORAGE_MOVEMENT.TABLE.MOVEMENT_TYPE'|translate}}</label>
+
+        <md-select name="movementType"
+                   ng-model="vm.movement.movementType"
+                   ng-disabled="vm.movement.status==2 || vm.movement.details.length"
+                   ng-if="vm.movement.isInput"
+                   required>
+            <md-option ng-repeat="movementType in vm.movementTypes|filter:{isInput:vm.movement.isInput}"
+                       ng-value="movementType.id">{{movementType.description}}</md-option>
+        </md-select>
+
+        <md-select name="movementType"
+                   ng-model="vm.movement.movementType"
+                   ng-disabled="vm.movement.status==2 || vm.movement.details.length"
+                   ng-if="vm.movement.isOutput"
+                   required>
+            <md-option ng-repeat="movementType in vm.movementTypes|filter:{isOutput:vm.movement.isOutput}"
+                       ng-value="movementType.id">{{movementType.description}}</md-option>
+        </md-select>
+
+        <div ng-messages="formGeneral.movementType.$error">
+            <div ng-message="required">
+                <span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+            </div>
+        </div>
+    </md-input-container>
+
+    <md-input-container flex>
+        <label for="unit">{{'STORAGE_MOVEMENT.TABLE.UNIT'|translate}}</label>
+        <md-select name="unit"
+                   ng-model="vm.movement.unit"
+                   ng-disabled="vm.movement.status==2 || vm.movement.details.length"
+                   required>
+            <md-option ng-repeat="unit in vm.units | filter:{ storage:true }"
+                       ng-value="unit.id">{{unit.name}}</md-option>
+        </md-select>
+        <div ng-messages="formGeneral.unit.$error">
+            <div ng-message="required">
+                <span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+            </div>
+        </div>
+    </md-input-container>
+</div>
+
+<div flex
+     layout-gt-sm="row"
+     ng-show="vm.movement.isPharmaceutical">
+    <md-switch class="md-block md-primary"
+               flex
+               ng-disabled="vm.movement.status==2 || vm.movement.details.length"
+               ng-show="vm.movement.isPharmaceutical"
+               ng-model="vm.isControlled"
+               aria-label="Medicamentos Controlados">Medicamentos Controlados
+    </md-switch>
+</div>
+
+<div ng-if="vm.movement.movementType==1"
+     ng-include="'/components/storage/movement/movementEdit/typeOrdenCompra.html'"></div>
+<div ng-if="vm.movement.movementType==2"
+     ng-include="'/components/storage/movement/movementEdit/typeDonacion.html'"></div>
+<div ng-if="vm.movement.movementType==3"
+     ng-include="'/components/storage/movement/movementEdit/typePrestamo.html'"></div>
+<div ng-if="vm.movement.movementType==4"
+     ng-include="'/components/storage/movement/movementEdit/typeDevuelven.html'"></div>
+<div ng-if="vm.movement.movementType==5"
+     ng-include="'/components/storage/movement/movementEdit/typeCenabast.html'"></div>

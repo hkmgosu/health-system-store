@@ -1,0 +1,265 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button"
+                   href="#/funcionarios"
+                   aria-label="Cancelar">
+            <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            <md-tooltip>Volver al listado</md-tooltip>
+        </md-button>
+        <ssvq-employee-avatar employee="vm.employee"></ssvq-employee-avatar>
+        <div flex
+             layout="column"
+             class="margin-left-10"
+             md-truncate>
+            <span class="md-body-1">{{vm.employee.fullname}}</span>
+            <span class="md-caption">{{vm.employee.rut | rut}}</span>
+        </div>
+        <ssvq-employee-actions employee="vm.employee"
+                               on-delete="vm.onDelete"></ssvq-employee-actions>
+    </div>
+</md-toolbar>
+<md-content layout="column"
+            class="overlay-5">
+    <md-subheader class="md-primary md-hue-1 overlay-5">Datos generales</md-subheader>
+    <md-card style="min-height: 362px;">
+        <md-card-content>
+            <div ng-form="vm.generalDataForm">
+                <div flex
+                     layout-gt-sm="row">
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label for="name"
+                               translate>EMPLOYEE.TABLE.NAME</label>
+                        <input type="text"
+                               name="name"
+                               ng-model="vm.employee.name"
+                               required />
+                        <div ng-messages="saveForm.name.$error">
+                            <div ng-message="required">
+                                <span translate>EMPLOYEE.VALIDATOR.REQUIRED</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label translate>EMPLOYEE.TABLE.LASTNAME</label>
+                        <input type="text"
+                               name="lastname"
+                               ng-model="vm.employee.lastname"
+                               required>
+                        <div ng-messages="saveForm.lastname.$error">
+                            <div ng-message="required">
+                                <span translate>EMPLOYEE.VALIDATOR.REQUIRED</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label translate>EMPLOYEE.TABLE.MLASTNAME</label>
+                        <input type="text"
+                               name="mlastname"
+                               ng-model="vm.employee.mlastname">
+                    </md-input-container>
+                </div>
+                <div flex
+                     layout-gt-sm="row"
+                     class="md-inline-form">
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label>Correo Institucional</label>
+                        <input type="email"
+                               name="email"
+                               ng-model="vm.employee.email"
+                               unique
+                               init="{{vm.employee.email}}">
+                        <div ng-messages="saveForm.email.$error">
+                            <div ng-message="email">
+                                <span translate>EMPLOYEE.VALIDATOR.EMAIL</span>
+                            </div>
+                            <div ng-message="unique">
+                                <span translate>EMPLOYEE.VALIDATOR.UNIQUE</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label translate>Correo personal</label>
+                        <input type="email"
+                               name="personalEmail"
+                               ng-model="vm.employee.personalEmail">
+                        <div ng-messages="saveForm.personalEmail.$error">
+                            <div ng-message="email">
+                                <span translate>EMPLOYEE.VALIDATOR.EMAIL</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label translate>EMPLOYEE.TABLE.ANNEXE</label>
+                        <input type="text"
+                               ng-model="vm.employee.annexe">
+                    </md-input-container>
+                </div>
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block"
+                                        flex="100"
+                                        flex-gt-sm="33">
+                        <label>Género</label>
+                        <md-select ng-model="vm.employee.gender">
+                            <md-option ng-value="gender.code"
+                                       ng-repeat="gender in vm.genderList">{{gender.text}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        flex="100"
+                                        flex-gt-sm="33">
+                        <label>Fecha nacimiento</label>
+                        <md-icon md-font-icon="zmdi zmdi-calendar"
+                                 class="md-accent"></md-icon>
+                        <input type="date"
+                               ssvq-date-input
+                               name="birthdate"
+                               ng-model="vm.employee.birthdate">
+                        <div ng-messages="vm.saveForm.birthdate.$error">
+                            <div ng-message="date">
+                                <span>{{::('EMPLOYEE.VALIDATOR.DATE' | translate)}}</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div layout="row">
+                    <span flex></span>
+                    <md-button class="md-raised md-primary"
+                               ng-click="vm.saveGeneralDataForm()"
+                               ng-disabled="vm.generalDataForm.$pristine">Actualizar datos generales</md-button>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
+
+    <md-subheader class="md-primary md-hue-1 overlay-5">Datos laborales</md-subheader>
+    <md-card style="min-height: 266px;">
+        <md-card-content>
+            <div ng-form="vm.jobDataForm">
+                <div layout-gt-sm="row">
+                    <ssvq-job-autocomplete selected="vm.employee.job"
+                                           flex></ssvq-job-autocomplete>
+                    <ssvq-unit-autocomplete selected="vm.employee.unit"
+                                            flex></ssvq-unit-autocomplete>
+                    <ssvq-establishment-autocomplete selected="vm.employee.establishment"
+                                                     flex></ssvq-establishment-autocomplete>
+                </div>
+                <div layout="row">
+                    <div flex
+                         layout-gt-sm="row">
+                        <md-input-container class="md-block"
+                                            flex>
+                            <label translate>EMPLOYEE.TABLE.LEGALQUALITY</label>
+                            <md-select ng-model="vm.employee.legalquality">
+                                <md-option ng-value="legalQuality.id"
+                                           ng-repeat="legalQuality in vm.parametricObj.legalQualities">{{legalQuality.name}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label translate>EMPLOYEE.TABLE.LEVEL</label>
+                            <input type="number"
+                                   ng-model="vm.employee.level">
+                        </md-input-container>
+                        <md-input-container class="md-block"
+                                            flex>
+                            <label translate>EMPLOYEE.TABLE.PLANT</label>
+                            <md-select ng-model="vm.employee.plant">
+                                <md-option ng-value="plant.id"
+                                           ng-repeat="plant in vm.parametricObj.plants">{{plant.name}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div flex
+                     layout-gt-sm="row">
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label translate>EMPLOYEE.TABLE.AFP</label>
+                        <md-select ng-model="vm.employee.afp">
+                            <md-option ng-value="afp.id"
+                                       ng-repeat="afp in vm.parametricObj.afps">{{afp.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label translate>EMPLOYEE.TABLE.HEALTHCARE</label>
+                        <md-select ng-model="vm.employee.healthcare">
+                            <md-option ng-value="healthcare.id"
+                                       ng-repeat="healthcare in vm.parametricObj.healthcares">{{healthcare.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div layout="row">
+                    <span flex></span>
+                    <md-button class="md-raised md-primary"
+                               ng-click="vm.saveJobDataForm()"
+                               ng-disabled="vm.jobDataForm.$pristine">Actualizar datos laborales</md-button>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
+    <md-subheader class="md-primary md-hue-1 overlay-5">Otros</md-subheader>
+    <md-card>
+        <md-card-content class="padding-0">
+            <md-list>
+                <md-list-item class="md-2-line"
+                              ng-click="vm.manageProfileList($event)">
+                    <div class="md-list-item-text">
+                        <h4>Perfiles</h4>
+                        <p>
+                            <span ng-repeat="profile in vm.employee.profileList">
+                                <span>{{profile.name}}</span>
+                                <span ng-if="!$last">, </span>
+                            </span>
+                        </p>
+                    </div>
+                    <md-icon md-font-icon="zmdi zmdi-edit"
+                             class="md-secondary"></md-icon>
+                </md-list-item>
+                <md-list-item class="md-2-line"
+                              ng-click="vm.editUnitReported($event)">
+                    <div class="md-list-item-text">
+                        <h4>Unidad de reporte</h4>
+                        <p>{{vm.employee.managedByUnit.name || 'Por defecto'}}</p>
+                    </div>
+                    <md-icon md-font-icon="zmdi zmdi-edit"
+                             class="md-secondary"></md-icon>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text">
+                        <h4>Acceso SAMU</h4>
+                        <p>Permite ver incidentes samu sin estar en un turno vigente</p>
+                    </div>
+                    <md-checkbox class="md-secondary md-primary md-hue-1"
+                                 ng-model="vm.employee.samuFullAccess"
+                                 ng-model-options="{ debounce: 1000 }"
+                                 ng-change="vm.onSamuFullAccessChange()"></md-checkbox>
+                </md-list-item>
+            </md-list>
+        </md-card-content>
+    </md-card>
+    <md-subheader class="md-primary md-hue-1 overlay-5">Recursos asociados</md-subheader>
+    <md-card>
+        <md-card-content class="padding-left-0 padding-right-0">
+            <p class="md-body-2 text-center margin-0"
+               ng-show="!vm.employeeResourceList.length">No hay recursos asociados</p>
+            <md-list class="padding-0">
+                <div ng-repeat="item in vm.employeeResourceList">
+                    <ssvq-resource-item-list resource="item"></ssvq-resource-item-list>
+                    <md-divider ng-if="!$last"></md-divider>
+                </div>
+            </md-list>
+        </md-card-content>
+    </md-card>
+    <md-subheader class="md-primary md-hue-1 overlay-5">Imagen de perfil</md-subheader>
+    <md-card>
+        <md-card-content>
+            <ssvq-employee-profile-picture-selector employee="vm.employee"></ssvq-employee-profile-picture-selector>
+        </md-card-content>
+    </md-card>
+</md-content>

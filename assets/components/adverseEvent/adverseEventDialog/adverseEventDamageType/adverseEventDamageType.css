@@ -1,0 +1,21 @@
+div.adverse-list-item p {
+    font-size: 1.4rem;
+    color: #000000;
+}
+div.adverse-list-item p.active {
+    font-weight: bold;
+}
+
+div.adverse-list-item p {
+    margin-left: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    div.adverse-list-item p {
+        margin-left: 0px;
+    }
+    div.adverse-list-item md-list-item .md-list-item-inner {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}

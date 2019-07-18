@@ -1,0 +1,32 @@
+var app = angular.module('app', [
+    'triangular',
+    'ngAnimate',
+    'ngCookies',
+    'ngSanitize',
+    'ngMessages',
+    'ngMaterial',
+    'ui.router',
+    'pascalprecht.translate',
+    'LocalStorageModule',
+    'linkify',
+    'ui.calendar',
+    'angularMoment',
+    'md.data.table',
+    'ngFileUpload',
+    'platanus.rut',
+    'mdLetterAvatar',
+    'angulartics',
+    'angulartics.google.analytics',
+    'ngjsColorPicker',
+    'chart.js',
+    'ngImgCrop',
+    'ksSwiper',
+    'leaflet-directive',
+    'angular-bind-html-compile',
+    'matchMedia',
+    'angular.filter',
+    'mentio'
+]).constant('APP_LANGUAGES', [{
+    name: 'LANGUAGES.ESPANISH',
+    key: 'es'
+}]);

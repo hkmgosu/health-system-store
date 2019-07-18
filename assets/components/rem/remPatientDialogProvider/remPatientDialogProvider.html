@@ -1,0 +1,96 @@
+<md-dialog aria-label="Detalles paciente"
+           flex="70"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog"
+           id="rem-patient-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <span class="md-subhead"
+                  ng-show="!vm.remPatient.id"
+                  flex>
+                Nuevo Paciente
+            </span>
+            <div layout="column"
+                 ng-show="vm.remPatient.id"
+                 flex
+                 md-truncate>
+                <span class="md-caption">Detalles del paciente</span>
+                <span class="md-body-1">
+                    {{ ::('#' + vm.remPatient.incrementalID) }} {{ vm.remPatient.patient.fullname || 's/nombre' }}
+                </span>
+            </div>
+            <md-button ng-click="vm.createRemPatient()"
+                       ng-disabled="vm.dialogForm.$invalid"
+                       ng-show="!vm.remPatient.id">
+                <span>Agregar paciente al incidente</span>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-tabs flex
+                 md-selected="vm.selectedTab"
+                 class="rem-patient-tabs md-primary md-hue-1">
+            <md-tab label="{{::('PATIENT.TAB.INITIALS' | translate)}}">
+                <div ng-form="vm.dialogForm">
+                    <ssvq-patient-form patient="vm.remPatient.patient"
+                                       opts="{showButtons: vm.remPatient.id, idTypeVisibility: vm.idTypeVisibility}"
+                                       on-update="vm.createLog"></ssvq-patient-form>
+                    <ssvq-basic-evolution basic="vm.remPatient"
+                                          form="vm.triageForm"></ssvq-basic-evolution>
+                </div>
+            </md-tab>
+            <!-- Tab Regulación -->
+            <md-tab label="{{::('PATIENT.TAB.REGULATOR' | translate)}}"
+                    class="patient-tab-dialog"
+                    ng-disabled="!vm.remPatient.id">
+                <ssvq-patient-regulator ng-if="vm.selectedTab == 1"
+                                        id-rem-patient="{{vm.remPatient.id}}"></ssvq-patient-regulator>
+            </md-tab>
+            <!-- Tab Intervención -->
+            <md-tab label="{{::('PATIENT.TAB.INTERVENTION' | translate)}}"
+                    ng-disabled="!vm.remPatient.id">
+                <ssvq-patient-intervention ng-if="vm.selectedTab == 2"
+                                           id-rem-patient="{{vm.remPatient.id}}"></ssvq-patient-intervention>
+            </md-tab>
+            <!-- Tab Evolución -->
+            <md-tab label="{{::('PATIENT.TAB.EVOLUTION' | translate)}}"
+                    ng-disabled="!vm.remPatient.id">
+                <div class="md-dialog-content-full">
+                    <ssvq-patient-evolution ng-if="vm.selectedTab == 3"
+                                            id-rem-patient="{{vm.remPatient.id}}"></ssvq-patient-evolution>
+                </div>
+            </md-tab>
+            <!-- Tab Historial -->
+            <md-tab ng-disabled="!vm.remPatient.id">
+                <md-tab-label>
+                    <span>{{::('PATIENT.TAB.HISTORY' | translate)}}</span>
+                    <span class="md-badge"
+                          ng-show="vm.historyCount">
+                        {{vm.historyCount || 0}}
+                    </span>
+                </md-tab-label>
+                <md-tab-body>
+                    <div>
+                        <ssvq-patient-clinical-history id-patient="{{ vm.remPatient.patient.id }}"
+                                                       count="vm.historyCount"></ssvq-patient-clinical-history>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+    <md-dialog-actions ng-if="!vm.remPatient.id"
+                       class="md-whiteframe-10dp">
+        <md-button class="md-primary md-raised md-hue-1"
+                   ng-click="vm.createRemPatient()"
+                   ng-disabled="vm.dialogForm.$invalid"
+                   ng-show="!vm.remPatient.id">
+            <span>Agregar paciente al incidente</span>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

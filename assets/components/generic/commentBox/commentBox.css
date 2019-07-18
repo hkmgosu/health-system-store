@@ -1,0 +1,21 @@
+.mentioned{
+    color: rgb(51,128,191);
+    background: #a8a8a81a;
+    font-weight: bold;
+    padding: 0 4px;
+    margin: 0 2px;
+    border-radius: 3px;
+}
+
+.customContentEditable{
+    border-bottom: 1px solid #b3b3b3;
+    padding:3px;
+    outline: none !important;
+    transition : border 200ms linear;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.customContentEditable:focus{
+    border-bottom: 2px solid #3d72a3;
+}

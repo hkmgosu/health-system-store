@@ -1,0 +1,52 @@
+{
+    "name": "Productos Simple",
+    "description": "Listado de Productos",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-product-simple",
+            "url": "/bodega/productos-simple",
+            "template": "<ssvq-storage-product-simple></ssvq-storage-product-simple>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/ProductController.get",
+                "Storage/ProductController.getAll",
+                "Storage/ProductController.getParams",
+                "Storage/ProductController.getStockParameters",
+                "Storage/ProductController.getAllowedProducts",
+                "UnitController.getUnitsForStorageManagement",
+                "Storage/ProductController.downloadProductProfilePicture",
+                "Storage/UnitProductsManagerController.getProductUnits",
+                "Storage/UnitProductsManagerController.getAllowedUnits",
+                "Storage/UnitProductsManagerController.getProductStoragesStock",
+                "Storage/ProductController.getProductByParams",
+                "Storage/ProductController.getPacks",
+                "Storage/ProductController.validateProductCode"
+            ],
+            "create": [
+                "Storage/ProductController.create",
+                "Storage/ProductController.saveStockParameter",
+                "Storage/UnitProductsManagerController.save",
+                "Storage/ProductController.savePack"
+            ],
+            "update": [
+                "Storage/ProductController.update",
+                "Storage/ProductController.deleteProductProfilePicture",
+                "Storage/ProductController.uploadProductProfilePicture"
+            ],
+            "delete": [
+                "Storage/ProductController.delete",
+                "Storage/ProductController.removeStockParameter",
+                "Storage/UnitProductsManagerController.delete",
+                "Storage/ProductController.removePack"
+            ]
+
+        }
+    }
+}

@@ -1,0 +1,45 @@
+<md-dialog aria-label="Administrar unidad de reporte del funcionario"
+           flex="70"
+           flex-sm="80"
+           flex-xs="100">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <div layout="column"
+                 hide-xs
+                 flex>
+                <span class="md-subhead">Unidad de reporte</span>
+                <span class="md-caption">{{vm.employee.fullname}}</span>
+            </div>
+            <md-button ng-click="vm.confirm()">Confirmar</md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-list>
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h4>Reporte por defecto</h4>
+                    <p>Unidad más próxima con jefatura asignada</p>
+                </div>
+                <p class="md-secondary">{{vm.defaultReportUnit.name || 'No encontrada'}}</p>
+            </md-list-item>
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h4>Reporte forzado</h4>
+                    <p>Reemplaza a la unidad de reporte por defecto</p>
+                </div>
+                <div class="md-secondary"
+                     style="min-width: 300px;">
+                    <ssvq-unit-autocomplete label="Seleccionar unidad"
+                                            type="search"
+                                            selected="vm.employee.managedByUnit">
+                    </ssvq-unit-autocomplete>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-dialog-content>
+</md-dialog>

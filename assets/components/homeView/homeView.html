@@ -1,0 +1,23 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <h4 flex>Publicaciones</h4>
+        <ssvq-search-input on-change="vm.onSearchTextChange"
+                           flex="50"></ssvq-search-input>
+        <span flex></span>
+        <md-button ng-click="vm.showCategoryList()">Ver categorías</md-button>
+    </div>
+</md-toolbar>
+<section layout="row"
+         class="full-height"
+         layout-fill
+         flex>
+    <!-- Lista de categorías -->
+    <md-sidenav class="md-sidenav-left md-whiteframe-1dp"
+                md-component-id="article-category">
+        <ssvq-article-category-selector on-change="vm.onCategoryChange"
+                                        show-private="false"></ssvq-article-category-selector>
+    </md-sidenav>
+    <!-- Contenido -->
+    <ssvq-article-list filter="vm.filter"
+                       flex></ssvq-article-list>
+</section>

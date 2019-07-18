@@ -1,0 +1,23 @@
+<!-- Selector de unidad -->
+<div layout="column">
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h3>{{vm.employee.fullname || '--'}}</h3>
+            <p>Nombre</p>
+        </div>
+        <md-divider></md-divider>
+    </md-list-item>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h3>{{vm.employee.rut || '--' | rut }}</h3>
+            <p>Rut</p>
+        </div>
+        <md-divider></md-divider>
+    </md-list-item>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h3>{{vm.employee.unit.name || '--'}}</h3>
+            <p>Unidad Administrativa</p>
+        </div>
+    </md-list-item>
+</div>

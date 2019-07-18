@@ -1,0 +1,183 @@
+<!-- Selector de unidad -->
+<div layout="column"
+     ng-if="::!vm.selfAssigned">
+    <form name="unitAssignmentForm"
+          ng-submit="unitAssignmentForm.$valid && vm.confirmSetUnitAssigned(true);"
+          novalidate>
+        <md-list-item class="md-2-line"
+                      ng-click="vm.editing='unit'"
+                      ng-disabled="vm.editing=='unit' || !vm.opts.unitAssigned.editable">
+            <div class="md-list-item-text">
+                <h3>Unidad Administrativa</h3>
+                <p>{{vm.unitAssigned.name || '--'}}</p>
+            </div>
+            <md-icon md-font-icon="zmdi zmdi-edit"
+                     ng-if="vm.opts.unitAssigned.editable"
+                     class="md-secondary md-18"></md-icon>
+        </md-list-item>
+        <md-content ng-show="vm.editing=='unit'"
+                    class="md-margin md-padding"
+                    md-whiteframe="1">
+            <ssvq-unit-autocomplete selected="vm.tmp.unitAssigned"
+                                    required="true"
+                                    filter-supervised="true"></ssvq-unit-autocomplete>
+            <div layout="row"
+                 layout-align="end center">
+                <md-button class="md-accent"
+                           ng-click="vm.editing = null">Cancelar</md-button>
+                <md-button class="md-primary md-raised"
+                           type="submit"
+                           ng-disabled="unitAssignmentForm.$submitted && unitAssignmentForm.$invalid">Guardar
+                </md-button>
+            </div>
+        </md-content>
+    </form>
+</div>
+
+<md-divider></md-divider>
+
+<!-- Selector de funcionario asignado -->
+<div layout="column">
+    <md-list-item class="md-2-line"
+                  ng-click="vm.editing='employee'"
+                  ng-disabled="vm.editing==='employee' || !vm.opts.employeeAssigned.editable">
+        <div class="md-list-item-text">
+            <h3>Asignado a</h3>
+            <p>{{ vm.employeeAssigned.fullname || '...' }}</p>
+        </div>
+        <md-icon md-font-icon="zmdi zmdi-edit"
+                 ng-if="vm.opts.employeeAssigned.editable"
+                 class="md-secondary md-18"></md-icon>
+    </md-list-item>
+    <md-content ng-show="vm.editing==='employee'"
+                class="md-margin md-padding"
+                md-whiteframe="1">
+        <ssvq-employee-autocomplete unit-root="vm.unitAssigned"
+                                    min-length="vm.minLength"
+                                    selected="vm.tmp.employeeAssigned"></ssvq-employee-autocomplete>
+        <div layout="row"
+             layout-align="end center">
+            <md-button class="md-accent"
+                       ng-click="vm.editing = null">Cancelar</md-button>
+            <md-button class="md-primary md-raised"
+                       ng-click="vm.confirmSetEmployeeAssigned($event, true);">Guardar</md-button>
+        </div>
+    </md-content>
+
+    <md-divider></md-divider>
+</div>
+
+<!-- Selector de tipo -->
+<div layout="column">
+    <md-list-item class="md-2-line"
+                  ng-click="vm.editing='label'"
+                  ng-disabled="vm.editing==='label' || !vm.opts.label.editable">
+        <div class="md-list-item-text">
+            <h3>Tipo</h3>
+            <p>{{vm.label.name || '...'}}</p>
+        </div>
+        <md-icon md-font-icon="zmdi zmdi-edit"
+                 ng-if="vm.opts.label.editable"
+                 class="md-secondary md-18"></md-icon>
+    </md-list-item>
+    <md-content ng-show="vm.editing==='label'"
+                class="md-margin md-padding"
+                md-whiteframe="1">
+        <md-select ng-model="vm.tmp.label"
+                   ng-model-options="{trackBy: '$value.id'}"
+                   placeholder="Seleccionar">
+            <md-option>...</md-option>
+            <md-option ng-value="label"
+                       ng-repeat="label in vm.labels track by $index">{{label.name}}</md-option>
+        </md-select>
+        <div layout="row"
+             layout-align="end center">
+            <md-button class="md-accent"
+                       ng-click="vm.editing = null">Cancelar</md-button>
+            <md-button class="md-primary md-raised"
+                       ng-click="vm.setLabel();">Guardar</md-button>
+        </div>
+    </md-content>
+</div>
+
+<md-divider></md-divider>
+
+<!-- Selector de fecha vencimiento -->
+<div layout="column">
+    <md-list-item class="md-2-line"
+                  ng-click="vm.editing='dueDate'"
+                  ng-disabled="vm.editing==='dueDate' || !vm.opts.dueDate.editable">
+        <div class="md-list-item-text">
+            <h3>Fecha de vencimiento</h3>
+            <p>{{(vm.dueDate | date : "dd MMM y" : 'UTC') || '...'}}</p>
+        </div>
+        <md-icon md-font-icon="zmdi zmdi-edit"
+                 ng-if="vm.opts.dueDate.editable"
+                 class="md-secondary md-18"></md-icon>
+    </md-list-item>
+    <md-content ng-show="vm.editing==='dueDate'"
+                ng-form="vm.dueDateForm"
+                class="md-margin"
+                md-whiteframe="1">
+        <md-input-container class="md-block margin-top-30">
+            <label>Vencimiento</label>
+            <md-datepicker ng-model="vm.tmp.dueDate"
+                           name="dueDate"
+                           md-min-date="vm.now"
+                           md-open-on-focus></md-datepicker>
+            <div ng-messages="vm.dueDateForm.dueDate.$error">
+                <div ng-message="valid">La fecha ingresada no es válida</div>
+            </div>
+        </md-input-container>
+        <div layout="row"
+             layout-align="end center"
+             ng-if="vm.requestId">
+            <md-button class="md-accent"
+                       ng-click="vm.editing = null">Cancelar</md-button>
+            <md-button class="md-primary md-raised"
+                       ng-disabled="!vm.dueDateForm.$valid"
+                       ng-click="vm.setDueDate();">Guardar</md-button>
+        </div>
+    </md-content>
+</div>
+
+<md-divider></md-divider>
+
+<!-- Notificaciones -->
+<div layout="column"
+     ng-if="vm.requestId"
+     class="md-padding"
+     ng-cloak>
+    <md-button class="md-accent md-raised"
+               ng-click="vm.setSubscribed(!vm.subscribed)">
+        <md-icon md-font-icon="zmdi zmdi-notifications-{{vm.subscribed ? 'off':'active'}}"></md-icon>
+        {{vm.subscribed ? 'Cancelar suscripción' : 'Suscribir'}}
+    </md-button>
+    <span class="md-caption text-center">
+        {{ vm.subscribed ? 'Recibirás notificaciones de esta solicitud' : 'No recibirás notificaciones de esta solicitud' }}
+    </span>
+</div>
+
+<md-divider></md-divider>
+
+<!-- Selector de participates -->
+<div>
+    <md-list-item ng-click="vm.editStakeholders($event)">
+        Participantes
+        <md-icon md-font-icon="zmdi zmdi-edit"
+                 class="md-secondary md-18"></md-icon>
+    </md-list-item>
+    <div class="padding-top-0"
+         layout="row"
+         layout-wrap
+         layout-padding>
+        <ssvq-employee-profile-link ng-repeat="stakeholder in vm.visibleStakeholders track by $index"
+                                    id-employee="{{stakeholder.employee.id}}">
+            <ssvq-employee-avatar employee="stakeholder.employee">
+            </ssvq-employee-avatar>
+            <md-tooltip md-direction="left">
+                {{stakeholder.employee.fullname}}
+            </md-tooltip>
+        </ssvq-employee-profile-link>
+    </div>
+</div>

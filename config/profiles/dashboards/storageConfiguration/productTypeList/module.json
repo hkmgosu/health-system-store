@@ -1,0 +1,28 @@
+{
+    "name": "PRIVILEGES.STORAGE.PRODUCT_TYPE.LIST.NAME",
+    "description": "PRIVILEGES.STORAGE.PRODUCT_TYPE.LIST.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-product-type",
+            "url": "/bodega/tipo-producto",
+            "template": "<ssvq-storage-product-type></ssvq-storage-product-type>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/ProductTypeController.get",
+                "Storage/ProductTypeController.getList",
+                "Storage/AccountPlanController.getAll"
+            ],
+            "create": ["Storage/ProductTypeController.save"],
+            "update": ["Storage/ProductTypeController.save"],
+            "delete": ["Storage/ProductTypeController.delete"]
+
+        }
+    }
+}

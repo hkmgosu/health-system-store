@@ -1,0 +1,48 @@
+<md-list-item class="md-2-line triage rem-patient-item animated flipInX"
+              ng-class="vm.remPatient.triage || 'withoutTriage'"
+              aria-label="{{vm.remPatient.patient.name + vm.remPatient.patient.lastname}}"
+              ng-click="vm.showPatientDialog($event, vm.remPatient)">
+    <md-icon class="patient-icon md-avatar-icon"
+             md-font-icon="zmdi zmdi-account">
+        <div class="top-border"></div>
+        <div class="bottom-border"></div>
+    </md-icon>
+    <div class="md-list-item-text"
+         style="width:calc(100% - 100px)">
+        <h3 md-truncate>
+            #{{vm.remPatient.incrementalID}} •
+            <span>{{vm.remPatient.patient.fullname || 's/nombre'}}</span>
+        </h3>
+        <p md-truncate>
+            <span>
+                {{ (vm.remPatient.patient.gender | translate) || 's/género'}}
+            </span>
+            <span>•</span>
+            <ssvq-patient-age patient="vm.remPatient.patient"></ssvq-patient-age>
+        </p>
+    </div>
+    <md-menu md-position-mode="target-right target"
+             class="md-secondary">
+        <md-button class="md-icon-button"
+                   ng-click="$mdMenu.open()">
+            <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+        </md-button>
+        <md-menu-content width="4">
+            <md-menu-item>
+                <md-button ng-click="vm.associatePatientVehicle(vm.remPatient, $event)">
+                    <md-icon class="movil-icon"
+                             md-font-icon="zmdi zmdi-truck"
+                             md-menu-origin></md-icon>
+                    Asociar/desasociar despacho
+                </md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button ng-click="vm.deleteRemPatient(vm.remPatient)">
+                    <md-icon class="md-warn"
+                             md-font-icon="zmdi zmdi-delete"></md-icon>
+                    Eliminar del incidente
+                </md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+</md-list-item>

@@ -1,0 +1,56 @@
+<div class="md-padding">
+    <span class="md-title">Ubicaciones en Bodegas</span>
+</div>
+
+<div layout="row"
+     layout-align="center">
+    <md-card flex="50">
+        <md-card-header>
+            <div flex>
+                Bodega
+                <md-button style="float: right;"
+                           ng-click="vm.clean()">Limpiar
+                </md-button>
+            </div>
+        </md-card-header>
+        <md-card-content>
+            <md-input-container class="md-block">
+                <label for="unit">Bodega</label>
+                <md-select ng-model="vm.unitSelected"
+                           name="unit"
+                           aria-label="Bodega"
+                           ng-change="vm.onSelectUnit()">
+                    <md-option ng-repeat="unit in vm.units track by $index"
+                               ng-value="unit.id">{{unit.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <h4>Ubicaciones</h4>
+
+            <md-list class="padding-0">
+                <md-list-item class="md-2-line"
+                              aria-label="{{item.name}}"
+                              ng-repeat="item in vm.locations track by $index"
+                              ng-click="vm.edit($event,$index)"
+                              layout="row">
+                    <div class="md-list-item-text"
+                         flex>
+                        <h4>{{item.description}}</h4>
+                    </div>
+                    <md-button ng-click="vm.delete(item.id, $index)">
+                        <md-icon md-font-icon="fa fa-trash"></md-icon>
+                    </md-button>
+                </md-list-item>
+            </md-list>
+
+            <div class="text-right">
+                <md-button class="md-fab md-primary"
+                           ng-disabled="!vm.unitSelected"
+                           ng-click="vm.create($event)">
+                    <md-icon md-font-icon="fa fa-plus"></md-icon>
+                </md-button>
+            </div>
+        </md-card-content>
+    </md-card>
+</div>

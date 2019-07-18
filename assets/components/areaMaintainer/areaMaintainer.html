@@ -1,0 +1,114 @@
+<section layout="row"
+         flex
+         class="area-view">
+
+    <!-- Contenedor sidenav izquierdo -->
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2"
+                md-component-id="left"
+                md-is-locked-open="true">
+
+        <!-- Lista de áreas -->
+        <div ng-if="!vm.areaSelected">
+            <md-toolbar class="md-hue-1">
+                <div class="md-toolbar-tools">
+                    <h4 flex>{{"AREA.TITLE"|translate}}</h4>
+                    <md-button class="md-icon-button"
+                               ng-click="vm.selectArea();">
+                        <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+
+            <md-content class="full-height">
+                <md-list>
+                    <md-list-item ng-repeat="area in vm.areaList"
+                                  ng-disabled="!area.visible"
+                                  ng-click="vm.selectArea(area)">
+                        <md-icon ng-style="{color: area.color}"
+                                 md-font-icon="zmdi zmdi-dot-circle-alt"></md-icon>
+                        <div class="md-list-item-text"
+                             flex>
+                            <h4>{{area.name}}</h4>
+                        </div>
+                        <md-button class="md-icon-button"
+                                   ng-click="vm.toggleVisibility(area)">
+                            <md-tooltip>
+                                ocultar/mostrar
+                            </md-tooltip>
+                            <md-icon md-font-icon="zmdi "
+                                     ng-class="{'zmdi-eye':area.visible,'zmdi-eye-off':!area.visible}"></md-icon>
+                        </md-button>
+                        <md-divider ng-if="!$last"></md-divider>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+        </div>
+
+        <!-- Edición de área -->
+        <div ng-if="vm.areaSelected"
+             ng-form="vm.areaForm">
+            <md-toolbar class="md-hue-1">
+                <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button"
+                               ng-click="vm.cancel()">
+                        <md-tooltip>Volver</md-tooltip>
+                        <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                    </md-button>
+                    <h4 flex>
+                        <span ng-show="vm.areaSelected.id">Edición</span>
+                        <span ng-show="!vm.areaSelected.id">Nueva</span>
+                    </h4>
+                    <md-button class="md-icon-button"
+                               ng-disabled="!vm.areaForm.$valid || !vm.layerSelected"
+                               ng-click="vm.confirmSave(vm.areaSelected)">
+                        <md-tooltip>Confirmar</md-tooltip>
+                        <md-icon md-font-icon="zmdi zmdi-check"></md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-content class="md-padding"
+                        layout="column">
+                <md-input-container flex="100">
+                    <label translate='AREA.NAME'></label>
+                    <input ng-model="vm.areaSelected.name"
+                           name="name"
+                           required
+                           type="text">
+                    <div ng-messages="vm.areaForm.name.$error">
+                        <div ng-message="required">Ingrese un nombre</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex="100">
+                    <label>Tipo</label>
+                    <md-select ng-model="vm.areaSelected.category">
+                        <md-option value="urbano">Zona urbana</md-option>
+                        <md-option value="rural">Rural</md-option>
+                    </md-select>
+                </md-input-container>
+                <p class="md-caption">{{"AREA.COLOR" | translate}}</p>
+                <ngjs-color-picker options="vm.customOptions"
+                                   custom-colors="vm.customColors"
+                                   selected-color="vm.areaSelected.color"></ngjs-color-picker>
+
+                <br>
+
+                <md-checkbox ng-model="vm.areaSelected.isPublic">
+                    Área visible pública
+                </md-checkbox>
+            </md-content>
+        </div>
+
+    </md-sidenav>
+
+    <!-- Contenedor del mapa -->
+    <md-content flex>
+        <div class="areas-map-container">
+            <leaflet center="vm.map.center"
+                     defaults="vm.map.defaults"
+                     layers="vm.map.layers"
+                     event-broadcast="vm.map.events"
+                     width="100%"
+                     height="100%"></leaflet>
+        </div>
+    </md-content>
+</section>

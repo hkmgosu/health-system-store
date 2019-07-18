@@ -1,0 +1,69 @@
+<md-dialog aria-label="Vehículo"
+           flex="60"
+           flex-xs="90">
+    <form name="saveForm"
+          ng-submit="saveForm.$valid && vm.confirm()"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                </md-button>
+                <div layout="column"
+                     flex>
+                    <span class="md-subhead">Cambio de estado</span>
+                    <span class="md-caption">{{vm.vehicle.name}}</span>
+                </div>
+                <md-button type="submit"
+                           aria-label="{{ 'CRUD.SAVE' | translate }}"
+                           ng-disabled="!vm.currentStatus">
+                    Cambiar estado
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-subheader>Seleccione un estado</md-subheader>
+            <md-list>
+                <md-list-item ng-click="vm.currentStatus = status;"
+                              ng-disabled="vm.currentStatus.id === status.id"
+                              ng-repeat="status in vm.vehicleStatusList | orderBy:['type','order']">
+                    <md-icon class="md-primary"
+                             style="font-size:20px;"
+                             ng-class="{'zmdi zmdi-check-square': (vm.currentStatus.id == status.id)}"></md-icon>
+                    <span class="md-body-1"
+                          flex
+                          ng-class="{'selected md-body-2': (vm.currentStatus.id == status.id)}">
+                        {{status.name}}
+                    </span>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+
+            <md-content md-whiteframe="2"
+                        ng-show="vm.vehicle.status.type=='ensalida'">
+                <p class="text-center">
+                    <md-icon class="md-primary"
+                             md-font-icon="zmdi zmdi-info"></md-icon>
+                    La
+                    <a ng-href="#/samu/incidentes/{{vm.vehicle.currentRem}}"
+                       target="_blank">salida actual</a> del vehículo quedará finalizada
+                </p>
+            </md-content>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-accent"
+                       ng-click="vm.cancel()"
+                       aria-label="{{ 'CRUD.CANCEL' | translate }}">
+                Volver
+            </md-button>
+            <md-button class="md-primary"
+                       type="submit"
+                       aria-label="{{ 'CRUD.SAVE' | translate }}"
+                       ng-disabled="!vm.currentStatus">
+                Cambiar estado
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

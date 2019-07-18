@@ -1,0 +1,13 @@
+{
+    "name": "PRIVILEGES.STORAGE.NAME",
+    "description": "PRIVILEGES.STORAGE.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "icon": "zmdi zmdi-store"
+        },
+        "_controllers": {}
+    }
+}

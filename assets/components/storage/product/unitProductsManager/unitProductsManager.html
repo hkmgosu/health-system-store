@@ -1,0 +1,61 @@
+<ng-form name="vm.unitProductsManagerForm">
+    <div flex
+         layout-gt-sm="row"
+         class="md-padding">
+        <md-input-container class="md-block"
+                            flex>
+            <label for="unit"
+                   translate>PRODUCT.TABLE.UNIT</label>
+            <md-select ng-model="vm.unitProductsManager.unit"
+                       ng-change="vm.addUnitProductsManager()"
+                       required
+                       name="unit">
+                <md-option ng-value="item.id"
+                           ng-repeat="item in vm.parametricData.units">
+                    {{item.name}}
+                </md-option>
+            </md-select>
+            <div ng-messages="vm.unitProductsManagerForm.unit.$error">
+                <div ng-message="required">
+                    <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                </div>
+            </div>
+        </md-input-container>
+    </div>
+</ng-form>
+<div class="md-whiteframe-1dp overlay-5 padding-top-10 padding-bottom-10 md-margin">
+    <p class="text-center">
+        <md-icon md-font-icon="zmdi zmdi-info"></md-icon>
+        &nbsp; utiliza el buscador para agregar producto a una unidad
+    </p>
+</div>
+<div style="min-height: 100px;">
+    <md-list md-dynamic-height
+             ng-show="vm.unitProductsManagers.length !== 0">
+        <md-list-item ng-repeat="item in vm.unitProductsManagers track by $index"
+                      class="md-2-line">
+            <div flex
+                 layout-gt-sm="row"
+                 class="md-list-item-text">
+                <h4 class="md-padding">{{item.unit.name}}</h4>
+            </div>
+            <md-button class="md-secondary md-warn md-raised"
+                       ng-disabled="vm.unitProductsManagers.length == 1"
+                       ng-click="vm.removeUnitProductsManager(item)">
+                Quitar
+                <md-tooltip>
+                    Quitar Unidad
+                </md-tooltip>
+            </md-button>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+    <p class="text-center md-padding"
+       ng-show="vm.unitProductsManagers.length === 0">
+        Sin Unidades
+    </p>
+    <p class="text-center md-padding"
+       ng-show="vm.unitProductsManagers === null">
+        Cargando Unidades
+    </p>
+</div>

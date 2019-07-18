@@ -1,0 +1,120 @@
+<div layout="row">
+	<md-input-container flex
+						class="md-block">
+		<label for="idChileCompra">{{'STORAGE_MOVEMENT.TABLE.ID_CHILE_COMPRA'|translate}}</label>
+		<input type="text"
+			   name="idChileCompra"
+			   required
+			   ng-readonly="vm.movement.status==2"
+			   ng-model="vm.movement.idChileCompra">
+		<div ng-messages="formGeneral.idChileCompra.$error">
+			<div ng-message="required">
+				<span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+			</div>
+		</div>
+	</md-input-container>
+
+	<md-input-container flex
+						class="md-block">
+		<label for="company">{{'STORAGE_MOVEMENT.TABLE.COMPANY'|translate}}</label>
+		<md-select name="company"
+				   ng-disabled="vm.movement.status==2"
+				   ng-model="vm.movement.company"
+				   required>
+			<md-option ng-repeat="company in vm.companies"
+					   ng-value="company.id">{{company.name}}
+			</md-option>
+		</md-select>
+		<div ng-messages="formGeneral.company.$error">
+			<div ng-message="required">
+				<span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+			</div>
+		</div>
+	</md-input-container>
+</div>
+
+<div layout="row">
+	<md-input-container flex
+						flex-gt="33"
+						class="md-block">
+		<label for="numInvoice">{{'STORAGE_MOVEMENT.TABLE.NUM_INVOICE'|translate}}</label>
+		<input type="text"
+			   name="numInvoice"
+			   ng-readonly="vm.movement.status==2"
+			   ng-model="vm.movement.numInvoice">
+	</md-input-container>
+
+	<md-input-container flex
+						flex-gt="33"
+						class="md-block">
+		<label for="numPurchaseOrder">{{'STORAGE_MOVEMENT.TABLE.NUM_PURCHASE_ORDER'|translate}}</label>
+		<input type="text"
+			   name="numPurchaseOrder"
+			   ng-readonly="vm.movement.status==2"
+			   ng-model="vm.movement.numPurchaseOrder">
+		<div ng-messages="formGeneral.numPurchaseOrder.$error">
+			<div ng-message="required">
+				<span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+			</div>
+		</div>
+	</md-input-container>
+
+	<md-input-container flex
+						flex-gt="33"
+						class="md-block">
+		<label for="yearPurchaseOrder">{{'STORAGE_MOVEMENT.TABLE.YEAR_PURCHASE_ORDER'|translate}}</label>
+		<input type="text"
+			   name="yearPurchaseOrder"
+			   disabled
+			   ng-model="vm.movement.yearPurchaseOrder">
+		<div ng-messages="formGeneral.yearPurchaseOrder.$error">
+			<div ng-message="required">
+				<span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+			</div>
+		</div>
+	</md-input-container>
+</div>
+
+<div layout="row">
+	<md-input-container flex
+						flex-gt="33"
+						class="md-block">
+		<label for="datePurchaseOrder"
+			   translate>Fecha de Orden de Compra</label>
+		<md-datepicker name="datePurchaseOrder"
+					   class="md-block"
+					   md-hide-icons="calendar"
+					   ng-disabled="vm.movement.status==2"
+					   ng-model="vm.movement.datePurchaseOrder"
+					   md-placeholder="Fecha de orden de compra">
+		</md-datepicker>
+	</md-input-container>
+
+	<md-input-container flex
+						flex="33"
+						class="md-block">
+		<label for="date">Fecha Digitación</label>
+		<md-datepicker ng-model="vm.movement.date"
+					   required
+					   md-hide-icons="calendar"
+					   ng-disabled="vm.movement.status==2"
+					   md-aria-label="Fecha del movimiento">
+		</md-datepicker>
+		<div ng-messages="formGeneral.date.$error">
+			<div ng-message="required">
+				<span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+			</div>
+		</div>
+	</md-input-container>
+
+	<md-input-container flex
+						flex-gt="33"
+						ng-if="vm.movement.id"
+						class="md-block">
+		<label for="priceTotal">Precio Neto Total</label>
+		<input type="number"
+			   name="priceTotal"
+			   ng-disabled="vm.movement.status==2"
+			   ng-model="vm.movement.priceTotal">
+	</md-input-container>
+</div>

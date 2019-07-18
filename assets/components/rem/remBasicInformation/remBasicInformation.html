@@ -1,0 +1,102 @@
+<form name="vm.basicDataForm"
+      ng-submit="vm.basicDataForm.$valid && vm.save(vm.basicInformation)"
+      novalidate>
+    <div layout="column">
+        <div layout="row"
+             layout-xs="column">
+            <md-input-container flex>
+                <label>Motivo del llamado</label>
+                <md-select ng-model="vm.basicInformation.callReason"
+                           ng-change="vm.basicInformation.subCallReason = null"
+                           name="callReason"
+                           required>
+                    <md-option ng-repeat="callReason in vm.callReasons"
+                               ng-value="callReason.id">
+                        {{callReason.name}}
+                    </md-option>
+                </md-select>
+                <div ng-messages="vm.basicDataForm.callReason.$error">
+                    <div ng-message="required">
+                        Ingrese un motivo de llamada
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Submotivo del llamado</label>
+                <md-select ng-model="vm.basicInformation.subCallReason"
+                           name="subCallReason"
+                           required>
+                    <md-option ng-repeat="subCallReason in vm.subCallReasons"
+                               ng-value="subCallReason.id">
+                        {{subCallReason.name}}
+                    </md-option>
+                </md-select>
+                <div ng-messages="vm.basicDataForm.subCallReason.$error">
+                    <div ng-message="required">
+                        Ingrese un submotivo de llamada
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container style="min-width:100px;">
+                <label>Prioridad</label>
+                <md-select ng-model="vm.basicInformation.priority"
+                           ng-class="vm.basicInformation.priority"
+                           class="priority-selector">
+                    <md-option ng-repeat="item in ::vm.priorities"
+                               class="priority-selector"
+                               ng-class="item.name"
+                               ng-value="item.value">
+                        {{ ::item.name | translate }}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <div layout="row"
+             layout-xs="column">
+            <md-input-container flex>
+                <label translate>Nombre solicitante</label>
+                <input type="text"
+                       name="applicantName"
+                       ng-model="vm.basicInformation.applicantName">
+            </md-input-container>
+            <md-input-container flex>
+                <label translate>Fono solicitante</label>
+                <input type="text"
+                       name="applicantPhone"
+                       ng-model="vm.basicInformation.applicantPhone">
+            </md-input-container>
+            <md-input-container flex>
+                <label translate>Tipo de solicitante</label>
+                <md-select ng-model="vm.basicInformation.applicantType">
+                    <md-option ng-value="applicantType.id"
+                               ng-repeat="applicantType in vm.applicantTypes">
+                        {{applicantType.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <md-input-container flex>
+            <label translate>Descripción de la emergencia</label>
+            <textarea rows="2"
+                      name="description"
+                      ng-model="vm.basicInformation.description"
+                      required></textarea>
+            <div ng-messages="vm.basicDataForm.description.$error">
+                <div ng-message="required">
+                    Agrega una descripción
+                </div>
+            </div>
+        </md-input-container>
+    </div>
+    <div layout="row"
+         layout-align="end center"
+         ng-if="vm.mode==='remCreated'">
+        <md-button type="submit"
+                   ng-disabled="(vm.basicDataForm.$submitted && vm.basicDataForm.$invalid) || vm.basicDataForm.$pristine || vm.saving"
+                   class="md-primary md-raised"
+                   aria-label="Guardar">
+            {{vm.saving ? 'Guardando...' : 'Actualizar datos básicos'}}
+        </md-button>
+    </div>
+</form>

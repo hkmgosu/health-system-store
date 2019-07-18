@@ -1,0 +1,31 @@
+{
+    "name": "Detalle Inventario",
+    "description": "Detalle Inventario de Productos por Unidad",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-inventory-details",
+            "url": "/bodega/inventarios/:id",
+            "template": "<ssvq-storage-inventory-details></ssvq-storage-inventory-details>",
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "Storage/InventoryController.get",
+                "Storage/InventoryController.getAll",
+                "Storage/UnitProductsManagerController.getAllowedUnits"
+            ],
+            "create": [
+                "Storage/InventoryController.create"
+            ],
+            "update": [
+                "Storage/InventoryController.update",
+                "Storage/InventoryController.updateInventoryDetail"
+            ]
+        }
+    }
+}

@@ -1,0 +1,240 @@
+<md-toolbar class="md-hue-1"
+            md-scroll-shrink
+            md-shrink-speed-factor="0.25">
+    <div class="md-toolbar-tools"
+         layout="row">
+        <md-button class="md-icon-button"
+                   href="#/perfiles"
+                   aria-label="Cancelar">
+            <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            <md-tooltip>Volver al listado</md-tooltip>
+        </md-button>
+        <div flex
+             layout="column"
+             md-truncate>
+            <span class="md-body-1">{{vm.profile.name || '--'}}</span>
+            <span class="md-caption">
+                <span>{{vm.employeeListCount || '0'}} funcionarios</span>
+                <span> • </span>
+                <span>{{vm.profile.description || '--'}}</span>
+            </span>
+        </div>
+
+        <div ng-show="vm.selectedTab == 1">
+            <md-button ng-click="vm.savePrivileges()"
+                       class="md-icon-button"
+                       hide-gt-xs>
+                <md-icon md-font-icon="zmdi zmdi-save"></md-icon>
+                <md-tooltip>Guardar cambios</md-tooltip>
+            </md-button>
+            <md-button ng-click="vm.savePrivileges()"
+                       hide-xs>
+                <md-icon md-font-icon="zmdi zmdi-save"></md-icon>
+                Guardar cambios
+            </md-button>
+        </div>
+
+        <div flex-gt-xs="40"
+             layout="row"
+             ng-show="vm.selectedTab == 2"
+             class="animated fadeIn animation-stop">
+
+            <ssvq-search-input on-change="vm.onEmployeeSearchTextChange"
+                               search-text="vm.searchText"
+                               flex
+                               hide-xs
+                               label="Buscar funcionarios"></ssvq-search-input>
+
+            <md-menu md-position-mode="target-right target">
+                <md-button class="md-icon-button"
+                           ng-click="$mdMenu.open()">
+                    <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                </md-button>
+                <md-menu-content width="4">
+                    <md-menu-item>
+                        <md-button aria-label="Quitar todos los funcionarios"
+                                   ng-click="vm.removeAllEmployees()">
+                            <md-icon md-font-icon="fa fa-trash"></md-icon>
+                            Quitar todos los funcionarios
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </div>
+
+        <md-divider style="height: 60%;"
+                    ng-show="vm.selectedTab"></md-divider>
+
+        <ssvq-profile-actions on-delete="vm.onDelete"
+                              id-profile="vm.profile.id"></ssvq-profile-actions>
+    </div>
+</md-toolbar>
+<md-tabs class="md-primary md-hue-1 tabs-profile-details"
+         md-selected="vm.selectedTab">
+    <md-tab label="General">
+        <md-content style="min-height: 100%;">
+            <md-subheader class="md-primary md-hue-1">Datos básicos</md-subheader>
+            <md-card flex>
+                <md-card-content ng-form="vm.basicDataForm">
+                    <div layout="column"
+                         layout-gt-xs="row">
+                        <md-input-container flex>
+                            <label translate>PROFILES.DATA.NAME</label>
+                            <input type="text"
+                                   md-autofocus
+                                   required
+                                   name="name"
+                                   ng-model="vm.profile.name">
+                            <div ng-messages="vm.basicDataForm.name.$error">
+                                <div ng-message="required">
+                                    <span>Ingrese un nombre</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label translate>PROFILES.DATA.DESCRIPTION</label>
+                            <textarea ng-model="vm.profile.description"></textarea>
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <span flex></span>
+                        <md-button ng-click="vm.saveBasicData()"
+                                   ng-disabled="vm.basicDataForm.$pristine"
+                                   class="md-primary md-raised">Actualizar perfil</md-button>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </md-content>
+    </md-tab>
+    <md-tab label="Permisos">
+        <md-content style="min-height: 100%;">
+            <md-list>
+                <div ng-repeat="module in vm.configProfile.profiles.dashboard.modules | orderBy:'config.menu.priority'">
+                    <md-list-item ng-click="vm.switchModule(module)"
+                                  aria-label="Módulo {{module.name | translate}}"
+                                  class="md-2-line">
+                        <md-icon class="md-avatar-icon"
+                                 layout="row"
+                                 layout-align="center center"
+                                 md-colors="{background: module.config.privileges.read ? 'primary-hue-1' : ''}"
+                                 md-font-icon="{{module.config.menu.icon || 'zmdi zmdi-help-outline'}}"></md-icon>
+                        <div class="md-list-item-text">
+                            <span translate
+                                  ng-class="module.config.privileges.read ? 'md-body-2' : 'md-body-1'"
+                                  md-colors="{color: module.config.privileges.read ? 'primary' : ''}">{{module.name}}</span>
+                            <p>
+                                <span ng-show="module.config.privileges.read">
+                                    <span ng-repeat="(privilege, value) in module.config.privileges">
+                                        <span ng-if="value">
+                                            <span>{{"PROFILES.CAN." + privilege.toUpperCase() | translate}}</span>
+                                            <span ng-if="!$last">, </span>
+                                        </span>
+                                    </span>
+                                </span>
+                            </p>
+                        </div>
+                        <md-button class="md-secondary md-primary md-icon-button"
+                                   ng-disabled="!module.config.privileges.read"
+                                   ng-click="vm.changePermissions($event, module)">
+                            <md-icon md-font-icon="zmdi zmdi-settings"></md-icon>
+                        </md-button>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                    <div ng-show="module.config.privileges.read"
+                         class="padding-left-20">
+                        <md-list-item ng-repeat="module in module.modules | orderBy:'config.menu.priority'"
+                                      ng-click="vm.switchModule(module)"
+                                      class="md-2-line">
+                            <md-icon class="md-avatar-icon"
+                                     md-colors="{background: module.config.privileges.read ? 'primary-hue-1' : ''}"
+                                     layout="row"
+                                     layout-align="center center"
+                                     md-font-icon="{{module.config.menu.icon || 'zmdi zmdi-help-outline' }}">
+                                <div class="top-border"></div>
+                                <div class="bottom-border"
+                                     ng-if="!$last"></div>
+                            </md-icon>
+                            <div class="md-list-item-text">
+                                <h4 translate
+                                    md-colors="{color: module.config.privileges.read ? 'primary' : ''}">{{module.name}}</h4>
+                                <p>
+                                    <span ng-show="module.config.privileges.read">
+                                        <span ng-repeat="(privilege, value) in module.config.privileges">
+                                            <span ng-if="value">
+                                                <span>{{"PROFILES.CAN." + privilege.toUpperCase() | translate}}</span>
+                                                <span ng-if="!$last">, </span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </p>
+                            </div>
+                            <md-button class="md-secondary md-primary md-icon-button"
+                                       ng-disabled="!module.config.privileges.read"
+                                       ng-click="vm.changePermissions($event, module)">
+                                <md-icon md-font-icon="zmdi zmdi-settings"></md-icon>
+                            </md-button>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                    </div>
+                </div>
+            </md-list>
+        </md-content>
+    </md-tab>
+    <md-tab label="Funcionarios">
+        <md-content class="full-height animated slideInUp animation-stop"
+                    ng-if="vm.employeeList.length > 0"
+                    ssvq-infinite-load
+                    next-page="vm.nextPageEmployeeList">
+            <md-list>
+                <md-list-item ng-repeat="employee in vm.employeeList">
+                    <ssvq-employee-item-list employee="employee"
+                                             fields="vm.employeeFields"
+                                             flex></ssvq-employee-item-list>
+                    <md-button class="md-warn md-raised"
+                               ng-click="vm.removeEmployee(employee)">Quitar</md-button>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-content>
+        <ssvq-loading class="full-height"
+                      ng-show="!vm.employeeList"></ssvq-loading>
+        <ssvq-no-results class="full-height"
+                         ng-show="vm.employeeList.length == 0"></ssvq-no-results>
+
+        <md-fab-speed-dial md-open="vm.isOpen"
+                           md-direction="up"
+                           class="md-fab-bottom-right md-fling md-hover-full"
+                           ng-mouseenter="vm.isOpen=true;"
+                           ng-mouseleave="vm.isOpen=false;"
+                           ng-cloak>
+            <md-fab-trigger>
+                <md-button aria-label="menu"
+                           class="md-raised md-primary md-fab"
+                           ng-click="vm.showDialogEmployeeManager($event)">
+                    <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                    <md-tooltip md-direction="left">
+                        Agregar funcionarios
+                    </md-tooltip>
+                </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+                <md-button aria-label="Agregar funcionarios por unidad"
+                           class="md-fab md-raised md-mini md-primary"
+                           ng-click="vm.showDialogUnitManager()">
+                    <md-icon md-font-icon="zmdi zmdi-group-work"></md-icon>
+                    <md-tooltip md-direction="left">
+                        Agregar funcionarios por unidad
+                    </md-tooltip>
+                </md-button>
+                <md-button aria-label="Agregar todos los funcionarios"
+                           class="md-fab md-raised md-mini md-primary"
+                           ng-click="vm.addAllEmployees()">
+                    <md-icon md-font-icon="zmdi zmdi-flash"></md-icon>
+                    <md-tooltip md-direction="left">
+                        Agregar todos los funcionarios
+                    </md-tooltip>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+    </md-tab>
+</md-tabs>

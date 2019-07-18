@@ -1,0 +1,44 @@
+<md-dialog flex-gt-md="40"
+           flex="70"
+           flex-xs="90"
+           aria-label="Publicadores autorizados">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <div flex
+                 layout="column">
+                <span class="md-subhead">Publicadores autorizados</span>
+                <span class="md-caption">{{vm.category.name}}</span>
+            </div>
+
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools">
+                <ssvq-employee-autocomplete on-select="vm.addManager"
+                                            type="search"
+                                            flex
+                                            clear-on-select="true"></ssvq-employee-autocomplete>
+            </div>
+        </md-toolbar>
+        <md-list class="unit-employee-list">
+            <md-list-item ng-repeat="item in vm.employeeList track by item.id">
+                <ssvq-employee-item-list employee="item"
+                                         fields="::vm.fields"
+                                         flex></ssvq-employee-item-list>
+                <md-button class="md-warn md-secondary md-raised"
+                           ng-click="vm.removeManager(item)">
+                    Quitar
+                </md-button>
+            </md-list-item>
+        </md-list>
+
+        <p class="text-center"
+           ng-if="vm.employeeList.length === 0">No hay publicadores autorizados</p>
+    </md-dialog-content>
+</md-dialog>

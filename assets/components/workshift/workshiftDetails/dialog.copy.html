@@ -1,0 +1,74 @@
+<md-dialog aria-label="Vehículo"
+           flex="60"
+           flex-xs="90"
+           class="mobile-fullwidth-dialog">
+    <form name="saveForm"
+          ng-submit="vm.confirm()"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Volver">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                    <md-tooltip>Volver</md-tooltip>
+                </md-button>
+                <h3 flex>Copia de turno</h3>
+                <md-button type="submit"
+                           aria-label="{{ 'CRUD.SAVE' | translate }}"
+                           ng-disabled="saveForm.$invalid">
+                    Crear turnos
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-padding">
+                <md-input-container class="md-block">
+                    <label>Nombre del grupo</label>
+                    <input type="text"
+                           name="title"
+                           ng-model="vm.copyValues.title">
+                </md-input-container>
+                <div layout="row">
+                    <span flex></span>
+                    <md-button ng-click="vm.addTimeItem()"
+                               class="md-primary">
+                        <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                        Agregar copia
+                    </md-button>
+                </div>
+                <div layout="column"
+                     ng-repeat="timeItem in vm.copyValues.timeList">
+                    <div layout="row"
+                         layout-align="center center">
+                        <ssvq-input-range range="timeItem"
+                                          flex></ssvq-input-range>
+                        <md-button ng-click="vm.deleteTimeItem(timeItem)"
+                                   ng-disabled="vm.copyValues.timeList.length === 1"
+                                   class="md-icon-button">
+                            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                            <md-tooltip>Quitar</md-tooltip>
+                        </md-button>
+                    </div>
+                    <ssvq-workshift-validator workshift-data="timeItem"></ssvq-workshift-validator>
+                </div>
+            </div>
+
+
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-accent"
+                       ng-click="vm.cancel()"
+                       aria-label="{{ 'CRUD.CANCEL' | translate }}">
+                Volver
+            </md-button>
+            <md-button class="md-primary md-raised"
+                       type="submit"
+                       aria-label="{{ 'CRUD.SAVE' | translate }}"
+                       ng-disabled="saveForm.$invalid">
+                Crear turnos
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

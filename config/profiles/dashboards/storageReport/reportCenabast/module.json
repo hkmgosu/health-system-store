@@ -1,0 +1,22 @@
+{
+    "name": "PRIVILEGES.STORAGE_REPORT.CENABAST.NAME",
+    "description": "PRIVILEGES.STORAGE_REPORT.CENABAST.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.report-cenabast",
+            "url": "/bodega/reporte-cenabast",
+            "template": "<ssvq-report-cenabast></ssvq-report-cenabast>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/StorageReportController.getCenabast",
+                "Storage/ProductController.getAll",
+                "Storage/UnitProductsManagerController.getAll",
+                "Storage/UnitProductsManagerController.getAllowedUnits"
+            ]
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "name": "PRIVILEGES.PERMISSIONMANAGEMENT.CLOSUREDETAILS.NAME",
+    "description": "PRIVILEGES.PERMISSIONMANAGEMENT.CLOSUREDETAILS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.permission-closure-details",
+            "url": "/permisos/cierres/detalles/:id",
+            "template": "<ssvq-permission-closure-details></ssvq-permission-closure-details>",
+            "params": {
+                "id": null,
+                "closure": null
+            },
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "PermissionClosureController.getClosureDetails",
+                "PermissionController.getPermissionListPdf"
+            ],
+            "update": [
+                "PermissionClosureController.confirm"
+            ]
+        }
+    }
+}

@@ -1,0 +1,20 @@
+<div class="profile-picture">
+    <img ng-src="employee/downloadProfilePicture/{{vm.employee.id}}?{{vm.timestamp}}">
+    <div class="profile-uploader"
+         ngf-select="vm.selectFile($file)"
+         ngf-multiple="false"
+         ng-model="vm.file"
+         accept="image/*"
+         ngf-max-size="5MB"
+         layout="column"
+         layout-align="center center">
+        <span class="md-body-2 text-center">Seleccionar</span>
+    </div>
+    <md-button ng-show="vm.employee.hasProfilePicture"
+               ng-click="vm.deleteProfilePicture()"
+               style="top:0;right:0"
+               class="md-fab md-fab-top-right md-mini md-warn delete-button">
+        <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
+        <md-tooltip>Eliminar foto de perfil</md-tooltip>
+    </md-button>
+</div>

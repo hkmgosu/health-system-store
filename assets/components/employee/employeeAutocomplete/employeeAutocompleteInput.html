@@ -1,0 +1,27 @@
+<div flex
+     class="full-width">
+    <md-autocomplete md-delay='500'
+                     md-selected-item="vm.selected"
+                     ng-attr-md-floating-label="{{vm.label || 'Buscar'}}"
+                     md-selected-item-change="vm.myOnSelect(item)"
+                     md-search-text="vm.searchText"
+                     md-items="item in vm.getMatches(vm.searchText)"
+                     md-item-text="vm.selected.fullname"
+                     md-select-on-match="false"
+                     md-min-length="vm.minLength"
+                     md-menu-class="autocomplete-custom-template"
+                     md-clear-button="vm.opts.clearButton"
+                     ng-disabled="vm.disabledOption"
+                     id="search"
+                     flex>
+        <md-item-template>
+            <ssvq-employee-item-list employee="item"
+                                     fields="::vm.fields"></ssvq-employee-item-list>
+        </md-item-template>
+        <md-not-found>
+            <div class="md-padding">
+                <span>{{'AUTOCOMPLETE.NOMATCHFOUND' | translate}}</span>
+            </div>
+        </md-not-found>
+    </md-autocomplete>
+</div>

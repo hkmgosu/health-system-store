@@ -1,0 +1,39 @@
+{
+    "name": "PRIVILEGES.SAMU.PATIENTS.NAME",
+    "description": "PRIVILEGES.SAMU.PATIENTS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "create": false,
+            "read": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.samu-patients",
+            "url": "/samu/pacientes/",
+            "template": "<ssvq-patient-maintainer></ssvq-patient-maintainer>",
+            "priority": 2
+        },
+        "_controllers": {
+            "read": [
+                "PatientController.getList",
+                "PatientController.getExternalPatient",
+                "PatientController.getClinicalHistory",
+                "RemPatientController.getHistoryItemDetails",
+                "RegionController.getAll",
+                "CommuneController.getAll",
+                "CommuneController.get",
+                "RemAttentionController.getAllClasses"
+            ],
+            "create": [
+                "PatientController.save"
+            ],
+            "update": [
+                "PatientController.save"
+            ],
+            "delete": [
+                "PatientController.delete"
+            ]
+        }
+    }
+}

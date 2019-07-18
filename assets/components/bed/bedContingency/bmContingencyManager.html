@@ -1,0 +1,47 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <h4 flex>Contingencias</h4>
+        <ssvq-search-input search-text="vm.searchText"
+                           label="Buscar por establecimiento"
+                           flex
+                           flex-gt-xs="50"></ssvq-search-input>
+        <span flex></span>
+        <md-button>Más filtros</md-button>
+    </div>
+</md-toolbar>
+<section layout="row"
+         flex>
+    <md-content flex
+                class="contingency-manager-contianer">
+        <md-list>
+            <md-list-item class="md-3-line"
+                          ng-click="vm.showContingency(item, $event)"
+                          ng-repeat="item in vm.contingencyList">
+                <div class="md-list-item-text">
+                    <h4>HOSPITAL GUSTAVO FRICKE</h4>
+                    <h4>DR. ESPINOSA</h4>
+                    <p>31 ene. 2018</p>
+                </div>
+                <md-button class="md-icon-button">
+                    <md-icon md-font-icon="zmdi zmdi-more"></md-icon>
+                </md-button>
+            </md-list-item>
+        </md-list>
+        <md-button aria-label="menu"
+                   class="md-raised md-primary md-mini md-fab md-fab-bottom-right"
+                   ng-click="vm.newRem($event)">
+            <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+            <md-tooltip md-direction="left">
+                Nueva contingencia
+            </md-tooltip>
+        </md-button>
+    </md-content>
+
+    <md-sidenav class="md-sidenav-right md-whiteframe-1dp"
+                md-component-id="contingency-filter">
+        Filtros
+
+        <ssvq-establishment-autocomplete></ssvq-establishment-autocomplete>
+    </md-sidenav>
+</section>
+<!-- end ssvqRemListView -->

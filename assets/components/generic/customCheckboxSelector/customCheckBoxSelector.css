@@ -1,0 +1,11 @@
+.observation-checkbox {
+    font-weight: normal;
+    font-size: 1.4rem;
+    line-height: normal;
+}
+.required-selector span::after{
+    content: " *";
+    font-size: 13px;
+    vertical-align: top;
+    color: red;
+}

@@ -1,0 +1,40 @@
+<div layout="row"
+     ng-form="vm.addressDataForm">
+    <md-input-container flex>
+        <label translate>Región</label>
+        <md-select ng-model="vm.data.region"
+                   name="region"
+                   placeholder="Región"
+                   ng-change="vm.onRegionChange(vm.data.region)"
+                   ng-required="vm.opts.required">
+            <md-option ng-value="reg.id"
+                       ng-repeat="reg in vm.regions">{{reg.name}}</md-option>
+        </md-select>
+        <div ng-messages="vm.addressDataForm.region.$error">
+            <div ng-message="required">Campo obligatorio</div>
+        </div>
+    </md-input-container>
+    <md-input-container flex>
+        <label translate>Comuna</label>
+        <md-select ng-model="vm.data.commune"
+                   name="commune"
+                   placeholder="Comuna"
+                   ng-required="vm.opts.required">
+            <md-option ng-value="com.id"
+                       ng-repeat="com in vm.communes">{{com.name}}</md-option>
+        </md-select>
+        <div ng-messages="vm.addressDataForm.commune.$error">
+            <div ng-message="required">Campo obligatorio</div>
+        </div>
+    </md-input-container>
+    <md-input-container class="md-block"
+                        flex>
+        <label>Lugar</label>
+        <input ng-model="vm.data.place"
+               name="place"
+               ng-required="vm.opts.required">
+        <div ng-messages="vm.addressDataForm.place.$error">
+            <div ng-message="required">Campo obligatorio</div>
+        </div>
+    </md-input-container>
+</div>

@@ -1,0 +1,38 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <h4 flex>Configuraciones SAMU</h4>
+        <md-button ng-click="vm.addStatus()">Nuevo estado</md-button>
+    </div>
+</md-toolbar>
+<md-content>
+    <md-list>
+        <md-subheader class="overlay-5 md-primary md-hue-1">Notificaciones</md-subheader>
+        <md-list-item ng-click="vm.changeSupervisors($event, status)"
+                      ng-repeat="status in vm.statusList"
+                      class="md-2-line">
+            <div class="md-list-item-text">
+                <h4>{{status.description}}</h4>
+                <p>
+                    <span ng-repeat="supervisor in status.supervisorList">
+                        <span class="supervisor-name">{{supervisor.name}}</span>
+                        <span ng-if="!$last">, </span>
+                    </span>
+                    <span ng-if="status.supervisorList.length === 0">Sin supervisores</span>
+                </p>
+            </div>
+            <div class="md-secondary">
+                <md-button ng-click="vm.changeOrder(status, 'down')"
+                           class="md-icon-button">
+                    <md-tooltip>Bajar orden</md-tooltip>
+                    <md-icon md-font-icon="zmdi zmdi-chevron-down"></md-icon>
+                </md-button>
+                <md-button ng-click="vm.changeOrder(status, 'up')"
+                           class="md-icon-button">
+                    <md-tooltip>Subir orden</md-tooltip>
+                    <md-icon md-font-icon="zmdi zmdi-chevron-up"></md-icon>
+                </md-button>
+            </div>
+            <md-divider></md-divider>
+        </md-list-item>
+    </md-list>
+</md-content>

@@ -1,0 +1,20 @@
+{
+    "name": "PRIVILEGES.SAMU_REPORTS.REM_ACCESS.NAME",
+    "description": "PRIVILEGES.SAMU_REPORTS.REM_ACCESS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.rem-access",
+            "url": "/samu/reporte-acceso",
+            "template": "<ssvq-rem-access-view></ssvq-rem-access-view>"
+        },
+        "_controllers": {
+            "read": [
+                "RemAccessController.get",
+                "RemAccessController.getEmployeeAccessList"
+            ]
+        }
+    }
+}

@@ -1,0 +1,9 @@
+.ptype-list-container {
+    height: calc(100vh - 128px);
+}
+
+@media (max-width: 599px) {
+    .ptype-list-container {
+        height: calc(100vh - 112px);
+    }
+}

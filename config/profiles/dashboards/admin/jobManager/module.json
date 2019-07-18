@@ -1,0 +1,31 @@
+{
+    "name": "PRIVILEGES.JOB.NAME",
+    "description": "PRIVILEGES.JOB.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.admin-job",
+            "url": "/cargos",
+            "template": "<ssvq-job-maintainer></ssvq-job-maintainer>"
+        },
+        "_controllers": {
+            "read": [
+                "JobController.get"
+            ],
+            "create": [
+                "JobController.save"
+            ],
+            "update": [
+                "JobController.save"
+            ],
+            "delete": [
+                "JobController.delete"
+            ]
+        }
+    }
+}

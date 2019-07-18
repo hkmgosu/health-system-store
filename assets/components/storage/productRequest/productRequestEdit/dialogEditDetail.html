@@ -1,0 +1,19 @@
+<md-dialog aria-label="{{vm.detail.product.description}}"
+		   flex-gt-sm="60"
+		   flex="100">
+	<md-toolbar class="md-toolbar-tools">
+		<h2 flex>Producto: {{vm.detail.product.description}}</h2>
+		<md-button class="md-icon-button float-right"
+				   ng-click="vm.cancel()"
+				   aria-label="Cancelar">
+			<md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+		</md-button>
+	</md-toolbar>
+
+	<md-dialog-content>
+		<ssvq-storage-product-request-detail id-detail="vm.detail.id"
+											 is-son-unit="vm.isSonUnit"
+											 change="vm.changeDetail">
+		</ssvq-storage-product-request-detail>
+	</md-dialog-content>
+</md-dialog>

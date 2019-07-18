@@ -1,0 +1,202 @@
+<div>
+    <md-toolbar class="md-hue-1"
+                ng-hide="vm.permissionDenied">
+        <div class="md-toolbar-tools"
+             layout="row">
+            <md-button class="md-icon-button"
+                       ng-click="vm.goBack()">
+                <md-tooltip>Volver</md-tooltip>
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            </md-button>
+            <div layout="column"
+                 flex>
+                <span class="md-subhead">Permiso #{{vm.permission.id}}</span>
+                <span class="md-caption"
+                      md-truncate>
+                    Ingresado
+                    <b>
+                        <ssvq-custom-time-ago time-at="::vm.permission.createdAt"></ssvq-custom-time-ago>
+                    </b> por
+                    <ssvq-employee-profile-link id-employee="{{::vm.permission.owner.id}}">
+                        {{::vm.permission.owner.fullname}}
+                    </ssvq-employee-profile-link>
+                </span>
+            </div>
+            <md-button ng-click="vm.changeStatus($event)"
+                       ng-disabled="!vm.enabledStatusList">
+                <span>{{vm.permission.status.name}}</span>
+                <md-icon md-font-icon="zmdi zmdi-caret-down"></md-icon>
+                <md-tooltip>Presionar para cambiar el estado</md-tooltip>
+            </md-button>
+            <md-button class="md-icon-button"
+                       ng-href="/permission/getPermissionDetailpdf?id={{vm.permission.id}}"
+                       download>
+                <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
+                <md-tooltip>Descargar a pdf</md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content style="min-height: calc(100vh - 128px)">
+        <div ng-hide="vm.permissionDenied"
+             layout-gt-sm="row"
+             layout-align="center start">
+            <div flex="100"
+                 flex-gt-sm="70">
+                <md-subheader class="md-primary md-hue-1">
+                    <div layout="row"
+                         layout-align="center center">
+                        <span flex>Datos del permiso</span>
+                        <i class="zmdi zmdi-{{showDetailsPermission ? 'plus':'minus'}}"
+                           ng-click="showDetailsPermission = !showDetailsPermission;">
+                            <md-tooltip>{{ showDetailsDay ? 'Mostrar' : 'Ocultar'}}</md-tooltip>
+                        </i>
+                    </div>
+                </md-subheader>
+
+                <md-card ng-show="!showDetailsPermission">
+                    <md-card-content>
+                        <md-list>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h4>{{vm.permission.type.name || '--'}}</h4>
+                                    <p>Tipo</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h4>{{vm.permission.reason || '--'}}</h4>
+                                    <p>Motivo</p>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+
+                        <div layout="column"
+                             class="margin-top-10"
+                             ng-if="(vm.permission.attachments.length > 0)">
+                            <span class="md-body-1 md-padding padding-top-0">Archivos adjuntos</span>
+                            <ssvq-upload-list-files files="vm.permission.attachments"
+                                                    mode="Viewer"
+                                                    style="display:block; margin-bottom: 10px; padding: 0 16px;"
+                                                    class="tiny-files">
+                            </ssvq-upload-list-files>
+                        </div>
+                    </md-card-content>
+                </md-card>
+
+                <md-subheader class="md-primary md-hue-1">
+                    <div layout="row"
+                         layout-align="center center">
+                        <span flex>Detalle días</span>
+                        <i class="zmdi zmdi-{{showDetailsDay ? 'plus':'minus'}}"
+                           ng-click="showDetailsDay = !showDetailsDay;">
+                            <md-tooltip>{{ showDetailsDay ? 'Mostrar' : 'Ocultar'}}</md-tooltip>
+                        </i>
+                    </div>
+                </md-subheader>
+
+                <md-card ng-show="!showDetailsDay"
+                         style="min-height:107px;">
+                    <md-card-content>
+                        <md-list layout="row"
+                                 layout-wrap>
+                            <md-list-item flex
+                                          flex-xs="100"
+                                          class="md-2-line">
+                                <md-icon class="md-avatar-icon"
+                                         layout="column"
+                                         layout-align="center center"
+                                         md-font-icon="zmdi zmdi-calendar-alt"
+                                         md-colors="{background: 'primary-hue-1'}"></md-icon>
+                                <div class="md-list-item-text">
+                                    <h3>{{ vm.permission.fromDate | date:"dd 'de' MMMM 'del' yyyy" }}</h3>
+                                    <p>Desde</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item flex
+                                          flex-xs="100"
+                                          class="md-2-line">
+                                <md-icon class="md-avatar-icon"
+                                         layout="column"
+                                         layout-align="center center"
+                                         md-font-icon="zmdi zmdi-calendar"
+                                         md-colors="{background: 'primary-hue-1'}"></md-icon>
+                                <div class="md-list-item-text">
+                                    <h3>{{ vm.permission.untilDate | date:"dd 'de' MMMM 'del' yyyy" }}</h3>
+                                    <p>Hasta</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item flex
+                                          flex-xs="100"
+                                          class="md-2-line">
+                                <md-icon class="md-avatar-icon"
+                                         layout="column"
+                                         layout-align="center center"
+                                         md-font-icon="zmdi zmdi-time-interval"
+                                         md-colors="{background: 'primary-hue-1'}"></md-icon>
+                                <div class="md-list-item-text">
+                                    <h3>{{ vm.permission.duration }}</h3>
+                                    <p>Duración</p>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </md-card-content>
+                </md-card>
+                <!-- Calendario -->
+                <ssvq-viatic-calendar days="vm.permission.detailsDay"
+                                      ng-show="!showDetailsDay"></ssvq-viatic-calendar>
+                <md-subheader class="md-primary md-hue-1">
+                    <div layout="row"
+                         layout-align="center center">
+                        <span flex>Actividad reciente</span>
+                        <i class="zmdi zmdi-{{showRecentActivity ? 'plus':'minus'}}"
+                           ng-click="showRecentActivity = !showRecentActivity;">
+                            <md-tooltip>{{ showRecentActivity ? 'Mostrar' : 'Ocultar'}}</md-tooltip>
+                        </i>
+                    </div>
+                </md-subheader>
+                <md-card ng-show="!vm.permissionDenied"
+                         class="no-padding-card">
+                    <md-card-content>
+                        <ssvq-comment-box on-create="vm.sendComment"></ssvq-comment-box>
+                        <md-divider></md-divider>
+                        <ssvq-permission-timeline id-permission="{{::vm.idPermission}}"></ssvq-permission-timeline>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <!-- Sidebar -->
+            <div flex="100"
+                 flex-gt-sm="30">
+                <md-subheader class="md-primary md-hue-1">
+                    <div layout="row"
+                         layout-align="center center">
+                        <span flex>Datos solicitante</span>
+                        <i class="zmdi zmdi-{{showOwnerData ? 'plus':'minus'}} toggle-rem-box-view"
+                           ng-click="showOwnerData = !showOwnerData;">
+                            <md-tooltip>{{ showOwnerData ? 'Mostrar' : 'Ocultar'}}</md-tooltip>
+                        </i>
+                    </div>
+                </md-subheader>
+                <md-card ng-if="!showOwnerData">
+                    <md-card-content>
+                        <ssvq-permission-details-sidebar employee="vm.permission.owner">
+                        </ssvq-permission-details-sidebar>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+        <div ng-show="vm.permissionDenied"
+             layout="row"
+             layout-align="center center">
+            <md-card flex="100"
+                     flex-gt-xs="80">
+                <md-card-content layout="column"
+                                 layout-align="center center">
+                    <span class="text-center">Lo sentimos, no tienes acceso al permiso.</span>
+                    <md-button class="md-primary"
+                               ng-click="vm.back()">Volver</md-button>
+                </md-card-content>
+            </md-card>
+        </div>
+    </md-content>
+</div>

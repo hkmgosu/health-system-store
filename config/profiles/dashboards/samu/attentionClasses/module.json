@@ -1,0 +1,31 @@
+{
+    "name": "PRIVILEGES.SAMU.ATTENTIONCLASSES.NAME",
+    "description": "PRIVILEGES.ATTENTIONCLASSES.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "create": false,
+            "read": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.samu-attention-classes",
+            "url": "/samu/clases-atencion/",
+            "template": "<ssvq-rem-attention-classes-view></ssvq-rem-attention-classes-view>"
+        },
+        "_controllers": {
+            "read": [
+                "RemAttentionController.getClasses"
+            ],
+            "create": [
+                "RemAttentionController.saveClass"
+            ],
+            "update": [
+                "RemAttentionController.saveClass"
+            ],
+            "delete": [
+                "RemAttentionController.deleteClass"
+            ]
+        }
+    }
+}

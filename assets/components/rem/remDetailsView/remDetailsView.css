@@ -1,0 +1,37 @@
+.view-rem-container {
+    height: calc(100vh - 64px);
+    overflow:hidden;
+}
+@media (max-width: 599px){
+    .view-rem-container {
+        height: calc(100vh - 56px);
+    }
+}
+.toggle-rem-box-view{
+    cursor: pointer;
+}
+
+.employee-chips .md-chip-input-container {
+    min-width: 400px;
+}
+
+.status-item{
+    transition: max-height 0.3s ease-out 0.1s, opacity 0.3s ease;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: 48px;
+    opacity: 1;
+    overflow: hidden;
+}
+.status-item.hidden-option{
+    max-height: 0 !important;
+    opacity: 0;
+}
+
+.ssvq-subheader-badge{
+        margin-right: 4px;
+        padding: 2px 5px;
+        background: #518fc6;
+        color: white;
+        border-radius: 30%;
+}

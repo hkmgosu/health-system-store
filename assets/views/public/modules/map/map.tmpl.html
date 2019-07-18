@@ -1,0 +1,64 @@
+<section layout="row"
+         flex
+         class="search-view">
+    <md-content flex>
+        <div class="search-map-container">
+            <div id="ssvqMap"
+                 class="full-height full-width"></div>
+        </div>
+        <md-button class="md-fab md-mini md-primary md-hue-1 md-fab-top-right"
+                   ng-click="vm.updateBounds()"
+                   aria-label="Filtros">
+            <md-tooltip>Ajustar bordes del mapa</md-tooltip>
+            <md-icon md-font-icon="zmdi zmdi-fullscreen-alt"></md-icon>
+        </md-button>
+    </md-content>
+    <md-content flex="30"
+                flex-xs="100"
+                class="animated fadeIn animation-stop"
+                ng-if="vm.establishmentSelected">
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.closeEstablishmentDetails();">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+                <h4>{{vm.establishmentSelected.name}}</h4>
+            </div>
+        </md-toolbar>
+        <md-content flex
+                    style="height: calc(100vh - 140px);">
+            <md-list>
+                <md-list-item>
+                    <md-icon md-font-icon="zmdi zmdi-pin-drop"></md-icon>
+                    <span flex
+                          class="md-body-1">{{vm.establishmentSelected.address.text || 'Sin información'}}</span>
+                </md-list-item>
+                <md-list-item>
+                    <md-icon md-font-icon="zmdi zmdi-globe-alt"></md-icon>
+                    <a flex
+                       href="{{vm.establishmentSelected.website}}"
+                       target="_blank">
+                        <span class="md-body-1">
+                            {{vm.establishmentSelected.website ? 'Ir al sitio web' : 'Sin información'}}
+                        </span>
+                    </a>
+                </md-list-item>
+                <md-list-item>
+                    <md-icon md-font-icon="zmdi zmdi-phone"></md-icon>
+                    <a flex
+                       href="tel:+{{vm.establishmentSelected.phone}}">
+                        <span class="md-body-1">{{vm.establishmentSelected.phone || 'Sin información'}}</span>
+                    </a>
+                </md-list-item>
+                <md-list-item>
+                    <md-icon md-font-icon="zmdi zmdi-email"></md-icon>
+                    <a flex
+                       ng-href="{{vm.establishmentSelected.email ? 'mailto:' + vm.establishmentSelected.email : '#'}}">
+                        <span class="md-body-1">{{vm.establishmentSelected.email || 'Sin información'}}</span>
+                    </a>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-content>
+</section>

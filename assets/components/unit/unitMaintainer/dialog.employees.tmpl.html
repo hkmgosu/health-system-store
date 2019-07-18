@@ -1,0 +1,39 @@
+<md-dialog flex="60"
+           aria-label="Funcionarios de la unidad">
+    <form name="saveForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <div layout="column"
+                     layout-align="center first"
+                     flex>
+                    <span class="md-caption">
+                        {{ ::('UNIT.OTHERS.EMPLOYEESTITLE' | translate) }} &nbsp;
+                        <md-icon md-font-icon="zmdi zmdi-chevron-right"></md-icon>
+                    </span>
+                    <span class="md-body-2"
+                          md-truncate>
+                        {{ ::vm.unit.name }}
+                    </span>
+                </div>
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Cancelar">
+                    <md-tooltip>Volver</md-tooltip>
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <ssvq-unit-employees unit="vm.unit"></ssvq-unit-employees>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button aria-label="Listo"
+                       class="md-primary"
+                       ng-click="vm.cancel()">
+                <span>Volver</span>
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

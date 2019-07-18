@@ -1,0 +1,78 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             hide-xs
+             flex>
+            <span class="md-subhead">Cargos</span>
+            <span class="md-caption">{{found}} resultados</span>
+        </div>
+        <!-- Buscar -->
+        <ssvq-search-input search-text="searchText"
+                           label="Buscar cargos"
+                           flex
+                           flex-gt-xs="50"></ssvq-search-input>
+        <span flex
+              hide-xs></span>
+    </div>
+</md-toolbar>
+<md-button required-privilege="['create','update']"
+           class="md-fab md-fab-top-right md-primary"
+           ng-click="showSaveDialog({})">
+    <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+    <md-tooltip md-direction="top">
+        <span translate>CRUD.CREATE</span>
+    </md-tooltip>
+</md-button>
+<md-content>
+    <md-table-container class="full-table-container">
+        <table md-table
+               ng-if="jobs.length > 0"
+               class="animated fadeIn animation-stop">
+            <thead md-head>
+                <tr md-row>
+                    <th md-column>{{ 'JOB.NAME' | translate}}</th>
+                    <th md-column>{{ 'JOB.DESCRIPTION' | translate}}</th>
+                    <th md-column></th>
+                    <th md-column></th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-row
+                    md-auto-select
+                    ng-repeat="item in jobs track by $index">
+                    <td md-cell>{{item.name}}</td>
+                    <td md-cell>{{item.description}}</td>
+                    <td md-cell>
+                        <md-button class="md-icon-button"
+                                   required-privilege="['update']"
+                                   ng-click="showSaveDialog(item)">
+                            <md-icon md-font-icon="fa fa-pencil">
+                                <md-tooltip md-direction="top">
+                                    <span translate>TABLE.TOOLTIP.EDIT</span>
+                                </md-tooltip>
+                            </md-icon>
+                        </md-button>
+                    </td>
+                    <td md-cell>
+                        <md-button class="md-icon-button"
+                                   required-privilege="['delete']"
+                                   ng-click="showDeleteConfirm(item)">
+                            <md-icon md-font-icon="fa fa-trash">
+                                <md-tooltip md-direction="top">
+                                    <span translate>EMPLOYEE.TOOLTIP.DELETE</span>
+                                </md-tooltip>
+                            </md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ssvq-loading ng-show="!jobs"></ssvq-loading>
+        <ssvq-no-results ng-show="jobs.length == 0"></ssvq-no-results>
+    </md-table-container>
+    <md-table-pagination md-limit="limit"
+                         md-page="page"
+                         md-total="{{found}}"
+                         md-on-paginate="get"
+                         md-page-select></md-table-pagination>
+</md-content>

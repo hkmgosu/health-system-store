@@ -1,0 +1,107 @@
+<div id="details-container"
+     style="padding: 20px">
+    <div class="layout-row layout-align-space-between-center">
+        <h2>Resumen viático</h2>
+        <h2 style="color: #0000008a">#<%= data[i].id %></h2>
+    </div>
+    <md-divider class="md-divider-print"></md-divider>
+    <p style="margin-top: 10px; margin-bottom: 25px;">Ingresado el <%= data[i].createdDate %></p>
+    <h3>Datos del viático</h3>
+    <md-divider class="md-divider-print"></md-divider>
+    <md-list class="layout-row layout-wrap">
+        <md-list-item class="md-2-line md-no-proxy _md flex-50">
+            <div class="md-list-item-text">
+                <h3 style="white-space: normal;"><%= data[i].fromDate %> al <%= data[i].toDate %></h3>
+                <p>Fecha viático</p>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-2-line md-no-proxy _md flex-50">
+            <div class="md-list-item-text">
+                <h3 style="white-space: normal;"><%= data[i].numResExenta || '--' %> /
+                    <%= data[i].dateResExenta  || '--' %></h3>
+                <p>Nº Res. Exenta</p>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-2-line md-no-proxy _md flex-100">
+            <div class="md-list-item-text">
+                <h3 style="white-space: normal;"><%= data[i].place || '--' %>, <%= data[i].commune.name || '--' %>,
+                    <%= data[i].region.name || '--' %></h3>
+                <p>Lugar</p>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-2-line md-no-proxy _md flex-100">
+            <div class="md-list-item-text">
+                <h3 style="white-space: normal;"><%= data[i].reason || '--' %></h3>
+                <p>Motivo</p>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-2-line md-no-proxy _md flex-50">
+            <div class="md-list-item-text">
+                <h3><%= data[i].transportType || '--' %></h3>
+                <p>Medio de transporte</p>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-2-line md-no-proxy _md flex-50">
+            <div class="md-list-item-text">
+                <h3><%= data[i].requireTransport ? 'Sí' : 'No' %></h3>
+                <p>Derecho a pasaje</p>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-2-line md-no-proxy _md flex-50">
+            <div class="md-list-item-text">
+                <h3><%= data[i].requireHotel ? 'Sí' : 'No' %></h3>
+                <p>Pernoctará fuera de la residencia</p>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-2-line md-no-proxy _md flex-50">
+            <div class="md-list-item-text">
+                <h3><%= data[i].transportType || '--' %></h3>
+                <p>Medio de transporte</p>
+            </div>
+        </md-list-item>
+    </md-list>
+    <h3>Datos del solicitante</h3>
+    <md-divider class="md-divider-print"></md-divider>
+    <md-list class="layout-row layout-wrap">
+        <md-list-item class="md-2-line md-no-proxy _md flex-50">
+            <div class="md-list-item-text">
+                <h3><%= data[i].owner.fullname || '--' %></h3>
+                <p>Nombre</p>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-2-line md-no-proxy _md flex-50">
+            <div class="md-list-item-text">
+                <h3><%= data[i].owner.rut || '--' %></h3>
+                <p>Rut</p>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-2-line md-no-proxy _md flex">
+            <div class="md-list-item-text">
+                <h3><%= data[i].unit.name || '--' %></h3>
+                <p>Unidad administrativa</p>
+            </div>
+        </md-list-item>
+    </md-list>
+    <h3>Montos</h3>
+    <md-divider class="md-divider-print"></md-divider>
+    <md-list class="layout-row layout-wrap">
+        <md-list-item class="md-2-line md-no-proxy _md flex-50">
+            <div class="md-list-item-text">
+                <h3>$ <%= Number(data[i].completeDayAmount).toLocaleString('es-Es') %></h3>
+                <p>Diarios (<%= data[i].completeDayQuantity %>)</p>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-2-line md-no-proxy _md flex-50">
+            <div class="md-list-item-text">
+                <h3>$ <%= Number(data[i].partialDayAmount).toLocaleString('es-Es') %></h3>
+                <p>Parciales (<%= data[i].partialDayQuantity %>)</p>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-2-line md-no-proxy _md flex-50">
+            <div class="md-list-item-text">
+                <h3>$ <%= Number(data[i].totalAmount).toLocaleString('es-Es')%></h3>
+                <p>Total</p>
+            </div>
+        </md-list-item>
+    </md-list>
+</div>

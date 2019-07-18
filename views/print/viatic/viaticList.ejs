@@ -1,0 +1,16 @@
+<%  for(var i=0; i < data.length; i++) { 
+        if (i === 0 || i % perPage === 0) {
+%>
+<div style="height: 100vh; padding: 0 10px">
+    <div class="layout-row">
+        <md-list class="flex">
+            <%  } %>
+            <%- include viaticItem.ejs %>
+            <%  if (i === data.length || (i !== 0 && (i + 1) % perPage === 0)) { %>
+        </md-list>
+    </div>
+</div>
+<%
+        }
+    } 
+%>

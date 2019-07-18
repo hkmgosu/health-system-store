@@ -1,0 +1,119 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             hide-xs
+             flex>
+            <span class="md-subhead">Vehículos</span>
+            <span class="md-caption">{{vm.count}} resultados</span>
+        </div>
+        <!-- Buscar -->
+        <ssvq-search-input search-text="vm.searchText"
+                           label="Buscar vehículos"
+                           flex
+                           flex-gt-xs="50"></ssvq-search-input>
+        <span flex
+              hide-xs></span>
+
+        <!-- Nuevo vehículo -->
+        <md-button required-privilege="['create','update']"
+                   class="md-icon-button"
+                   ng-click="vm.onVehicleItemEditClick({}, $event)">
+            <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+            <md-tooltip md-direction="top">
+                <span translate>CRUD.CREATE</span>
+            </md-tooltip>
+        </md-button>
+    </div>
+</md-toolbar>
+<div layout="row">
+    <md-content flex
+                ng-show="!vm.selectedView || vm.selectedView === 'list'"
+                class="vehicle-maintainer-list-container">
+        <p class="text-center"
+           ng-if="!vm.vehicleList">Cargando lista de vehículos</p>
+        <div ng-if="vm.vehicleList"
+             class="animated fadeIn animation-stop">
+            <div ng-repeat="(establishment, vehicleList) in vm.vehicleList | groupBy: 'establishment.name'">
+                <md-subheader class="md-primary">
+                    {{ (establishment === 'undefined') ? 'Sin establecimiento base' : establishment}}
+                </md-subheader>
+                <div layout="row"
+                     layout-wrap>
+                    <div flex="100"
+                         flex-gt-xs="50"
+                         flex-gt-md="33"
+                         ng-repeat="vehicle in vehicleList">
+                        <md-card>
+                            <md-card-content class="padding-0">
+                                <md-list-item ng-click="vm.onVehicleItemEditClick(vehicle, $event)"
+                                              class="md-2-line"
+                                              aria-label="{{::vehicle.name}}">
+                                    <md-icon md-font-icon="zmdi zmdi-truck"
+                                             ng-class="vehicle.status.type"
+                                             class="vehicle-status md-avatar-icon">
+                                    </md-icon>
+                                    <div class="md-list-item-text"
+                                         flex>
+                                        <h4>{{vehicle.name}}</h4>
+                                        <p ng-class="vehicle.status.type">{{vehicle.status.name}}</p>
+                                    </div>
+
+                                    <md-menu md-position-mode="target-right target">
+                                        <md-button class="md-icon-button"
+                                                   ng-click="$mdMenu.open()">
+                                            <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+                                        </md-button>
+                                        <md-menu-content width="4">
+                                            <md-menu-item ng-if="vehicle.idGPS">
+                                                <md-button ng-click="vm.onVehicleItemClick(vehicle, $event)">
+                                                    Ubicar en mapa
+                                                </md-button>
+                                            </md-menu-item>
+                                            <md-menu-item>
+                                                <md-button ng-click="vm.onStatusClick(vehicle, $event)">
+                                                    Cambiar estado del vehículo
+                                                </md-button>
+                                            </md-menu-item>
+                                            <md-menu-item ng-if="vehicle.currentRem">
+                                                <md-button ng-href="#/samu/incidentes/{{vehicle.currentRem}}"
+                                                           target="_blank">
+                                                    Ver incidente actual
+                                                </md-button>
+                                            </md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
+
+                                </md-list-item>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </md-content>
+    <md-content flex
+                ng-show="!vm.selectedView || vm.selectedView === 'map'"
+                class="vehicle-maintainer-list-container">
+        <md-button class="md-fab md-mini md-primary md-hue-1 md-fab-top-right"
+                   ng-click="vm.updateBounds()"
+                   aria-label="Filtros">
+            <md-tooltip>Ajustar bordes del mapa</md-tooltip>
+            <md-icon md-font-icon="zmdi zmdi-fullscreen-alt"></md-icon>
+        </md-button>
+        <!-- Mapa georreferenciado de vehículos -->
+        <div id="ssvqMap"
+             style="width: 100%;height:100%;"></div>
+    </md-content>
+
+</div>
+
+<!-- Botonera para cambiar de vista -->
+<div class="view-button-list"
+     hide-gt-xs>
+    <md-button ng-class="{'md-primary': (vm.selectedView === 'list')}"
+               ng-click="vm.selectView('list')"
+               class="md-raised">Lista</md-button>
+    <md-button ng-class="{'md-primary': (vm.selectedView === 'map')}"
+               ng-click="vm.selectView('map')"
+               class="md-raised">Mapa</md-button>
+</div>

@@ -1,0 +1,116 @@
+<!-- HEADER -->
+<table class="head-wrap" bgcolor="#999999">
+    <tr>
+        <td></td>
+        <td class="header container" >
+
+            <div class="content">
+                <table bgcolor="#999999">
+                    <tr>
+                        <td><img src="<%= logo %>" /></td>
+                    </tr>
+                </table>
+            </div>
+
+        </td>
+        <td></td>
+    </tr>
+</table><!-- /HEADER -->
+
+
+<!-- BODY -->
+<table class="body-wrap">
+    <tr>
+        <td></td>
+        <td class="container" bgcolor="#FFFFFF">
+            <div class="content">
+                <table>
+                    <tr>
+                        <td>
+                            <h3><%= __('email.default.welcome') %> <%= user.name ? user.name : "" %>  <%= user.lastname ? user.lastname : "" %></h3>
+                            <p class="lead"><%= email.title ? email.title : "" %></p>
+                            <p> <%= email.description ? email.description : "" %></p>
+                            <!-- Callout Panel -->
+                            <p class="callout">
+                                <%- email.body ? email.body : "" %>
+                            </p><!-- /Callout Panel -->
+
+                            <!-- social & contact -->
+                            <table class="social" width="100%">
+                                <tr>
+                                    <td>
+                                        <!-- column 1 -->
+                                        <table align="left" class="column">
+                                            <tr>
+                                                <td>
+
+                                                    <h5 class=""><%=  __('email.default.followUsOn') %></h5>
+                                                    <p class="">
+                                                        <a href="#" class="soc-btn fb">Facebook</a>
+                                                        <a href="#" class="soc-btn tw">Twitter</a>
+                                                        <a href="#" class="soc-btn gp">Google+</a>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table><!-- /column 1 -->
+
+                                        <!-- column 2 -->
+                                        <table align="left" class="column">
+                                            <tr>
+                                                <td>
+
+                                                    <h5 class=""><%=  __('email.default.contact.title') %></h5>
+                                                    <p>
+                                                        <%=  __('email.default.contact.phone') %>
+                                                        <strong><%= contact.phone ? contact.phone : "" %></strong>
+                                                        <br/>
+                                                        <%=  __('email.default.termsOfService.terms') %>
+                                                        <strong><a href="emailto:<%= contact.email ? contact.email : '' %>"><%= contact.email ? contact.email : "" %></a></strong>
+                                                    </p>
+
+                                                </td>
+                                            </tr>
+                                        </table><!-- /column 2 -->
+
+                                        <span class="clear"></span>
+
+                                    </td>
+                                </tr>
+                            </table><!-- /social & contact -->
+
+                        </td>
+                    </tr>
+                </table>
+            </div><!-- /content -->
+
+        </td>
+        <td></td>
+    </tr>
+</table><!-- /BODY -->
+
+<!-- FOOTER -->
+<table class="footer-wrap">
+    <tr>
+        <td></td>
+        <td class="container">
+            <!-- content -->
+            <div class="content">
+                <table>
+                    <tr>
+                        <td align="center">
+                            <p>
+                                <a href="#"><%=  __('email.default.termsOfService.terms') %></a> |
+                                <a href="#"><%=  __('email.default.termsOfService.privacy') %></a> |
+                                <a href="#"><unsubscribe> <%=  __('email.default.termsOfService.unsubscribe') %></unsubscribe></a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- /content -->
+        </td>
+        <td>
+
+        </td>
+    </tr>
+</table><!-- /FOOTER -->

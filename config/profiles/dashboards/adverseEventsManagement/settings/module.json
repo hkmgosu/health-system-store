@@ -1,0 +1,31 @@
+{
+    "name": "PRIVILEGES.ADVERSEEVENTSMANAGEMENT.SETTINGS.NAME",
+    "description": "PRIVILEGES.ADVERSEEVENTSMANAGEMENT.SETTINGS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.adverse-event-settings",
+            "url": "/eventos-adversos/configuraciones",
+            "template": "<ssvq-adverse-event-settings-view></ssvq-adverse-event-settings-view>"
+        },
+        "_controllers": {
+            "read": [
+                "EstablishmentController.getAdverseEventModuleAvailable",
+                "EstablishmentController.getAdverseEventSupervisors",
+                "UnitController.getUnitsEstablishment",
+                "UnitController.getAdverseEventSupervisors"
+            ],
+            "update": [
+                "EstablishmentController.save",
+                "EstablishmentController.addAdverseEventSupervisors",
+                "EstablishmentController.rmAdverseEventSupervisors",
+                "UnitController.save",
+                "UnitController.addAdverseEventSupervisors",
+                "UnitController.rmAdverseEventSupervisors"
+            ]
+        }
+    }
+}

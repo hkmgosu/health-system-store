@@ -1,0 +1,39 @@
+{
+    "SEARCH": {
+        "TITLE": "Búsqueda",
+        "ESTABLISHMENTS": "Establecimientos",
+        "AUTOCOMPLETE": "Buscar",
+        "FILTER": {
+            "TITLE": "Filtrar por tipo de establecimiento",
+            "CONFIRM": "Confirmar",
+            "CANCEL": "Volver"
+        }
+    },
+    "EMPLOYEE": {
+        "PROFILETITLE": "Perfil de funcionario",
+        "SEARCH": "Buscar",
+        "ACCEPT": "Aceptar",
+        "TABLE": {
+            "RUT": "Rut",
+            "NAME": "Nombre",
+            "LASTNAME": "Apellido",
+            "EMAIL": "Correo",
+            "PHONE": "Teléfono",
+            "BIRTHDATE": "Fecha nacimiento",
+            "HEALTHCARE": "Salud",
+            "AFP": "AFP",
+            "LEGALQUALITY": "Calidad jurídica",
+            "LEVEL": "Grado",
+            "JOB": "Cargo",
+            "UNIT": "Unidad",
+            "ANNEXE": "Anexo",
+            "RESOURCE": {
+                "NAME": "Nombre",
+                "VALUE": "Valor"
+            }
+        }
+    },
+    "AUTOCOMPLETE": {
+        "NOMATCHFOUND":"No se encontraron resultados"
+    }
+}

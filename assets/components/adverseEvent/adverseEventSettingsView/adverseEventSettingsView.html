@@ -1,0 +1,133 @@
+<md-toolbar class="md-hue-1"
+            hide-xs>
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             flex>
+            <span class="md-subhead">Configuración de eventos adversos</span>
+            <span class="md-caption">Supervisores de estableciemientos y unidades</span>
+        </div>
+        <span flex></span>
+    </div>
+</md-toolbar>
+<md-content>
+    <md-tabs class="md-primary md-hue-1 ae-config-tabs">
+        <md-tab label="Establecimientos">
+            <div class="md-padding padding-bottom-0">
+                <ssvq-establishment-autocomplete on-select="vm.addEstablishment"
+                                                 clear-on-select="true"></ssvq-establishment-autocomplete>
+            </div>
+            <div class="md-whiteframe-1dp overlay-5 padding-top-10 padding-bottom-10 md-margin">
+                <p class="text-center">
+                    <md-icon md-font-icon="zmdi zmdi-info"></md-icon>
+                    &nbsp; Utiliza el buscador para agregar un establecimiento
+                </p>
+            </div>
+            <md-list>
+                <md-list-item ng-repeat="item in vm.establishments"
+                              class="md-2-line"
+                              ng-click="vm.showSupervisors(item, $event)">
+                    <div class="md-list-item-text">
+                        <h4>{{::item.name}}</h4>
+                        <p>{{item.adverseEventSupervisorsCount || 'Sin'}} supervisor(es)</p>
+                    </div>
+                    <md-button class="md-secondary md-warn md-raised"
+                               ng-click="vm.rmEstablishment(item)">
+                        Quitar
+                        <md-tooltip>
+                            Quitar del módulo eventos adversos
+                        </md-tooltip>
+                    </md-button>
+                </md-list-item>
+            </md-list>
+        </md-tab>
+        <md-tab label="Gestión de unidades">
+            <div layout="row"
+                 class="ae-config-panel">
+                <div flex="100"
+                     flex-gt-sm="50"
+                     class="md-whiteframe-z2"
+                     style="z-index: 50">
+                    <md-list>
+                        <md-subheader class="md-no-sticky">Establecimientos</md-subheader>
+                        <md-list-item ng-repeat="item in vm.establishments"
+                                      class="md-2-line"
+                                      ng-class="{activeListItem: (item.id === vm.activeEstablishment)}"
+                                      ng-click="vm.getUnitsEstablishment(item.id)">
+                            <div class="md-list-item-text">
+                                <h3>{{::item.name}}</h3>
+                            </div>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+                    </md-list>
+                </div>
+                <div flex="100"
+                     flex-gt-sm="50"
+                     class="ae-list-units">
+                    <md-subheader>
+                        <div layout="row">
+                            <span>Unidades</span>
+                            <span flex></span>
+                            <span flex="20"
+                                  flex-gt-sm="10"
+                                  style="text-align:right;">Habilitar</span>
+                            <span flex="10"
+                                  flex-gt-sm="5"
+                                  style="text-align:center;">|</span>
+                            <span flex="20"
+                                  flex-gt-sm="10">Ocurrencia</span>
+                        </div>
+                    </md-subheader>
+                    <md-list ng-show="!vm.onLoadUnits">
+                        <md-list-item class="md-3-line"
+                                      ng-repeat="item in vm.units | orderBy : 'id'"
+                                      ng-init="$last && vm.finished()"
+                                      ng-disabled="!tempAdverseEvent"
+                                      ng-click="vm.showUnitSupervisors(item, $event)"
+                                      layout="row">
+                            <div class="md-list-item-text"
+                                 flex>
+                                <h4>{{::item.name}}</h4>
+                                <p>Depende de {{ ::item.parent.name || '--' }}</p>
+                                <p>{{item.adverseEventSupervisorsCount || 'Sin'}} supervisor(es)</p>
+                            </div>
+                            <md-switch class="md-primary"
+                                       aria-label="Habilitar/Deshabilitar"
+                                       flex="20"
+                                       flex-gt-sm="10"
+                                       ng-init="tempAdverseEvent = (item.adverseEvent === false || item.adverseEvent) ? true : false"
+                                       ng-model="tempAdverseEvent"
+                                       ng-change="vm.onChange(item, tempAdverseEvent)"></md-switch>
+                            <md-switch class="md-primary"
+                                       aria-label="Habilitar/Deshabilitar unidad de ocurrencia"
+                                       flex="20"
+                                       flex-gt-sm="10"
+                                       ng-model="item.adverseEvent"
+                                       ng-disabled="!tempAdverseEvent"
+                                       ng-false-value="false"
+                                       ng-true-value="true"
+                                       ng-change="vm.onChange(item)"></md-switch>
+                        </md-list-item>
+                    </md-list>
+                    <div ng-show="vm.units.length === 0"
+                         style="height: 90%"
+                         layout="column"
+                         layout-align="center center">
+                        <div>
+                            <md-icon md-font-icon="zmdi zmdi-search-in-page"
+                                     class="md-warn"
+                                     style="font-size: 46px;">
+                            </md-icon>
+                        </div>
+                        <p>No se encontraron unidades</p>
+                    </div>
+                    <div ng-show="!vm.units"
+                         style="height: 90%"
+                         layout="column"
+                         layout-align="center center">
+                        <p>Seleccione Establecimiento</p>
+                    </div>
+                </div>
+            </div>
+        </md-tab>
+    </md-tabs>
+</md-content>

@@ -1,0 +1,127 @@
+<md-toolbar md-theme="white">
+    <div class="md-toolbar-tools">
+        <md-icon md-font-icon="fa fa-filter"></md-icon>
+        <h2 flex>Filtros</h2>
+        <md-button ng-click="vm.cleanFilters()">Limpiar</md-button>
+    </div>
+</md-toolbar>
+<md-content>
+    <md-input-container md-no-float
+                        class="md-block margin-left-10 margin-right-10 margin-bottom-0">
+        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+        <input ng-model="vm.filter.searchText"
+               ng-model-options="{ debounce: 800 }"
+               type="search"
+               id="search"
+               autofocus
+               placeholder="{{ 'CRUD.SEARCH' | translate }}">
+    </md-input-container>
+
+    <md-divider></md-divider>
+
+    <!-- Comuna -->
+    <md-list-item class="md-2-line"
+                  ng-click="vm.filterOpened = 'commune'"
+                  ng-disabled="vm.filterOpened == 'commune'">
+        <div class="md-list-item-text">
+            <h3>Comuna</h3>
+            <p>{{vm.filter.commune.name || 'Cualquiera'}}</p>
+        </div>
+        <md-button class="md-secondary md-icon-button"
+                   ng-click="vm.filter.commune = null"
+                   ng-show="vm.filter.commune">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            <md-tooltip>Limpiar filtro</md-tooltip>
+        </md-button>
+    </md-list-item>
+    <md-content ng-show="vm.filterOpened=='commune'"
+                class="md-padding">
+        <md-autocomplete flex
+                         md-no-cache="false"
+                         md-selected-item="vm.filter.commune"
+                         ng-model-options="{debounce: 600}"
+                         md-search-text="vm.communeSearchText"
+                         md-items="item in vm.getCommunes(vm.communeSearchText)"
+                         md-item-text="item.name"
+                         placeholder="Comuna"
+                         md-max-length="50">
+            <md-item-template>
+                <div class="md-padding">
+                    <span class="md-body-1"
+                          md-highlight-text="vm.communeSearchText"
+                          md-highlight-flags="^i">
+                        {{item.name}}
+                    </span>
+                </div>
+            </md-item-template>
+            <md-not-found>
+                <div class="md-padding">
+                    <span>{{'AUTOCOMPLETE.NOMATCHFOUND' | translate}}</span>
+                </div>
+            </md-not-found>
+        </md-autocomplete>
+    </md-content>
+
+    <md-divider></md-divider>
+
+    <!-- Creado por -->
+    <md-list-item class="md-2-line"
+                  ng-click="vm.filterOpened = 'createdBy'"
+                  ng-disabled="vm.filterOpened == 'createdBy'">
+        <div class="md-list-item-text">
+            <h3>Creado por</h3>
+            <p>
+                {{vm.filter.createdBy.fullname || 'Cualquiera'}}
+            </p>
+        </div>
+        <md-button class="md-secondary md-icon-button"
+                   ng-click="vm.filter.createdBy = null"
+                   ng-show="vm.filter.createdBy && vm.mode !== 'sent'">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            <md-tooltip>Limpiar filtro</md-tooltip>
+        </md-button>
+    </md-list-item>
+    <md-content class="md-padding"
+                ng-show="vm.filterOpened === 'createdBy'">
+        <ssvq-employee-autocomplete on-select="vm.cleanFilterOpened"
+                                    selected="vm.filter.createdBy">
+        </ssvq-employee-autocomplete>
+    </md-content>
+    <md-divider style="width:98%; margin:auto;"></md-divider>
+
+    <!-- Fecha de creación-->
+    <md-list-item class="md-2-line"
+                  ng-click="vm.showCreatedAtFilter($event)">
+        <div class="md-list-item-text">
+            <h3>Fecha de ingreso</h3>
+            <p>
+                <span ng-show="vm.filter.minDate || vm.filter.maxDate">
+                    {{(vm.filter.minDate | date : "dd MMM y") || '--'}} al {{(vm.filter.maxDate | date : "dd MMM y") || '--'}}
+                </span>
+                <span ng-show="!vm.filter.minDate && !vm.filter.maxDate">
+                    Cualquiera
+                </span>
+            </p>
+        </div>
+        <md-button class="md-secondary md-icon-button"
+                   ng-click="vm.filter.minDate = vm.filter.maxDate = null"
+                   ng-show="vm.filter.minDate || vm.filter.maxDate">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            <md-tooltip>Limpiar filtro</md-tooltip>
+        </md-button>
+    </md-list-item>
+
+    <md-divider style="width:98%; margin:auto;"></md-divider>
+
+    <!-- Estado-->
+    <md-list-item>Estado</md-list-item>
+    <md-list-item ng-repeat="item in vm.remStatus | orderBy:'finished'">
+        <span class="md-body-2">
+            <span ng-class="item.finished ? 'status-finished': 'status-unfinished'">•</span>
+            {{::item.description}}
+        </span>
+        <md-checkbox class="md-secondary md-primary"
+                     aria-label="{{::item.description}}"
+                     ng-model="item.checked"></md-checkbox>
+    </md-list-item>
+</md-content>

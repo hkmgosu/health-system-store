@@ -1,0 +1,103 @@
+<md-card>
+    <md-card-content class="padding-0">
+        <div class="botonera-rem"
+             layout="row">
+            <md-button class="margin-0 padding-top-10 padding-bottom-10"
+                       style="min-width:40px;"
+                       ng-click="vm.createMultiplePatients($event)">
+                <md-tooltip>Agregar múltiples pacientes</md-tooltip>
+                <md-icon md-font-icon="zmdi zmdi-accounts-add"></md-icon>
+            </md-button>
+            <md-divider></md-divider>
+            <md-button class="margin-0 padding-top-10 padding-bottom-10"
+                       flex
+                       ng-click="vm.showNewRemPatientDialog($event)">
+                <md-icon md-font-icon="zmdi zmdi-account-add"></md-icon>
+                <span class="md-body-1">Paciente</span>
+                <md-tooltip>Agregar paciente</md-tooltip>
+            </md-button>
+            <md-divider></md-divider>
+            <md-button class="margin-0 padding-top-10 padding-bottom-10"
+                       flex
+                       ng-click="vm.showCreateRemVehicleDialog($event)">
+                <md-icon class="movil-icon"
+                         md-font-icon="zmdi zmdi-truck"></md-icon>
+                <span class="md-body-1">Despacho</span>
+                <md-tooltip>Agregar despacho</md-tooltip>
+            </md-button>
+        </div>
+    </md-card-content>
+</md-card>
+
+<div ng-if="::vm.remVehicles"
+     class="animated fadeIn">
+    <md-card md-whiteframe="2">
+        <md-card-content class="padding-0">
+            <div ng-show="withoutTransfer.length > 0">
+                <md-subheader class="md-no-sticky">
+                    Pacientes sin traslado
+                </md-subheader>
+                <md-divider></md-divider>
+            </div>
+            <md-list class="padding-0 expandible">
+                <ssvq-rem-patient-item rem-patient="remPatient"
+                                       id-rem="vm.idRem"
+                                       get-rem-vehicles="vm.getRemVehicles"
+                                       ng-class="{'last': $last}"
+                                       ng-repeat="remPatient in vm.remPatients | filter: {vehicle: null, deleted: false} | orderBy:'incrementalID' as withoutTransfer track by remPatient.id">
+                </ssvq-rem-patient-item>
+            </md-list>
+            <div ng-show="currentFiltered.length > 0">
+                <md-divider></md-divider>
+                <md-subheader class="md-no-sticky">
+                    Despachos en curso
+                </md-subheader>
+                <md-divider></md-divider>
+            </div>
+            <md-list class="padding-0">
+                <div ng-repeat="remVehicle in vm.remVehicles | filter: vm.currentFilter | orderBy:'-createdAt' as currentFiltered">
+                    <md-divider ng-show="!$first"></md-divider>
+                    <ssvq-rem-vehicle-item rem-vehicle="remVehicle">
+                    </ssvq-rem-vehicle-item>
+                    <md-divider></md-divider>
+                    <ssvq-rem-patient-item rem-patient="remPatient"
+                                           id-rem="vm.idRem"
+                                           get-rem-vehicles="vm.getRemVehicles"
+                                           ng-class="{'last': $last}"
+                                           ng-repeat="remPatient in vm.remPatients | filter: {vehicle: remVehicle.id, deleted: false} | orderBy:'incrementalID' track by remPatient.id">
+                    </ssvq-rem-patient-item>
+                    <md-list-item ng-show="( vm.remPatients | filter: {vehicle: remVehicle.id, deleted: false} ).length == 0">
+                        <p class="text-center md-caption">Despacho sin pacientes asociados</p>
+                    </md-list-item>
+                </div>
+            </md-list>
+            <div ng-show="finishedFiltered.length > 0">
+                <md-divider></md-divider>
+                <md-subheader class="md-no-sticky">
+                    Despachos finalizados
+                </md-subheader>
+                <md-divider></md-divider>
+            </div>
+            <md-list class="padding-0">
+                <div ng-repeat="remVehicle in vm.remVehicles | filter: vm.finishedFilter as finishedFiltered">
+                    <md-divider ng-show="!$first"></md-divider>
+                    <ssvq-rem-vehicle-item rem-vehicle="remVehicle">
+                    </ssvq-rem-vehicle-item>
+                    <md-divider></md-divider>
+                    <ssvq-rem-patient-item rem-patient="remPatient"
+                                           id-rem="vm.idRem"
+                                           get-rem-vehicles="vm.getRemVehicles"
+                                           ng-class="{'last': $last}"
+                                           ng-repeat="remPatient in vm.remPatients | filter: {vehicle: remVehicle.id, deleted: false} | orderBy:'incrementalID' track by remPatient.id">
+                    </ssvq-rem-patient-item>
+                    <md-list-item ng-show="( vm.remPatients | filter: {vehicle: remVehicle.id, deleted: false} ).length == 0">
+                        <p class="text-center md-caption">Despacho sin pacientes asociados</p>
+                    </md-list-item>
+                </div>
+            </md-list>
+        </md-card-content>
+    </md-card>
+</div>
+
+<p class="text-center"
+   ng-if="!vm.remVehicles">Cargando pacientes y despachos...</p>

@@ -1,0 +1,30 @@
+.item-list-history p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .01em;
+    line-height: 1.6em;
+}
+.item-head-history {
+    padding: 10px;
+    cursor: pointer;
+}
+.item-head-history:focus {
+    outline: none;
+}
+.item-head-history:hover, .item-head-history.active {
+    background-color: rgba(158,158,158,0.2);
+}
+.item-body-history {
+    padding: 0 10px 10px;
+}
+.item-body-history md-list-item {
+    padding: 5px 0;
+}
+.link-button-history {
+    position: absolute;
+    right: 20px;
+}
+.content-patient-history {
+    overflow-x: hidden;
+}

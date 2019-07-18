@@ -1,0 +1,35 @@
+{
+    "name": "PRIVILEGES.BED_MANAGER.PATIENT_TRANSFER_DETAILS.NAME",
+    "description": "PRIVILEGES.BED_MANAGER.PATIENT_TRANSFER_DETAILS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.bed-manager-patient-transfer-details",
+            "url": "/derivaciones/detalles/:id",
+            "template": "<ssvq-derivation-details></ssvq-derivation-details>",
+            "params": {
+                "id": null,
+                "derivation": null
+            },
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "DerivationController.get",
+                "DerivationStatusController.getList",
+                "DerivationController.getTimeline",
+                "DerivationController.unsubscribe",
+                "RegionController.getAll",
+                "CommuneController.getAll",
+                "CommuneController.get"
+            ],
+            "update": [
+                "DerivationController.addComment",
+                "DerivationController.update"
+            ]
+        }
+    }
+}

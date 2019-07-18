@@ -1,0 +1,9 @@
+.rem-patient-tabs {
+    height: calc(90vh - 64px);
+    overflow:hidden;
+}
+@media (max-width: 599px){
+    .rem-patient-tabs {
+        height: calc(100vh - 56px);
+    }
+}

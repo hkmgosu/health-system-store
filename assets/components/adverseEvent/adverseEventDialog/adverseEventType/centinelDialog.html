@@ -1,0 +1,61 @@
+<md-dialog aria-label="Nuevo evento"
+           flex="80"
+           flex-sm="90"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <div>
+        <md-dialog-content>
+            <div class="md-dialog-content tab-dialog-content adverse-list-item">
+                <span>¿El evento que usted desea reportar es uno de los siguientes? marque la opción</span>
+                <md-list>
+                    <div class="adverse-list-item">
+                        <md-list-item ng-if="vm.options"
+                                      ng-repeat="eventType in vm.options | orderBy: 'id'"
+                                      ng-click="vm.model = eventType"
+                                      class="adverse-list-item">
+                            <p ng-class="{active: vm.model.id === eventType.id}">
+                                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                         class="date-icon padding-right-0">
+                                </md-icon>
+                                {{::(eventType.name)}}
+                            </p>
+                            <md-icon md-font-icon="zmdi zmdi-check-circle"
+                                     class="md-primary margin-left-10"
+                                     ng-show="vm.model.id === {{::(eventType.id)}}"
+                                     style="font-size: 30px;">
+                            </md-icon>
+                        </md-list-item>
+                        <md-list-item class="adverse-list-item" ng-click="vm.model = {id: -1}">
+                            <p ng-class="{active: vm.model.id === -1 }">
+                                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                                         class="date-icon padding-right-0">
+                                </md-icon>
+                                No, deseo reportar un evento distinto a los anteriores
+                            </p>
+                            <md-icon md-font-icon="zmdi zmdi-check-circle"
+                                     class="md-primary margin-left-10"
+                                     ng-show="vm.model.id === -1"
+                                     style="font-size: 30px;">
+                            </md-icon>
+                        </md-list-item>
+                    </div>
+                </md-list>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row"
+                           layout-align="end center">
+            <md-button class="md-accent"
+                       ng-click="vm.cancel();"
+                       translate="Cancelar"
+                       aria-label="Cancelar">
+            </md-button>
+            <md-button class="md-primary"
+                       type="button"
+                       ng-click="vm.model.id !== -1 ? vm.save() : vm.cancel();"
+                       ng-disabled="!vm.model"
+                       translate="Confirmar"
+                       aria-label="Confirmar">
+            </md-button>
+        </md-dialog-actions>
+    </div>
+</md-dialog>

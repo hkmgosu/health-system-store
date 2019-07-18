@@ -1,0 +1,87 @@
+<md-dialog aria-label="Detalles del item"
+           flex-gt-sm="60"
+           flex="100">
+    <form name="formPlanCenabast">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 flex>{{ vm.planCenabast.id ? 'Editar Item':'Agregar Producto'}}</h2>
+                <span flex></span>
+
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Cancelar">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+
+        <md-dialog-content md-border-bottom
+                           class="md-padding">
+
+            <ssvq-product-autocomplete on-select="vm.onProductSelected"
+                                       selected="vm.planCenabast.product"
+                                       exclude="vm.exclude"
+                                       ng-show="!vm.planCenabast.product"
+                                       allowed-only="false">
+            </ssvq-product-autocomplete>
+
+            <md-list>
+                <md-list-item class="md-2-line"
+                              ng-show="vm.planCenabast.product"
+                              ng-click="vm.clean()">
+
+                    <md-letter-avatar class="md-avatar"
+                                      ng-show="!vm.planCenabast.product.hasProfilePicture"
+                                      length="1"
+                                      font-size="18px"
+                                      shape="round"
+                                      data="vm.planCenabast.product.description">
+                    </md-letter-avatar>
+                    <img class="md-avatar"
+                         ng-show="vm.planCenabast.product.hasProfilePicture"
+                         ng-src="storage/product/downloadProductProfilePicture/{{vm.planCenabast.product.id}}?{{vm.timestamp(vm.planCenabast.product)}}">
+
+                    <div class="md-list-item-text">
+                        <h3 class="md-body-2">
+                            <span md-highlight-text="vm.searchText"
+                                  md-highlight-flags="gi">
+                                {{vm.planCenabast.product.description}}
+                            </span>
+                        </h3>
+                        <p class="md-caption"
+                           md-highlight-text="vm.searchText"
+                           md-highlight-flags="gi">
+                            Código: {{vm.planCenabast.product.productCode}},
+                            {{vm.planCenabast.product.dosage}} {{vm.planCenabast.product.dosageType.description}},
+                            {{vm.planCenabast.product.drugType.description}}
+                        </p>
+                    </div>
+                </md-list-item>
+            </md-list>
+
+            <md-input-container class="md-block">
+                <label for="quantity">Cantidad</label>
+                <input type="number"
+                       name="quantity"
+                       ng-model="vm.planCenabast.quantity"
+                       min="1"
+                       required>
+                <div ng-messages="formPlanCenabast.quantity.$error">
+                    <div ng-message="required">
+                        <span translate>STORAGE_CENABAST.VALIDATOR.REQUIRED</span>
+                    </div>
+                </div>
+            </md-input-container>
+
+        </md-dialog-content>
+
+        <md-dialog-actions class="text-right">
+            <md-button class="md-raised md-primary"
+                       ng-click="vm.confirm()"
+                       ng-disabled="formPlanCenabast.$invalid"
+                       aria-label="CRUD.SAVE"
+                       translate="CRUD.SAVE"></md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,39 @@
+<md-toolbar class="md-hue-1"
+            md-scroll-shrink>
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             hide-xs
+             flex>
+            <span class="md-subhead"
+                  translate>Consumos Inmediatos</span>
+            <span class="md-caption"
+                  ng-show="vm.viewMode=='list'">Mostrando {{vm.expressIncomes.length}} de {{vm.found}} resultados</span>
+        </div>
+
+        <md-divider class="vertical-divider"></md-divider>
+
+        <!-- LISTA/TABLA -->
+        <md-button class="md-icon-button"
+                   ng-show="vm.viewMode == 'list'"
+                   ng-click="vm.viewChange()">
+            <md-icon md-font-icon="fa fa-table"></md-icon>
+            <md-tooltip>Ver como tabla</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button"
+                   ng-show="vm.viewMode == 'table'"
+                   ng-click="vm.viewChange()">
+            <md-icon md-font-icon="fa fa-list"></md-icon>
+            <md-tooltip>Ver como lista</md-tooltip>
+        </md-button>
+
+        <!-- BOTON NUEVO -->
+        <md-button required-privilege="['create']"
+                   class="md-icon-button"
+                   ng-disabled="vm.allowedUnits.length == 0"
+                   ng-click="vm.onCreate($event)">
+            <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+            <md-tooltip>Crear nuevo consumo</md-tooltip>
+        </md-button>
+
+    </div>
+</md-toolbar>

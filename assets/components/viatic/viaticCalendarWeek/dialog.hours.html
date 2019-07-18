@@ -1,0 +1,52 @@
+<md-dialog flex="50"
+           flex-md="60"
+           flex-sm="80"
+           flex-xs="95"
+           aria-label="Seleccione cantidad de horas">
+    <md-dialog-content>
+        <md-subheader class="md-primary">Cantidad de horas</md-subheader>
+        <div class="padding-10"
+             layout="column">
+            <md-slider-container style="padding: 0 10px;">
+                <md-icon md-font-icon="zmdi zmdi-watch"></md-icon>
+                <md-slider ng-model="vm.day.value.quantity"
+                           min="0"
+                           max="9"
+                           step="0.25"
+                           aria-label="Horas"
+                           ng-change="vm.calcHumanTime(hours)"
+                           class="md-primary"></md-slider>
+                <div layout="column"
+                     layout-align="center start"
+                     style="max-width: 60px !important; width: 60px;">
+                    <span>{{ vm.day.value.label }}</span>
+                </div>
+            </md-slider-container>
+        </div>
+        <md-subheader class="md-primary">Solicitadas para</md-subheader>
+        <div class="padding-10"
+             layout="column">
+            <div layout="row"
+                 layout-xs="column">
+                <md-button flex
+                           class="md-hue-1 md-raised"
+                           ng-disabled="vm.day.value.quantity == 0"
+                           ng-click="vm.day.value.schedule = 'am'"
+                           ng-class="{'md-primary': vm.day.value.schedule == 'am'}">Inicio jornada</md-button>
+                <md-button flex
+                           class="md-hue-1 md-raised"
+                           ng-disabled="vm.day.value.quantity == 0"
+                           ng-click="vm.day.value.schedule = 'pm'"
+                           ng-class="{'md-primary': vm.day.value.schedule == 'pm'}">Final jornada</md-button>
+            </div>
+        </div>
+        <div layout="row"
+             layout-align="end center">
+            <md-button class="md-accent"
+                       ng-click="vm.cancel()">Cancelar</md-button>
+            <md-button class="md-primary"
+                       ng-disabled="!vm.day.value.schedule || vm.day.value.quantity === 0"
+                       ng-click="vm.confirm()">Confirmar</md-button>
+        </div>
+    </md-dialog-content>
+</md-dialog>

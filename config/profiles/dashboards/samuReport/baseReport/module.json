@@ -1,0 +1,19 @@
+{
+    "name": "PRIVILEGES.SAMU_REPORTS.BASEREPORT.NAME",
+    "description": "PRIVILEGES.SAMU_REPORTS.BASEREPORT.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.samu-rem-base-report",
+            "url": "/samu/reporte-base",
+            "template": "<ssvq-rem-base-report-view></ssvq-rem-base-report-view>"
+        },
+        "_controllers": {
+            "read": [
+                "RemController.getBaseReport"
+            ]
+        }
+    }
+}

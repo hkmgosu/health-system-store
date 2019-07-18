@@ -1,0 +1,46 @@
+<md-list ng-if="vm.data" class="padding-top-0">
+    <md-subheader class="md-no-sticky">
+        <span flex>Datos del error de medicación</span>
+    </md-subheader>
+    <md-divider></md-divider>
+    <md-list-item class="md-3-line md-long-text ae-list-details">
+        <div class="md-list-item-text">
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Medicamento indicado:</strong>
+                <span>{{ (vm.data.medicine || {}).name || '--' }} - {{ (vm.data.medicine || {}).presentation || '--' }}</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Via de administración indicada:</strong>
+                <span>{{ (vm.data.via || {}).name || '--' }}</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Consecuencia(s) del evento:</strong>
+                <span ng-repeat="consequence in ::vm.data.consequences">{{ ::consequence.name }}{{ ::(!$last ? ', ' : '') }}</span>
+                <span ng-if="::vm.data.consequences.length === 0">--</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Etapa en que se produjo el error:</strong>
+                <span>{{ (vm.data.stageError || {}).name || '--' }}</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Tipo de error:</strong>
+                <span>{{ (vm.data.typeError || {}).name || '--' }}</span>
+            </p>
+        </div>
+    </md-list-item>
+</md-list>

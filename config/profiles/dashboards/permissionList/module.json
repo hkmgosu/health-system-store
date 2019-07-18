@@ -1,0 +1,30 @@
+{
+    "name": "PRIVILEGES.PERMISSION.NAME",
+    "description": "PRIVILEGES.PERMISSION.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.permission",
+            "url": "/permisos",
+            "icon": "zmdi zmdi-calendar-check",
+            "priority": 30,
+            "template": "<ssvq-permission-list-view></ssvq-permission-list-view>"
+        },
+        "_controllers": {
+            "read": [
+                "PermissionController.getSent",
+                "PermissionController.getPermissionTypeList",
+                "HolidayController.getHolidays",
+                "EmployeeController.getList",
+                "WorkflowController.canCreate",
+                "WorkflowController.getStatus"
+            ],
+            "create": [
+                "PermissionController.create"
+            ]
+        }
+    }
+}

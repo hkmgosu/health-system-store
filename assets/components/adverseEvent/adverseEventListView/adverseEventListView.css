@@ -1,0 +1,14 @@
+.tabs-adverse-events {
+    height: calc(100vh - 64px);
+}
+@media (max-width: 599px){
+    .tabs-adverse-events {
+        height: calc(100vh - 56px);
+    }
+}
+
+.float-icon-swipeable{
+    position: absolute;
+    top: 18px;
+    left: 15px;
+}

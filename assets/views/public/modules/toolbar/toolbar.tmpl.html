@@ -1,0 +1,58 @@
+<div class="md-toolbar-tools"
+     layout="row"
+     layout-align="end center">
+    <md-button class="md-icon-button"
+               hide-gt-sm
+               ng-click="vm.openSideNav('left')"
+               aria-label="side navigation">
+        <md-icon md-font-icon="zmdi zmdi-menu"></md-icon>
+    </md-button>
+    <h4 hide-xs
+        class="margin-right-10">Contactos SSVQ</h4>
+    <span flex
+          hide-sm
+          hide-xs></span>
+    <ssvq-employee-autocomplete flex-gt-sm="50"
+                                flex
+                                on-select="vm.showEmployeeProfile"
+                                on-show-establishment="vm.showEstablishment"
+                                on-send-email="vm.sendEmail"
+                                public="true"
+                                type="search"
+                                layout="row"
+                                layout-align="center center"></ssvq-employee-autocomplete>
+    <span flex
+          hide-sm
+          hide-xs></span>
+    <md-button href="/"
+               ng-hide="::vm.employee"
+               layout="row"
+               hide-xs>
+        Iniciar sesión
+        <md-tooltip md-direction="left">Entrar a Mi SSVQ</md-tooltip>
+    </md-button>
+    <md-button class="md-icon-button"
+               href="/"
+               hide-gt-xs
+               layout="row"
+               ng-hide="::vm.employee">
+        <md-icon md-font-icon="fa fa-sign-in"></md-icon>
+        <md-tooltip md-direction="left">Entrar a Mi SSVQ</md-tooltip>
+    </md-button>
+    <md-menu md-offset="0 2"
+             class="margin-left-10"
+             layout="row"
+             layout-align="center center"
+             ng-show="::vm.employee">
+        <ssvq-employee-avatar ng-click="$mdOpenMenu()"
+                              employee="::vm.employee">
+        </ssvq-employee-avatar>
+        <md-menu-content width="4"
+                         class="animated fadeIn">
+            <md-subheader>{{::vm.employee.fullname}}</md-subheader>
+            <md-menu-item>
+                <md-button href="/">Entrar a Mi SSVQ</md-button>
+            </md-menu-item>
+        </md-menu-content>
+    </md-menu>
+</div>

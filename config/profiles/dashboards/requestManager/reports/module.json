@@ -1,0 +1,15 @@
+{
+    "name": "PRIVILEGES.REQUESTS.REPORTS.NAME",
+    "description": "PRIVILEGES.REQUESTS.REPORTS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.admin-request-reports",
+            "url": "/solicitudes/reportes",
+            "template": "<ssvq-request-report></ssvq-request-report>"
+        },
+        "_controllers": {}
+    }
+}

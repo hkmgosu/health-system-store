@@ -1,0 +1,22 @@
+<div class="overlay-10 md-whiteframe-1dp padding-bottom-10 padding-top-10"
+     layout="row"
+     layout-padding
+     layout-align="center center">
+    <!-- From -->
+    <div layout="column"
+         flex>
+        <span class="md-body-2 text-center">Anterior</span>
+        <span class="md-body-1 text-center">{{vm.oldValue || '--'}}</span>
+    </div>
+    <div layout="column"
+         layout-align="center center">
+        <md-icon class="md-primary"
+                 md-font-icon="zmdi zmdi-chevron-right"></md-icon>
+    </div>
+    <!-- To -->
+    <div layout="column"
+         flex>
+        <span class="md-body-2 text-center">Actual</span>
+        <span class="md-body-1 text-center">{{vm.newValue || '--'}}</span>
+    </div>
+</div>

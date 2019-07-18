@@ -1,0 +1,32 @@
+{
+    "name": "PRIVILEGES.STORAGE_MOVEMENT_TYPE.NAME",
+    "description": "PRIVILEGES.STORAGE_MOVEMENT_TYPE.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-movement-type-admin",
+            "url": "/bodega/tipo-movimiento",
+            "template": "<ssvq-storage-movement-type-admin></ssvq-storage-movement-type-admin>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/MovementTypeController.get",
+                "Storage/MovementTypeController.getAll"
+            ],
+            "create": [
+                "Storage/MovementTypeController.create"
+            ],
+            "update": [
+                "Storage/MovementTypeController.update"
+            ],
+            "delete": [
+                "Storage/MovementTypeController.delete"
+            ]
+        }
+    }
+}

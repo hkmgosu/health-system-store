@@ -1,0 +1,280 @@
+<md-toolbar class="md-hue-1"
+            ng-hide="vm.permissionDenied">
+    <div class="md-toolbar-tools"
+         layout="row">
+        <md-button class="md-icon-button"
+                   ng-click="vm.goBack()">
+            <md-tooltip>Volver</md-tooltip>
+            <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+        </md-button>
+        <ssvq-employee-avatar employee="::vm.viatic.owner">
+        </ssvq-employee-avatar>
+        <div layout="column"
+             class="margin-left-10"
+             flex>
+            <span class="md-subhead">Viático #{{vm.viatic.id}}</span>
+            <span class="md-caption"
+                  md-truncate>
+                Ingresado
+                <b>
+                    <ssvq-custom-time-ago time-at="::vm.viatic.createdAt"></ssvq-custom-time-ago>
+                </b> por
+                <ssvq-employee-profile-link id-employee="{{::vm.viatic.owner.id}}">
+                    {{::vm.viatic.owner.fullname}}
+                </ssvq-employee-profile-link>
+            </span>
+        </div>
+        <!-- Cambiar estado -->
+        <div layout="column"
+             class="status-button">
+            <span class="md-caption label">Estado actual:</span>
+            <md-button ng-click="vm.changeStatus($event)"
+                       ng-disabled="!vm.enabledStatusList">
+                <span class="md-body-2">{{vm.viatic.status.name}}</span>
+                <md-icon md-font-icon="zmdi zmdi-caret-down"></md-icon>
+                <md-tooltip>Presionar para cambiar el estado</md-tooltip>
+            </md-button>
+        </div>
+        <!-- Descargar PDF -->
+        <md-button class="md-icon-button"
+                   ng-href="/viatic/getViaticDetailPdf?id={{::vm.idViatic}}"
+                   download>
+            <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
+            <md-tooltip>Descargar a pdf</md-tooltip>
+        </md-button>
+    </div>
+</md-toolbar>
+
+<md-content style="height: calc(100vh - 128px)">
+    <div ng-hide="vm.permissionDenied"
+         layout-gt-sm="row"
+         layout-align="center start">
+        <div flex="100"
+             flex-gt-sm="70">
+            <md-subheader class="md-primary md-hue-1">
+                <div layout="row"
+                     layout-align="center center">
+                    <span flex>Datos del viático</span>
+                    <i class="zmdi zmdi-{{showDetailsPermission ? 'plus':'minus'}}"
+                       ng-click="showDetailsPermission = !showDetailsPermission;">
+                        <md-tooltip>{{ showDetailsDay ? 'Mostrar' : 'Ocultar'}}</md-tooltip>
+                    </i>
+                </div>
+            </md-subheader>
+            <md-card ng-show="!showDetailsPermission"
+                     style="min-height:107px;">
+                <md-card-content>
+                    <md-list>
+                        <md-list-item class="md-2-line">
+                            <div class="md-list-item-text">
+                                <h4 class="respect-line-break">{{vm.viatic.reason || '--'}}</h4>
+                                <p>Motivo</p>
+                            </div>
+                        </md-list-item>
+                        <div layout="row"
+                             layout-xs="column">
+                            <md-list-item class="md-2-line"
+                                          flex="33"
+                                          flex-xs="100">
+                                <div class="md-list-item-text">
+                                    <h4>{{vm.viatic.type.name || '--'}}</h4>
+                                    <p>Tipo</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line"
+                                          flex="66"
+                                          flex-xs="100">
+                                <div class="md-list-item-text">
+                                    <h4>
+                                        {{vm.viatic.place}}, {{vm.viatic.commune.name}}, {{vm.viatic.region.name}}
+                                    </h4>
+                                    <p>Lugar</p>
+                                </div>
+                            </md-list-item>
+                        </div>
+                        <div layout="row"
+                             layout-xs="column">
+                            <md-list-item class="md-2-line"
+                                          flex="33"
+                                          flex-xs="100">
+                                <div class="md-list-item-text"
+                                     md-truncate>
+                                    <h4>{{vm.viatic.transportType || '--'}}</h4>
+                                    <p>Medio de Transporte</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line"
+                                          flex="33"
+                                          flex-xs="100">
+                                <div class="md-list-item-text"
+                                     md-truncate>
+                                    <h4>{{vm.viatic.requireTransport ? 'Sí' : 'No'}}</h4>
+                                    <p>Derecho a Pasaje</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line"
+                                          flex="33"
+                                          flex-xs="100">
+                                <div class="md-list-item-text"
+                                     md-truncate>
+                                    <h4>{{vm.viatic.requireHotel ? 'Sí' : 'No'}}</h4>
+                                    <p>Pernoctará fuera de la residencia</p>
+                                </div>
+                            </md-list-item>
+                        </div>
+                        <div layout="row"
+                             layout-xs="column">
+                            <md-list-item class="md-2-line"
+                                          flex="33"
+                                          flex-xs="100">
+                                <div class="md-list-item-text">
+                                    <h4>
+                                        <span ng-if="vm.viatic.numResExenta">
+                                            {{vm.viatic.numResExenta}} /
+                                            {{vm.viatic.dateResExenta | date : 'dd-MM-yyyy'}}
+                                        </span>
+                                        <span ng-if="!vm.viatic.numResExenta">--</span>
+                                    </h4>
+                                    <p>Res. Exenta</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line"
+                                          flex="33"
+                                          flex-xs="100">
+                                <div class="md-list-item-text"
+                                     md-truncate>
+                                    <h4>{{vm.viatic.numFolio || '--'}}</h4>
+                                    <p>Folio SIGFE Contabilidad</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line"
+                                          flex="33"
+                                          flex-xs="100">
+                                <div class="md-list-item-text"
+                                     md-truncate>
+                                    <h4>{{vm.viatic.numFolioTesoreria || '--'}}</h4>
+                                    <p>Folio SIGFE Tesorería</p>
+                                </div>
+                            </md-list-item>
+                        </div>
+                    </md-list>
+                </md-card-content>
+            </md-card>
+            <md-subheader class="md-primary md-hue-1">
+                <div layout="row"
+                     layout-align="center center">
+                    <span flex>Detalle días</span>
+                    <i class="zmdi zmdi-{{showDetailsDay ? 'plus':'minus'}}"
+                       ng-click="showDetailsDay = !showDetailsDay;">
+                        <md-tooltip>{{ showDetailsDay ? 'Mostrar' : 'Ocultar'}}</md-tooltip>
+                    </i>
+                </div>
+            </md-subheader>
+            <ssvq-viatic-calendar days="vm.viatic.daysDetails"
+                                  ng-show="!showDetailsDay"></ssvq-viatic-calendar>
+            <md-subheader class="md-primary md-hue-1">
+                <div layout="row"
+                     layout-align="center center">
+                    <span flex>Actividad reciente</span>
+                    <i class="zmdi zmdi-{{showRecentActivity ? 'plus':'minus'}}"
+                       ng-click="showRecentActivity = !showRecentActivity;">
+                        <md-tooltip>{{ showRecentActivity ? 'Mostrar' : 'Ocultar'}}</md-tooltip>
+                    </i>
+                </div>
+            </md-subheader>
+            <md-card ng-show="!vm.permissionDenied"
+                     class="no-padding-card">
+                <md-card-content>
+                    <ssvq-comment-box on-create="vm.sendComment"></ssvq-comment-box>
+                    <md-divider></md-divider>
+                    <ssvq-viatic-timeline id-viatic="::vm.idViatic"></ssvq-viatic-timeline>
+                </md-card-content>
+            </md-card>
+        </div>
+        <!-- Sidebar -->
+        <div flex="100"
+             flex-gt-sm="30">
+            <md-subheader class="md-primary md-hue-1">
+                <div layout="row"
+                     layout-align="center center">
+                    <span flex>Datos solicitante</span>
+                    <i class="zmdi zmdi-{{showOwnerData ? 'plus':'minus'}} toggle-rem-box-view"
+                       ng-click="showOwnerData = !showOwnerData;">
+                        <md-tooltip>{{ showOwnerData ? 'Mostrar' : 'Ocultar'}}</md-tooltip>
+                    </i>
+                </div>
+            </md-subheader>
+            <md-card ng-if="!showOwnerData">
+                <md-card-content>
+                    <div layout="column">
+                        <md-list-item class="md-2-line">
+                            <div class="md-list-item-text">
+                                <h3>{{vm.viatic.owner.fullname || '--'}}</h3>
+                                <p>Nombre</p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <div class="md-list-item-text">
+                                <h3>{{vm.viatic.owner.rut || '--' | rut }}</h3>
+                                <p>Rut</p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                        <md-list-item class="md-2-line"
+                                      md-truncate>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.viatic.unit.name || '--'}}</h3>
+                                <p>Unidad Administrativa</p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                        <md-list-item class="md-2-line"
+                                      md-truncate>
+                            <div class="md-list-item-text">
+                                <h3>{{vm.viatic.establishment.name || '--'}}</h3>
+                                <p>Establecimiento</p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                        <md-list-item class="md-2-line"
+                                      md-truncate>
+                            <div class="md-list-item-text">
+                                <h3>
+                                    {{vm.viatic.legalQuality.name || '--'}} (Grado {{vm.viatic.level || '--'}})
+                                </h3>
+                                <p>Calidad jurídica</p>
+                            </div>
+                        </md-list-item>
+                    </div>
+                </md-card-content>
+            </md-card>
+            <md-subheader class="md-primary md-hue-1">
+                <div layout="row"
+                     layout-align="center center">
+                    <span flex>Montos</span>
+                    <i class="zmdi zmdi-{{showAmountData ? 'plus':'minus'}} toggle-rem-box-view"
+                       ng-click="showAmountData = !showAmountData;">
+                        <md-tooltip>{{ showAmounthData ? 'Mostrar' : 'Ocultar'}}</md-tooltip>
+                    </i>
+                </div>
+            </md-subheader>
+            <ssvq-viatic-amount-summary viatic-data="vm.viatic"
+                                        static="true"
+                                        ng-show="!showAmountData"></ssvq-viatic-amount-summary>
+        </div>
+    </div>
+    <div ng-show="vm.permissionDenied"
+         layout="row"
+         layout-align="center center">
+        <md-card flex="100"
+                 flex-gt-xs="80">
+            <md-card-content layout="column"
+                             layout-align="center center">
+                <span class="text-center">Lo sentimos, no tienes acceso al viático.</span>
+                <md-button class="md-primary"
+                           ng-click="vm.back()">Volver</md-button>
+            </md-card-content>
+        </md-card>
+    </div>
+</md-content>

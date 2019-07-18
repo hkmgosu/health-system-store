@@ -1,0 +1,41 @@
+{
+    "name": "PRIVILEGES.RESOURCE_MAINTAINER.NAME",
+    "description": "PRIVILEGES.RESOURCE_MAINTAINER.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "create": false,
+            "read": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.resource-maintainer",
+            "url": "/recursos",
+            "icon": "zmdi zmdi-devices",
+            "template": "<ssvq-resource-maintainer></ssvq-resource-maintainer>"
+        },
+        "_controllers": {
+            "read": [
+                "ResourceController.getList",
+                "ResourceController.getExportList",
+                "ResourceController.getResourceTypeList",
+                "ResourceController.getResourceStatusList",
+                "ResourceController.getEmployeeListByResource",
+                "UnitController.get",
+                "EstablishmentController.get",
+                "EmployeeController.get",
+                "ResourceController.getAssignmentCoincidences"
+            ],
+            "create": [
+                "ResourceController.create"
+            ],
+            "update": [
+                "ResourceController.update",
+                "ResourceController.updateLocationInfo"
+            ],
+            "delete": [
+                "ResourceController.delete"
+            ]
+        }
+    }
+}

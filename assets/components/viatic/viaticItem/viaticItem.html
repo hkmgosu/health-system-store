@@ -1,0 +1,50 @@
+<md-list-item class="md-3-line"
+              layout="row"
+              aria-label="Ítem viático"
+              ng-href="#/viaticos/detalles/{{ ::vm.viatic.id }}">
+    <ssvq-employee-avatar employee="vm.viatic.owner"
+                          class="margin-right-10"></ssvq-employee-avatar>
+    <div class="md-list-item-text"
+         md-truncate
+         flex>
+        <h3 style="font-weight:500;"
+            md-colors="{color: 'primary-hue-1'}">
+            {{ ::vm.viatic.owner.fullname }}
+        </h3>
+        <h4>
+            <!-- Unidad -->
+            <i class="zmdi zmdi-group-work"
+               style="padding-right: 3px; font-size: 15px; color: #89aa81"></i>
+            {{ ::vm.viatic.unit.name }}
+            <span class="customBullet">•</span>
+
+            <!-- Tipo -->
+            <i class="zmdi zmdi-label-alt"
+               style="padding-right: 3px; font-size: 15px; color: #b47781"></i>
+            {{ ::vm.viatic.type.name }}
+            <span class="customBullet">•</span>
+
+            <!-- Ubicación -->
+            <i class="zmdi zmdi-pin"
+               style="padding-right: 3px; font-size: 15px; color: #7199c7"></i>
+            {{ ::vm.viatic.commune.name }}, {{ ::vm.viatic.region.name }}
+        </h4>
+        <p>
+            #{{vm.viatic.id}}
+            <span class="customBullet">•</span>
+            <i class="zmdi zmdi-calendar-alt"></i>
+            <span>{{vm.viatic.fromDate | date:"dd 'de' MMM"}}</span>
+            <span ng-if="vm.viatic.fromDate != vm.viatic.toDate"> al {{vm.viatic.toDate | date:"dd 'de' MMM"}}</span>
+            <span class="customBullet">•</span>
+            ${{vm.viatic.totalAmount | number}}
+        </p>
+    </div>
+    <div>
+        <div>
+            <span class="md-body-2">
+                {{::vm.viatic.status.name}}
+            </span>
+            <span class="md-body-2 {{ ::('dot-status-' + vm.viatic.status.type) }}">•</span>
+        </div>
+    </div>
+</md-list-item>

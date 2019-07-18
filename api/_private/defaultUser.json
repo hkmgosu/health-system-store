@@ -1,0 +1,11 @@
+{
+    "enable": true,
+    "id": -1,
+    "rut": "0",
+    "firstUpdate": true,
+    "email": "admin@admin.cl",
+    "name": "Administrador",
+    "lastname": "Administrador",
+    "password": "admin",
+    "profile": {}
+}

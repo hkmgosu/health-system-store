@@ -1,0 +1,215 @@
+<div>
+    <md-toolbar class="md-hue-1"
+                ng-hide="vm.permissionDenied">
+        <div class="md-toolbar-tools"
+             layout="row">
+            <md-button class="md-icon-button"
+                       ng-click="vm.goBack()">
+                <md-tooltip>Volver al listado</md-tooltip>
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            </md-button>
+            <div layout="column"
+                 flex>
+                <span class="md-subhead">Cierre #{{vm.closure.id}}</span>
+                <span class="md-caption"
+                      md-truncate>
+                    Ingresado
+                    <b>
+                        <span am-time-ago="vm.closure.createdAt"></span>
+                    </b> por
+                    <ssvq-employee-profile-link id-employee="{{::vm.closure.createdBy.id}}">
+                        {{::vm.closure.createdBy.fullname}}
+                    </ssvq-employee-profile-link>
+                </span>
+            </div>
+            <md-button class="md-icon-button"
+                       ng-href="/permission/getPermissionListpdf?id={{vm.closure.id}}"
+                       download>
+                <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
+                <md-tooltip>Descargar a pdf</md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content style="min-height: calc(100vh - 128px)">
+        <div ng-hide="vm.permissionDenied"
+             layout-gt-sm="row"
+             layout-align="center start">
+            <div flex="100"
+                 flex-gt-sm="70">
+                <md-subheader class="md-primary md-hue-1">Datos del cierre</md-subheader>
+                <md-card style="min-height:107px;">
+                    <md-card-content>
+                        <span class="respect-line-break">{{vm.closure.observation || '...'}}</span>
+                        <md-divider class="margin-top-10 margin-bottom-10"></md-divider>
+                        <md-list layout="row"
+                                 layout-wrap>
+                            <md-list-item flex
+                                          flex-xs="100"
+                                          class="md-2-line">
+                                <md-icon class="md-avatar-icon"
+                                         layout="column"
+                                         layout-align="center center"
+                                         md-font-icon="zmdi zmdi-calendar-check"
+                                         style="background-color: #3380bf"></md-icon>
+                                <div class="md-list-item-text">
+                                    <h3>{{ vm.closure.permissions.length }}</h3>
+                                    <p>Total permisos</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item flex
+                                          flex-xs="100"
+                                          class="md-2-line">
+                                <md-icon class="md-avatar-icon"
+                                         layout="column"
+                                         layout-align="center center"
+                                         md-font-icon="fa fa-hashtag"
+                                         style="background-color: #3380bf"></md-icon>
+                                <div class="md-list-item-text">
+                                    <h3>{{ vm.closure.correlativeStart || '--' }}</h3>
+                                    <p>Inicio correlativo</p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item flex
+                                          flex-xs="100"
+                                          class="md-2-line">
+                                <md-icon class="md-avatar-icon"
+                                         layout="column"
+                                         layout-align="center center"
+                                         md-font-icon="fa fa-hashtag"
+                                         style="background-color: #3380bf"></md-icon>
+                                <div class="md-list-item-text">
+                                    <h3>{{ vm.closure.correlativeEnd || '--' }}</h3>
+                                    <p>Fin correlativo</p>
+                                </div>
+                            </md-list-item>
+                        </md-list>
+                    </md-card-content>
+                </md-card>
+                <md-subheader class="md-primary md-hue-1">
+                    <div layout="row"
+                         layout-align="center center">
+                        <span flex>Detalle permisos</span>
+                        <i class="zmdi zmdi-{{showDetailsPermission ? 'plus':'minus'}}"
+                           ng-click="showDetailsPermission = !showDetailsPermission;">
+                            <md-tooltip>{{ showDetailsDay ? 'Mostrar' : 'Ocultar'}}</md-tooltip>
+                        </i>
+                    </div>
+                </md-subheader>
+                <md-card ng-show="!showDetailsPermission">
+                    <md-card-content class="padding-0">
+                        <div style="overflow: auto;max-height: 440px;">
+                            <md-list class="padding-0">
+                                <md-list-item class="md-3-line"
+                                              ng-repeat="permission in vm.closure.permissions"
+                                              target="_blank"
+                                              ng-href="#/permisos/detalles/{{ ::permission.id }}">
+                                    <ssvq-employee-avatar employee="permission.owner"
+                                                          class="margin-right-10"></ssvq-employee-avatar>
+
+                                    <div class="md-list-item-text"
+                                         md-truncate
+                                         flex>
+                                        <h3 style="font-weight:500;"
+                                            md-colors="{color: 'primary-hue-1'}">
+                                            {{ ::permission.owner.fullname }}
+                                        </h3>
+                                        <h4>
+                                            <!-- Unidad -->
+                                            <i class="zmdi zmdi-group-work"
+                                               style="padding-right: 3px; font-size: 15px; color: #89aa81"></i>
+                                            {{ ::permission.unit.name }}
+                                            <span class="customBullet">•</span>
+
+                                            <!-- Tipo -->
+                                            <i class="zmdi zmdi-label-alt"
+                                               style="padding-right: 3px; font-size: 15px; color: #b47781"></i>
+                                            {{ ::permission.type.name }}
+                                        </h4>
+                                        <p>
+                                            #{{permission.id}}
+                                            <span class="customBullet">•</span>
+                                            <i class="zmdi zmdi-calendar-alt"></i>
+                                            <span>{{permission.fromDate | date:"dd 'de' MMM"}}</span>
+                                            <span ng-if="permission.fromDate != permission.untilDate"> al
+                                                {{permission.untilDate | date:"dd 'de' MMM"}}</span>
+                                        </p>
+                                    </div>
+                                    <div class="md-secondary"
+                                         layout="row"
+                                         layout-align="center center">
+                                        <span class="md-body-2">{{permission.status.name}}</span>
+                                        <div style="height: 38px;
+                                                    width: 1px;
+                                                    margin: 0 15px;
+                                                    background: #acacac63;"></div>
+                                        <div layout="column"
+                                             layout-align="center center">
+                                            <span class="md-caption">Nº Correlativo</span>
+                                            <span class="md-body-2">{{ permission.correlativeNumber || '--' }}</span>
+                                        </div>
+                                    </div>
+                                    <md-divider></md-divider>
+                                </md-list-item>
+                            </md-list>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <div flex>
+                <md-subheader class="md-primary md-hue-1">Confirmación</md-subheader>
+                <md-card ng-form="vm.form">
+                    <md-card-content>
+                        <div layout="column"
+                             ng-if="!vm.closure.confirmed">
+                            <md-input-container flex>
+                                <label>Nº Resolución:</label>
+                                <input ng-model="vm.num"
+                                       name="num"
+                                       ng-change="vm.onChange(vm.num)"
+                                       required>
+                                <div ng-messages="vm.form.num.$error"
+                                     role="alert">
+                                    <div ng-message="required">
+                                        <span>Ingrese un Nº Resolución para continuar</span>
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <div layout="row">
+                                <span flex></span>
+                                <md-button ng-click="vm.onConfirm()"
+                                           ng-disabled="vm.form.$invalid"
+                                           class="md-raised md-primary">Confirmar</md-button>
+                            </div>
+                        </div>
+                        <div ng-if="vm.closure.confirmed"
+                             layout="column"
+                             layout-align="center center">
+                            <md-icon md-font-icon="zmdi zmdi-check"
+                                     style="color:green;"></md-icon>
+                            <p class="text-center md-body-2">El cierre ya está confirmado</p>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+        <div ng-show="vm.permissionDenied"
+             layout="row"
+             layout-align="center center">
+            <md-card flex="100"
+                     flex-gt-xs="80">
+                <md-card-content layout="column"
+                                 layout-align="center center">
+                    <span class="text-center">Lo sentimos, no tienes acceso al cierre.</span>
+                    <md-button class="md-primary"
+                               ng-click="vm.back()">Volver</md-button>
+                </md-card-content>
+            </md-card>
+        </div>
+    </md-content>
+</div>
+<md-button class="md-fab md-fab-bottom-right md-primary hidden-print"
+           ng-click="vm.export()">
+    <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
+    <md-tooltip md-direction="left">Exportar a pdf</md-tooltip>
+</md-button>

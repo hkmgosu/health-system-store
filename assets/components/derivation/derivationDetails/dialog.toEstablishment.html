@@ -1,0 +1,41 @@
+<md-dialog aria-label="Establecimiento de Destino"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <span class="md-subhead"
+                  flex>Destino del paciente</span>
+            <md-button ng-click="vm.confirm()"
+                       aria-label="Cambiar estado">
+                Actualizar
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-padding">
+            <ssvq-establishment-autocomplete selected="vm.derivation.toEstablishment"
+                                             filter="{bedManagementModuleAvailable: true}"
+                                             label="Establecimiento destino"></ssvq-establishment-autocomplete>
+            <ssvq-unit-autocomplete selected="vm.derivation.toUnit"
+                                    establishment="{{vm.derivation.toEstablishment.id}}"
+                                    required="true"
+                                    label="Unidad destino"></ssvq-unit-autocomplete>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-accent"
+                   ng-click="vm.cancel()">Volver</md-button>
+        <md-button class="md-primary"
+                   ng-click="vm.confirm()"
+                   aria-label="Actualizar">
+            Actualizar
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

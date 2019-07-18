@@ -1,0 +1,29 @@
+<md-dialog aria-label='Filtrar recurso por estado'
+           flex='60'
+           flex-sm='80'
+           flex-xs='100'
+           class='mobile-fullwidth-dialog'>
+    <md-toolbar>
+        <div class='md-toolbar-tools'>
+            <md-button class='md-icon-button'
+                       ng-click='vm.cancel()'>
+                <md-icon md-font-icon='zmdi zmdi-arrow-left'></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <span class='md-subhead'
+                  flex>Filtrar recurso por estado</span>
+            <md-button ng-click="vm.confirm()">Aplicar</md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <md-list>
+                <md-list-item ng-repeat="resourceStatus in vm.resourceStatusList">
+                    <p>{{resourceStatus.name}}</p>
+                    <md-checkbox class="md-secondary md-primary"
+                                 ng-model="resourceStatus.wanted"></md-checkbox>
+                </md-list-item>
+            </md-list>
+        </div>
+    </md-dialog-content>
+</md-dialog>

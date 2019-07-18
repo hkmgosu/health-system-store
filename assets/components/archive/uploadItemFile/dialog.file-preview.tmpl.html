@@ -1,0 +1,33 @@
+<md-dialog flex="60"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog"
+           aria-label="Selección de Unidades supervisadas">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 class="line-clamp line-clamp-1"
+                flex>{{nameFile}}</h2>
+            <md-button class="md-icon-button"
+                       ng-click="cancel()"
+                       aria-label="Cancelar">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout="column"
+                       style="background: #e5e5e5">
+        <object ng-attr-data="{{::pathFile}}"
+                type="application/pdf"
+                style="height:80vh"
+                ng-if="typeFile === 'pdf' && pathFile"
+                flex>
+        </object>
+        <div style="max-height:80vh"
+             ng-if="typeFile === 'image'"
+             layout="column"
+             layout-align="center center">
+            <img ng-src="{{::pathFile}}"
+                 style="width:auto; max-width:95%; margin: 15px 0;"
+                 class="md-whiteframe-z2">
+        </div>
+    </md-dialog-content>
+</md-dialog>

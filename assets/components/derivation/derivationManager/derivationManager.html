@@ -1,0 +1,123 @@
+<section layout="row"
+         flex>
+    <md-content flex>
+        <md-tabs md-swipe-content
+                 md-selected="vm.selectedTab"
+                 class="md-primary md-hue-1 tabs-transferManager"
+                 style="border-radius: 0">
+            <md-tab md-on-select="null"
+                    id="open">
+                <md-tab-label>
+                    <span>Abiertos</span>
+                    <span class="md-badge"
+                          ng-show="vm.openedCount"
+                          hide-xs>{{vm.openedCount || 0}}</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <ssvq-derivation-list finished="false"
+                                          count="vm.openedCount"
+                                          filter="vm.filter"
+                                          ng-if="vm.selectedTab == 0"></ssvq-derivation-list>
+                </md-tab-body>
+            </md-tab>
+            <md-tab md-on-select="null"
+                    id="closed">
+                <md-tab-label>
+                    <span>Cerrados</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <ssvq-derivation-list finished="true"
+                                          filter="vm.filter"
+                                          ng-if="vm.selectedTab == 1"></ssvq-derivation-list>
+                </md-tab-body>
+            </md-tab>
+            <md-tab md-on-select="null"
+                    id="all">
+                <md-tab-label>
+                    <span>Todos</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <ssvq-derivation-list finished="[true, false]"
+                                          filter="vm.filter"
+                                          ng-if="vm.selectedTab == 2"></ssvq-derivation-list>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+        <md-button aria-label="menu"
+                   class="md-raised md-primary md-fab md-fab-bottom-right"
+                   ng-click="vm.newPatientTransfer($event)">
+            <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+            <md-tooltip md-direction="left">
+                Nueva solicitud de derivación
+            </md-tooltip>
+        </md-button>
+    </md-content>
+
+    <md-sidenav class="md-sidenav-right md-whiteframe-1dp"
+                md-is-locked-open="$mdMedia('gt-xs')"
+                md-is-open="vm.filterIsOpen"
+                md-component-id="derivation-filter">
+        <md-toolbar md-theme="white">
+            <div class="md-toolbar-tools">
+                <md-icon md-font-icon="fa fa-filter"></md-icon>
+                <h2 flex>Filtros</h2>
+                <md-button ng-click="vm.cleanFilters()">Limpiar</md-button>
+            </div>
+        </md-toolbar>
+        <md-list>
+            <md-list-item>
+                Origen
+            </md-list-item>
+            <div class="md-padding padding-top-0">
+                <md-chips ng-model="vm.filter.fromEstablishment"
+                          md-autocomplete-snap
+                          name="fromEstablishmentFilter"
+                          md-removable="true">
+                    <md-autocomplete md-selected-item="vm.fromEstablishmentFilter.selectedItem"
+                                     md-search-text="vm.fromEstablishmentFilter.searchText"
+                                     md-items="item in vm.getEstablishmentList(ctrl.searchText)"
+                                     md-min-length="0"
+                                     md-item-text="item.name"
+                                     placeholder="Buscar un establecimiento">
+                        <md-item-template>
+                            <div class="md-padding">
+                                <span md-highlight-text="ctrl.searchText">{{item.name}}</span>
+                            </div>
+                        </md-item-template>
+                    </md-autocomplete>
+                    <md-chip-template>
+                        {{$chip.name}}
+                    </md-chip-template>
+                </md-chips>
+            </div>
+            <md-divider></md-divider>
+            <md-list-item>
+                Destino
+            </md-list-item>
+            <div class="md-padding padding-top-0">
+                <md-chips ng-model="vm.filter.toEstablishment"
+                          md-autocomplete-snap
+                          name="toEstablishmentFilter"
+                          md-removable="true">
+                    <md-autocomplete md-selected-item="vm.toEstablishmentFilter.selectedItem"
+                                     md-search-text="vm.toEstablishmentFilter.searchText"
+                                     md-items="item in vm.getEstablishmentList(ctrl.searchText)"
+                                     md-min-length="0"
+                                     md-item-text="item.name"
+                                     placeholder="Buscar un establecimiento">
+                        <md-item-template>
+                            <div class="md-padding">
+                                <span md-highlight-text="ctrl.searchText">{{item.name}}</span>
+                            </div>
+                        </md-item-template>
+                    </md-autocomplete>
+                    <md-chip-template>
+                        {{$chip.name}}
+                    </md-chip-template>
+                </md-chips>
+            </div>
+            <md-divider></md-divider>
+
+        </md-list>
+    </md-sidenav>
+</section>

@@ -1,0 +1,55 @@
+<div layout="row">
+	<md-input-container flex
+						class="md-block">
+		<label for="numRequest">{{'STORAGE_MOVEMENT.TABLE.NUM_REQUEST'|translate}}</label>
+		<input type="text"
+			   name="numRequest"
+			   ng-readonly="vm.movement.status==2"
+			   ng-model="vm.movement.numRequest">
+	</md-input-container>
+
+	<md-input-container flex
+						class="md-block">
+		<label for="numShippingOrder">{{'STORAGE_MOVEMENT.TABLE.NUM_SHIPPING_ORDER'|translate}}</label>
+		<input type="text"
+			   name="numShippingOrder"
+			   ng-readonly="vm.movement.status==2"
+			   ng-model="vm.movement.numShippingOrder">
+	</md-input-container>
+
+	<md-input-container flex
+						class="md-block">
+		<label for="numInvoice">{{'STORAGE_MOVEMENT.TABLE.NUM_INVOICE'|translate}}</label>
+		<input type="text"
+			   name="numInvoice"
+			   ng-readonly="vm.movement.status==2"
+			   ng-model="vm.movement.numInvoice">
+	</md-input-container>
+</div>
+
+<div layout="row">
+	<md-input-container flex
+						class="md-block">
+		<label for="date">Fecha</label>
+		<md-datepicker ng-model="vm.movement.date"
+					   required
+					   ng-disabled="vm.movement.status==2"
+					   md-aria-label="Fecha del movimiento">
+		</md-datepicker>
+		<div ng-messages="formGeneral.date.$error">
+			<div ng-message="required">
+				<span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+			</div>
+		</div>
+	</md-input-container>
+
+	<md-input-container flex
+						ng-if="vm.movement.id"
+						class="md-block">
+		<label for="priceTotal">Precio Neto Total</label>
+		<input type="number"
+			   name="priceTotal"
+			   ng-disabled="vm.movement.status==2"
+			   ng-model="vm.movement.priceTotal">
+	</md-input-container>
+</div>

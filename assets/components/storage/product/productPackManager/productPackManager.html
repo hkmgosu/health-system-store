@@ -1,0 +1,202 @@
+<div layout="row"
+     layout-xs="column">
+    <!-- Lista de packs -->
+    <div layout="column"
+         layout-fill
+         flex-xs="100"
+         flex="50">
+        <md-subheader class="md-primary md-hue-1 overlay-5">
+            Packs
+        </md-subheader>
+        <md-card>
+            <md-card-content md-dynamic-height>
+                <div layout="column"
+                     layout-fill
+                     flex
+                     ng-if="vm.productPackList.length > 0">
+                    <md-list style="min-height: 23vh;"
+                             md-dynamic-height>
+                        <md-list-item ng-class="{'selected': vm.productPackSelected.id == productPack.id }"
+                                      ng-repeat="productPack in vm.productPackList"
+                                      ng-click="vm.selectProductPack(productPack)">
+                            <span>{{productPack.fantasyName}} - {{productPack.code}}</span>
+                            <md-divider ng-if="!$last"></md-divider>
+                        </md-list-item>
+                    </md-list>
+                </div>
+                <ssvq-no-results ng-if="vm.productPackList.length == 0"
+                                 flex></ssvq-no-results>
+                <ssvq-loading ng-if="!vm.productPackList"
+                              flex></ssvq-loading>
+                <div layout="column"
+                     layout-fill
+                     layout-align="end end"
+                     flex>
+                    <md-button aria-label="Nuevo Pack"
+                               class="md-raised md-primary md-fab"
+                               ng-click="vm.showCreatePackForm()">
+                        <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                        <md-tooltip md-direction="top">
+                            {{ vm.createPackMode ? 'Limpiar' : 'Nuevo' }}
+                        </md-tooltip>
+                    </md-button>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+    <!-- Contenido -->
+    <div layout="row"
+         flex-xs="100"
+         flex="50">
+        <div layout="column"
+             layout-fill
+             flex>
+            <md-subheader class="md-primary md-hue-1 overlay-5"
+                          ng-if="!vm.createPackMode && !vm.editPackMode">
+                Información:
+            </md-subheader>
+            <md-subheader class="md-primary md-hue-1 overlay-5"
+                          ng-if="!vm.createPackMode && vm.editPackMode">
+                Editar: {{ vm.productPackSelected.code}}
+            </md-subheader>
+            <md-subheader class="md-primary md-hue-1 overlay-5"
+                          ng-if="vm.createPackMode && !vm.editPackMode">
+                Ingresar Información:
+            </md-subheader>
+            <md-card>
+                <md-card-content style="min-height: 29vh;">
+                    <div layout="column"
+                         layout-fill
+                         layout-align="center center"
+                         style="min-height: 34vh;"
+                         ng-if="!vm.createPackMode && !vm.editPackMode">
+                        <div class="md-whiteframe-1dp overlay-5 padding-top-10 padding-bottom-10 md-margin">
+                            <p class="text-center md-padding"
+                               flex>
+                                <md-icon md-font-icon="zmdi zmdi-info"></md-icon>
+                                &nbsp; Use el menú izquierdo para crear o seleccionar pack
+                            </p>
+                        </div>
+                    </div>
+                    <div ng-if="vm.createPackMode || vm.editPackMode"
+                         flex
+                         layout="column"
+                         layout-fill>
+                        <ng-form name="vm.packForm">
+                            <div flex
+                                 layout-gt-sm="row"
+                                 class="md-padding">
+                                <md-input-container class="md-block"
+                                                    ng-if="vm.createPackMode && !vm.editPackMode"
+                                                    flex>
+                                    <label for="code">Código</label>
+                                    <input type="text"
+                                           name="code"
+                                           ng-model="vm.pack.code"
+                                           required>
+                                    <div ng-messages="vm.packForm.code.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block"
+                                                    flex>
+                                    <label for="fantasyName">Nombre Fantasía</label>
+                                    <input type="text"
+                                           name="fantasyName"
+                                           ng-model="vm.pack.fantasyName"
+                                           required>
+                                    <div ng-messages="vm.packForm.fantasyName.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block"
+                                                    flex>
+                                    <label for="company">Laboratorio</label>
+                                    <md-select ng-model="vm.pack.company"
+                                               name="company"
+                                               required>
+                                        <md-option ng-value="item.id"
+                                                   ng-repeat="item in vm.parametricData.companies">
+                                            {{item.name}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="vm.packForm.company.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <div flex
+                                 layout-gt-sm="row"
+                                 class="md-padding">
+                                <md-input-container class="md-block"
+                                                    flex>
+                                    <label for="packtype">Tipo de Pack</label>
+                                    <md-select ng-model="vm.pack.packtype"
+                                               name="packtype"
+                                               required>
+                                        <md-option ng-value="item.id"
+                                                   ng-repeat="item in vm.parametricData.packTypes">
+                                            {{item.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="vm.packForm.packtype.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block"
+                                                    flex>
+                                    <label for="indicatorContainer">Contenedor</label>
+                                    <md-select ng-model="vm.pack.indicatorcontainer"
+                                               name="indicatorcontainer"
+                                               required>
+                                        <md-option ng-value="item"
+                                                   ng-repeat="item in vm.indicatorContainers">
+                                            {{item}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="vm.packForm.indicatorcontainer.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block"
+                                                    flex>
+                                    <label for="quantity">Cantidad</label>
+                                    <input type="number"
+                                           name="quantity"
+                                           ng-model="vm.pack.quantity"
+                                           required>
+                                    <div ng-messages="vm.packForm.quantity.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <div layout="row"
+                            class="md-padding" flex>
+                                <md-button ng-if="!vm.createPackMode && vm.editPackMode"
+                                           class="md-raised md-warn"
+                                           ng-disabled="vm.loading"
+                                           ng-click="vm.onDeletePack()">Eliminar</md-button>
+                                <md-button ng-if="vm.createPackMode || vm.editPackMode"
+                                           ng-disabled="vm.packForm.$invalid || vm.loading"
+                                           ng-click="vm.savePack()"
+                                           class="md-raised md-primary">Guardar</md-button>
+                            </div>
+                        </ng-form>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+</div>

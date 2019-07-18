@@ -1,0 +1,24 @@
+<div ng-form="autocompleteForm">
+    <md-autocomplete md-delay="500"
+                     md-floating-label="{{'PATIENT.EVOLUTION.MEDICINES.MEDICINE' | translate}}"
+                     md-search-text="searchText"
+                     md-items="item in vm.getMatches(searchText)"
+                     md-item-text="item.name + (item.presentation ? ' - ' + item.presentation : '')"
+                     md-selected-item="vm.medicine"
+                     md-select-on-match="false"
+                     md-min-length="2"
+                     md-input-name="autocomplete"
+                     ng-required="vm.requiredOption"
+                     flex>
+        <md-item-template>
+            <p class="md-body-2 padding-10-bottom padding-10-top"
+               md-highlight-text="searchText"
+               md-highlight-flags="^i">{{item.name + (item.presentation ? ' - ' + item.presentation : '')}}</p>
+        </md-item-template>
+        <md-not-found>
+            <div class="md-padding">
+                <span>{{'AUTOCOMPLETE.NOMATCHFOUND' | translate}}</span>
+            </div>
+        </md-not-found>
+    </md-autocomplete>
+</div>

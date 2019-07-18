@@ -1,0 +1,20 @@
+{
+    "name": "PRIVILEGES.TYPECASTING.NAME",
+    "description": "PRIVILEGES.TYPECASTING.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.admin-typecasting",
+            "url": "/encasillamiento",
+            "template": "<ssvq-typecasting-search></ssvq-typecasting-search>"
+        },
+        "_controllers": {
+            "read": [
+                "EmployeeController.getTypecasting",
+                "EmployeeController.getList"
+            ]
+        }
+    }
+}

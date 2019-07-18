@@ -1,0 +1,217 @@
+<md-dialog aria-label="Detalles traslado"
+           id="rem-vehicle-dialog"
+           flex="80"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <form name="vm.saveForm"
+          ng-submit="vm.subValidate() && vm.saveForm.$valid && vm.save(vm.remVehicle)"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                    <md-tooltip>Volver</md-tooltip>
+                </md-button>
+                <span class="md-subhead"
+                      ng-show="!vm.remVehicle.id">
+                    Nuevo despacho
+                </span>
+                <div layout="column"
+                     ng-show="vm.remVehicle.id">
+                    <span class="md-subhead"
+                          ng-show="vm.remVehicle.isPrivate">
+                        {{vm.remVehicle.particularDescription || '...'}}
+                    </span>
+                    <span class="md-subhead"
+                          ng-show="!vm.remVehicle.isPrivate">
+                        {{vm.remVehicle.vehicle.name || '...'}}
+                    </span>
+                    <span class="md-caption">
+                        Estado: {{vm.remVehicle.status.name}}
+                    </span>
+                </div>
+                <span flex></span>
+                <md-button class="ng-hide"
+                           type="submit"
+                           aria-label="{{ ::('CRUD.SAVE' | translate) }}"
+                           ng-disabled="(vm.saveForm.$submitted && vm.saveForm.$invalid) || (vm.remVehicle.id && vm.saveForm.$pristine)"
+                           ng-show="vm.selectedTabIndex === 0">
+                    {{vm.remVehicle.id ? 'Actualizar despacho': 'Agregar despacho'}}
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-tabs flex
+                     md-selected="vm.selectedTabIndex"
+                     class="vehicle-dialog md-primary md-hue-1">
+                <md-tab label="Datos básicos">
+                    <div>
+                        <md-subheader class="md-primary">Datos solicitud</md-subheader>
+                        <div class="md-padding"
+                             layout="column"
+                             layout-gt-xs="row">
+                            <md-input-container flex>
+                                <label>Descripción solicitud</label>
+                                <textarea rows="1"
+                                          ng-model="vm.remVehicle.requestDescription"></textarea>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label>Tipo solicitado</label>
+                                <md-select ng-model="vm.remVehicle.requestedType"
+                                           name="requestedType"
+                                           placeholder="Tipo solicitado">
+                                    <md-option value="m1">
+                                        <span class="rem-vehicle-type">m1</span>
+                                        Básico
+                                    </md-option>
+                                    <md-option value="m2">
+                                        <span class="rem-vehicle-type">m2</span>
+                                        Avanzado
+                                    </md-option>
+                                    <md-option value="m3">
+                                        <span class="rem-vehicle-type">m3</span>
+                                        Medicalizado
+                                    </md-option>
+                                    <md-option value="x5">
+                                        <span class="rem-vehicle-type">x5</span>
+                                        Tripulación completa
+                                    </md-option>
+                                </md-select>
+                                <div ng-messages="vm.saveForm.requestedType.$error"
+                                     role="alert">
+                                    <div ng-message="required">
+                                        <span>Ingrese un tipo de vehículo solicitado</span>
+                                    </div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <md-subheader class="md-primary">
+                            Datos despacho
+                        </md-subheader>
+                        <div class="md-padding"
+                             style="min-height: 184px">
+                            <div layout="column"
+                                 layout-gt-xs="row">
+                                <div flex
+                                     layout="row">
+                                    <!-- Selector de vehículo SAMU -->
+                                    <ssvq-vehicle-autocomplete class="full-width"
+                                                               selected="vm.remVehicle.vehicle"
+                                                               on-select="vm.vehicleChanged"
+                                                               ng-show="!vm.remVehicle.isPrivate"
+                                                               status-type="['disponible', 'ensalida']"
+                                                               flex>
+                                    </ssvq-vehicle-autocomplete>
+                                    <!--is-disabled="{{::(!!vm.remVehicle.vehicle )}}"-->
+                                    <!-- Descripción de vehículo particular -->
+                                    <md-input-container flex
+                                                        ng-show="vm.remVehicle.isPrivate">
+                                        <label>Descripción vehículo</label>
+                                        <input ng-model="vm.remVehicle.particularDescription">
+                                    </md-input-container>
+                                    <div layout="row"
+                                         layout-align="center center">
+                                        <md-button class="md-icon-button margin-bottom-20 margin-right-20"
+                                                   ng-class="{'md-primary': vm.remVehicle.isPrivate}"
+                                                   ng-click="vm.remVehicle.isPrivate = !vm.remVehicle.isPrivate;vm.isPrivateChanged(vm.remVehicle.isPrivate);">
+                                            <md-icon md-font-icon="zmdi zmdi-car"></md-icon>
+                                            <md-tooltip>
+                                                {{ vm.remVehicle.isPrivate ? 'Es un vehículo particular' : 'No es un
+                                                vehículo particular' }}
+                                            </md-tooltip>
+                                        </md-button>
+                                    </div>
+                                </div>
+                                <md-input-container flex>
+                                    <label>Tipo despachado</label>
+                                    <md-select ng-model="vm.remVehicle.deliveredType"
+                                               placeholder="Tipo despachado">
+                                        <md-option value="m1">
+                                            <span class="rem-vehicle-type">m1</span>
+                                            Básico
+                                        </md-option>
+                                        <md-option value="m2">
+                                            <span class="rem-vehicle-type">m2</span>
+                                            Avanzado
+                                        </md-option>
+                                        <md-option value="m3">
+                                            <span class="rem-vehicle-type">m3</span>
+                                            Medicalizado
+                                        </md-option>
+                                        <md-option value="x5">
+                                            <span class="rem-vehicle-type">x5</span>
+                                            Tripulación completa
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div layout="column"
+                                 layout-gt-xs="row">
+                                <ssvq-establishment-autocomplete selected="vm.remVehicle.establishment"
+                                                                 label="Establecimiento Base"
+                                                                 flex>
+                                </ssvq-establishment-autocomplete>
+                                <ssvq-establishment-autocomplete selected="vm.remVehicle.deliveryEstablishment"
+                                                                 label="Establecimiento Destino"
+                                                                 flex>
+                                </ssvq-establishment-autocomplete>
+                            </div>
+                        </div>
+                        <md-subheader class="md-primary">Tripulación</md-subheader>
+                        <div>
+                            <ssvq-participant-list-manager filter="{remVehicle: vm.remVehicle.id}"
+                                                           opts="vm.participantListOpts"
+                                                           participant-list="vm.remVehicle.participantList">
+                            </ssvq-participant-list-manager>
+                        </div>
+                        <md-subheader class="md-primary">Otros</md-subheader>
+                        <div class="md-padding"
+                             layout="row"
+                             layout-align="space-around center">
+                            <md-input-container class="md-block">
+                                <label>{{::('VEHICLE.FORM.KMDEPARTURE' | translate)}}</label>
+                                <input type="number"
+                                       name="kmdeparture"
+                                       ng-model="vm.remVehicle.kmDeparture" />
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>{{::('VEHICLE.FORM.KMARRIVAL' | translate)}}</label>
+                                <input type="number"
+                                       name="kmarrival"
+                                       ng-model="vm.remVehicle.kmArrival" />
+                            </md-input-container>
+                        </div>
+                </md-tab>
+                <md-tab label="Historial"
+                        ng-disabled="!vm.remVehicle.id">
+                    <ssvq-rem-vehicle-route id-rem-vehicle="vm.remVehicle.id">
+                    </ssvq-rem-vehicle-route>
+                </md-tab>
+                <md-tab label="Opciones"
+                        ng-disabled="!vm.remVehicle.id">
+                    <div class="md-padding">
+                        <md-list>
+                            <md-list-item class="md-warn"
+                                          ng-click="vm.deleteRemVehicle()">
+                                <md-icon class="md-warn"
+                                         md-font-icon="zmdi zmdi-delete"></md-icon>
+                                <p>Eliminar despacho</p>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-primary"
+                       type="submit"
+                       aria-label="{{ ::('CRUD.SAVE' | translate) }}"
+                       ng-disabled="(vm.saveForm.$submitted && vm.saveForm.$invalid) || vm.saveForm.$pristine"
+                       ng-show="vm.selectedTabIndex === 0">
+                {{vm.remVehicle.id ? 'Actualizar despacho': 'Agregar despacho'}}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,25 @@
+<div layout="row"
+     layout-align="start center">
+    <md-letter-avatar length="1"
+                      font-size="18px"
+                      shape="round"
+                      data="{{vm.productType.description}}"
+                      layout="row"
+                      layout-align="center center"></md-letter-avatar>
+    <div flex
+         layout="column"
+         class="md-padding"
+         style="overflow: hidden;">
+        <span class="md-body-2"
+              md-highlight-text="searchText"
+              md-highlight-flags="gi">
+            {{vm.productType.description}}
+        </span>
+        <span class="md-caption"
+              ng-show="vm.productType.id"
+              md-highlight-text="searchText"
+              md-highlight-flags="gi">
+            Tipo Fármaceutico: {{vm.productType.isPharmaceutical ? 'Sí':'No'}}
+        </span>
+    </div>
+</div>

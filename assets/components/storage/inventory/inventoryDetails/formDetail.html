@@ -1,0 +1,31 @@
+<div layout="column"
+     class="md-padding"
+     flex>
+    <div layout="row">
+        <md-input-container class="md-block"
+                            flex>
+            <label for="realStock">Stock Real</label>
+            <input type="number"
+                   min="0"
+                   name="realStock"
+                   ng-model="vm.inventoryDetail.realStock"
+                   required>
+            <div ng-messages="vm.updateInventoryDetailForm.realStock.$error">
+                <div ng-message="required">
+                    <span>Campo Requerido</span>
+                </div>
+            </div>
+        </md-input-container>
+    </div>
+    <div layout="row">
+        <md-input-container class="md-block"
+                            flex>
+            <label for="observation">Observaciones</label>
+            <textarea ng-model="vm.inventoryDetail.observation"
+                      md-maxlength="1000"
+                      rows="3"
+                      md-select-on-focus></textarea>
+
+        </md-input-container>
+    </div>
+</div>

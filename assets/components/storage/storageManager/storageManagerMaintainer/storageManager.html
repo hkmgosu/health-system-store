@@ -1,0 +1,63 @@
+<div class="md-padding">
+    <span class="md-title">Configuraciones de Bodega</span>
+</div>
+<div layout="row"
+     layout-align="center center">
+    <md-card flex="60"
+             flex-sm="80"
+             flex-xs="100">
+        <md-card-content>
+            <form name="vm.storageManagerForm">
+                <div layout="row"
+                     layout-fill
+                     flex>
+                    <ssvq-unit-autocomplete name="unit"
+                                            selected="vm.storageUnit.unit"
+                                            flex></ssvq-unit-autocomplete>
+                    <md-input-container class="md-block md-padding">
+                        <md-checkbox class="md-primary margin-0"
+                                     ng-model="vm.storageUnit.isPharmaceutical"
+                                     aria-label="Farmacia">
+                            Farmacia
+                        </md-checkbox>
+                    </md-input-container>
+                </div>
+                <div layout="column"
+                     layout-align="center end"
+                     flex>
+                    <md-button aria-label="Guardar"
+                               class="md-raised md-primary"
+                               ng-disabled="vm.loading"
+                               ng-click="vm.saveStorageUnit()">
+                        {{ vm.loading ? 'cargando...' : 'Agregar Bodega' }}
+                    </md-button>
+                </div>
+            </form>
+            <div class="md-whiteframe-1dp overlay-5 padding-top-10 padding-bottom-10 md-margin">
+                <p class="text-center">
+                    <md-icon md-font-icon="zmdi zmdi-info"></md-icon>
+                    &nbsp; utiliza el buscador para agregar unidad a bodega
+                </p>
+            </div>
+            <md-list>
+                <md-list-item ng-repeat="unit in vm.storageUnits"
+                              class="md-2-line"
+                              ng-click="vm.showStorageManagers(unit, $event)">
+                    <div class="md-list-item-text">
+                        <h4>{{unit.name}}</h4>
+                        <p>{{unit.storageManagerListCount || 0 }}{{unit.storageManageListCount == 1 ? ' Usuario' : ' Usuarios'}}</p>
+                        <p>{{'Bodega ' + (unit.isPharmaceutical ? 'Farmacia' : 'Economato')}}</p>
+                    </div>
+                    <md-button class="md-secondary md-warn md-raised"
+                               ng-disabled="vm.loading"
+                               ng-click="vm.rmStorageUnit(unit)">
+                        {{ vm.loading ? 'cargando' : 'Quitar'}}
+                        <md-tooltip>
+                            Quitar de unidad
+                        </md-tooltip>
+                    </md-button>
+                </md-list-item>
+            </md-list>
+        </md-card-content>
+    </md-card>
+</div>

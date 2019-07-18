@@ -1,0 +1,21 @@
+<md-dialog aria-label="Establecimiento de Destino"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <span class="md-subhead"
+                  flex>Detalles del paciente</span>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <ssvq-patient-form patient="vm.derivation.patient"
+                           opts="{showButtons: true}"></ssvq-patient-form>
+    </md-dialog-content>
+</md-dialog>

@@ -1,0 +1,20 @@
+.tabs-requests {
+    height: calc(100vh - 64px);
+}
+@media (max-width: 599px){
+    .tabs-requests {
+        height: calc(100vh - 56px);
+    }
+}
+/* Custom badge */
+.ssvq-badge{
+    margin: 4px;
+    padding: 2px 5px;
+    background: #ef4143;
+    border-radius: 30%;
+}
+.float-icon-swipeable{
+    position: absolute;
+    top: 18px;
+    left: 15px;
+}

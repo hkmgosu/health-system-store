@@ -1,0 +1,87 @@
+.callReason-icon{
+    color: #b66c78 !important;
+}
+.date-icon{
+    color: #75a26b !important;
+}
+.patients-icon{
+    color: #76692B !important; 
+}
+.address-icon{
+    color: #5383c5 !important;
+}
+.vehicles-icon{
+    color: #ACBD58 !important;
+}
+
+.priority{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+}
+.priority.S1{
+    border: 2px solid #eb0000;
+    background: rgba(235, 0, 0, 0.11);
+    color: #8B0202;
+}
+.priority.S2{
+    border: 2px solid #EB8500;
+    background: rgba(235, 129, 0, 0.11);
+    color: #B66400;
+}
+.priority.S3{
+    border: 2px solid #EBD400;
+    background: rgba(235, 212, 0, 0.11);
+    color: #C0AD01;
+}
+.priority.S4{
+    border: 2px solid #00A819;
+    background: rgba(0, 168, 22, 0.11);
+    color: #00740F;
+}
+.priority.S5{
+    border: 2px solid #D4D4D4;
+    background: rgba(165, 165, 165, 0.11);
+    color: #777777;
+}
+.rem-item p {
+    margin: 5px !important;
+}
+.rem-card {
+    cursor: pointer;
+}
+.rem-card:hover{
+    background: #f5f5f5;
+}
+
+a.rem-link:hover, a.rem-link:focus {
+    text-decoration: none !important;
+}
+
+.rems-map{
+    width:100%;
+    height:400px;
+    position: relative;
+}
+.rems-map .angular-google-map {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.rems-map .angular-google-map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.rem-vehicle-type {
+    background: #edf7ff;
+    padding: 0 6px;
+    border-radius: 5px;
+    color: #929292;
+}

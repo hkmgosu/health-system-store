@@ -1,0 +1,36 @@
+<div ng-include="'/components/storage/expressIncome/expressIncomeEdit/toolbar.html'"></div>
+
+<div layout-gt-sm="row">
+    <div flex-gt-sm="60">
+
+        <md-subheader class="md-primary">
+            <div layout="row"
+                 layout-align="center center">
+                <span flex>Datos generales</span>
+            </div>
+        </md-subheader>
+
+        <form name="formGeneral">
+            <md-card>
+                <md-card-content ng-include="'/components/storage/expressIncome/expressIncomeEdit/formGeneral.html'">
+                </md-card-content>
+
+                <md-card-footer class="text-right"
+                                ng-show="vm.expressIncome.status==1">
+                    <md-button class="md-primary md-raised md-my-theme-theme"
+                               aria-label="CRUD.SAVE"
+                               translate="CRUD.SAVE"
+                               ng-disabled="formGeneral.$invalid"
+                               ng-click="vm.saveGeneral()"
+                               required-privilege="['update']">
+                    </md-button>
+                </md-card-footer>
+            </md-card>
+        </form>
+    </div>
+
+    <div flex-gt-sm="40"
+         ng-include="'/components/storage/expressIncome/expressIncomeEdit/details.html'">
+    </div>
+
+</div>

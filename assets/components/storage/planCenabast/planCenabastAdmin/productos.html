@@ -1,0 +1,64 @@
+<md-list class="padding-0 md-dense"
+         ng-show="vm.month">
+    <md-list-item class="md-2-line">
+
+        <md-icon md-font-icon="fa fa-calendar"
+                 class="text-center"></md-icon>
+
+        <div class="md-list-item-text">
+            <h3 class="md-body-2">{{vm.month[1]}} {{vm.year}}</h3>
+        </div>
+        <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
+</md-list>
+
+<ssvq-loading ng-show="!vm.plans"></ssvq-loading>
+<ssvq-no-results ng-show="vm.plans.length == 0"></ssvq-no-results>
+
+<md-list class="animated slideInUp animation-stop padding-0"
+         ng-show="vm.plans.length">
+    <md-list-item class="md-2-line"
+                  ng-repeat="plan in vm.plans track by $index"
+                  ng-click="vm.editProduct($event,$index)">
+
+        <md-letter-avatar class="md-avatar"
+                          ng-show="!plan.product.hasProfilePicture"
+                          length="1"
+                          font-size="18px"
+                          shape="round"
+                          data="plan.product.description">
+        </md-letter-avatar>
+        <img class="md-avatar"
+             ng-show="plan.product.hasProfilePicture"
+             ng-src="storage/product/downloadProductProfilePicture/{{plan.product.id}}?{{vm.timestamp(plan.product)}}">
+
+        <div class="md-list-item-text">
+            <h3 class="md-body-2">
+                <span md-highlight-text="vm.searchText"
+                      md-highlight-flags="gi">
+                    {{plan.product.description}}
+                </span>
+            </h3>
+            <p class="md-caption"
+               ng-if="!vm.searchText">
+                Código: {{plan.product.productCode}},
+                {{plan.product.dosage}} {{plan.product.dosageType.description}},
+                {{plan.product.drugType.description}}
+            </p>
+            <p class="md-caption"
+               ng-if="vm.searchText">
+                <md-icon md-font-icon="fa fa-calendar"
+                         class="text-center"></md-icon>
+                {{ vm.months[ plan.month -1 ][1] }} {{plan.year}}
+            </p>
+            <div class="md-secondary">
+                Cantidad: {{plan.quantity}}
+                <md-button ng-click="vm.delete($event,$index)"
+                           class="md-icon-button">
+                    <md-icon md-font-icon="fa fa-trash"></md-icon>
+                </md-button>
+            </div>
+        </div>
+        <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
+</md-list>

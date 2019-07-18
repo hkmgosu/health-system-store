@@ -1,0 +1,118 @@
+<md-dialog aria-label="Detalles de funcionario"
+           flex="60"
+           flex-xs="100">
+    <form name="vm.createForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="cancel()"
+                           aria-label="Cancelar">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                </md-button>
+                <h2 translate
+                    flex>EMPLOYEE.OTHERS.CREATETITLE</h2>
+                <md-button ng-click="vm.confirm()"
+                           ng-disabled="vm.createForm.$invalid">Crear funcionario</md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content class="md-padding">
+            <div layout="row">
+                <md-input-container class="md-block"
+                                    flex>
+                    <label translate>EMPLOYEE.TABLE.RUT</label>
+                    <input ng-rut
+                           name="rut"
+                           type="text"
+                           ng-model="vm.employee.rut"
+                           required>
+                    <div ng-messages="vm.createForm.rut.$error">
+                        <div ng-message="rut">
+                            <span translate>EMPLOYEE.VALIDATOR.RUT</span>
+                        </div>
+                        <div ng-message="required">
+                            <span translate>EMPLOYEE.VALIDATOR.REQUIRED</span>
+                        </div>
+                    </div>
+                </md-input-container>
+                <div>
+                    <md-button class="md-accent md-raised"
+                               ng-disabled="!vm.createForm.rut.$valid || vm.sync"
+                               ng-click="vm.syncFromApi(vm.employee.rut)">
+                        Sincronizar
+                        <md-tooltip>Autocompletar la información del funcionario</md-tooltip>
+                    </md-button>
+                </div>
+            </div>
+            <div ng-form="vm.generalDataForm">
+                <div flex
+                     layout-gt-sm="row">
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label for="name"
+                               translate>EMPLOYEE.TABLE.NAME</label>
+                        <input type="text"
+                               name="name"
+                               ng-model="vm.employee.name"
+                               required>
+                        <div ng-messages="vm.createForm.name.$error">
+                            <div ng-message="required">
+                                <span translate>EMPLOYEE.VALIDATOR.REQUIRED</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label translate>EMPLOYEE.TABLE.LASTNAME</label>
+                        <input type="text"
+                               name="lastname"
+                               ng-model="vm.employee.lastname"
+                               required>
+                        <div ng-messages="vm.createForm.lastname.$error">
+                            <div ng-message="required">
+                                <span translate>EMPLOYEE.VALIDATOR.REQUIRED</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label translate>EMPLOYEE.TABLE.MLASTNAME</label>
+                        <input type="text"
+                               name="mlastname"
+                               ng-model="vm.employee.mlastname">
+                    </md-input-container>
+                </div>
+                <div layout="row">
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label>Género</label>
+                        <md-select ng-model="vm.employee.gender">
+                            <md-option ng-value="gender.code"
+                                       ng-repeat="gender in vm.genderList">{{gender.text}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        flex="100"
+                                        flex-gt-sm="33">
+                        <label>Fecha nacimiento</label>
+                        <md-icon md-font-icon="zmdi zmdi-calendar"
+                                 class="md-accent"></md-icon>
+                        <input type="date"
+                               ssvq-date-input
+                               name="birthdate"
+                               ng-model="vm.employee.birthdate">
+                        <div ng-messages="vm.createForm.birthdate.$error">
+                            <div ng-message="date">
+                                <span>{{::('EMPLOYEE.VALIDATOR.DATE' | translate)}}</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-raised md-primary"
+                       ng-click="vm.confirm()"
+                       ng-disabled="vm.createForm.$invalid">Crear funcionario</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

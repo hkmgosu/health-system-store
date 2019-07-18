@@ -1,0 +1,20 @@
+<div ng-if="vm.participantList.length > 0"
+     class="animated fadeIn animation-stop"
+     layout="row"
+     layout-wrap>
+    <div ng-repeat="participant in vm.participantList"
+         ssvq-employee-profile-links
+         id-employee="{{participant.member.id}}"
+         ng-click="vm.onParticipantClick(participant, $event)"
+         ng-class="{'margin-right-10': !$last}">
+        <ssvq-employee-avatar employee="participant.member"
+                              ng-class="vm.avatarClass">
+        </ssvq-employee-avatar>
+        <md-tooltip md-direction="left">
+            {{participant.member.fullname}}
+        </md-tooltip>
+    </div>
+</div>
+<p ng-if="vm.participantList.length === 0"
+   class="text-center md-caption margin-0"
+   md-truncate>Sin participantes</p>

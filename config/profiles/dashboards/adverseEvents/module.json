@@ -1,0 +1,31 @@
+{
+    "name": "PRIVILEGES.ADVERSEEVENTS.NAME",
+    "description": "PRIVILEGES.ADVERSEEVENTS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.adverse-event",
+            "url": "/eventos-adversos",
+            "template": "<ssvq-adverse-event-list-view></ssvq-adverse-event-list-view>",
+            "icon": "zmdi zmdi-receipt"
+        },
+        "_controllers": {
+            "read": [
+                "AdverseEventController.*",
+                "PatientController.getExternalPatient",
+                "PatientController.getList",
+                "UnitController.getAutocomplete",
+                "MedicineController.*"
+            ],
+            "create": [
+                "AdverseEventController.createEvent",
+                "PatientController.save"
+            ],
+            "update": ["PatientController.save"]
+        }
+    }
+}

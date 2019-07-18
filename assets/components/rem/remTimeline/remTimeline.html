@@ -1,0 +1,154 @@
+<md-divider ng-show="vm.timelineView.length > 0"></md-divider>
+
+<!-- Comentarios -->
+<div ng-repeat="item in vm.timelineView | orderBy:'-createdAt'"
+     class="padding-top-20">
+    <div layout="row"
+         layout-align="center start">
+        <div style="position:relative">
+            <ssvq-employee-avatar employee="::item.createdBy">
+            </ssvq-employee-avatar>
+            <i class="zmdi"
+               ng-class="vm.getIconClass(item.type)"></i>
+        </div>
+        <div layout-gt-xs="row"
+             class="padding-left-20"
+             style="min-height: 40px; padding-top:8px;"
+             flex>
+            <div layout="column"
+                 flex>
+                <span class="md-body-1">
+                    <ssvq-employee-profile-link id-employee="{{::item.createdBy.id}}">
+                        {{::item.createdBy.fullname}}
+                    </ssvq-employee-profile-link>
+                    <span ng-if="!item.type">escribió:</span>
+                    <span ng-if="::(item.type==='vehicleCreated')">
+                        agregó
+                        <span ng-if="::(item.vehicle)">el despacho
+                            <b>{{::item.vehicle.name}}</b>
+                        </span>
+                        <span ng-if="::(!item.vehicle)">un
+                            <b>despacho</b>
+                        </span>
+                    </span>
+                    <span ng-if="::(item.type==='vehicleEdited')">
+                        actualizó
+                        <span ng-if="::(item.vehicle)">el despacho
+                            <b>{{::item.vehicle.name}}</b>
+                        </span>
+                        <span ng-if="::(!item.vehicle)">un
+                            <b>despacho</b>
+                        </span>
+                    </span>
+                    <span ng-if="::(item.type==='vehicleRemoved')">
+                        removió
+                        <span ng-if="::(item.vehicle)">el despacho
+                            <b>{{::item.vehicle.name}}</b>
+                        </span>
+                        <span ng-if="::(!item.vehicle)">un
+                            <b>despacho</b>
+                        </span>
+                    </span>
+                    <span ng-if="::(item.type==='patientCreated')">
+                        agregó al paciente
+                        <b>{{::item.patient.name}} {{::item.patient.lastname}}</b>
+                    </span>
+                    <span ng-if="::(item.type==='patientEdited')">
+                        actualizó al paciente
+                        <b>{{::item.patient.name}} {{::item.patient.lastname}}</b>
+                    </span>
+                    <span ng-if="::(item.type==='patientAssociated')">
+                        {{!item.remVehicle? 'des':''}}asoció al paciente
+                        <b>{{::item.patient.name}} {{::item.patient.lastname}}</b>
+                        {{!item.remVehicle? 'de su' : 'con el'}}
+                        despacho
+                        <b>{{::item.remVehicle.vehicle.name}}</b>
+                    </span>
+                    <span ng-if="::(item.type==='patientRemoved')">
+                        removió al paciente
+                        <b>{{::item.patient.name}} {{::item.patient.lastname}}</b>
+                    </span>
+                    <span ng-if="::(item.type==='basicInformationChanged')">
+                        actualizó los
+                        <b>datos básicos</b> del incidente
+                    </span>
+                    <span ng-if="::(item.type==='addressInformationChanged')">
+                        actualizó la
+                        <b>ubicación</b> del incidente
+                    </span>
+                    <span ng-if="::(item.type==='statusChanged')">
+                        actualizó el estado del incidente a
+                        <b>{{::item.status.description}}</b>
+                        <span ng-show="item.reason">por
+                            <b>{{::item.reason}}</b>
+                        </span>
+                    </span>
+                    <span ng-if="::(item.type==='vehicleStatusChanged')">
+                        actualizó el estado
+                        <span ng-if="::(item.vehicle)">del despacho
+                            <b>{{::item.vehicle.name}}</b>
+                        </span>
+                        <span ng-if="::(!item.vehicle)">de un
+                            <b>despacho</b>
+                        </span> a
+                        <b>{{::item.status.name}}</b>
+                    </span>
+                    <span ng-if="::(item.type==='patientIntervention')">
+                        actualizó datos
+                        de intervención al paciente
+                        <b>{{::item.patient.name}} {{::item.patient.lastname}}</b>
+                    </span>
+                    <span ng-if="::(item.type==='patientBasicEvolution')">
+                        actualizó datos
+                        básicos de evolución al paciente
+                        <b>{{::item.patient.name}} {{::item.patient.lastname}}</b>
+                    </span>
+                    <span ng-if="::(item.type==='patientVitalSigns')">
+                        agregó signos
+                        vitales al paciente
+                        <b>{{::item.patient.name}} {{::item.patient.lastname}}</b>
+                    </span>
+                    <span ng-if="::(item.type==='addPatientMedicine' || item.type==='removePatientMedicine')">
+                        {{ item.type ===
+                                'addPatientMedicine' ? 'agregó' : 'quitó' }}
+                        medicina
+                        al paciente
+                        <b>{{::item.patient.name}} {{::item.patient.lastname}}</b>
+                    </span>
+                    <span ng-if="::(item.type==='patientDataEvolution')">
+                        actualizó datos
+                        evolución al paciente
+                        <b>{{::item.patient.name}} {{::item.patient.lastname}}</b>
+                    </span>
+                </span>
+                <span class="md-body-1 respect-line-break comentario"
+                      ng-if="item.description"
+                      bind-html-compile="::item.description"></span>
+                <span class="md-body-1 respect-line-break comentario"
+                      ng-if="item.comment"
+                      bind-html-compile="::item.comment"></span>
+                <ssvq-upload-list-files mode="Viewer"
+                                        files="item.attachments"
+                                        comment-id="{{item.id}}"
+                                        ng-if="item.attachments && item.attachments.length > 0"
+                                        flex
+                                        class="tiny-files">
+                </ssvq-upload-list-files>
+            </div>
+            <p class="margin-0 md-body-1 text-right">
+                {{::(item.createdAt | date:"HH:mm '•' dd 'de' MMM")}}
+            </p>
+        </div>
+    </div>
+</div>
+
+<div layout="row"
+     layout-align="center center"
+     ng-show="vm.timeline.length > 3 && !vm.showAll">
+    <md-button aria-label="Mostrar todo"
+               class="md-primary md-raised"
+               ng-click="vm.setShowAll()"
+               flex="90">
+        Mostrar todo
+    </md-button>
+</div>

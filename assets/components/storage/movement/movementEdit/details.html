@@ -1,0 +1,159 @@
+<md-subheader class="md-primary">
+	<div layout="row"
+		 layout-align="center center">
+		<span flex>Productos
+			<span ng-if="vm.movement.isInput">que ingresan</span>
+			<span ng-if="!vm.movement.isInput">que salen</span>
+			({{vm.movement.details.length}} ítems)
+		</span>
+	</div>
+</md-subheader>
+
+<md-card ng-show="1 == (vm.movement.status || 1) && vm.movement.isPharmaceutical">
+	<md-card-content class="padding-0">
+		<div layout="row">
+			<md-button ng-click="vm.dialogProgram($event)"
+					   class="margin-0 flex">
+				<md-icon md-font-icon="fa fa-object-group"></md-icon>
+				Agregar programa
+			</md-button>
+		</div>
+	</md-card-content>
+</md-card>
+
+<!-- SIN PROGRAMA -->
+<md-card>
+	<md-card-header layout="row"
+					class="padding-bottom-0">
+		<div flex>
+			<md-icon md-font-icon="fa fa-home"></md-icon>
+			<span ng-if="vm.movement.isPharmaceutical">Sin Programa</span>
+			<span ng-if="!vm.movement.isPharmaceutical">Productos</span>
+		</div>
+		<md-button ng-click="vm.addDetail($event, null)"
+				   ng-show="1 == (vm.movement.status || 1)"
+				   class="md-icon-button">
+			<md-icon md-font-icon="fa fa-plus"></md-icon>
+		</md-button>
+	</md-card-header>
+	<md-card-content class="padding-top-0">
+		<md-list class="md-dense">
+			<md-list-item class="md-3-line md-with-secondary"
+						  ng-repeat="item in vm.getDetailsBySubprogram(null) track by $index"
+						  ng-click="vm.editDetail($event, item)">
+				<div layout="row"
+					 layout-align="center center">
+					<div class="top-border"></div>
+					<span class="md-avatar-icon text-center"
+						  style="background: orange"
+						  ng-show="!vm.itemValid(item)">
+						<md-icon md-font-icon="fa fa-exclamation-triangle"
+								 class="text-white"
+								 title="Item incompleto!"></md-icon>
+					</span>
+					<md-letter-avatar class="md-avatar"
+									  ng-show="vm.itemValid(item) && !item.product.hasProfilePicture"
+									  length="1"
+									  font-size="18px"
+									  shape="round"
+									  data="item.product.description">
+					</md-letter-avatar>
+					<img class="md-avatar"
+						 ng-show="vm.itemValid(item) && item.product.hasProfilePicture"
+						 ng-src="storage/product/downloadProductProfilePicture/{{item.product.id}}?{{vm.timestamp(item.product)}}">
+
+					<div class="bottom-border"></div>
+				</div>
+				<div class="md-list-item-text"
+					 layout="column">
+					<h3 truncate><b>{{item.product.productCode}}</b> :
+						{{item.productDescription || item.product.description}}</h3>
+					<h4 ng-if="item.expiration">Lote: {{item.lot}} | Vence: {{item.expiration | date:'dd/MM/yyyy'}}</h4>
+					<h4 ng-if="!item.expiration">Lote: {{item.lot}} | Vence: -</h4>
+					<p ng-style="{ color: item.quantity < 0 ? 'red':'green' }">
+						Cantidad: {{ item.quantity | abs }} ($ {{item.priceItem.toLocaleString('es')}})
+					</p>
+				</div>
+				<div class="md-secondary-container">
+					<md-button class="md-warn md-icon-button"
+							   ng-show="1 == (vm.movement.status || 1)"
+							   ng-click="vm.delDetail($event, item)">
+						<md-icon md-font-icon="fa fa-trash"></md-icon>
+					</md-button>
+				</div>
+			</md-list-item>
+			<md-divider></md-divider>
+		</md-list>
+	</md-card-content>
+</md-card>
+
+<!-- CON PROGRAMA -->
+<md-card ng-repeat="subprogram in vm.subprogramsView">
+	<md-card-header layout="row"
+					class="padding-bottom-0">
+		<div flex
+			 ng-if="!subprogram.program">
+			{{subprogram.description}}
+		</div>
+		<div flex
+			 ng-if="subprogram.program">
+			{{subprogram.program.description}} / {{subprogram.description}}
+		</div>
+		<md-button ng-click="vm.addDetail($event, subprogram.id)"
+				   ng-show="1 == (vm.movement.status || 1)"
+				   class="md-icon-button">
+			<md-icon md-font-icon="fa fa-plus"></md-icon>
+		</md-button>
+	</md-card-header>
+	<md-card-content class="padding-top-0">
+		<md-list class="md-dense">
+			<md-list-item class="md-3-line md-with-secondary"
+						  ng-repeat="item in vm.getDetailsBySubprogram(subprogram.id) track by $index"
+						  ng-click="vm.editDetail($event, item)">
+				<div layout="row"
+					 layout-align="center center">
+					<div class="top-border"></div>
+					<span class="md-avatar-icon text-center"
+						  style="background: orange"
+						  ng-show="!vm.itemValid(item)">
+						<md-icon md-font-icon="fa fa-exclamation-triangle"
+								 class="text-white"
+								 title="Item incompleto!"></md-icon>
+					</span>
+					<md-letter-avatar class="md-avatar"
+									  ng-show="vm.itemValid(item) && !item.product.hasProfilePicture"
+									  length="1"
+									  font-size="18px"
+									  shape="round"
+									  data="item.product.description">
+					</md-letter-avatar>
+					<img class="md-avatar"
+						 ng-show="vm.itemValid(item) && item.product.hasProfilePicture"
+						 ng-src="storage/product/downloadProductProfilePicture/{{item.product.id}}?{{vm.timestamp(item.product)}}">
+
+					<div class="bottom-border"></div>
+				</div>
+				<div class="md-list-item-text"
+					 layout="column">
+					<h3>{{item.productDescription || item.product.description}}</h3>
+					<h4>Lote: {{item.lot}} | Vence: {{item.expiration | date:'dd/MM/yyyy'}}</h4>
+					<p ng-style="{ color: item.quantity < 0 ? 'red':'green' }">
+						Cantidad: {{ item.quantity | abs }} ($ {{item.priceItem.toLocaleString('es')}})
+					</p>
+				</div>
+				<div class="md-secondary-container">
+					<md-button class="md-warn md-icon-button"
+							   ng-show="1 == (vm.movement.status || 1)"
+							   ng-click="vm.delDetail($event, item)">
+						<md-icon md-font-icon="fa fa-trash"></md-icon>
+					</md-button>
+				</div>
+			</md-list-item>
+			<md-divider></md-divider>
+		</md-list>
+	</md-card-content>
+</md-card>
+
+
+
+<ssvq-loading ng-show="!vm.movement.id"></ssvq-loading>

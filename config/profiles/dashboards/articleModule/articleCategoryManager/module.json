@@ -1,0 +1,35 @@
+{
+    "name": "Categorías de publicaciones",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.article-category-manager",
+            "url": "/gestion-publicaciones/categorias",
+            "template": "<ssvq-article-category-manager></ssvq-article-category-manager>"
+        },
+        "_controllers": {
+            "read": [
+                "ArticleCategoryController.getList",
+                "ArticleCategoryController.getDetails",
+                "ArticleCategoryController.getBreadcrumbs",
+                "ArticleCategoryController.getManagerList"
+            ],
+            "create": [
+                "ArticleCategoryController.create"
+            ],
+            "update": [
+                "ArticleCategoryController.edit",
+                "ArticleCategoryController.addManager",
+                "ArticleCategoryController.removeManager"
+            ],
+            "delete": [
+                "ArticleCategoryController.delete"
+            ]
+        }
+    }
+}

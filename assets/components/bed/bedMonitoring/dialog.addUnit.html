@@ -1,0 +1,30 @@
+<md-dialog aria-label="Selección de establecimiento"
+           id="establishment-selector-dialog"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <form name="vm.saveForm"
+          ng-submit="vm.saveForm.$valid && vm.save()"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                Selección de establecimiento
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-input-container>
+                <label>Nombre</label>
+                <input ng-model="vm.name"
+                       type="text">
+            </md-input-container>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-primary"
+                       type="submit"
+                       aria-label="Cambiar establecimiento">
+                Agregar unidad
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

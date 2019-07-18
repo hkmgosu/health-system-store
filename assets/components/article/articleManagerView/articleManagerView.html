@@ -1,0 +1,29 @@
+<section layout="row">
+    <!-- Lista de categorías -->
+    <md-sidenav class="md-sidenav-left md-whiteframe-2dp"
+                md-is-locked-open="$mdMedia('gt-xs')"
+                md-component-id="article-category">
+        <ssvq-article-category-selector on-change="vm.onCategoryChange"
+                                        mode="manager"></ssvq-article-category-selector>
+    </md-sidenav>
+    <!-- Contenido -->
+    <div layout="column"
+         layout-fill
+         flex>
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools">
+                <h4 flex>Publicaciones</h4>
+                <ssvq-search-input on-change="vm.onSearchTextChange"
+                                   flex="50"></ssvq-search-input>
+                <span flex></span>
+                <!-- Botón para crear publicación -->
+                <md-button ng-click="vm.createArticle()">
+                    Nueva publicación
+                </md-button>
+            </div>
+        </md-toolbar>
+        <ssvq-article-list filter="vm.filter"
+                           mode="'manager'"
+                           flex></ssvq-article-list>
+    </div>
+</section>

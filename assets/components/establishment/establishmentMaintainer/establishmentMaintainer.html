@@ -1,0 +1,97 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             hide-xs
+             flex>
+            <span class="md-subhead">Establecimientos</span>
+            <span class="md-caption">{{found}} resultados</span>
+        </div>
+        <!-- Buscar -->
+        <ssvq-search-input search-text="searchText"
+                           label="Buscar establecimientos"
+                           flex
+                           flex-gt-xs="50"></ssvq-search-input>
+        <span flex
+              hide-xs></span>
+    </div>
+</md-toolbar>
+<md-button required-privilege="['create','update']"
+           class="md-fab md-fab-top-right md-primary"
+           ng-click="showSaveDialog({})">
+    <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+    <md-tooltip md-direction="top">
+        <span translate>CRUD.CREATE</span>
+    </md-tooltip>
+</md-button>
+<md-content>
+    <md-table-container class="full-table-container">
+        <table md-table
+               ng-if="establishments && establishments.length > 0"
+               class="animated fadeIn animation-stop">
+            <thead md-head>
+                <tr md-row>
+                    <th md-column>{{ 'ESTABLISHMENT.TYPE' | translate}}</th>
+                    <th md-column>{{ 'ESTABLISHMENT.NAME' | translate}}</th>
+                    <th md-column>{{ 'ESTABLISHMENT.ADDRESS' | translate}}</th>
+                    <th md-column>{{ 'ESTABLISHMENT.PHONO' | translate}}</th>
+                    <th md-column>{{ 'ESTABLISHMENT.EMAIL' | translate}}</th>
+                    <th md-column>{{ 'ESTABLISHMENT.WEBSITE' | translate}}</th>
+                    <th md-column></th>
+                    <th md-column></th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-row
+                    md-auto-select
+                    ng-repeat="item in establishments track by $index">
+                    <td md-cell>{{getTypeObj(item.type).shortname}}
+                        <md-tooltip md-direction="top">
+                            <span>{{getTypeObj(item.type).name}}</span>
+                        </md-tooltip>
+                    </td>
+                    <td md-cell>{{item.name}} {{(item.shortname)? '(' + item.shortname + ')' : ''}}</td>
+                    <td md-cell>{{item.address.text}}</td>
+                    <td md-cell>
+                        <a href="tel:+{{item.phone}}">{{item.phone}}</a>
+                    </td>
+                    <td md-cell>
+                        <a href="mailto:{{item.email}}">{{item.email}}</a>
+                    </td>
+                    <td md-cell>
+                        <a href="{{item.website}}"
+                           target="_blank">{{item.website}}</a>
+                    </td>
+                    <td md-cell>
+                        <md-button class="md-icon-button"
+                                   required-privilege="['update']"
+                                   ng-click="showSaveDialog(item)">
+                            <md-icon md-font-icon="fa fa-pencil">
+                                <md-tooltip md-direction="top">
+                                    <span translate>TABLE.TOOLTIP.EDIT</span>
+                                </md-tooltip>
+                            </md-icon>
+                        </md-button>
+                    </td>
+                    <td md-cell>
+                        <md-button class="md-icon-button"
+                                   required-privilege="['delete']"
+                                   ng-click="showDeleteConfirm(item)">
+                            <md-icon md-font-icon="fa fa-trash">
+                                <md-tooltip md-direction="top">
+                                    <span translate>TABLE.TOOLTIP.DELETE</span>
+                                </md-tooltip>
+                            </md-icon>
+                        </md-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ssvq-loading ng-show="!establishments"></ssvq-loading>
+        <ssvq-no-results ng-show="establishments.length == 0"></ssvq-no-results>
+    </md-table-container>
+    <md-table-pagination md-limit="limit"
+                         md-page="page"
+                         md-total="{{found}}"
+                         md-on-paginate="get"
+                         md-page-select></md-table-pagination>
+</md-content>

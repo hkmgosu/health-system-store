@@ -1,0 +1,199 @@
+<md-dialog flex="60"
+           flex-md="80"
+           flex-sm="90"
+           flex-xs="100"
+           id="calendar-container"
+           class="mobile-fullwidth-dialog"
+           aria-label="Nueva solicitud de permiso"
+           ng-form="permissionForm">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.close()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Cancelar</md-tooltip>
+            </md-button>
+
+            <h2 flex
+                md-truncate>Nuevo permiso</h2>
+
+            <md-button ng-show="ssvqWizard.currentStep === 1"
+                       ng-click="ssvqWizard.currentStep = 0">
+                Anterior
+            </md-button>
+
+            <md-button ng-show="ssvqWizard.currentStep === 0"
+                       ng-disabled="vm.initForm.$invalid"
+                       ng-click="ssvqWizard.currentStep = 1">
+                Siguiente
+            </md-button>
+
+            <md-button aria-label="Enviar"
+                       ng-click="vm.save()"
+                       ng-show="ssvqWizard.currentStep === 1"
+                       ng-disabled="permissionForm.$invalid || vm.formDisabled">
+                <span>Enviar</span>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div ssvq-wizard>
+            <md-tabs class="md-hue-1 md-primary md-dynamic-height"
+                     md-selected="ssvqWizard.currentStep">
+                <md-tab>
+                    <md-tab-label>
+                        <span class="adverse-event-step-label">1</span>
+                        General
+                    </md-tab-label>
+                    <md-tab-body>
+                        <div layout="column"
+                             class="md-padding"
+                             ng-form="vm.initForm">
+                            <md-input-container class="md-block">
+                                <label>Tipo de permiso</label>
+                                <md-select ng-model="vm.permission.type"
+                                           name="type"
+                                           ng-change="vm.onTypeChanged(vm.permission.type)"
+                                           required>
+                                    <md-option ng-value="type.id"
+                                               ng-repeat="type in vm.permissionTypeList track by $index">
+                                        {{type.name}}
+                                    </md-option>
+                                </md-select>
+                                <div ng-messages="vm.initForm.type.$error"
+                                     role="alert">
+                                    <div ng-message="required">
+                                        <span>Campo obligatorio</span>
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Motivo</label>
+                                <textarea ng-model="vm.permission.reason"
+                                          md-maxlength="500"
+                                          style="min-height: 54px"></textarea>
+                            </md-input-container>
+
+                            <p class="md-caption">Archivos adjuntos</p>
+                            <ssvq-upload-list-files mode="Manager"
+                                                    files="vm.permission.attachments"
+                                                    upload-files="vm.uploadFiles"
+                                                    layout="column"></ssvq-upload-list-files>
+                            <div layout="row">
+                                <md-button class="md-primary upload-button button-comment"
+                                           ngf-select="vm.uploadFiles($files)"
+                                           ngf-multiple="true"
+                                           aria-label="{{ 'ARCHIVE.UPLOAD' | translate }}">
+                                    <span class="md-caption">Agregar archivo adjunto</span>
+                                    <md-icon md-font-icon
+                                             class="zmdi zmdi-attachment-alt"></md-icon>
+                                </md-button>
+                            </div>
+                        </div>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab ng-disabled="vm.initForm.$invalid">
+                    <md-tab-label>
+                        <span class="adverse-event-step-label">2</span>
+                        Periodo
+                    </md-tab-label>
+                    <md-tab-body>
+                        <div class="md-padding"
+                             style="min-height: 370px">
+                            <div layout="row"
+                                 class="md-inline-form">
+                                <md-input-container>
+                                    <label>Desde</label>
+                                    <md-datepicker ng-model="vm.permission.fromDate"
+                                                   name="fromDate"
+                                                   ng-change="vm.onFromDateChanged(vm.permission.fromDate)"
+                                                   ng-disabled="!vm.permission.type"
+                                                   required
+                                                   class="margin-top-0"></md-datepicker>
+                                    <div ng-messages="permissionForm.fromDate.$error"
+                                         role="alert">
+                                        <div ng-message="required">
+                                            <span>Campo obligatorio</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container ng-if="vm.calendarOptions.watchUntilDate">
+                                    <label>Hasta</label>
+                                    <md-datepicker ng-model="vm.permission.untilDate"
+                                                   name="untilDate"
+                                                   ng-change="vm.onUntilDateChanged(vm.permission.untilDate)"
+                                                   required
+                                                   class="margin-top-0"></md-datepicker>
+                                    <div ng-messages="permissionForm.untilDate.$error"
+                                         role="alert">
+                                        <div ng-message="required">
+                                            <span>Campo obligatorio</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex-xs="30"
+                                                    class="margin-left-10"
+                                                    ng-if="vm.calendarOptions.watchDuration">
+                                    <label>Por</label>
+                                    <input type="number"
+                                           min="1"
+                                           name="duration"
+                                           required
+                                           ng-model-options="{ debounce: 500 }"
+                                           ng-model="vm.permission.duration">
+                                    <div class="hint"
+                                         ng-hide="permissionForm.duration.$error.required">día(s)</div>
+                                    <div ng-messages="permissionForm.duration.$error"
+                                         role="alert">
+                                        <div ng-message="required">
+                                            <span>Campo obligatorio</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <!-- Calendario -->
+                            <ssvq-viatic-calendar ng-if="vm.permission.fromDate && (vm.permission.untilDate || vm.permission.duration)"
+                                                  days="vm.permission.detailsDay"
+                                                  from-date="vm.permission.fromDate"
+                                                  until-date="vm.permission.untilDate"
+                                                  duration="vm.permission.duration"
+                                                  item-options="vm.itemOptions"
+                                                  options="vm.calendarOptions"
+                                                  extra-data="vm.calendarExtraData"></ssvq-viatic-calendar>
+                        </div>
+
+                    </md-tab-body>
+                </md-tab>
+            </md-tabs>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions class="md-whiteframe-2dp">
+        <md-button aria-label="Cancelar"
+                   class="md-accent"
+                   ng-click="vm.close()">
+            <span>Cancelar</span>
+        </md-button>
+        <span flex></span>
+
+        <md-button class="md-accent"
+                   ng-show="ssvqWizard.currentStep === 1"
+                   ng-click="ssvqWizard.currentStep = 0">
+            Anterior
+        </md-button>
+
+        <md-button class="md-raised md-primary"
+                   ng-show="ssvqWizard.currentStep === 0"
+                   ng-disabled="vm.initForm.$invalid"
+                   ng-click="ssvqWizard.currentStep = 1">
+            Siguiente
+        </md-button>
+
+        <md-button aria-label="Enviar"
+                   ng-click="vm.save()"
+                   ng-show="ssvqWizard.currentStep === 1"
+                   ng-disabled="permissionForm.$invalid || vm.formDisabled"
+                   class="md-raised md-primary">
+            <span>Enviar</span>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

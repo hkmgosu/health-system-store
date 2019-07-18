@@ -1,0 +1,25 @@
+<md-card ng-repeat="careTeam in vm.careTeamList | orderBy: 'id'"
+         class="margin-top-10">
+    <md-list-item class="md-2-line"
+                  ng-click="vm.editCareTeam($event, careTeam)"
+                  ng-disabled="vm.opts.disabled">
+        <md-icon class="md-avatar-icon"
+                 ng-class="careTeam.vehicle ? 'zmdi zmdi-truck': 'zmdi zmdi-home'"
+                 md-colors="{background: 'primary-hue-1'}"
+                 layout="row"
+                 layout-align="center center"></md-icon>
+        <div class="md-list-item-text">
+            <span class="md-body-2"
+                  md-colors="{color: 'primary-hue-1'}">{{careTeam.vehicle.name || 'En base'}}</span>
+        </div>
+        <md-button class="md-icon-button md-secondary"
+                   ng-click="vm.removeCareTeam(careTeam)"
+                   ng-if="careTeam.vehicle && !vm.opts.disabled">
+            <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
+        </md-button>
+        <md-divider></md-divider>
+    </md-list-item>
+    <ssvq-participant-list-avatar participant-list="careTeam.participantList"
+                                  show-history="true"
+                                  class="margin-10"></ssvq-participant-list-avatar>
+</md-card>

@@ -1,0 +1,131 @@
+<md-toolbar>
+    <h4 class="padding-10">
+        {{::('ADVERSEEVENT.FALLFORM.TITLE' | translate)}}
+    </h4>
+</md-toolbar>
+<md-subheader class="md-primary">{{::('ADVERSEEVENT.FALLFORM.FALLDATA' | translate)}}</md-subheader>
+<div class="md-dialog-content tab-dialog-content padding-top-0">
+    <div flex
+         layout="column">
+        <ssvq-custom-option-selector model="vm.data.placeFall"
+                                     label="{{::('ADVERSEEVENT.FALLFORM.WHERE' | translate)}}"
+                                     parametrics="vm.parametrics.placesFall"
+                                     other-option="true"
+                                     autocomplete-function="vm.getMatches"
+                                     required-option="true"
+                                     name-parametric="placeFall"></ssvq-custom-option-selector>
+    </div>
+    <div flex
+         layout="column">
+        <ssvq-custom-option-selector model="vm.data.fromFall"
+                                     label="{{::('ADVERSEEVENT.FALLFORM.FROM' | translate)}}"
+                                     parametrics="vm.parametrics.fromFalls"
+                                     other-option="true"
+                                     autocomplete-function="vm.getMatches"
+                                     required-option="true"
+                                     name-parametric="fromFall"></ssvq-custom-option-selector>
+    </div>
+    <div flex
+         layout="column">
+        <ssvq-custom-option-selector model="vm.data.activityFall"
+                                     label="{{::('ADVERSEEVENT.FALLFORM.ACTIVITYFALL' | translate)}}"
+                                     parametrics="vm.parametrics.activitiesFall"
+                                     other-option="true"
+                                     autocomplete-function="vm.getMatches"
+                                     required-option="true"
+                                     name-parametric="activityFall"></ssvq-custom-option-selector>
+    </div>
+</div>
+<md-subheader class="md-primary"
+              ng-if="vm.parametrics.eventConsequences.length > 0">
+    {{::('ADVERSEEVENT.FALLFORM.FALLCONSEQUENCES' | translate)}}
+</md-subheader>
+<div class="md-dialog-content tab-dialog-content padding-top-0"
+     ng-if="vm.parametrics.eventConsequences.length > 0">
+    <div flex
+         layout="column">
+        <md-input-container class="md-block"
+                            flex="100"
+                            flex-gt-sm="50">
+            <label>{{ ::('ADVERSEEVENT.FALLFORM.LOCALIZATION' | translate) }}</label>
+            <textarea rows="2"
+                      required
+                      ng-model="vm.data.localizationInjury">{{ ADVERSEEVENT.FALLFORM.LOCALIZATION }}</textarea>
+        </md-input-container>
+    </div>
+    <div flex
+         layout="column">
+        <ssvq-custom-checkbox-selector model="vm.data.typesInjury"
+                                       label="{{::('ADVERSEEVENT.FALLFORM.TYPEINJURY' | translate)}}"
+                                       parametrics="vm.parametrics.eventConsequences"
+                                       other-option="true"
+                                       autocomplete-function="vm.getMatches"
+                                       required-option="true"
+                                       name-parametric="eventConsequence"></ssvq-custom-checkbox-selector>
+    </div>
+</div>
+<md-subheader class="md-primary">{{::('ADVERSEEVENT.FALLFORM.PREVENTIVEMEASURE' | translate)}}</md-subheader>
+<div class="md-dialog-content tab-dialog-content padding-top-0">
+    <div flex
+         layout="column">
+        <ssvq-custom-checkbox-selector model="vm.data.preventiveMeasures"
+                                       label="{{::('ADVERSEEVENT.FALLFORM.PREVENTIVEMEASUREATMOMENT' | translate)}}"
+                                       parametrics="vm.parametrics.preventiveMeasures"
+                                       name-parametric="preventiveMeasure"
+                                       autocomplete-function="vm.getMatches"
+                                       required-option="true"
+                                       other-option="true"></ssvq-custom-checkbox-selector>
+    </div>
+</div>
+<md-subheader class="md-primary">{{::('ADVERSEEVENT.FALLFORM.EVENTFACTORS' | translate)}}</md-subheader>
+<div class="md-dialog-content tab-dialog-content padding-top-0">
+    <div flex
+         layout="column">
+        <ssvq-custom-option-selector model="vm.data.fallRisk"
+                                     label="{{::('ADVERSEEVENT.FALLFORM.RISKFALL' | translate)}}"
+                                     required-option="true"
+                                     parametrics="vm.parametrics.riskCategorizations"></ssvq-custom-option-selector>
+    </div>
+    <div flex
+         layout="column">
+        <ssvq-custom-option-selector model="vm.data.previousFall"
+                                     label="{{::('ADVERSEEVENT.FALLFORM.PREVIOUSFALL' | translate)}}"
+                                     required-option="true"
+                                     parametrics="vm.parametrics.previousFalls"></ssvq-custom-option-selector>
+    </div>
+    <div flex
+         layout="column">
+        <ssvq-custom-option-selector model="vm.data.consciousnessState"
+                                     label="{{::('ADVERSEEVENT.FALLFORM.CONSCIOUSNESSSTATE' | translate)}}"
+                                     required-option="true"
+                                     parametrics="vm.parametrics.consciousnessStates"></ssvq-custom-option-selector>
+    </div>
+    <div flex
+         layout="column">
+        <ssvq-custom-checkbox-selector model="vm.data.typeMedicationUsed"
+                                       label="{{::('ADVERSEEVENT.FALLFORM.TYPEMEDICATION' | translate)}}"
+                                       required-option="true"
+                                       parametrics="vm.parametrics.typesMedication"></ssvq-custom-checkbox-selector>
+    </div>
+    <div flex
+         layout="column">
+        <ssvq-custom-option-selector model="vm.data.sensoryDeficit"
+                                     label="{{::('ADVERSEEVENT.FALLFORM.SENSORYDEFICIT' | translate)}}"
+                                     required-option="true"
+                                     parametrics="vm.parametrics.sensoryDeficits"></ssvq-custom-option-selector>
+    </div>
+    <div flex
+         layout="column">
+        <ssvq-custom-option-selector model="vm.data.patientMovility"
+                                     label="{{::('ADVERSEEVENT.FALLFORM.PATIENTMOVILITY' | translate)}}"
+                                     required-option="true"
+                                     parametrics="vm.parametrics.patientMovilities"></ssvq-custom-option-selector>
+    </div>
+    <div flex
+         layout="column">
+        <ssvq-custom-option-selector model="vm.data.patientWalk"
+                                     label="{{::('ADVERSEEVENT.FALLFORM.PATIENTWALK' | translate)}}"
+                                     required-option="true"
+                                     parametrics="vm.parametrics.patientWalks"></ssvq-custom-option-selector>
+    </div>
+</div>

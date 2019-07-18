@@ -1,0 +1,41 @@
+<md-card ng-if="vm.options.editMode">
+    <md-content>
+        <p class="text-center md-body-2"
+           style="color: #3b8bc7">
+            <md-icon md-font-icon="zmdi zmdi-info"
+                     style="color: #3b8bc7"></md-icon>
+            <span>Haz clic sobre un día del calendario para cambiar su valor</span>
+        </p>
+    </md-content>
+</md-card>
+<md-card ng-if="vm.days"
+         class="animated fadeIn animation-stop">
+    <md-card-content class="padding-0">
+        <md-list class="padding-0">
+            <div ng-repeat="(month, date) in vm.days | groupBy: 'monthIndex'"
+                 layout="column">
+                <md-list-item>
+                    {{vm.months[month]}}
+                </md-list-item>
+                <md-divider></md-divider>
+                <div layout="row">
+                    <span ng-repeat="day in vm.weekDayList"
+                          class="text-center md-body-1 margin-top-10 margin-bottom-10"
+                          flex>
+                        {{day}}
+                    </span>
+                </div>
+                <md-divider></md-divider>
+
+                <ssvq-viatic-calendar-week week-days="weekDays"
+                                           ng-repeat="(weekIndex, weekDays) in date | groupBy: 'weekIndex'"
+                                           edit-mode="vm.options.editMode"
+                                           item-options="vm.itemOptions"
+                                           flex></ssvq-viatic-calendar-week>
+                <md-divider></md-divider>
+            </div>
+        </md-list>
+    </md-card-content>
+</md-card>
+<p ng-if="!vm.days"
+   class="text-center md-body-2">Cargando calendario...</p>

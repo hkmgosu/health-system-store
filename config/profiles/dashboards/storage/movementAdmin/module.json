@@ -1,0 +1,34 @@
+{
+	"name": "PRIVILEGES.STORAGE_MOVEMENT.NAME",
+	"description": "PRIVILEGES.STORAGE_MOVEMENT.DESCRIPTION",
+	"config": {
+		"privileges": {
+			"read": false,
+			"create": false,
+			"delete": false
+		},
+		"menu": {
+			"state": "triangular.mi-ssvq.storage-movement-admin",
+			"url": "/bodega/movimientos",
+			"template": "<ssvq-storage-movement-admin></ssvq-storage-movement-admin>"
+		},
+		"_controllers": {
+			"read": [
+				"Storage/MovementController.get",
+				"Storage/MovementController.getDetail",
+				"Storage/MovementController.getAll",
+				"Storage/MovementController.getAllDetail",
+				"Storage/MovementController.getExternalUnits",
+				"Storage/MovementController.unsubscribe",
+				"Storage/MovementTypeController.getAll",
+				"Storage/ProductRequestController.getOriginUnits"
+			],
+			"create": [
+				"Storage/MovementController.create"
+			],
+			"delete": [
+				"Storage/MovementController.delete"
+			]
+		}
+	}
+}

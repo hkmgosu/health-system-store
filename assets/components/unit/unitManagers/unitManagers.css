@@ -1,0 +1,4 @@
+.unit-employee-list {
+    max-height: 450px;
+    overflow: auto;
+}

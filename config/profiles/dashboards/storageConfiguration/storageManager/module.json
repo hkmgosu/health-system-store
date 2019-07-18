@@ -1,0 +1,31 @@
+{
+    "name": "PRIVILEGES.STORAGE_MANAGER.NAME",
+    "description": "PRIVILEGES.STORAGE_MANAGER.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-manager",
+            "url": "/bodega/configuraciones",
+            "template": "<ssvq-storage-manager></ssvq-storage-manager>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/StorageManagerController.getStorageUnits",
+                "Storage/StorageManagerController.getStorageManagers",
+                "EmployeeController.getList",
+                "UnitController.getAutocomplete"
+            ],
+            "update": [
+                "Storage/StorageManagerController.saveStorageUnit",
+                "Storage/StorageManagerController.addStorageManager",
+                "Storage/StorageManagerController.rmStorageManager",
+                "Storage/StorageManagerController.updateStorageManager"
+            ]
+        }
+    }
+}

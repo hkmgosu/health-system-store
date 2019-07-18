@@ -1,0 +1,26 @@
+.rem-patient-item .md-list-item-inner{
+    max-width: calc(100% - 50px);
+}
+.rem-patient-item md-icon{
+    display: flex;
+    justify-content: center;
+}
+.top-border{
+    width: 2px;
+    background: rgba(223, 223, 223, 0.45);
+    height: 18px;
+    position: absolute;
+    top: 0;
+    left: 35px;
+}
+.bottom-border{
+    width: 2px;
+    background: rgba(223, 223, 223, 0.45);
+    height: 14px;
+    position: absolute;
+    bottom: 0;
+    left: 35px;
+}
+.last .bottom-border{
+    display: none;
+}

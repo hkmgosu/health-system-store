@@ -1,0 +1,30 @@
+<section layout="column"
+         layout-fill>
+    <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools">
+            <span class="md-subhead"
+                  flex>Configuración de derivaciones</span>
+            <ssvq-establishment-autocomplete on-select="vm.addEstablishment"
+                                             type="search"
+                                             label="Buscar y agregar establecimiento"
+                                             flex="50"></ssvq-establishment-autocomplete>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <md-content flex
+                class="derivation-settings-list">
+        <md-list>
+            <md-list-item ng-repeat="establishment in vm.establishmentList"
+                          ng-click="vm.manageSupervisors(establishment, $event)"
+                          class="md-2-line">
+                <div class="md-list-item-text">
+                    <h4>{{establishment.name}}</h4>
+                    <p>{{establishment.bedManagementSupervisorsCount || 0 }} supervisores</p>
+                </div>
+                <md-button class="md-secondary md-warn md-raised"
+                           ng-click="vm.removeEstablishment(establishment)">Quitar</md-button>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</section>

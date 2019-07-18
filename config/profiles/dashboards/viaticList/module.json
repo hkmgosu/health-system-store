@@ -1,0 +1,32 @@
+{
+    "name": "PRIVILEGES.VIATIC.NAME",
+    "description": "PRIVILEGES.VIATIC.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.viatic",
+            "url": "/viaticos",
+            "icon": "zmdi zmdi-flight-takeoff",
+            "priority": 40,
+            "template": "<ssvq-viatic-list-view></ssvq-viatic-list-view>"
+        },
+        "_controllers": {
+            "read": [
+                "ViaticController.getSent",
+                "WorkflowController.canCreate",
+                "HolidayController.getHolidays",
+                "ViaticController.validateDates",
+                "ViaticController.getTypeList",
+                "RegionController.getAll",
+                "CommuneController.getAll",
+                "ViaticController.getStatusList"
+            ],
+            "create": [
+                "ViaticController.create"
+            ]
+        }
+    }
+}

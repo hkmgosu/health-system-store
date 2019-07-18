@@ -1,0 +1,23 @@
+<md-dialog aria-label='Actualizar ubicación'
+           flex='60'
+           flex-sm='80'
+           flex-xs='100'
+           class='mobile-fullwidth-dialog'>
+    <md-toolbar>
+        <div class='md-toolbar-tools'>
+            <md-button class='md-icon-button'
+                       ng-click='vm.cancel()'>
+                <md-icon md-font-icon='zmdi zmdi-arrow-left'></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <span class='md-subhead'
+                  flex>Editar ubicación</span>
+            <md-button ng-click="vm.confirm()">Confirmar</md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-padding">
+            <ssvq-address-form address="vm.address"></ssvq-address-form>
+        </div>
+    </md-dialog-content>
+</md-dialog>

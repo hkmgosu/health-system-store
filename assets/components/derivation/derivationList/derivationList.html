@@ -1,0 +1,60 @@
+<md-content class="full-height"
+            ng-if="vm.derivationList.length > 0"
+            ssvq-infinite-load
+            next-page="vm.nextPage">
+    <md-list class="animated slideInUp animation-stop padding-0">
+        <md-list-item class="md-3-line"
+                      href="#/derivaciones/detalles/{{item.id}}"
+                      aria-label="{{item.diagnostic}}"
+                      ng-repeat="item in vm.derivationList track by $index">
+            <div class="md-avatar">
+                <ssvq-employee-avatar employee="item.createdBy"
+                                      class="margin-right-10"></ssvq-employee-avatar>
+            </div>
+            <div class="md-list-item-text">
+                <h4>
+                    <strong>{{item.title}}</strong>
+                </h4>
+                <h3>
+                    <span>
+                        <i class="fa fa-hospital-o"
+                           style="color:#b7643b;"
+                           aria-hidden="true"></i>
+                        {{item.fromEstablishment.shortname || item.fromEstablishment.name}} ({{item.fromUnit.name}})
+                    </span> •
+                    <span>
+                        <i class="fa fa-hospital-o"
+                           style="color:#b7643b;"
+                           aria-hidden="true"></i>
+                        {{item.toEstablishment.shortname || item.toEstablishment.name}} ({{item.toUnit.name}})
+                    </span>
+                </h3>
+                <p>
+                    <span>
+                        <strong>
+                            <i class="zmdi zmdi-account patient-icon"
+                               style="color:#4bad9f;"></i>
+                        </strong>
+                        {{item.patient.fullname}}, {{item.patient.gender | translate}} de
+                        <ssvq-patient-age patient="item.patient"></ssvq-patient-age>
+                    </span>
+                    •
+                    <span>
+                        <strong>
+                            <i class="zmdi zmdi-time-countdown time-icon"></i>
+                        </strong>
+                        <ssvq-custom-time-ago time-at="::item.createdAt"></ssvq-custom-time-ago>
+                    </span>
+                </p>
+            </div>
+            <div class="md-secondary">
+                <md-button class="md-primary md-hue-1">{{item.status.name}}</md-button>
+            </div>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+    <p class="text-center"
+       ng-if="vm.count && (vm.count > vm.pagination.limit) && (vm.derivationList.length == vm.count)">Fin de la lista</p>
+</md-content>
+<ssvq-loading ng-if="!vm.derivationList"></ssvq-loading>
+<ssvq-no-results ng-if="vm.derivationList.length === 0"></ssvq-no-results>

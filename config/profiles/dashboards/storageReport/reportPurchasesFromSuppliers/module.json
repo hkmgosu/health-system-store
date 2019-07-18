@@ -1,0 +1,24 @@
+{
+    "name": "PRIVILEGES.STORAGE_REPORT.PURCHASES_FROM_SUPPLIERS.NAME",
+    "description": "PRIVILEGES.STORAGE_REPORT.PURCHASES_FROM_SUPPLIERS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.report-purchases-from-suppliers",
+            "url": "/bodega/reporte-compras-proveedores",
+            "template": "<ssvq-report-purchases-from-suppliers></ssvq-report-purchases-from-suppliers>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/StorageReportController.getPurchasesFromSuppliers",
+                "Storage/ProductTypeController.getAll",
+                "Storage/ProductController.getAll",
+                "Storage/UnitProductsManagerController.getAll",
+                "Storage/UnitProductsManagerController.getAllowedUnits",
+                "Storage/CompanyController.getAll"
+            ]
+        }
+    }
+}

@@ -1,0 +1,30 @@
+<md-subheader class="md-primary">{{::('ADVERSEEVENT.EVENTTYPE.TITLE' | translate)}}</md-subheader>
+<div class="md-dialog-content tab-dialog-content adverse-list-item" ng-if="vm.completed">
+    <md-list>
+        <input type="hidden"
+               name="eventType"
+               ng-required="true"
+               ng-model="vm.data.eventType">
+        <div ng-if="vm.associatedProcessesFilter"
+             ng-repeat="associatedProcess in vm.associatedProcessesFilter | orderBy: 'id'"
+             class="adverse-list-item">
+            <md-subheader class="md-no-sticky">{{::associatedProcess.name}}</md-subheader>
+            <md-divider></md-divider>
+            <md-list-item ng-repeat="eventType in ::associatedProcess.eventTypes | orderBy: 'id'"
+                          ng-click="vm.selectTuple($event, eventType)">
+                <p ng-class="{active: vm.data.eventType === eventType.id}">
+                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                             class="date-icon padding-right-0">
+                    </md-icon>
+                    {{::(eventType.name)}}
+                    {{ eventType.description ? '(' + eventType.description + ')' : '' }}
+                </p>
+                <md-icon md-font-icon="zmdi zmdi-check-circle"
+                         class="md-primary margin-left-10"
+                         ng-show="vm.data.eventType === {{::(eventType.id)}}"
+                         style="font-size: 30px;">
+                </md-icon>
+            </md-list-item>
+        </div>
+    </md-list>
+</div>

@@ -1,0 +1,35 @@
+<md-dialog aria-label="Nuevo evento"
+           flex="80"
+           flex-sm="90"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <div>
+        <md-dialog-content>
+            <md-subheader class="md-primary">Últimos eventos notificados del paciente</md-subheader>
+            <div class="md-dialog-content">
+                <span>Verifique que el evento a notificar no se encuentre en el siguiente listado</span>
+            </div>
+            <div>
+                <ssvq-adverse-event-list-item flex
+                                              ng-repeat="event in vm.events | orderBy : '-createdAt'"
+                                              event="event"
+                                              target="true">
+                </ssvq-adverse-event-list-item>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row"
+                           layout-align="end center">
+            <md-button class="md-accent"
+                       ng-click="vm.cancel();"
+                       translate="Abortar ingreso"
+                       aria-label="Abortar ingreso">
+            </md-button>
+            <md-button class="md-primary"
+                       type="button"
+                       ng-click="vm.continue();"
+                       translate="Continuar"
+                       aria-label="Continuar">
+            </md-button>
+        </md-dialog-actions>
+    </div>
+</md-dialog>

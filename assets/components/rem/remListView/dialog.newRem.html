@@ -1,0 +1,36 @@
+<md-dialog aria-label="Nuevo incidente"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <form name="saveForm"
+          ng-submit="saveForm.$valid && vm.save(vm.basicInformation)"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                    <md-tooltip>Volver</md-tooltip>
+                </md-button>
+                <span class="md-subhead">
+                    Nuevo incidente
+                </span>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <ssvq-rem-basic-information data="vm.basicInformation">
+                </ssvq-rem-basic-information>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-primary md-raised"
+                       type="submit"
+                       aria-label="Crear rem"
+                       ng-disabled="saveForm.$invalid">
+                Ingresar incidente
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

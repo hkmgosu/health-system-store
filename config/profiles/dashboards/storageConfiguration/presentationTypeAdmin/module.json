@@ -1,0 +1,32 @@
+{
+    "name": "PRIVILEGES.STORAGE_PRESENTATION_TYPE.NAME",
+    "description": "PRIVILEGES.STORAGE_PRESENTATION_TYPE.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-presentation-type-admin",
+            "url": "/bodega/tipo-presentacion",
+            "template": "<ssvq-storage-presentation-type-admin></ssvq-storage-presentation-type-admin>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/PresentationTypeController.get",
+                "Storage/PresentationTypeController.getAll"
+            ],
+            "create": [
+                "Storage/PresentationTypeController.create"
+            ],
+            "update": [
+                "Storage/PresentationTypeController.update"
+            ],
+            "delete": [
+                "Storage/PresentationTypeController.delete"
+            ]
+        }
+    }
+}

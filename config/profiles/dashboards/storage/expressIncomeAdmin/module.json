@@ -1,0 +1,33 @@
+{
+	"name": "Consumo Inmediato",
+	"description": "Registro de Consumo Inmediato",
+	"config": {
+		"privileges": {
+			"read": false,
+			"create": false,
+			"delete": false
+		},
+		"menu": {
+			"state": "triangular.mi-ssvq.storage-express-income-admin",
+			"url": "/bodega/consumo-inmediato",
+			"template": "<ssvq-storage-express-income-admin></ssvq-storage-express-income-admin>"
+		},
+		"_controllers": {
+			"read": [
+				"Storage/ExpressIncomeController.get",
+				"Storage/ExpressIncomeController.getDetail",
+				"Storage/ExpressIncomeController.getAll",
+				"Storage/ExpressIncomeController.getAllDetail",
+				"Storage/ExpressIncomeController.unsubscribe",
+				"Storage/ExpressIncomeTypeController.getAll",
+				"UnitController.getAutocomplete"
+			],
+			"create": [
+				"Storage/ExpressIncomeController.create"
+			],
+			"delete": [
+				"Storage/ExpressIncomeController.delete"
+			]
+		}
+	}
+}

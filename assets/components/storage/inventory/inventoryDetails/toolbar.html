@@ -1,0 +1,21 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button"
+                   href="#/bodega/inventarios">
+            <md-tooltip>Volver al listado</md-tooltip>
+            <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+        </md-button>
+        <div layout="column"
+             flex>
+            <span class="md-subhead">Inventario #{{vm.inventory.id}}</span>
+            <span class="md-caption">creado el {{ vm.inventory.createdAt | date:"dd/MM/yyyy 'a las' HH:mm" }}</span>
+        </div>
+        <md-divider class="vertical-divider"></md-divider>
+        <md-button class="md-icon-button"
+                   ng-click="vm.downloadReportPdf()"
+                   ng-disabled="vm.loading">
+            <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
+            <md-tooltip>Descargar reporte como pdf</md-tooltip>
+        </md-button>
+    </div>
+</md-toolbar>

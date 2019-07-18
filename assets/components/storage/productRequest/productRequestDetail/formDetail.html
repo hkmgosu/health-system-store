@@ -1,0 +1,60 @@
+<p>&nbsp;</p>
+
+<form name="formDetail"
+	  layout="row">
+	<md-input-container flex>
+		<label for="quantity">Cantidad Solicitada</label>
+		<input type="number"
+			   name="quantity"
+			   ng-model="vm.detail.quantity"
+			   ng-disabled="vm.detail.productRequest.status != 1"
+			   ng-change="vm.detail.quantityBoss2 = vm.detail.quantityBoss1 = vm.detail.quantity"
+			   min="1"
+			   required>
+		<div ng-messages="formDetail.quantity.$error">
+			<div ng-message="required">
+				<span translate>PRODUCT_REQUEST.VALIDATOR.REQUIRED</span>
+			</div>
+		</div>
+	</md-input-container>
+	<md-input-container flex
+						ng-show="vm.detail.productRequest.isPharmaceutical && !vm.isSonUnit">
+		<label for="quantityBoss1">Autorizado por<br>Jefe Farmacia</label>
+		<input type="number"
+			   name="quantityBoss1"
+			   ng-model="vm.detail.quantityBoss1"
+			   ng-disabled="vm.detail.productRequest.status != 2 || !vm.isPharmacyBoss"
+			   ng-change="vm.detail.quantityBoss2 = vm.detail.quantityBoss1"
+			   min="0"
+			   required>
+		<div ng-messages="formDetail.quantityBoss1.$error">
+			<div ng-message="required">
+				<span translate>PRODUCT_REQUEST.VALIDATOR.REQUIRED</span>
+			</div>
+		</div>
+	</md-input-container>
+	<md-input-container flex>
+		<label for="quantityBoss2">Autorizado por<br>Jefe Bodega</label>
+		<input type="number"
+			   name="quantityBoss2"
+			   ng-model="vm.detail.quantityBoss2"
+			   ng-disabled="!vm.canUpdate || !vm.isStorageBoss"
+			   min="0"
+			   required>
+		<div ng-messages="formDetail.quantityBoss2.$error">
+			<div ng-message="required">
+				<span translate>PRODUCT_REQUEST.VALIDATOR.REQUIRED</span>
+			</div>
+		</div>
+	</md-input-container>
+
+	<div class="float-right"
+		 ng-show="!vm.shippings.length && vm.canUpdate">
+		<md-button class="md-raised md-primary"
+				   ng-click="vm.saveDetail()"
+				   ng-disabled="formDetail.$invalid"
+				   aria-label="CRUD.SAVE"
+				   translate="CRUD.SAVE">
+		</md-button>
+	</div>
+</form>

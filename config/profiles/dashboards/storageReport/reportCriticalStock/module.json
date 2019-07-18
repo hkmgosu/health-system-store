@@ -1,0 +1,23 @@
+{
+    "name": "PRIVILEGES.STORAGE_REPORT.CRITICAL_STOCK.NAME",
+    "description": "PRIVILEGES.STORAGE_REPORT.CRITICAL_STOCK.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.report-critical-stock",
+            "url": "/bodega/reporte-stock-critico",
+            "template": "<ssvq-report-critical-stock></ssvq-report-critical-stock>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/ProductTypeController.getAll",
+                "Storage/ProductController.getAll",
+                "Storage/UnitProductsManagerController.getAll",
+                "Storage/UnitProductsManagerController.getAllowedUnits",
+                "Storage/StorageReportController.getCriticalStock"
+            ]
+        }
+    }
+}

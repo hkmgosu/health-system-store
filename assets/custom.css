@@ -1,0 +1,598 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+
+
+/* 
+    Created on : 19-feb-2016, 23:03:13
+    Author     : pedrohernandezletelier
+*/
+
+.angular-google-map-container {
+    height: 100%;
+}
+
+#admin-panel-content-view {
+    min-height: calc(100vh - 64px);
+    padding-bottom: 0px;
+}
+@media (max-width: 599px){
+    #admin-panel-content-view {
+        min-height: calc(100vh - 56px);
+    }
+}
+.tab-users {
+    min-height: 80vh !important;
+}
+
+.content-tab {
+    height: 435px;
+}
+
+/** Buscador público **/
+
+.search-map-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.search-map-container .angular-google-map {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.search-map-container .angular-google-map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/** Buscador público **/
+
+/* Mapa creador establecimientos */
+
+#map-establishment{
+    width: 100%;
+    height: 320px;
+    position: relative;
+}
+
+#map-establishment .angular-google-map {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+#map-establishment .angular-google-map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.marker-static {
+    position: absolute;
+    height: 45px;
+    width: 220px;
+    top: calc(50% - 51px);
+    left: calc(50% - 110px);
+    z-index: 1;
+}
+.marker-static .marker-title{
+    width: 220px;
+    color: #fff;
+    background-color: #607D8B;
+    border-radius: 15px;
+    padding: 5px 20px;
+    margin: 0;
+    text-align: center;
+}
+.map-edit{
+    position: absolute;
+    right: 16px;
+    top: 16px;
+}
+.map-search{
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    width: 450px;
+}
+/* Mapa creador establecimientos */
+
+.drop-box{
+    height: 128px;
+    width: 128px;
+    border: 2px dashed #666;
+}
+
+/* Parche alineación tablas */
+.md-data-table td{
+    vertical-align: middle !important;
+}
+
+/* Fondo login */
+
+.login-bg {
+    background-image: url("/assets/images/login-bg.jpg");
+}
+
+#employee-search{
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: calc(100% - 36px);
+    max-width: 600px;
+}
+
+/* Perfil Sidebar */
+
+.profile-container {
+    background: url("/assets/images/profile.jpg") rgb(96, 125, 139);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    font-weight: bold;
+}
+.profile-img{
+    background-color: aliceblue;
+    border-radius: 50%;
+    border: 2px solid #b6b6b6;
+    padding: 0;
+}
+.img-container{
+    border-radius: 40px;
+    overflow: hidden;
+    border: 10px solid #d1a200;
+    width: 75px;
+    height: 75px;
+    margin: 10px;
+    margin-top: -50px;
+}
+
+.profile-container p{
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+}
+.profile-container .sombra{
+    color: #666;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.search-view{
+    height: 100%;
+}
+
+.md-autocomplete-suggestions-container .md-autocomplete-suggestions li {
+  line-height: inherit;
+  height: auto;
+}
+md-autocomplete[md-floating-label] md-input-container {
+    padding-bottom: 0;
+}
+.type-img-container{
+    width: 40px !important;
+}
+.type-item div{
+    flex: initial !important;
+}
+.lowercase {
+    text-transform: lowercase;
+}
+.capitalize {
+    text-transform: capitalize;
+}
+.force-line{
+    white-space: nowrap;
+}
+md-list-item.selected, md-list-item.selected h3 {
+    color: #0f69b4 !important;
+    background: #f4f4f4;
+}
+#chart_div table {
+    border-collapse: initial;
+}
+.oc-unit{
+    font-weight: bold;
+    color: #cb3129;
+}
+.oc-employee{
+    font-weight: bold;
+    color: #455a64;
+}
+#chart_div{
+    overflow-x: scroll;
+}
+
+/* Mapa areas */
+
+.area-view {
+    height: calc(100vh - 64px);
+}
+
+.areas-map-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.areas-map-container .angular-google-map {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.areas-map-container .angular-google-map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+md-list-item.selected-area {
+    padding: 1px;
+    background: #92a3ab;
+    color: #fff !important;
+}
+md-list-item.selected-area md-icon{
+    color: #fff !important;
+}
+
+/*
+Request Custom Styles
+ */
+.textarea-container textarea {
+    min-height: 200px !important;
+}
+
+.request-state{
+    padding: 5px 10px;
+}
+.request-state.open{
+    color: #2e7b32;
+}
+.request-state.close{
+    color: #d32f2f;
+}
+.request-state .md-select-value {
+    border-bottom: 0;
+}
+#comment-box .comment-input {
+    max-height: 0;
+    -webkit-transition: min-height 0.5s; /* For Safari 3.1 to 6.0 */
+    transition: min-height 0.5s;
+}
+#comment-box.onfocus .comment-input {
+    min-height: 145px !important;
+    max-height: none !important;
+}
+#comment-box .button-comment {
+    display: none;
+}
+#comment-box.onfocus .button-comment {
+    display: flex;
+}
+
+.app-toolbar span, .app-toolbar md-icon{
+    color: #1465a8 !important;
+}
+.app-toolbar .blue {
+    background-color: #0f69b4;
+    height: 12px;
+}
+.app-toolbar .red {
+    background-color: #ef4143;
+    height: 12px;
+}
+.app-toolbar .md-toolbar-tools {
+    height: 51px;
+}
+.md-data-table td, .md-data-table th{
+    padding: 0 18px !important;
+}
+md-card.no-padding-card md-card-content {
+    padding: 0;
+}
+
+a {
+    color: #0f69b4;
+}
+.searchbox{
+    background: white;
+    border-radius: 2px;
+    color: black;
+}
+.no-errors .md-errors-spacer{
+    display: none;
+}
+.custom-datepicker .md-datepicker-input-container {
+    width: calc(100% - 64px);
+    text-align: end;
+}
+.custom-datepicker input {
+    width: 100%;
+    text-align: end;
+}
+#employee-search md-input-container{
+    margin-bottom: 0;
+    margin-top: 0;
+}
+#employee-search .md-errors-spacer{
+    display: none;
+}
+.table-buttons{
+    animation-duration: 0.5s !important;
+    display: none;
+    position: absolute;
+    right: 24px;
+    height: 46px;
+    background: #eee;
+}
+tr:hover .table-buttons{
+    display: block;
+}
+.md-data-table tr{
+    position: relative;
+}
+/*
+Request Managment Style
+ */
+section.section-filter {
+    margin: 0 10px;
+    max-height: 55px;
+}
+
+section.section-filter .md-button {
+    font-size: 1.5rem;
+    margin: 5px 2px;
+    padding: 0;
+    color: #0f69b4;
+    background-color: #f0f0f0;
+    text-transform: none;
+    min-width:100px;
+    border-radius: 0;
+}
+
+section.section-filter .selected {
+    border-bottom: 2px solid #ff5252;
+    font-weight: bold;
+}
+
+/* FIX multiple select option */
+md-select-menu[multiple] md-option {
+    padding-left: 32px; padding-right: 32px;
+}
+md-select-menu[multiple] md-option[selected] .md-text:before {
+    box-sizing: border-box;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    left:14px;
+    display: table;
+    width: 6.67px;
+    height: 16.33px;
+    border-width: 2px;
+    border-style: solid;
+    border-top: 0;
+    border-left: 0;
+    content: '';
+}
+.card-complete{
+    height: calc(100vh - 200px);
+}
+.dsp-list .md-list-item-text{
+    width: calc(100% - 56px);
+}
+.hint{
+    position: absolute;
+    left: 2px;
+    right: auto;
+    bottom: 7px;
+    font-size: 12px;
+    line-height: 14px;
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+    color: grey;
+}
+.respect-line-break {
+    white-space: pre-line !important;
+}
+#autoconsulta {
+    width: 1024px;
+    height: 768px;
+}
+
+@media (min-width: 600px) {
+    .public-view md-sidenav.admin-sidebar-left.md-sidenav-left {
+        width: 330px;
+        min-width: 330px;
+        max-width: 330px;
+    }
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(145, 145, 145, 0.43);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(145, 145, 145, 0.43);
+}
+
+/* Custom badge */
+.md-badge{
+    margin: 4px;
+    padding: 2px 5px;
+    background: #ef4143;
+    border-radius: 30%;
+}
+
+md-toolbar md-input-container .md-errors-spacer{
+    min-height: 0px !important;
+}
+
+/* Parche para multi dialogs */
+
+/* .md-dialog-backdrop:nth-of-type(even) {
+    z-index: 81;
+}
+
+.md-dialog-backdrop:nth-of-type(odd) {
+    z-index: 79;
+}
+
+.md-dialog-container:nth-of-type(even) {
+    z-index: 80;
+}
+
+.md-dialog-container:nth-of-type(odd) {
+    z-index: 82;
+} */
+
+.full-container {
+    height: calc(100vh - 64px);
+    overflow:hidden;
+}
+@media (max-width: 599px){
+    .full-container {
+        height: calc(100vh - 56px);
+    }
+}
+
+.not-outline {
+    outline: 0;
+}
+
+.md-button.md-white-theme.md-hue-1.md-primary.md-fab:not([disabled]).md-focused, .md-button.md-white-theme.md-hue-1.md-primary.md-fab:not([disabled]):hover, .md-button.md-white-theme.md-hue-1.md-primary.md-raised:not([disabled]).md-focused, .md-button.md-white-theme.md-hue-1.md-primary.md-raised:not([disabled]):hover {
+    background-color: rgb(218, 218, 218);
+}
+
+md-chips.no-underline .md-chips{
+    box-shadow: none;
+}
+
+/* Corrige bug de elementos q se ocultan con animaciones */
+.animation-stop.ng-animate {
+    -webkit-animation: none 0s;
+    animation: none 0s;
+}
+
+.full-table-container {
+    height: calc(100vh - 185px);
+}
+
+@media (max-width: 599px){
+    .full-table-container {
+        height: calc(100vh - 169px);
+    }
+}
+
+.vertical-divider{
+    border: 0.5px solid #6ea3d1;
+    height: 70%;
+}
+
+.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+	-webkit-transition: -webkit-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-moz-transition: -moz-transform 0.3s ease-out, opacity 0.3s ease-in;
+	-o-transition: -o-transform 0.3s ease-out, opacity 0.3s ease-in;
+	transition: transform 0.3s ease-out, opacity 0.3s ease-in;
+}
+
+.leaflet-cluster-spider-leg {
+	/* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
+	-webkit-transition: -webkit-stroke-dashoffset 0.3s ease-out, -webkit-stroke-opacity 0.3s ease-in;
+	-moz-transition: -moz-stroke-dashoffset 0.3s ease-out, -moz-stroke-opacity 0.3s ease-in;
+	-o-transition: -o-stroke-dashoffset 0.3s ease-out, -o-stroke-opacity 0.3s ease-in;
+	transition: stroke-dashoffset 0.3s ease-out, stroke-opacity 0.3s ease-in;
+}
+
+.marker-cluster-small {
+	background-color: rgba(181, 226, 140, 0.6);
+	}
+.marker-cluster-small div {
+	background-color: rgba(110, 204, 57, 0.6);
+	}
+
+.marker-cluster-medium {
+	background-color: rgba(241, 211, 87, 0.6);
+	}
+.marker-cluster-medium div {
+	background-color: rgba(240, 194, 12, 0.6);
+	}
+
+.marker-cluster-large {
+	background-color: rgba(253, 156, 115, 0.6);
+	}
+.marker-cluster-large div {
+	background-color: rgba(241, 128, 23, 0.6);
+	}
+
+	/* IE 6-8 fallback colors */
+.leaflet-oldie .marker-cluster-small {
+	background-color: rgb(181, 226, 140);
+	}
+.leaflet-oldie .marker-cluster-small div {
+	background-color: rgb(110, 204, 57);
+	}
+
+.leaflet-oldie .marker-cluster-medium {
+	background-color: rgb(241, 211, 87);
+	}
+.leaflet-oldie .marker-cluster-medium div {
+	background-color: rgb(240, 194, 12);
+	}
+
+.leaflet-oldie .marker-cluster-large {
+	background-color: rgb(253, 156, 115);
+	}
+.leaflet-oldie .marker-cluster-large div {
+	background-color: rgb(241, 128, 23);
+}
+
+.marker-cluster {
+	background-clip: padding-box;
+	border-radius: 20px;
+	}
+.marker-cluster div {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+
+	text-align: center;
+	border-radius: 15px;
+	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	}
+.marker-cluster span {
+	line-height: 30px;
+    }
+    
+    .customBullet {
+        padding: 0 3px;
+    }

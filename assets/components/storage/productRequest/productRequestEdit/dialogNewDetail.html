@@ -1,0 +1,46 @@
+<form name="formDetail"
+      flex-gt-sm="60"
+      flex="100">
+    <md-dialog aria-label="Nuevo item">
+        <md-toolbar class="md-toolbar-tools">
+            <h2 flex>Agregar Producto</h2>
+            <md-button class="md-icon-button float-right"
+                       ng-click="vm.cancel()"
+                       aria-label="Cancelar">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </md-toolbar>
+
+        <md-dialog-content md-border-bottom
+                           class="md-padding">
+            <ssvq-product-autocomplete selected="vm.detail.product"
+                                       on-select="vm.onSelectProduct"
+                                       exclude="vm.exclude"
+                                       product-type-search="vm.productTypeSearch"
+                                       request-allowed-only="true"
+                                       ng-show="!vm.detail.id">
+            </ssvq-product-autocomplete>
+
+            <md-input-container class="md-block">
+                <label for="quantity">
+                    {{'PRODUCT_REQUEST_DETAIL.TABLE.QUANTITY'|translate}}
+                </label>
+                <input type="number"
+                       required
+                       min="1"
+                       name="quantity"
+                       ng-model="vm.detail.quantity">
+            </md-input-container>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button class="md-raised md-primary"
+                       type="submit"
+                       ng-click="vm.saveDetail()"
+                       ng-disabled="formDetail.$invalid || !vm.detail.product || vm.isInvalid"
+                       aria-label="CRUD.SAVE"
+                       translate="CRUD.SAVE">
+            </md-button>
+        </md-dialog-actions>
+    </md-dialog>
+</form>

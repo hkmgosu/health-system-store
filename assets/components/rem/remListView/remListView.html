@@ -1,0 +1,114 @@
+<!-- ssvqRemListView -->
+<section layout="row"
+         ng-if="vm.hasActiveWorkshift"
+         flex>
+    <md-content flex>
+        <md-tabs md-swipe-content
+                 md-selected="vm.selectedTab"
+                 class="md-primary md-hue-1 tabs-requests"
+                 style="border-radius: 0">
+            <md-tab md-on-select="null"
+                    id="open">
+                <md-tab-label>
+                    <span>Abiertos</span>
+                    <span class="md-badge"
+                          ng-if="vm.selectedTab == 0"
+                          hide-xs>{{vm.openedCount || 0}}</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <ssvq-rem-grid count="vm.openedCount"
+                                   finished="false"
+                                   ng-if="vm.selectedTab == 0"
+                                   filter="vm.filter"></ssvq-rem-grid>
+                </md-tab-body>
+            </md-tab>
+            <md-tab md-on-select="null"
+                    id="closed">
+                <md-tab-label>
+                    <span>Cerrados</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <ssvq-rem-grid count="vm.closedCount"
+                                   finished="true"
+                                   ng-if="vm.selectedTab == 1"
+                                   filter="vm.filter"></ssvq-rem-grid>
+                </md-tab-body>
+            </md-tab>
+            <md-tab md-on-select="null"
+                    id="all">
+                <md-tab-label>
+                    <span>Todos</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <ssvq-rem-grid count="vm.allCount"
+                                   finished="[true, false]"
+                                   ng-if="vm.selectedTab == 2"
+                                   filter="vm.filter"></ssvq-rem-grid>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+        <md-fab-speed-dial md-open="vm.isOpen"
+                           md-direction="up"
+                           class="md-fab-bottom-right md-fling md-hover-full"
+                           ng-mouseenter="vm.isOpen=true;"
+                           ng-mouseleave="vm.isOpen=false;"
+                           ng-cloak>
+            <md-fab-trigger>
+                <md-button aria-label="menu"
+                           class="md-raised md-primary md-fab md-hue-1"
+                           ng-click="vm.newRem($event)">
+                    <md-icon md-font-icon="zmdi zmdi-edit"
+                             class="animated rotateIn float-icon-swipeable"
+                             ng-class="!vm.isOpen? 'rotateOut' : ''"></md-icon>
+                    <md-icon md-font-icon="zmdi zmdi-plus"
+                             class="animated rotateIn float-icon-swipeable"
+                             ng-class="vm.isOpen? 'rotateOut' : ''"></md-icon>
+                    <md-tooltip md-direction="left">
+                        Nuevo incidente
+                    </md-tooltip>
+                </md-button>
+            </md-fab-trigger>
+            <md-fab-actions>
+                <md-button aria-label="Nueva solicitud"
+                           class="md-fab md-raised md-mini md-warn"
+                           ng-click="vm.createRejectedRem($event)">
+                    <md-icon md-font-icon="zmdi zmdi-phone-missed"></md-icon>
+                    <md-tooltip md-direction="left">
+                        Nueva llamada rechazada
+                    </md-tooltip>
+                </md-button>
+                <md-button aria-label="Actualizar lista"
+                           class="md-fab md-raised md-mini"
+                           ng-click="vm.updateList()">
+                    <md-icon md-font-icon="zmdi zmdi-refresh"
+                             class="md-primary"></md-icon>
+                    <md-tooltip md-direction="left">
+                        Actualizar lista
+                    </md-tooltip>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+        <md-button class="md-fab md-mini md-accent md-fab-top-right"
+                   ng-click="vm.toggleFilter()"
+                   aria-label="Filtros">
+            <md-tooltip>Ver filtros</md-tooltip>
+            <md-icon md-font-icon="zmdi zmdi-filter-list"></md-icon>
+        </md-button>
+    </md-content>
+
+    <md-sidenav class="md-sidenav-right md-whiteframe-1dp"
+                md-component-id="rem-filter">
+        <ssvq-rem-list-filter selected-tab="vm.selectedTab"
+                              filter="vm.filter">
+        </ssvq-rem-list-filter>
+    </md-sidenav>
+</section>
+
+<div ng-if="vm.hasActiveWorkshift === false"
+     style="height: calc(100vh - 128px);"
+     layout="column"
+     layout-align="center center">
+    <ssvq-no-results message="No se ha encontrado un turno activo donde participes"></ssvq-no-results>
+</div>
+
+<!-- end ssvqRemListView -->

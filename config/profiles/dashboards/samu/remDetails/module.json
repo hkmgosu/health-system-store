@@ -1,0 +1,78 @@
+{
+    "name": "PRIVILEGES.SAMU.REM.DETAILS.NAME",
+    "description": "PRIVILEGES.SAMU.REM.DETAILS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.rem-details",
+            "url": "/samu/incidentes/:id",
+            "template": "<ssvq-rem-details-view></ssvq-rem-details-view>",
+            "data": {
+                "layout": {
+                    "sideMenuSize": "icon"
+                }
+            },
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "RemController.*",
+                "EmployeeController.getList",
+                "EmployeeController.getProfileById",
+                "VehicleController.getAll",
+                "RegionController.getAll",
+                "CommuneController.getAll",
+                "CommuneController.get",
+                "MedicineController.*",
+                "DiagnosticController.*",
+                "PatientController.getList",
+                "PatientController.getClinicalHistory",
+                "PatientController.getExternalPatient",
+                "RemAttentionController.getAllClasses",
+                "RemAttentionController.getAllItems",
+                "RemAttentionController.getRemPatientAttentions",
+                "RemTransferStatusController.get",
+                "RemTransferStatusController.getAll",
+                "VehicleController.getAutocomplete",
+                "EstablishmentController.get",
+                "VehicleStatusController.getAll",
+                "VehicleController.getRemLog",
+                "VehicleController.getRemVehicleRoute",
+                "RemPatientController.getVitalSignsEvolution",
+                "RemPatientController.getMedicineHistory",
+                "RemPatientController.get",
+                "PatientController.getClinicalHistory",
+                "RemPatientController.getHistoryItemDetails",
+                "AddressController.getAddressAutocomplete",
+                "AddressController.getAddressAutocompleteReverse"
+            ],
+            "create": [
+                "RemController.save",
+                "RemController.createMultiplePatients",
+                "RemController.saveRegulatorObservations",
+                "RemPatientController.create"
+            ],
+            "update": [
+                "RemController.save",
+                "RemController.saveRemVehicle",
+                "RemController.saveRemPatient",
+                "RemController.addComment",
+                "RemVehicleController.updateStatus",
+                "RemController.saveRemPatientIntervention",
+                "RemController.saveRemPatientBasicEvolution",
+                "RemController.saveRemPatientVitalSigns",
+                "RemController.saveRemPatientMedicines",
+                "RemVehicleController.finishByRem",
+                "PatientController.identifyPatient"
+            ],
+            "delete": [
+                "RemController.deleteRemPatientMedicines"
+            ]
+        }
+    }
+}

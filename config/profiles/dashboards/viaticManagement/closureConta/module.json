@@ -1,0 +1,24 @@
+{
+    "name": "PRIVILEGES.VIATICMANAGEMENT.CLOSURE_CONTABILIDAD.NAME",
+    "description": "PRIVILEGES.VIATICMANAGEMENT.CLOSURE_CONTABILIDAD.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.viatic-closure-conta",
+            "url": "/viaticos/cierres/contabilidad",
+            "template": "<ssvq-viatic-closure-view type='contabilidad'></ssvq-viatic-closure-view>"
+        },
+        "_controllers": {
+            "read": [
+                "ViaticClosureController.getList",
+                "ViaticController.getList"
+            ],
+            "create": [
+                "ViaticClosureController.create"
+            ]
+        }
+    }
+}

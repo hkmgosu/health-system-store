@@ -1,0 +1,70 @@
+<!-- HEADER -->
+<table class="footer-wrap">
+    <tr>
+        <td></td>
+        <td class="container">
+            <!-- content -->
+            <div class="content">
+                <table>
+                    <tr>
+                        <td align="center">
+                            <div class="custom-border">
+                                <div class="blue-border"></div>
+                                <div class="red-border"></div>
+                            </div>
+                            <p class="ssvq-color">Mi SSVQ</p>
+                            <div class="custom-border">
+                                <div class="blue-border"></div>
+                                <div class="red-border"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- /content -->
+        </td>
+    </tr>
+</table>
+<!-- /HEADER -->
+
+
+<!-- BODY -->
+<table class="body-wrap">
+    <tr>
+        <td></td>
+        <td class="container"
+            bgcolor="#FFFFFF">
+            <div class="content">
+                <table>
+                    <tr>
+                        <td>
+                            <p class="lead">
+                                Hola, <b><%= user.name %> <%= user.lastname %></b>
+                            </p>
+                            <p class="lead">
+                                <%- email.description %>
+                            </p>
+                            <!-- Callout Panel -->
+                            <div class="box-request">
+                                <p class="request-title">
+                                    <b><%- email.permission.type.name %></b>
+                                </p>
+                                <div class="divider"></div>
+                                <p><span class="respect-line-break"><%- email.permission.reason || '--' %></span></p>
+                            </div>
+                            <p class="callout">
+                                <%- email.body %>
+                            </p>
+                            <!-- /Callout Panel -->
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- /content -->
+
+        </td>
+        <td></td>
+    </tr>
+</table>
+<!-- /BODY -->

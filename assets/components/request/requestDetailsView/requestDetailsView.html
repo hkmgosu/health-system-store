@@ -1,0 +1,116 @@
+<div>
+    <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools"
+             layout="row">
+            <md-button class="md-icon-button"
+                       href="#/solicitudes">
+                <md-tooltip>Volver al listado</md-tooltip>
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            </md-button>
+            <div layout="column"
+                 flex>
+                <span class="md-subhead">Solicitud #{{vm.request.id}}</span>
+                <span class="md-caption"
+                      md-truncate>
+                    Ingresada
+                    <b>
+                        <ssvq-custom-time-ago time-at="::vm.request.createdAt"></ssvq-custom-time-ago>
+                    </b> por
+                    <ssvq-employee-profile-link id-employee="{{::vm.request.createdBy.id}}">
+                        {{::vm.request.createdBy.fullname}}
+                    </ssvq-employee-profile-link>
+                </span>
+            </div>
+            <md-input-container class="margin-0">
+                <md-select ng-model="vm.request.state"
+                           ng-model-options="{trackBy: '$value.id'}"
+                           class="md-subhead request-state md-no-underline"
+                           ng-change="vm.stateChanged()"
+                           aria-label="Estado de la solicitud">
+                    <md-option ng-value="state"
+                               ng-repeat="state in vm.states">{{ state.description }}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </md-toolbar>
+
+    <md-content class="overlay-5">
+        <div ng-hide="vm.permissionDenied"
+             layout-gt-sm="row"
+             layout-align="center start">
+            <div flex-gt-sm="70"
+                 flex="100">
+                <md-card style="min-height:107px;">
+                    <md-card-content>
+                        <!-- Información general de la solicitud -->
+                        <span class="md-title">{{vm.request.title || '...'}}</span>
+                        <md-divider class="margin-top-10 margin-bottom-10"></md-divider>
+                        <span class="md-subhead respect-line-break"
+                              ng-bind-html="vm.request.description | linky:'_blank'"></span>
+                        <md-divider ng-show="(vm.request.tagsCollection.length > 0 || vm.request.attachments.length > 0)"
+                                    class="margin-top-10 margin-bottom-10"></md-divider>
+                        <div layout="column"
+                             class="margin-top-10"
+                             ng-show="(vm.request.tagsCollection.length > 0)">
+                            <span class="md-body-1">Tags</span>
+                            <md-chips flex
+                                      class="no-underline">
+                                <md-chip class="md-caption"
+                                         ng-repeat="tag in vm.request.tagsCollection track by $index">
+                                    #{{tag}}
+                                </md-chip>
+                            </md-chips>
+                        </div>
+                        <div layout="column"
+                             class="margin-top-10"
+                             ng-if="(vm.request.attachments.length > 0)">
+                            <span class="md-body-1">Archivos adjuntos</span>
+                            <ssvq-upload-list-files mode="Viewer"
+                                                    files="vm.request.attachments"
+                                                    request-id="{{vm.request.id}}"
+                                                    class="tiny-files">
+                            </ssvq-upload-list-files>
+                        </div>
+                    </md-card-content>
+                </md-card>
+                <md-card ng-show="!vm.permissionDenied"
+                         class="no-padding-card">
+                    <md-card-content>
+                        <ssvq-comment-box on-create="vm.sendComment"></ssvq-comment-box>
+                        <md-divider></md-divider>
+                        <ssvq-request-timeline id-request="{{::vm.idRequest}}"></ssvq-request-timeline>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <!-- Sidebar -->
+            <md-card flex="100"
+                     flex-gt-sm="30"
+                     style="min-height: 526px;">
+                <md-card-content>
+                    <ssvq-request-detail-sidebar class="request-sidebar"
+                                                 user-types="vm.userTypes"
+                                                 request-id="vm.idRequest"
+                                                 unit-assigned="vm.request.unitAssigned"
+                                                 employee-assigned="vm.request.employeeAssigned"
+                                                 label="vm.request.label"
+                                                 due-date="vm.request.dueDate"
+                                                 stakeholders="vm.request.stakeholders">
+                    </ssvq-request-detail-sidebar>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div ng-show="vm.permissionDenied"
+             layout="row"
+             layout-align="center center">
+            <md-card flex="100"
+                     flex-gt-xs="80">
+                <md-card-content layout="column"
+                                 layout-align="center center">
+                    <span class="text-center">Lo sentimos, no tienes acceso a la solicitud.</span>
+                    <md-button class="md-primary"
+                               ng-click="vm.back()">Volver</md-button>
+                </md-card-content>
+            </md-card>
+        </div>
+    </md-content>
+</div>

@@ -1,0 +1,41 @@
+<md-subheader class="md-primary">
+    Indicador de Triage
+</md-subheader>
+<div class="md-padding"
+     ng-form="vm.saveForm"
+     novalidate>
+    <div layout="column"
+         flex>
+        <md-input-container class="md-block"
+                            flex>
+            <label>{{::('PATIENT.EVOLUTION.TRIAGE.NAME' | translate)}}</label>
+            <md-select ng-model="vm.basic.triage">
+                <md-option ng-repeat="item in ::vm.triages"
+                           value="{{::item.value}}">
+                    <md-icon md-font-icon="zmdi zmdi-circle"
+                             class="triage-{{item.name | translate}}"></md-icon>
+                    {{ ::item.name | translate }}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <md-input-container class="md-block"
+                            flex>
+            <label>{{ ::('PATIENT.EVOLUTION.TRIAGE.OBSERVATION' | translate) }}</label>
+            <textarea rows="2"
+                      name="triageObservation"
+                      ng-model="vm.basic.triageObservation">{{ ::('PATIENT.EVOLUTION.TRIAGE.OBSERVATION' | translate) }}</textarea>
+        </md-input-container>
+        <div flex
+             layout="row"
+             ng-show="vm.basic.id"
+             layout-align="end center">
+            <md-button class="md-primary md-raised"
+                       type="button"
+                       aria-label="{{ ::('PATIENT.EVOLUTION.TRIAGE.SAVE' | translate) }}"
+                       ng-click="vm.saveForm.$valid && vm.save(vm.basic)"
+                       ng-disabled="vm.saveForm.$invalid || vm.saveForm.$pristine">
+                Actualizar Triage
+            </md-button>
+        </div>
+    </div>
+</div>

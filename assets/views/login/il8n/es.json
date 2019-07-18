@@ -1,0 +1,168 @@
+{
+    "MENU": {
+        "AUTH": {
+            "AUTH": "Authentication",
+            "LOGIN": "Ingresar",
+            "SIGN_UP": "Registrar",
+            "FORGOT": "Recuperar Contraseña",
+            "LOCK": "Lock Page",
+            "PROFILE": "Profile"
+        }
+    },
+    "EMPLOYEE": {
+        "ERROR": {
+            "EMPTY": "Datos no válidos",
+            "NODATA": "Datos no válidos",
+            "DATABASE": "Datos no válidos",
+            "NOTPROFILE": "Solicita asignación de perfil",
+            "MAILORPASSINVALID": "Rut o contraseña inválida.",
+            "NOTFOUND": "Funcionario no encontrado",
+            "BLOCKEDLOGIN": "Tu cuenta ha sido bloqueda por múltiples intentos fallidos de ingreso."
+        }
+    },
+    "HEADER": {
+        "HEADING": "Triangular"
+    },
+    "LOGIN": {
+        "TITLE": "Ingresar a Mi SSVQ",
+        "RUT": {
+            "LABEL": "Rut",
+            "PLEASE_ENTER": "Ingresa tu rut",
+            "PLEASE_VALID": "Ingresa un rut válido"
+        },
+        "PASSWORD": {
+            "LABEL": "Contraseña",
+            "PLEASE_ENTER": "Ingresa tu contraseña"
+        },
+        "REMEMBER": "Recordar",
+        "FORGOT": "¿Olvidaste tu contraseña?",
+        "BUTTON": "Iniciar sesión",
+        "SIGNUP_LINK": "Regístrate",
+        "SOCIAL": {
+            "OR": "or login with"
+        },
+        "MESSAGES": {
+            "ACCESS_DENIED": "Username / Password Incorrect"
+        },
+        "EMPLOYEE": {
+            "ERROR": {
+                "EMPTY": "Datos no validos",
+                "NODATA": "Datos no validos",
+                "DATABASE": "Datos no validos",
+                "MAILORPASSINVALID": "Rut o contraseña invalida."
+            }
+        },
+        "LOADING": "Esperando respuesta..."
+    },
+    "SIGNUP": {
+        "TITLE": "Resgistro",
+        "NAME": {
+            "LABEL": "Nombre",
+            "PLEASE_ENTER": "Ingresa tu nombre"
+        },
+        "EMAIL": {
+            "LABEL": "Correo",
+            "PLEASE_ENTER": "Ingresa tu correo",
+            "PLEASE_VALID": "Ingresa un correo valido"
+        },
+        "PASSWORD": {
+            "LABEL": "Contraseña",
+            "PLEASE_ENTER": "Ingresa una contraseña",
+            "MIN_LENGTH": "Mínimo 8 caracteres",
+            "SAME_PASSWORD": "Ingresa la misma contraseña"
+        },
+        "PASSWORD_CONFIRM": {
+            "LABEL": "Confirmar Contraseña"
+        },
+        "BUTTON": "Registrar",
+        "HAVE_LOGIN": "¿ya tienes cuenta?. Ingresa aquí",
+        "MESSAGES": {
+            "CONFIRM_SENT": "Confirmation sent to",
+            "LOGIN_NOW": "Login",
+            "CONFIRM_SENT": "Confirmation sent to",
+            "NO_SIGNUP": "Could not sign user up"
+        },
+        "CREATE": {
+            "ERROR": "Error en el registro",
+            "EXIST": "Correo ya registrado",
+            "SUCCESS": "Bienvenido "
+        },
+        "CAPTCHA": {
+            "ERROR": "Error en el registro."
+        }
+    },
+    "LOCK": {
+        "TITLE": "Welcome back",
+        "LOGGED_OUT": "You have been logged out due to idleness. Enter your password to log back in.",
+        "PASSWORD": {
+            "LABEL": "password",
+            "PLEASE_ENTER": "Please enter your password."
+        },
+        "LOGIN": "Log in",
+        "LOGOUT": "Log out",
+        "MESSAGES": {
+            "ACCESS_DENIED": "Username / Password Incorrect"
+        }
+    },
+    "FORGOT": {
+        "TITLE": "¿Olvidaste tu contraseña?",
+        "ENTER_EMAIL": "Ingresa tu correo electrónico",
+        "EMAIL": {
+            "LABEL": "Correo electrónico",
+            "PLEASE_ENTER": "Campo obligatorio",
+            "PLEASE_VALID": "Correo electrónico inválido"
+        },
+        "RESET": "Restaurar",
+        "LOGIN": "¿La recuerdas? Inicia sesión",
+        "MESSAGES": {
+            "RESET_SENT": "Te hemos enviado un correo electrónico para realizar la restauración de contraseña",
+            "LOGIN_NOW": "Iniciar sesión",
+            "NO_RESET": "No se puede enviar el correo de restauración"
+        }
+    },
+    "PROFILE": {
+        "TITLE": "Profile",
+        "NAME": {
+            "LABEL": "name",
+            "PLEASE_ENTER": "Please enter your name"
+        },
+        "EMAIL": {
+            "LABEL": "email",
+            "PLEASE_ENTER": "Please enter your email address",
+            "PLEASE_VALID": "Please enter a valid email address"
+        },
+        "LOCATION": {
+            "LABEL": "location"
+        },
+        "WEBSITE": {
+            "LABEL": "website"
+        },
+        "BIO": {
+            "LABEL": "bio"
+        },
+        "TWITTER": {
+            "LABEL": "twitter"
+        },
+        "PASSWORD": {
+            "LABEL": "new password",
+            "CURRENT": "current",
+            "PLEASE_ENTER": "Please enter a password",
+            "MIN_LENGTH": "Your password must be greater than 8 characters long",
+            "SAME_PASSWORD": "You need to enter the same password"
+        },
+        "PASSWORD_CONFIRM": {
+            "LABEL": "confirm password"
+        },
+        "BUTTON": "Update Settings"
+    },
+    "RECOVERY": {
+        "TITLE": "Restauración de contraseña",
+        "PASSWORD": "Nueva contraseña",
+        "PASSWORD_CONFIRM": "Confirma la nueva contraseña",
+        "SUBMIT": "Restaurar",
+        "INVALID": "Enlace inválido",
+        "LOGIN": "Iniciar Sesión",
+        "SUCCESS": "Contraseña restaurada exitosamente, serás redireccionado al inicio de sesión",
+        "ERROR": "No se ha podido restaurar tu contraseña"
+    }
+}

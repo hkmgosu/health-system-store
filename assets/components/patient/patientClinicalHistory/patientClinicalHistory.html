@@ -1,0 +1,78 @@
+<div class="content-patient-history">
+    <div class="list-history"
+         ng-show="!vm.viewDetail"
+         ng-class="!vm.viewDetail ? 'animated slideInLeft' : ''">
+        <div ng-repeat="item in vm.clinicalHistory | orderBy: '-rem.createdAt'">
+            <div class="item-list-history"
+                 layout="column">
+                <div class="link-button-history"
+                     layout="row">
+                    <md-button class="md-icon-button"
+                               aria-label="Ir al REM"
+                               target="_blank"
+                               ng-href="#/samu/incidentes/{{ item.rem.id }}">
+                        <md-icon md-font-icon="zmdi zmdi-link"
+                                 class="date-icon">
+                            <md-tooltip md-direction="top">
+                                <span translate>Ir al REM</span>
+                            </md-tooltip>
+                        </md-icon>
+                    </md-button>
+                </div>
+                <div class="item-head-history"
+                     layout="column"
+                     ng-click="vm.loadData(item)"
+                     ng-class="item.showDetail ? 'active' : ''">
+                    <div layout="row"
+                         layout-align="space-between none">
+                        <md-icon md-font-icon="zmdi zmdi-calendar"
+                                 class="date-icon">
+                        </md-icon>
+                        <p class="md-body-1"
+                           flex
+                           md-truncate>
+                            <span>
+                                {{ item.rem.createdAt | date:"dd 'de' MMM yyyy" }}
+                            </span>
+                        </p>
+                    </div>
+                    <div layout="row">
+                        <md-icon md-font-icon="zmdi zmdi-label"
+                                 class="material-icons callReason-icon"></md-icon>
+                        <p class="md-body-1"
+                           flex
+                           md-truncate>
+                            <span>
+                                {{ item.rem.callReason.name }}{{ item.rem.subCallReason ? ' • ' + item.rem.subCallReason.name : '' }}
+                            </span>
+                        </p>
+                    </div>
+                    <div layout="row">
+                        <p md-truncate>
+                            {{ item.rem.description }} &nbsp;
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <md-divider></md-divider>
+        </div>
+    </div>
+    <p ng-if="vm.clinicalHistory.length === 0">Sin Historial</p>
+    <div ng-show="vm.viewDetail"
+         ng-class="vm.viewDetail ? 'animated slideInRight' : ''">
+        <div layout="row"
+             layout-align="start center">
+            <md-button class="md-icon-button"
+                       aria-label="Volver"
+                       ng-click="vm.goBack()">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            </md-button>
+            <h3>Detalle</h3>
+        </div>
+        <p ng-show="!vm.itemDetails"
+           class="text-center">Cargando historia...</p>
+        <ssvq-patient-clinical-history-item-details data="vm.itemDetails"
+                                                    class="animated fadeIn animation-stop"
+                                                    ng-show="vm.itemDetails"></ssvq-patient-clinical-history-item-details>
+    </div>
+</div>

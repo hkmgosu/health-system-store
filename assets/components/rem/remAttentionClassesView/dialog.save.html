@@ -1,0 +1,72 @@
+<md-dialog aria-label=""
+           flex="60">
+    <form name="saveForm"
+          ng-submit="saveForm.$valid && vm.save(vm.attentionClass)"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>
+                    {{ ::(((!vm.attentionClass.id) ? 'ATTENTIONCLASS.OTHERS.CREATETITLE' : 'ATTENTIONCLASS.OTHERS.EDITTITLE') | translate) }}
+                </h2>
+                <span flex></span>
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Cancelar">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-toolbar class="md-warn"
+                    ng-show="vm.msg !== ''">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">{{ vm.msg |translate }}</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-padding"
+                 layout-wrap
+                 layout="row">
+                <md-input-container class="md-block"
+                                    flex=100>
+                    <label>{{::('ATTENTIONCLASS.TABLE.NAME' | translate)}}</label>
+                    <input type="text"
+                           name="name"
+                           ng-model="vm.attentionClass.name" />
+                    <div ng-messages="saveForm.name.$error">
+                        <div ng-message="required">
+                            <span translate>ATTENTIONCLASS.TABLE.REQUIRED</span>
+                        </div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block"
+                                    flex=100>
+                    <label>{{::('ATTENTIONCLASS.TABLE.DESCRIPTION' | translate)}}</label>
+                    <textarea rows="1"
+                              ng-model="vm.attentionClass.description"></textarea>
+                </md-input-container>
+                <md-input-container class="md-block"
+                                    flex="100">
+                    <label>{{::('ATTENTIONCLASS.TABLE.TYPEATTENTION' | translate)}}</label>
+                    <md-select ng-model="vm.attentionClass.primary">
+                        <md-option value="true">{{::('ATTENTIONCLASS.TABLE.PRIMARY' | translate)}}</md-option>
+                        <md-option value="false">{{::('ATTENTIONCLASS.TABLE.SECONDARY' | translate)}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-accent"
+                       ng-click="vm.cancel()"
+                       aria-label="{{ 'CRUD.CANCEL' | translate }}"
+                       translate="CRUD.CANCEL">
+            </md-button>
+            <md-button class="md-primary"
+                       type="submit"
+                       aria-label="{{ 'CRUD.SAVE' | translate }}"
+                       ng-disabled="saveForm.$submitted && saveForm.$invalid"
+                       translate="CRUD.SAVE">
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,19 @@
+<ssvq-employee-autocomplete on-select="vm.addSupervisor"
+                            clear-on-select="true"></ssvq-employee-autocomplete>
+<div class="md-whiteframe-1dp overlay-10 padding-top-10 padding-bottom-10 md-margin">
+    <p class="text-center">
+        <md-icon md-font-icon="zmdi zmdi-info"></md-icon>
+        &nbsp; Utiliza el buscador para agregar supervisores de Unidad
+    </p>
+</div>
+<md-list class="unit-employee-list">
+    <md-list-item ng-repeat="item in vm.employees track by item.id">
+        <ssvq-employee-item-list employee="item"
+                                 fields="::vm.fields"
+                                 flex></ssvq-employee-item-list>
+        <md-button class="md-warn md-secondary md-raised"
+                   ng-click="vm.rmEmployee(item)">
+            Quitar
+        </md-button>
+    </md-list-item>
+</md-list>

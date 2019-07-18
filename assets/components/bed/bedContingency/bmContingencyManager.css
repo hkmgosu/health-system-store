@@ -1,0 +1,8 @@
+.contingency-manager-contianer {
+    height: calc(100vh - 128px);
+}
+@media (max-width: 599px){
+    .contingency-manager-contianer {
+        height: calc(100vh - 112px);
+    }
+}

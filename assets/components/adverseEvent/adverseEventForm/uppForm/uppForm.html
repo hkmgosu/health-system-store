@@ -1,0 +1,74 @@
+<md-toolbar>
+    <h4 class="padding-10">
+        {{::('ADVERSEEVENT.UPPFORM.TITLE' | translate)}}
+    </h4>
+</md-toolbar>
+<md-subheader class="md-primary">{{::('ADVERSEEVENT.UPPFORM.UPPSET' | translate)}}</md-subheader>
+<div class="md-dialog-content tab-dialog-content padding-top-0">
+    <div flex
+         layout="column">
+        <div flex>
+            <md-list layout="row"
+                     layout-wrap
+                     ng-if="vm.parametrics">
+                <md-list-item flex="100"
+                              flex-gt-sm="50"
+                              ng-repeat="upp in vm.data.causes | orderBy : uppNumber"
+                              ng-click="vm.showUppDialog($event, upp)"
+                              class="secondary-button-padding">
+                    <p>#{{ upp.uppNumber }} - LPP grado {{ vm.getGrade(upp.grade).name }}, localización: {{ vm.getLocalization(upp.localization).name }}</p>
+                    <div flex="20">
+                        <md-button ng-click="vm.rmCause(upp.uppNumber)"
+                                   class="md-raised md-warn md-secondary">
+                            Quitar
+                            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                        </md-button>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </div>
+        <div layout="column">
+            <md-button ng-click="vm.showUppDialog($event)"
+                       class="md-raised md-primary">
+                Agregar Lpp
+            </md-button>
+        </div>
+    </div>
+</div>
+<div ng-show="(vm.data || {}).causes && vm.data.causes.length > 0">
+    <md-subheader class="md-primary">{{::('ADVERSEEVENT.UPPFORM.EVENTFACTORS' | translate)}}</md-subheader>
+    <div class="md-dialog-content tab-dialog-content padding-top-0">
+        <md-input-container class="md-block"
+                            flex="100">
+            <label>{{::('ADVERSEEVENT.UPPFORM.DEPENDENCERISK' | translate)}}</label>
+            <md-select ng-model="vm.data.dependenceRisk" required>
+                <md-option ng-repeat="item in ::vm.parametrics.dependenceRisks"
+                           ng-value="{{::item.id}}">
+                    {{ ::item.name | translate }}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+    <md-subheader class="md-primary">{{::('ADVERSEEVENT.UPPFORM.RISKCATEGORIZATION' | translate)}}</md-subheader>
+    <div class="md-dialog-content tab-dialog-content padding-top-0">
+        <div flex
+             layout="column">
+            <ssvq-custom-option-selector model="vm.data.uppRisk"
+                                         ng-if="vm.parametrics.riskCategorizations"
+                                         label="{{::('ADVERSEEVENT.UPPFORM.RISKCATEGORIZATIONDESCRIBE' | translate)}}"
+                                         required-option="true"
+                                         parametrics="vm.parametrics.riskCategorizations"></ssvq-custom-option-selector>
+        </div>
+        <div flex
+             layout="column">
+            <ssvq-custom-checkbox-selector model="vm.data.preventiveMeasures"
+                                           label="{{::('ADVERSEEVENT.UPPFORM.PREVENTIVEMEASURE' | translate)}}"
+                                           ng-if="vm.parametrics.preventiveMeasures"
+                                           parametrics="vm.parametrics.preventiveMeasures"
+                                           other-option="true"
+                                           required-option="true"
+                                           autocomplete-function="vm.getMatches"
+                                           name-parametric="preventiveMeasure"></ssvq-custom-checkbox-selector>
+        </div>
+    </div>
+</div>

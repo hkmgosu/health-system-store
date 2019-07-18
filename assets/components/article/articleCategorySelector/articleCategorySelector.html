@@ -1,0 +1,21 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <md-button ng-if="vm.categorySelected"
+                   ng-click="vm.backCategory()"
+                   class="md-icon-button">
+            <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            <md-tooltip>Volver</md-tooltip>
+        </md-button>
+        <h4 ng-if="!vm.categorySelected">Categorías</h4>
+        <h4 ng-if="vm.categorySelected">{{vm.categorySelected.name}}</h4>
+    </div>
+</md-toolbar>
+<md-list>
+    <md-list-item ng-repeat="category in vm.categoryList"
+                  ng-click="vm.selectCategory(category)">
+        <span>{{category.name}}</span>
+    </md-list-item>
+</md-list>
+
+<p class="text-center md-caption"
+   ng-if="vm.categoryList.length == 0">Lista de categorías vacía</p>

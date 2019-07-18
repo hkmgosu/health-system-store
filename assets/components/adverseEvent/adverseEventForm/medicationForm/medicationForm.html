@@ -1,0 +1,60 @@
+<md-toolbar>
+    <h4 class="padding-10">
+        {{::('ADVERSEEVENT.MEDICATIONFORM.TITLE' | translate)}}
+    </h4>
+</md-toolbar>
+<md-subheader class="md-primary">{{::('ADVERSEEVENT.MEDICATIONFORM.EVENTDATA' | translate)}}</md-subheader>
+<div class="md-dialog-content tab-dialog-content padding-top-0">
+    <div flex
+         layout="column">
+        <div flex
+             layout="row">
+            <ssvq-medicine-service-autocomplete flex="100"
+                                        flex-gt-sm="50"
+                                        required-option="true"
+                                        medicine="vm.data.medicine"></ssvq-medicine-service-autocomplete>
+            <md-input-container class="md-block"
+                                flex
+                                flex-gt-sm="50">
+                <label>{{::('ADVERSEEVENT.MEDICATIONFORM.MEDICATIONVIA' | translate)}}</label>
+                <md-select ng-model="vm.data.via"
+                           ng-disabled="!vm.data.medicine"
+                           required
+                           ng-if="vm.parametrics.medicineVias">
+                    <md-option ng-repeat="item in ::vm.parametrics.medicineVias"
+                               ng-value="{{::item.id}}">
+                        {{ ::item.name | translate }}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div flex
+             layout="column"
+             ng-if="vm.parametrics.eventConsequences.length > 0">
+            <ssvq-custom-checkbox-selector model="vm.data.consequences"
+                                           label="{{::('ADVERSEEVENT.MEDICATIONFORM.TYPEINJURY' | translate)}}"
+                                           parametrics="vm.parametrics.eventConsequences"
+                                           other-option="true"
+                                           autocomplete-function="vm.getMatches"
+                                           required-option="true"
+                                           name-parametric="eventConsequence"></ssvq-custom-checkbox-selector>
+        </div>
+        <div flex
+             layout="column">
+            <ssvq-custom-option-selector model="vm.data.stageError"
+                                         label="{{::('ADVERSEEVENT.MEDICATIONFORM.STAGEERROR' | translate)}}"
+                                         required-option="true"
+                                         parametrics="vm.parametrics.stageErrors"></ssvq-custom-option-selector>
+        </div>
+        <div flex
+             layout="column">
+            <ssvq-custom-option-selector model="vm.data.typeError"
+                                         label="{{::('ADVERSEEVENT.MEDICATIONFORM.TYPEERROR' | translate)}}"
+                                         parametrics="vm.parametrics.medicationTypeErrors"
+                                         name-parametric="medicationTypeError"
+                                         autocomplete-function="vm.getMatches"
+                                         required-option="true"
+                                         other-option="true"></ssvq-custom-option-selector>
+        </div>
+    </div>
+</div>

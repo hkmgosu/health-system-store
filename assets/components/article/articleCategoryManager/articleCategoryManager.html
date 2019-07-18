@@ -1,0 +1,35 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button"
+                   ng-click="vm.selectCategory()"
+                   ng-disabled="!vm.mainCategory">
+            <md-icon md-font-icon="zmdi zmdi-home"></md-icon>
+            <md-tooltip>Ir al inicio</md-tooltip>
+        </md-button>
+        <div layout="row"
+             style="overflow-y:auto;"
+             flex>
+            <div ng-repeat="breadcrumbs in vm.breadcrumbs | orderBy:'hierarchy' track by $index"
+                 layout="row"
+                 layout-align="center center">
+                <span>/</span>
+                <md-button ng-disabled="vm.mainCategory.id === breadcrumbs.id"
+                           ng-click="vm.selectCategory(breadcrumbs)">
+                    {{breadcrumbs.name}}
+                    <md-tooltip>Ir a {{breadcrumbs.name}}</md-tooltip>
+                </md-button>
+            </div>
+        </div>
+        <md-button ng-click="vm.createCategory()">Nueva categoría</md-button>
+    </div>
+</md-toolbar>
+<md-content style="height: calc(100vh - 128px)">
+    <md-list>
+        <div ng-repeat="category in vm.categoryList">
+            <ssvq-article-category-manager-item category="category"
+                                                on-select="vm.selectCategory"></ssvq-article-category-manager-item>
+        </div>
+    </md-list>
+    <p class="text-center"
+       ng-if="vm.categoryList.length === 0">No hay categorías en esta ubicación</p>
+</md-content>

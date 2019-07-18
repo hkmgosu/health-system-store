@@ -1,0 +1,81 @@
+<md-list class="list-notifications">
+    <div ng-repeat="notification in vm.notificationList | orderBy: '-lastCreatedAt'"
+         ng-init="notification.groupHidden = true">
+        <md-list-item ng-click="vm.onNotificationClick(notification);"
+                      ng-class="notification.read ? 'readed' : 'unreaded'"
+                      class="md-3-line"
+                      aria-label="Ir a notificación">
+            <md-icon md-font-icon="{{vm.getIcon(notification.modelModule)}}"
+                     class="md-avatar-icon icon-notifications color-linker">
+                <div ng-if="notification.count > 1"
+                     class="bottom-linker-notifications color-linker"></div>
+            </md-icon>
+            <div class="md-list-item-text padding-top-10"
+                 layout="column">
+                <span flex
+                      class="md-body-1"
+                      ng-bind-html="notification.title"></span>
+                <div layout="row">
+                    <span flex></span>
+                    <span class="md-caption"
+                          am-time-ago="notification.lastCreatedAt"></span>
+                </div>
+            </div>
+            <md-icon aria-label="Marcar notificación como leída/no leída"
+                     ng-click="vm.toggleReaded(notification);"
+                     ng-class="!notification.read ? 'zmdi-circle' : 'zmdi-dot-circle'"
+                     class="md-secondary zmdi"
+                     style="font-size:10px;">
+                <md-tooltip md-direction="left">
+                    <span ng-show="!notification.read"
+                          translate>NOTIFICATION.MARK_AS_READ</span>
+                    <span ng-show="notification.read"
+                          translate>Marcar como no leída</span>
+                </md-tooltip>
+            </md-icon>
+            <md-divider ng-if="notification.count <= 1 && !$last"></md-divider>
+        </md-list-item>
+        <div ng-if="notification.count > 1"
+             ng-class="notification.read ? 'readed' : 'unreaded'">
+            <div layout="row">
+                <div ng-class="{'linker-dotted': notification.groupHidden, 'linker-solid': !notification.groupHidden}">
+                </div>
+                <a href=""
+                   ng-click="vm.getGroup(notification);">
+                    <span class="md-caption">
+                        {{notification.count - 1}}
+                        {{ (notification.count - 1) === 1 ? 'notificación' : 'notificaciónes'}} más
+                    </span>
+                </a>
+            </div>
+            <md-divider></md-divider>
+        </div>
+        <md-list class="padding-0"
+                 ng-show="!notification.groupHidden">
+            <md-list-item class="md-3-line"
+                          ng-click="vm.onNotificationClick(notification);"
+                          aria-label="Ir a notificación"
+                          ng-repeat="groupNotification in notification.groupedNotifications"
+                          ng-class="groupNotification.read ? 'readed' : 'unreaded'">
+                <div class="avatar-empty color-linker">
+                    <div class="top-linker-notifications color-linker"></div>
+                    <div class="bottom-linker-notifications color-linker"
+                         ng-if="!$last"></div>
+                </div>
+                <div class="md-list-item-text"
+                     layout="column"
+                     flex>
+                    <span flex
+                          class="md-body-1"
+                          ng-bind-html="groupNotification.title"></span>
+                    <div layout="row">
+                        <span flex></span>
+                        <span class="md-caption"
+                              am-time-ago="groupNotification.createdAt"></span>
+                    </div>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+    </div>
+</md-list>

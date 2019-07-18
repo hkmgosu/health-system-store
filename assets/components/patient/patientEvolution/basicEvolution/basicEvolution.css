@@ -1,0 +1,16 @@
+.title-disabled {
+    color: #7e7e7e;
+}
+
+.triage-Rojo{
+    color: rgba(227, 7, 19, 0.8);
+}
+.triage-Amarillo{
+    color: rgba(253, 214, 23, 0.8);
+}
+.triage-Verde{
+    color: rgba(20, 152, 69, 0.8);
+}
+.triage-Negro{
+    color: rgba(69, 69, 69, 0.8);
+}

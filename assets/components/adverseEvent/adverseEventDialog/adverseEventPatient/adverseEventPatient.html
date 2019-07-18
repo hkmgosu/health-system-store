@@ -1,0 +1,94 @@
+<ssvq-patient-form patient="vm.data.patient"
+                   opts="vm.opts"></ssvq-patient-form>
+<md-subheader class="md-primary animated fadeIn animation-stop"
+              ng-if="vm.data.patient.identificationType === 'newborn'">
+    {{::('ADVERSEEVENT.PATIENT.FAMILIARDATA' | translate)}}
+</md-subheader>
+<div class="md-dialog-content tab-dialog-content animated fadeIn animation-stop"
+     ng-if="vm.data.patient.identificationType === 'newborn'"
+     flex
+     layout-gt-sm="row">
+    <md-input-container class="md-block"
+                        flex="100"
+                        flex-gt-sm="50">
+        <label>{{::('ADVERSEEVENT.PATIENT.MOTHERNAME' | translate)}}</label>
+        <input type="text"
+               name="motherName"
+               ng-required="true"
+               ng-model="vm.data.patient.motherName" />
+        <div class="errors"
+             ng-messages="vm.patientForm.motherName.$error">
+            <div ng-message="required">
+                <span>{{::('PATIENT.VALIDATOR.REQUIRED' | translate)}}</span>
+            </div>
+        </div>
+    </md-input-container>
+    <md-input-container class="md-block"
+                        flex="100"
+                        flex-gt-sm="50">
+        <label>{{::('ADVERSEEVENT.PATIENT.MOTHERRUT' | translate)}}</label>
+        <input ng-rut
+               type="text"
+               name="motherRut"
+               ng-required="true"
+               ng-model="vm.data.patient.motherRut" />
+        <div class="errors"
+             ng-messages="vm.patientForm.motherRut.$error">
+            <div ng-message="rut">
+                <span>{{::('EMPLOYEE.VALIDATOR.RUT' | translate)}}</span>
+            </div>
+            <div ng-message="required">
+                <span>{{::('PATIENT.VALIDATOR.REQUIRED' | translate)}}</span>
+            </div>
+        </div>
+    </md-input-container>
+</div>
+<md-subheader class="md-primary">{{::('ADVERSEEVENT.PATIENT.HOSPITALDATA' | translate)}} </md-subheader>
+<div class="md-dialog-content tab-dialog-content">
+    <div flex
+         layout-gt-sm="row">
+        <md-input-container class="md-block"
+                            flex="100"
+                            flex-gt-sm="50">
+            <label>{{::('ADVERSEEVENT.PATIENT.ENTRYDATE' | translate)}}</label>
+            <input type="date"
+                   max="{{ ::vm.today }}"
+                   name="patientAdmissionAt"
+                   ng-required="vm.data.patient.identificationType === 'nn'"
+                   ng-model="vm.data.patientAdmissionAt" />
+            <div class="errors"
+                 ng-messages="vm.patientForm.patientAdmissionAt.$error">
+                <div ng-message="required">
+                    <span>{{::('PATIENT.VALIDATOR.REQUIRED' | translate)}}</span>
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block"
+                            flex="100"
+                            flex-gt-sm="50">
+            <label>{{::('ADVERSEEVENT.PATIENT.TYPEPATIENT' | translate)}}</label>
+            <md-select ng-model="vm.data.typePatient"
+                       name="typePatient"
+                       required>
+                <md-option ng-repeat="item in ::vm.typePatient"
+                           value="{{::item.value}}">
+                    {{ ::item.name | translate }}
+                </md-option>
+            </md-select>
+            <div class="errors"
+                 ng-messages="vm.patientForm.typePatient.$error">
+                <div ng-message="required">
+                    <span>{{::('PATIENT.VALIDATOR.REQUIRED' | translate)}}</span>
+                </div>
+            </div>
+        </md-input-container>
+    </div>
+    <md-input-container class="md-block"
+                        flex="100">
+        <label>{{ ::('ADVERSEEVENT.PATIENT.MEDICALDIAGNOSTIC' | translate) }}</label>
+        <textarea rows="3"
+                  name="patientDiagnostic"
+                  ng-model="vm.data.patientDiagnostic"
+                  md-maxlength="300">{{ ::('ADVERSEEVENT.PATIENT.MEDICALDIAGNOSTIC' | translate) }}</textarea>
+    </md-input-container>
+</div>

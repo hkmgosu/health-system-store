@@ -1,0 +1,90 @@
+<md-dialog aria-label="Detalles de cama"
+           id="establishment-selector-dialog"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <form name="vm.saveForm"
+          ng-submit="vm.saveForm.$valid && vm.save()"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                Detalles de cama
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-tabs md-dynamic-height
+                     class="md-primary md-hue-1">
+                <md-tab label="Paciente">
+                    <md-subheader>
+                        Datos básicos
+                    </md-subheader>
+                    <md-list>
+                        <md-list-item class="md-2-line">
+                            <div class="md-list-item-text">
+                                <h3>Nombre</h3>
+                                <p>Jaime Felipe Cisternas Mutis</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <div class="md-list-item-text">
+                                <h3>Rut</h3>
+                                <p>17.353.919-3</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <div class="md-list-item-text">
+                                <h3>Sexo</h3>
+                                <p>Masculino</p>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <div class="md-list-item-text">
+                                <h3>Fecha Nacimiento</h3>
+                                <p>20 oct. 1989</p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                    <md-subheader>Historial de categorización</md-subheader>
+                    <md-list>
+                        <md-list-item>
+                            <div class="md-list-item-text">
+                                <h3>C3</h3>
+                                <p>20 oct. 1989</p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-tab>
+                <md-tab label="Historial">
+                    <md-list>
+                        <md-list-item class="md-3-line">
+                            <div class="md-list-item-text">
+                                <h3>Jaime Cisternas</h3>
+                                <h4>28 años • Masculino</h4>
+                                <p>20 feb. 2018</p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-tab>
+                <md-tab label="Historial">
+                    <md-list>
+                        <md-list-item class="md-3-line">
+                            <div class="md-list-item-text">
+                                <h3>Jaime Cisternas</h3>
+                                <h4>28 años • Masculino</h4>
+                                <p>10 feb. - 14 feb.</p>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-primary"
+                       type="submit"
+                       aria-label="Volver">
+                Volver
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,37 @@
+{
+    "name": "PRIVILEGES.STORAGE_REQUEST.NAME",
+    "description": "PRIVILEGES.STORAGE_REQUEST.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-product-request-admin",
+            "url": "/bodega/solicitud-productos",
+            "template": "<ssvq-storage-product-request-admin></ssvq-storage-product-request-admin>"
+        },
+        "_controllers": {
+            "read": [
+                "UnitController.getAll",
+                "UnitController.getUnitsForStorageManagement",
+                "Storage/ProductRequestController.get",
+                "Storage/ProductRequestController.getAll",
+                "Storage/ProductRequestStatusController.getAll",
+                "Storage/UnitProductRequestController.getAll",
+                "Storage/CostCenterController.getAll",
+                "Storage/MovementTypeController.getAll",
+                "Storage/ProgramController.getAll",
+                "Storage/ProductController.getAll",
+                "Storage/ProductRequestController.getOriginUnits"
+            ],
+            "create": [
+                "Storage/ProductRequestController.create"
+            ],
+            "delete": [
+                "Storage/ProductRequestController.delete"
+            ]
+        }
+    }
+}

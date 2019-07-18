@@ -1,0 +1,24 @@
+{
+    "name": "PRIVILEGES.STORAGE_REPORT.MOST_REQUESTED_PRODUCTS.NAME",
+    "description": "PRIVILEGES.STORAGE_REPORT.MOST_REQUESTED_PRODUCTS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.report-most-requested-products",
+            "url": "/bodega/reporte-productos-mas-solicitados",
+            "template": "<ssvq-report-most-requested-products></ssvq-report-most-requested-products>"
+        },
+        "_controllers": {
+            "read": [
+
+                "Storage/StorageReportController.getProductMostRequested",
+                "Storage/ProductTypeController.getAll",
+                "Storage/ProductController.getAll",
+                "Storage/UnitProductsManagerController.getAll",
+                "Storage/UnitProductsManagerController.getAllowedUnits"
+            ]
+        }
+    }
+}

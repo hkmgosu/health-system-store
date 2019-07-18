@@ -1,0 +1,76 @@
+<!-- Modo Tabla -->
+<!-- BOTON VER FILTRO -->
+<md-button class="md-fab md-mini md-accent md-fab-top-right hide-gt-xs"
+           ng-click="vm.toggleFilter()">
+    <md-tooltip>Ver filtro</md-tooltip>
+    <md-icon md-font-icon="zmdi zmdi-filter-list"></md-icon>
+</md-button>
+
+<!-- Modo Tabla -->
+<md-table-container class="full-table-container">
+    <table md-table
+           ng-if="vm.movements && vm.movements.length > 0">
+        <thead md-head>
+            <tr md-row>
+                <th md-column></th>
+                <th md-column>{{ 'STORAGE_MOVEMENT.TABLE.MOVEMENT_TYPE' | translate}}</th>
+                <th md-column>Otros</th>
+                <th md-column></th>
+            </tr>
+        </thead>
+        <tbody md-body>
+            <tr md-row
+                ng-repeat="item in vm.movements track by $index">
+                <td md-cell>
+                    <md-icon md-font-icon="fa fa-arrow-up"
+                             style="color: green;"
+                             ng-if="!item.isOutput"></md-icon>
+                    <md-icon md-font-icon="fa fa-arrow-down"
+                             style="color: red;"
+                             ng-if="!!item.isOutput"></md-icon>
+                </td>
+                <td md-cell>
+                    <span class="force-line capitalize">{{item.movementType.description}}</span>
+                </td>
+                <td md-cell>
+                    <span class="force-line capitalize"
+                          ng-if="item.movementType.id == 1"
+                          md-highlight-text="searchText">ChileCompra: {{item.idChileCompra}}
+                    </span>
+                    <span class="force-line capitalize"
+                          ng-if="item.movementType.id == 2"
+                          md-highlight-text="searchText">Donado por: {{item.donatedBy}}
+                    </span>
+                    <span class="force-line capitalize"
+                          ng-if="item.movementType.id == 3"
+                          md-highlight-text="searchText">Entidad: {{item.company.name}}
+                    </span>
+                    <span class="force-line capitalize"
+                          ng-if="item.movementType.id == 4"
+                          md-highlight-text="searchText">Nro. Despacho: {{item.numShippingOrder}}
+                    </span>
+                    <span class="force-line capitalize"
+                          ng-if="item.movementType.id == 5"
+                          md-highlight-text="searchText">Factura: {{item.numInvoice}}
+                    </span>
+                </td>
+                <td md-cell>
+                    <md-button ng-href="#/bodega/movimientos/{{item.id}}">
+                        <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                    </md-button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ssvq-loading ng-show="!vm.movements"></ssvq-loading>
+    <ssvq-no-results ng-show="vm.movements.length == 0"></ssvq-no-results>
+</md-table-container>
+
+<md-table-pagination md-limit="vm.limit"
+                     md-page="vm.page"
+                     md-total="{{vm.found}}"
+                     md-on-paginate="vm.nextTable"
+                     md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}"
+                     md-page-select>
+</md-table-pagination>

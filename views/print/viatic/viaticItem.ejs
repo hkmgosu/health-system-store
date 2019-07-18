@@ -1,0 +1,34 @@
+<md-list-item class="md-3-line md-no-proxy _md">
+    <div class="md-list-item-text">
+        <h3><b>Fecha viático:</b>
+            <%= data[i].fromDate + ' al ' + data[i].toDate %> • <b>Monto: </b> $
+            <%= Number(data[i].totalAmount).toLocaleString('es-Es') %>
+        </h3>
+        <h4><b>Funcionario:</b>
+            <%= data[i].owner.fullname %> • <b>rut: </b>
+            <%= data[i].owner.rut %>
+        </h4>
+        <h4><b>Calidad juridica: </b>
+            <%= (data[i].legalQuality || {}).name || '--' %> • <b>Unidad servicio:</b>
+            <%= (data[i].unit || {}).name || '--' %>
+        </h4>
+    </div>
+    <% if(data[i].numResExenta) { %>
+    <div class="md-secondary-container layout-align-center-center layout-column">
+        <span class="md-caption">Nº Res. Exenta</span>
+        <span class="md-body-2">
+            <%= data[i].numResExenta %> / <%= data[i].dateResExenta %></span>
+    </div>
+    <% } %>
+    <% if(data[i].numFolio) { %>
+    <div class="flex"></div>
+    <div class="md-secondary-container layout-align-center-center layout-column">
+        <span class="md-caption">Nº Folio SIGFE</span>
+        <span class="md-body-2">
+            <%= data[i].numFolio %></span>
+    </div>
+    <% } %>
+    <% if (i < (data.length - 1) && !(i !== 0 && (i + 1) % perPage === 0)) { %>
+    <md-divider class="md-divider-print"></md-divider>
+    <% } %>
+</md-list-item>

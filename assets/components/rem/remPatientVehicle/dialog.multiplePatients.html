@@ -1,0 +1,66 @@
+<md-dialog flex="60"
+           flex-xs="100"
+           aria-label="Agregar múltiples pacientes">
+    <form name="vm.saveForm"
+          ng-submit="vm.save()">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>
+                    Agregar múltiples pacientes
+                </h2>
+                <span flex></span>
+                <md-button class="md-icon-button"
+                           ng-click="vm.close()"
+                           aria-label="Cancelar">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <p>Selecciona la cantidad de pacientes para agregar</p>
+                <div layout="row"
+                     layout-align="center center">
+                    <md-input-container>
+                        <input type="number"
+                               name="patientsToCreate"
+                               class="text-center"
+                               ng-min="1"
+                               ng-max="30"
+                               ng-model="vm.patientsToCreate"
+                               aria-label="Cantidad de pacientes"
+                               md-autofocus
+                               required>
+                        <div ng-messages="vm.saveForm.patientsToCreate.$error">
+                            <div ng-message="required">
+                                <span>Ingrese una cantidad</span>
+                            </div>
+                            <div ng-message="number">
+                                <span>Ingrese una cantidad válida</span>
+                            </div>
+                            <div ng-message="min">
+                                <span>Ingrese una cantidad superior a 0</span>
+                            </div>
+                            <div ng-message="max">
+                                <span>Ingrese una cantidad inferior a 30</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-accent"
+                       ng-click="vm.close()"
+                       aria-label="{{ 'CRUD.CANCEL' | translate }}">
+                Volver
+            </md-button>
+            <md-button type="submit"
+                       class="md-primary"
+                       aria-label="Agregar"
+                       ng-disabled="vm.saveForm.$invalid || vm.saveForm.$submitted">
+                Agregar pacientes
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

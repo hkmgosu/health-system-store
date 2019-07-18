@@ -1,0 +1,49 @@
+.botonera-rem span {
+    color: #666666 !important;
+}
+
+.triage md-icon.patient-icon{
+    background: rgba(223, 223, 223, 0.45) !important;
+}
+.triage.rojo md-icon.patient-icon{
+    color: rgba(227, 7, 19, 0.8);
+}
+.triage.amarillo md-icon.patient-icon{
+    color: rgba(253, 214, 23, 0.8);
+}
+.triage.verde md-icon.patient-icon{
+    color: rgba(20, 152, 69, 0.8);
+}
+.triage.negro md-icon.patient-icon{
+    color: rgba(69, 69, 69, 0.8);
+}
+.triage.withoutTriage md-icon.patient-icon{
+    background: white !important;
+    border: 1px solid #e1e1e1;
+    color: #d2d2d2;
+    padding: 7px;
+}
+
+.movil-icon{
+    color: #b2a249 !important;
+}
+ssvq-rem-vehicle-item .movil-icon{
+    background: rgba(223, 223, 223, 0.45) !important;
+    display: flex;
+    justify-content: center;
+}
+md-list.expandible {
+    max-height: 330px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.private-movil-badge {
+    background: #666666;
+    border-radius: 30%;
+    color: white !important;
+    padding: 4px;
+}
+
+.selected{
+    color: #0f69b4;
+}

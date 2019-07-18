@@ -1,0 +1,24 @@
+{
+    "name": "PRIVILEGES.VIATICMANAGEMENT.CLOSURE_PARTES.NAME",
+    "description": "PRIVILEGES.VIATICMANAGEMENT.CLOSURE_PARTES.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.viatic-closure-partes",
+            "url": "/viaticos/cierres/partes",
+            "template": "<ssvq-viatic-closure-view type='partes'></ssvq-viatic-closure-view>"
+        },
+        "_controllers": {
+            "read": [
+                "ViaticClosureController.getList",
+                "ViaticController.getList"
+            ],
+            "create": [
+                "ViaticClosureController.create"
+            ]
+        }
+    }
+}

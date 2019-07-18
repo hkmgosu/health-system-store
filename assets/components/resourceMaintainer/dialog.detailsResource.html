@@ -1,0 +1,65 @@
+<md-dialog aria-label='Título'
+           flex='80'
+           flex-sm='80'
+           flex-xs='100'
+           class='mobile-fullwidth-dialog'>
+    <md-toolbar>
+        <div class='md-toolbar-tools'>
+            <md-button class='md-icon-button'
+                       ng-click='vm.cancel()'>
+                <md-icon md-font-icon='zmdi zmdi-arrow-left'></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <span class='md-subhead'
+                  flex>Detalle recurso</span>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-tabs class="md-hue-1 md-primary"
+                 md-dynamic-height>
+            <md-tab label="Información del recurso">
+                <md-content layout="row">
+                    <div flex>
+                        <md-subheader class="md-primary md-hue-1">General</md-subheader>
+                        <md-card>
+                            <md-card-content>
+                                <ssvq-resource-data resource="vm.resource"
+                                                    on-confirm="vm.confirmData"></ssvq-resource-data>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                    <div flex>
+                        <md-subheader class="md-primary md-hue-1">Localización</md-subheader>
+                        <md-card>
+                            <md-card-content>
+                                <ssvq-resource-location-form resource="vm.resource"
+                                                             on-confirm="vm.confirmLocation">
+                                </ssvq-resource-location-form>
+                            </md-card-content>
+                        </md-card>
+                    </div>
+                </md-content>
+            </md-tab>
+            <md-tab label="Historial"
+                    ng-disabled="!vm.resource.id">
+                <md-list class="padding-0">
+                    <md-list-item ng-repeat="item in vm.employeeResourceList"
+                                  class="md-3-line">
+                        <div class="md-list-item-text">
+                            <h3>{{item.employee.fullname}}</h3>
+                            <h4>{{item.observations}}</h4>
+                            <p class="text-right">
+                                <span>{{item.startDate | date:"dd 'de' MMM yyyy"}}</span> -
+                                <span>{{(item.endDate | date:"dd 'de' MMM yyyy") || 'Actualidad'}}</span>
+                            </p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+                <p ng-show="vm.employeeResourceList.length == 0"
+                   class="text-center">
+                    El recurso no tiene historial de uso aún
+                </p>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+</md-dialog>

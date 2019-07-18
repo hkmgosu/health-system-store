@@ -1,0 +1,44 @@
+<md-dialog flex="60"
+           ng-cloak>
+    <form name="saveForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <div layout="column"
+                     layout-align="center first"
+                     flex>
+                    <span class="md-caption line-clamp">
+                        Supervisores &nbsp;
+                        <md-icon md-font-icon="zmdi zmdi-chevron-right"></md-icon>
+                    </span>
+                    <span class="md-body-2 line-clamp">
+                        {{ ::vm.unit.name }}
+                    </span>
+                </div>
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Cancelar">
+                    <md-tooltip>Volver</md-tooltip>
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-toolbar class="md-warn"
+                    ng-show="vm.msg !== ''">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">{{vm.msg|translate}}</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <ssvq-unit-supervisors unit="vm.unit"></ssvq-unit-supervisors>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button aria-label="Listo"
+                       class="md-primary"
+                       ng-click="vm.cancel()">
+                <span>Volver</span>
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

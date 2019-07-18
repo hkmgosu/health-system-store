@@ -1,0 +1,159 @@
+<md-dialog flex="60"
+           flex-xs="100"
+           aria-label="Confirmación cambio de estado">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()">
+                <md-tooltip>Volver</md-tooltip>
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            </md-button>
+            <div layout="column"
+                 flex>
+                <span class="md-subhead">Cambio de estado</span>
+                <span class="md-caption">Estado actual: {{vm.statusInitial.description}}</span>
+            </div>
+            <md-button aria-label="Cambiar estado del incidente"
+                       ng-disabled="vm.showList"
+                       ng-click="vm.confirm()">
+                Cambiar estado
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+
+        <md-subheader>
+            <span class="ssvq-subheader-badge">1</span>
+            <span>Selección de estado</span>
+        </md-subheader>
+        <md-list class="padding-0">
+            <!-- <md-divider></md-divider> -->
+            <md-list-item ng-repeat="status in vm.statusList | orderBy:'order'"
+                          class="status-item"
+                          ng-class="{
+                              'item-selected': (vm.statusSelected.id == status.id),
+                              'hidden-option': (!vm.showList && vm.statusSelected.id !== status.id),
+                              'initial-status': (vm.statusInitial.id === status.id)
+                            }"
+                          ng-disabled="vm.statusSelected.id == status.id"
+                          ng-click="vm.statusSelected = status; vm.showList = false">
+                <span ng-class="{'selected': (vm.statusSelected.id == status.id)}"
+                      class="md-subhead">
+                    {{status.description}}
+                </span>
+                <md-icon class="md-secondary zmdi"
+                         ng-class="vm.statusSelected.id === status.id ? 'md-primary zmdi-check-square' : 'md-accent zmdi-square-o'">
+                </md-icon>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+
+        <div layout="row">
+            <span flex></span>
+            <md-button ng-if="!vm.showList"
+                       class="md-accent"
+                       ng-click="vm.statusSelected = null; vm.showList = true">Modificar selección</md-button>
+        </div>
+
+        <md-subheader>
+            <span class="ssvq-subheader-badge">2</span>
+            <span>Acciones opcionales</span>
+        </md-subheader>
+
+        <ssvq-comment-box comment="vm.comment"
+                          opts="vm.commentOptions"
+                          class="padding-right-20"></ssvq-comment-box>
+
+        <div ng-show="vm.statusSelected.id == 3"
+             class="ng-hide">
+
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h4>Despachos</h4>
+                    <p class="md-caption margin-bottom-10">
+                        Ingresar un nuevo despacho al incidente
+                    </p>
+                </div>
+                <md-input-container class="md-secondary">
+                    <label>Tipo solicitado</label>
+                    <md-select ng-model="vm.requestedType"
+                               name="requestedType"
+                               placeholder="Tipo solicitado">
+                        <md-option></md-option>
+                        <md-option value="m1">Básico</md-option>
+                        <md-option value="m2">Avanzado</md-option>
+                        <md-option value="m3">Medicalizado</md-option>
+                        <md-option value="x5">Tripulación completa</md-option>
+                    </md-select>
+                </md-input-container>
+            </md-list-item>
+
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h4>Prioridad</h4>
+                    <p class="md-caption margin-bottom-10">
+                        Actualizar la prioridad del incidente
+                    </p>
+                </div>
+                <md-input-container md-no-float>
+                    <label>Prioridad</label>
+                    <md-select ng-model="vm.priority"
+                               ng-class="vm.priority"
+                               class="priority-selector">
+                        <md-option ng-repeat="item in ::vm.priorities"
+                                   class="priority-selector"
+                                   ng-class="item.name"
+                                   ng-value="item.value">
+                            {{ ::item.name | translate }}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </md-list-item>
+        </div>
+
+        <div ng-show="vm.statusSelected.finished">
+            <md-list-item class="md-2-line">
+                <div class="md-list-item-text">
+                    <h4>Motivo</h4>
+                    <p>Indicar motivo</p>
+                </div>
+                <md-input-container flex>
+                    <md-select ng-model="vm.reasonSelected">
+                        <md-option ng-value="null">-- Seleccionar --</md-option>
+                        <md-option ng-repeat="item in vm.reasons | filter: {status: vm.statusSelected.id}"
+                                   class="priority-selector"
+                                   ng-value="item.description">
+                            {{ item.description }}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </md-list-item>
+            <div ng-show="vm.statusSelected.id === 2 && vm.remVehicleCount > 0">
+                <md-list class="padding-0">
+                    <md-list-item class="md-2-line">
+                        <div class="md-list-item-text">
+                            <h4>Finalizar despachos</h4>
+                            <p>Despachos en curso quedarán finalizados y sus vehículos disponibles</p>
+                        </div>
+                        <md-checkbox class="md-secondary"
+                                     ng-model="vm.finishRemVehicles">
+                        </md-checkbox>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button aria-label="Cancelar"
+                   class="md-accent"
+                   ng-click="vm.cancel()">
+            Cancelar
+        </md-button>
+        <md-button aria-label="Cambiar estado del incidente"
+                   class="md-primary md-raised"
+                   ng-disabled="vm.showList"
+                   ng-click="vm.confirm()">
+            Cambiar estado
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

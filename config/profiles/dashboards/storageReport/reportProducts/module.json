@@ -1,0 +1,23 @@
+{
+    "name": "PRIVILEGES.STORAGE_REPORT.PRODUCTS.NAME",
+    "description": "PRIVILEGES.STORAGE_REPORT.PRODUCTS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.report-products",
+            "url": "/bodega/reporte-productos",
+            "template": "<ssvq-report-products></ssvq-report-products>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/StorageReportController.getProducts",
+                "Storage/ProductTypeController.getAll",
+                "Storage/ProductController.getAll",
+                "Storage/UnitProductsManagerController.getAll",
+                "Storage/UnitProductsManagerController.getAllowedUnits"
+            ]
+        }
+    }
+}

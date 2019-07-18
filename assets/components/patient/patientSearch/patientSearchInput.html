@@ -1,0 +1,25 @@
+<div flex
+     class="full-width">
+    <md-autocomplete md-delay='500'
+                     md-selected-item="selected"
+                     ng-attr-placeholder="{{vm.label}}"
+                     md-selected-item-change="myOnSelect(selected)"
+                     md-search-text="searchText"
+                     md-items="item in getMatches(searchText)"
+                     md-item-text="selected.fullname"
+                     md-select-on-match="false"
+                     md-min-length="minLength"
+                     md-menu-class="autocomplete-custom-template"
+                     id="search"
+                     flex>
+        <md-item-template>
+            <ssvq-patient-item-list patient="item"
+                                    fields="::fields"></ssvq-patient-item-list>
+        </md-item-template>
+        <md-not-found>
+            <div class="md-padding">
+                <span>{{'AUTOCOMPLETE.NOMATCHFOUND' | translate}}</span>
+            </div>
+        </md-not-found>
+    </md-autocomplete>
+</div>

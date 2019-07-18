@@ -1,0 +1,18 @@
+<md-content class="overlay-5 full-height"
+            ssvq-infinite-load
+            ng-if="vm.articleList"
+            layout="column"
+            next-page="vm.nextPage">
+    <div layout="column"
+         flex
+         class="animated slideInUp animation-stop"
+         ng-if="vm.articleList.length > 0">
+        <ssvq-article-item ng-repeat="article in vm.articleList"
+                           article="article"
+                           admin="::(vm.mode === 'manager')"></ssvq-article-item>
+    </div>
+    <ssvq-no-results ng-if="vm.articleList.length == 0"
+                     flex></ssvq-no-results>
+</md-content>
+<ssvq-loading ng-if="!vm.articleList"
+              flex></ssvq-loading>

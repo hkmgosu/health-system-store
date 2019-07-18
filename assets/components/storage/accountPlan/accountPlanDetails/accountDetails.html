@@ -1,0 +1,60 @@
+<md-toolbar class="md-hue-1" md-scroll-shrink md-shrink-speed-factor="0.25">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" href="#/bodega/cuenta-contable" aria-label="Cancelar">
+			<md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+			<md-tooltip>Volver al listado</md-tooltip>
+		</md-button>
+		<div flex layout="column" class="margin-left-10" md-truncate>
+			<span class="md-body-1">{{vm.accountPlan.description}}</span>
+			<span class="md-caption">{{vm.accountPlan.year}}: {{vm.accountPlan.code}}</span>
+		</div>
+	</div>
+</md-toolbar>
+
+<md-content layout="column" class="overlay-5">
+	<md-subheader class="md-primary md-hue-1 overlay-5">Datos generales</md-subheader>
+	<md-card>
+		<md-card-content>
+			<div ng-form="vm.updateForm">
+				<div flex layout-gt-sm="row">
+					<md-input-container class="md-block" flex>
+						<label for="year" translate>ACCOUNT_PLAN.TABLE.YEAR</label>
+						<input type="number" name="year" ng-model="vm.accountPlan.year" required/>
+						<div ng-messages="updateForm.year.$error">
+							<div ng-message="required">
+								<span translate>ACCOUNT_PLAN.VALIDATOR.REQUIRED</span>
+							</div>
+						</div>
+					</md-input-container>
+
+					<md-input-container class="md-block" flex>
+						<label for="code" translate>ACCOUNT_PLAN.TABLE.CODE</label>
+						<input type="text" name="code" ng-model="vm.accountPlan.code" required/>
+						<div ng-messages="updateForm.code.$error">
+							<div ng-message="required">
+								<span translate>ACCOUNT_PLAN.VALIDATOR.REQUIRED</span>
+							</div>
+						</div>
+					</md-input-container>
+				</div>
+
+				<div flex layout-gt-sm="row">
+					<md-input-container class="md-block" flex>
+						<label for="description" translate>ACCOUNT_PLAN.TABLE.DESCRIPTION</label>
+						<input type="text" name="description" ng-model="vm.accountPlan.description" required/>
+						<div ng-messages="updateForm.description.$error">
+							<div ng-message="required">
+								<span translate>ACCOUNT_PLAN.VALIDATOR.REQUIRED</span>
+							</div>
+						</div>
+					</md-input-container>
+				</div>
+
+				<div layout="row">
+					<span flex></span>
+					<md-button class="md-raised md-primary" ng-click="vm.update()" ng-disabled="vm.updateForm.$invalid">Actualizar datos</md-button>
+				</div>
+			</div>
+		</md-card-content>
+	</md-card>
+</md-content>

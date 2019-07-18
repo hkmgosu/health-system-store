@@ -1,0 +1,32 @@
+{
+    "name": "PRIVILEGES.COMPANY.NAME",
+    "description": "PRIVILEGES.COMPANY.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-company-admin",
+            "url": "/bodega/compania",
+            "template": "<ssvq-storage-company-admin></ssvq-storage-company-admin>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/CompanyController.get",
+                "Storage/CompanyController.getAll"
+            ],
+            "create": [
+                "Storage/CompanyController.create"
+            ],
+            "update": [
+                "Storage/CompanyController.update"
+            ],
+            "delete": [
+                "Storage/CompanyController.delete"
+            ]
+        }
+    }
+}

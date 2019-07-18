@@ -1,0 +1,41 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button"
+                   href="#/bodega/consumo-inmediato">
+            <md-tooltip>Volver al listado</md-tooltip>
+            <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+        </md-button>
+        <div layout="column"
+             flex>
+            <span class="md-subhead">Consumo Inmediato #{{ vm.expressIncome.id }}</span>
+            <span class="md-caption"
+                  md-truncate
+                  hide-xs>
+                Ingresada <strong am-time-ago="vm.expressIncome.createdAt"></strong> por
+                <strong ssvq-employee-profile-link
+                        id-employee="{{ vm.expressIncome.createdBy.id }}">
+                    {{ vm.expressIncome.createdBy.fullname || "--" }}
+                </strong>
+            </span>
+        </div>
+
+        <ssvq-storage-report-express-income-input express-income="vm.expressIncome"
+                                                  company="vm.cacheCompany"
+                                                  destiny-unit="vm.cacheDestinyUnit">
+        </ssvq-storage-report-express-income-input>
+        <ssvq-storage-report-express-income-output express-income="vm.expressIncome">
+        </ssvq-storage-report-express-income-output>
+
+        <md-input-container class="margin-0">
+            <md-select ng-model="vm.newStatus"
+                       class="md-subhead request-state md-no-underline"
+                       aria-label="Estado del consumo"
+                       ng-change="vm.onChangeStatus()">
+                <md-option value="1"
+                           ng-if="vm.expressIncome.status==1">En Preparación</md-option>
+                <md-option value="2"
+                           ng-show="vm.expressIncome.details.length">Confirmado</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+</md-toolbar>

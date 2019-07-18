@@ -1,0 +1,13 @@
+.company-list-container {
+    height: calc(100vh - 128px);
+}
+
+.highlight {
+    background-color: yellow;
+}
+
+@media (max-width: 599px) {
+    .company-list-container {
+        height: calc(100vh - 112px);
+    }
+}

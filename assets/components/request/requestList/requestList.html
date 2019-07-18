@@ -1,0 +1,13 @@
+<md-content class="full-height">
+    <md-content class="animated slideInUp animation-stop full-height"
+                ssvq-infinite-load
+                ng-if="vm.requests && vm.requests.length > 0"
+                next-page="vm.nextPage">
+        <ssvq-request-list-item flex
+                                ng-repeat="request in vm.requests"
+                                request="request">
+        </ssvq-request-list-item>
+    </md-content>
+    <ssvq-loading ng-show="!vm.requests"></ssvq-loading>
+    <ssvq-no-results ng-show="vm.requests.length === 0"></ssvq-no-results>
+</md-content>

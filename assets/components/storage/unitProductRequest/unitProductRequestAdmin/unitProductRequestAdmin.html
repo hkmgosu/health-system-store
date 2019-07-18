@@ -1,0 +1,62 @@
+<div class="md-padding">
+    <span class="md-title">Bodega donde Solicitar Productos</span>
+</div>
+
+<div layout="row">
+    <md-card flex="50">
+        <md-card-header>
+            <div flex>
+                Empleado
+                <md-button style="float: right;"
+                           ng-click="vm.clean()">Limpiar
+                </md-button>
+            </div>
+        </md-card-header>
+        <md-card-content>
+            <ssvq-employee-autocomplete clear-on-select="true"
+                                        on-select="vm.onSelectEmployee"
+                                        ng-show="!vm.employee">
+            </ssvq-employee-autocomplete>
+
+            <ssvq-employee-item-list ng-show="vm.employee"
+                                     employee="vm.employee"
+                                     fields="::vm.fields">
+            </ssvq-employee-item-list>
+
+            <md-input-container ng-show="vm.employee"
+                                class="md-block">
+                <label for="unit">Bodega</label>
+                <md-select ng-model="vm.unitSelected"
+                           name="unit"
+                           aria-label="Bodega"
+                           ng-change="vm.onSelectUnit()">
+                    <md-option ng-repeat="unit in vm.units track by $index"
+                               ng-value="unit.id">{{unit.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </md-card-content>
+    </md-card>
+    <md-card flex>
+        <md-card-header>Bodegas</md-card-header>
+        <md-card-content>
+            <md-list class="padding-0">
+                <md-list-item class="md-2-line"
+                              aria-label="{{item.unit.name}}"
+                              ng-repeat="item in vm.employeeUnits track by $index"
+                              layout="row">
+                    <div class="md-list-item-text"
+                         flex>
+                        <h4 md-truncate>
+                            {{item.unit.name}}
+                        </h4>
+                        <p>{{item.unit.description || '--'}}</p>
+                    </div>
+                    <md-button ng-click="vm.delete(item.id, $index)">
+                        <md-icon md-font-icon="fa fa-trash"></md-icon>
+                    </md-button>
+                </md-list-item>
+            </md-list>
+        </md-card-content>
+    </md-card>
+</div>

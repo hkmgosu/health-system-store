@@ -1,0 +1,96 @@
+<!-- adverseEventListItem -->
+<md-list-item ui-sref="triangular.mi-ssvq.adverse-event-details({id:vm.event.id,event:vm.event})"
+              target="{{ ::(vm.target ? '_blank' : '_self') }}"
+              aria-label="{{::vm.event.eventType.name}}"
+              class="md-3-line">
+    <md-letter-avatar class="event-avatar"
+                      length="3"
+                      color="{{ ::vm.getColor(vm.event.damageType.categoryDamage) }}"
+                      font-size="22px"
+                      shape="round"
+                      data="{{vm.event.damageType.categoryDamage}}"
+                      layout="row"
+                      layout-align="center center">
+    </md-letter-avatar>
+    <div class="md-list-item-text padding-left-10"
+         style="width: calc(100% - 130px);"
+         layout="column"
+         layout-gt-xs="row">
+        <div flex-gt-xs="50"
+             flex
+             class="padding-ea-item"
+             layout="column">
+            <h4>
+                {{::(vm.event.eventType.name || vm.event.damageType.name) }}
+            </h4>
+            <p md-truncate>
+                {{ ::vm.event.eventDescription ? vm.event.eventDescription : '--' }}
+            </p>
+            <p md-truncate
+               class="capitalize-text">
+                <md-icon md-font-icon="zmdi zmdi-city-alt"></md-icon>
+                <span>{{ ::vm.event.occurrenceService.name | lowercase }}</span>
+            </p>
+        </div>
+        <div flex
+             class="padding-ea-item"
+             layout="column">
+            <p md-truncate>
+                <md-icon md-font-icon="zmdi zmdi-account"></md-icon>
+                <span>{{ ::(vm.event.patient.fullname ? vm.event.patient.fullname : '--') }}</span>
+            </p>
+            <p md-truncate
+               ng-if="::(vm.event.formType === 'FormMedication')">
+                {{ vm.event.formData.medicine.name || '--' }}
+            </p>
+            <p md-truncate
+               ng-if="::(vm.event.formType === 'FormMedication')">
+                {{ vm.event.formData.typeError.name || '--' }}
+                <span style="padding: 0 6px;">•</span>
+                {{ vm.event.formData.stageError.name || '--' }}
+            </p>
+            <p md-truncate
+               ng-if="::(vm.event.formType === 'FormFall')">
+                <span ng-repeat="typeInjury in vm.event.formData.typesInjury">{{typeInjury.name}}{{ !$last ? ', ' : ''
+                    }}</span>
+            </p>
+            <p md-truncate
+               ng-if="::(vm.event.formType === 'FormFall')">
+                {{ vm.event.formData.placeFall.name }}
+            </p>
+            <p md-truncate
+               ng-if="::(vm.event.formType === 'FormUpp') && vm.event.formData.causes.length === 1">
+                {{ vm.event.formData.causes[0].localization.name || '--' }}
+                <span style="padding: 0 6px;">•</span>
+                Grado {{ vm.event.formData.causes[0].grade.name || '--' }}
+            </p>
+            <p md-truncate
+               ng-if="::(vm.event.formType === 'FormUpp') && vm.event.formData.causes.length === 1">
+                {{ vm.event.formData.causes[0].origin.name || '--' }}
+            </p>
+            <p md-truncate
+               ng-if="::(vm.event.formType === 'FormUpp') && vm.event.formData.causes.length > 1">
+                {{ vm.event.formData.causes.length }} LPPs ingresadas
+            </p>
+            <!-- <p ng-if="::(vm.event.formType === 'FormGeneral')">&nbsp;</p>
+            <p ng-if="::(vm.event.formType === 'FormGeneral')">&nbsp;</p> -->
+        </div>
+        <div flex
+             class="padding-ea-item"
+             layout="column">
+            <p md-truncate>
+                Ocurrencia:
+                <span>{{ vm.event.occurrenceAt ? vm.event.occurrenceAt : '--' | date : 'mediumDate' }}</span>
+            </p>
+            <p md-truncate>
+                Hora:
+                <span>{{ vm.event.occurrenceAt ? vm.event.occurrenceAt : '--' | date: 'shortTime' }}</span>
+            </p>
+            <p style="font-style: italic; text-align: right;">
+                <span>#{{::vm.event.id}}</span>
+            </p>
+        </div>
+    </div>
+    <md-divider class="margin-left-60"></md-divider>
+</md-list-item>
+<!-- /adverseEventListItem -->

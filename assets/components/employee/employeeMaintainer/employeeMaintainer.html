@@ -1,0 +1,158 @@
+<md-toolbar class="md-hue-1"
+            md-scroll-shrink>
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             hide-xs
+             flex>
+            <span class="md-subhead">Funcionarios</span>
+            <span class="md-caption">
+                <span ng-if="vm.viewMode == 'list'">Mostrando {{vm.employeeList.length}} de </span> {{vm.total}} resultados
+            </span>
+        </div>
+        <!-- Buscar -->
+        <ssvq-search-input search-text="searchText"
+                           label="Buscar funcionarios"
+                           flex
+                           flex-gt-xs="50"></ssvq-search-input>
+        <span flex
+              hide-xs></span>
+        <md-button class="md-icon-button"
+                   ng-show="vm.viewMode == 'list'"
+                   ng-click="vm.viewMode = 'table'">
+            <md-icon md-font-icon="fa fa-table"></md-icon>
+            <md-tooltip>Ver como tabla</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button"
+                   ng-show="vm.viewMode == 'table'"
+                   ng-click="vm.viewMode = 'list'">
+            <md-icon md-font-icon="fa fa-list"></md-icon>
+            <md-tooltip>Ver como lista</md-tooltip>
+        </md-button>
+        <md-divider class="vertical-divider"></md-divider>
+        <md-button required-privilege="['create','update']"
+                   class="md-icon-button"
+                   ng-click="showSaveDialog($event)">
+            <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+            <md-tooltip>Crear nuevo funcionario</md-tooltip>
+        </md-button>
+    </div>
+</md-toolbar>
+<md-content ng-if="vm.viewMode == 'table'">
+    <!-- Modo Tabla -->
+    <div>
+        <md-table-container class="full-table-container">
+            <table md-table
+                   ng-if="vm.employeeList && vm.employeeList.length > 0"
+                   class="animated fadeIn animation-stop">
+                <thead md-head>
+                    <tr md-row>
+                        <th></th>
+                        <th md-column>{{ 'EMPLOYEE.TABLE.RUT' | translate}}</th>
+                        <th md-column>{{ 'EMPLOYEE.TABLE.NAME' | translate}}</th>
+                        <th md-column>{{ 'EMPLOYEE.TABLE.EMAIL' | translate}}</th>
+                        <th md-column>{{ 'EMPLOYEE.TABLE.ANNEXE' | translate}}</th>
+                        <th md-column>{{ 'EMPLOYEE.TABLE.BIRTHDATE' | translate}}</th>
+                        <th md-column>{{ 'EMPLOYEE.TABLE.JOB' | translate}}</th>
+                        <th md-column>{{ 'EMPLOYEE.TABLE.UNIT' | translate}}</th>
+                        <th md-column>{{ 'EMPLOYEE.TABLE.ESTABLISHMENT' | translate}}</th>
+                        <th md-column>{{ 'EMPLOYEE.TABLE.LEGALQUALITY' | translate}}</th>
+                        <th md-column>{{ 'EMPLOYEE.TABLE.PLANT' | translate}}</th>
+                        <th md-column>{{ 'EMPLOYEE.TABLE.AFP' | translate}}</th>
+                        <th md-column>{{ 'EMPLOYEE.TABLE.HEALTHCARE' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row
+                        ng-click="vm.viewDetails(item)"
+                        ng-repeat="item in ::vm.employeeList track by $index">
+                        <td md-cell>
+                            <md-icon md-font-icon="zmdi zmdi-alert-triangle"
+                                     ng-show="!item.email"
+                                     class="md-warn">
+                                <md-tooltip md-direction="top">
+                                    <span>Funcionario sin correo electrónico</span>
+                                </md-tooltip>
+                            </md-icon>
+                            <md-icon md-font-icon="zmdi zmdi-lock"
+                                     ng-show="item.blockedLogin"
+                                     class="md-warn">
+                                <md-tooltip md-direction="top">
+                                    <span>Funcionario con cuenta bloqueada</span>
+                                </md-tooltip>
+                            </md-icon>
+                        </td>
+                        <td md-cell>
+                            <span class="force-line">{{item.rut | rut}}</span>
+                        </td>
+                        <td md-cell>
+                            <span class="force-line capitalize"
+                                  md-highlight-text="searchText">{{item.fullname}}</span>
+                        </td>
+                        <td md-cell
+                            class="lowercase">{{item.email}}</td>
+                        <td md-cell>{{item.annexe}}</td>
+                        <td md-cell>{{item.birthdate | date : 'dd/M/yyyy' : 'utc'}}</td>
+                        <td md-cell>
+                            <span class="capitalize"
+                                  md-truncate>{{item.job.name}}</span>
+                            <md-tooltip md-direction="top"
+                                        ng-show="item.job.name">
+                                <span>{{item.job.name}}</span>
+                            </md-tooltip>
+                        </td>
+                        <td md-cell>
+                            <span class="capitalize"
+                                  md-truncate>{{item.unit.name}}</span>
+                            <md-tooltip md-direction="top"
+                                        ng-show="item.unit.name">
+                                <span>{{item.unit.name}}</span>
+                            </md-tooltip>
+                        </td>
+                        <td md-cell>
+                            <span md-truncate>{{item.establishment.name}}</span>
+                        </td>
+                        <td md-cell>
+                            <span md-truncate>{{::vm.getLegalQuality(item.legalquality)}}</span>
+                        </td>
+                        <td md-cell>{{::vm.getPlant(item.plant)}}</td>
+                        <td md-cell
+                            md-truncate>{{::vm.getAfp(item.afp)}}</td>
+                        <td md-cell>
+                            <span md-truncate>{{::vm.getHealthcare(item.healthcare)}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <ssvq-loading ng-show="!vm.employeeList"></ssvq-loading>
+            <ssvq-no-results ng-show="vm.employeeList.length == 0"></ssvq-no-results>
+        </md-table-container>
+        <md-table-pagination md-limit="vm.paginate.limit"
+                             md-page="vm.paginate.page"
+                             md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}"
+                             md-total="{{vm.total}}"
+                             md-on-paginate="vm.onTablePaginate"
+                             md-page-select></md-table-pagination>
+    </div>
+</md-content>
+<!-- Modo Lista -->
+<md-content class="employee-list-container"
+            ng-if="vm.viewMode == 'list'"
+            ssvq-infinite-load
+            next-page="vm.nextPage">
+    <ssvq-loading ng-show="!vm.employeeList"></ssvq-loading>
+    <ssvq-no-results ng-show="vm.employeeList.length == 0"></ssvq-no-results>
+    <md-list class="animated slideInUp animation-stop padding-0"
+             ng-if="vm.employeeList">
+        <md-list-item ng-repeat="employee in vm.employeeList"
+                      aria-label="Item de funcionario"
+                      ng-click="null"
+                      ng-href="#/funcionarios/detalles/{{employee.id}}">
+            <ssvq-employee-item-list employee="employee"
+                                     flex
+                                     fields="::vm.fields"></ssvq-employee-item-list>
+            <ssvq-employee-actions employee="employee"
+                                   on-delete="vm.onDelete"></ssvq-employee-actions>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+</md-content>

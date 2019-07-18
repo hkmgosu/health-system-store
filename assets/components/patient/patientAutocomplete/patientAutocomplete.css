@@ -1,0 +1,21 @@
+ssvq-patient-autocomplete md-autocomplete {
+    background: none !important;
+}
+ssvq-patient-autocomplete .check-patient {
+    padding: 8px;
+    margin: 0 6px;
+}
+ssvq-patient-autocomplete .check-patient md-icon {
+    color: #109922;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+}
+ul.patient-data-import span {
+    color: #7e7e7e;
+}
+
+.loading-api-patient {
+    -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
+    animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
+}

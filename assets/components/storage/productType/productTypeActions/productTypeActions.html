@@ -1,0 +1,47 @@
+<div hide-xs
+     layout="row"
+     >
+     <md-button class="md-icon-button"
+                required-privilege="['update']"
+                ng-click="vm.editItem()">
+        <md-icon md-font-icon="fa fa-pencil">
+        <md-tooltip md-direction="top">
+            <span translate>Editar Tipo de Producto</span>
+        </md-tooltip>
+        </md-icon>
+    </md-button>
+    <md-button required-privilege="['delete']"
+               ng-click="vm.deleteItem()"
+               class="md-icon-button">
+        <md-icon md-font-icon="fa fa-trash"></md-icon>
+        <md-tooltip md-direction="top">
+                <span translate>Eliminar Tipo de Producto</span>
+        </md-tooltip>
+    </md-button>
+</div>
+<md-menu hide-gt-xs>
+    <md-button class="md-icon-button"
+               ng-click="$mdMenu.open()">
+        <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+    </md-button>
+    <md-menu-content width="4">
+        <md-menu-item>
+            <md-button class="md-icon-button"
+                        required-privilege="['update']"
+                        ng-click="vm.editItem()">
+                <md-icon md-font-icon="fa fa-pencil">
+                <md-tooltip md-direction="top">
+                    <span translate>Editar Tipo de Producto</span>
+                </md-tooltip>
+                </md-icon>
+            </md-button>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button required-privilege="['delete']"
+                       ng-click="vm.deleteItem()">
+                <md-icon md-font-icon="fa fa-trash"></md-icon>
+                <span translate>Eliminar Tipo de Producto</span>
+            </md-button>
+        </md-menu-item>
+    </md-menu-content>
+</md-menu>

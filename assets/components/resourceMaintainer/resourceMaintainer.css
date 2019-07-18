@@ -1,0 +1,12 @@
+.resource-list-container {
+    height: calc(100vh - 128px);
+}
+@media (max-width: 599px){
+    .resource-list-container {
+        height: calc(100vh - 112px);
+    }
+}
+
+ssvq-resource-maintainer .md-chips .md-chip-input-container {
+    width: 100%;
+}

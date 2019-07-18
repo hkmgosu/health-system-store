@@ -1,0 +1,74 @@
+<md-card ng-show="!vm.shippings.length">
+    <md-card-content class="text-center">Sin Envios</md-card-content>
+</md-card>
+
+<md-list class="md-dense">
+    <div ng-repeat="item in vm.shippings track by $index">
+        <md-list-item class="md-3-line"
+                      ng-click="received[$index] = !received[$index]">
+            <div layout="row"
+                 layout-align="center center">
+                <ssvq-employee-avatar employee="item.createdBy"
+                                      class="md-avatar"></ssvq-employee-avatar>
+            </div>
+            <div class="md-list-item-text"
+                 layout="column">
+                <h3 style="font-weight: bold;">Cantidad: {{item.quantitySend}} &nbsp; &nbsp;
+                    Lote: {{item.originProductStock.productLot.lot}} &nbsp; &nbsp;
+                    Vencimiento: {{item.originProductStock.productLot.expiration|date:'dd/MM/yyyy'}}
+                </h3>
+                <p style="color: #0f69b4; font-weight: bold;">Recibida: {{item.quantityReceived}}</p>
+                <p layout="row">
+                    <span flex>{{item.createdBy.name}} {{item.createdBy.lastname}} {{item.createdBy.mlastname}}</span>
+                    <span flex
+                          class="text-right">Fecha: {{item.date|date:'dd/MM/yyyy'}}</span>
+                </p>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-2-line"
+                      ng-show="received[$index]">
+            <div class="md-list-item-text">
+                <form name="forms['formReceived{{$index}}']">
+                    <div layout="row">
+                        <md-input-container flex
+                                            class="md-block">
+                            <label>Ingrese la cantidad recibida</label>
+                            <input type="number"
+                                   name="inputReceived"
+                                   ng-disabled="item.quantityReceived"
+                                   min="1"
+                                   required
+                                   ng-max="item.quantitySend"
+                                   ng-model="item.inputReceived">
+                            <div ng-messages="forms['formReceived'+$index].inputReceived.$error">
+                                <div ng-message="required">Cantidad Requerida</div>
+                                <div ng-message="min">Cantidad debe ser mayor a 0</div>
+                                <div ng-message="max">Cantidad no debe ser mayor a {{item.quantitySend}}</div>
+                            </div>
+                        </md-input-container>
+                        <md-button class="md-primary"
+                                   ng-show="!item.quantityReceived"
+                                   ng-disabled="forms['formReceived'+$index].$invalid || !vm.isCreator"
+                                   ng-click="vm.saveReceived($index)">
+                            Confirmar
+                        </md-button>
+                    </div>
+                    <div layout="row">
+                        <md-input-container flex
+                                            class="md-block"
+                                            ng-if="item.inputReceived > 0 && item.inputReceived < item.quantitySend">
+                            <label>Motivo de recibir menos</label>
+                            <textarea ng-model="item.comment"
+                                      rows="3"
+                                      required></textarea>
+                            <div ng-messages="forms['formReceived'+$index].comment.$error">
+                                <div ng-message="required">Se require comentario</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </form>
+            </div>
+        </md-list-item>
+    </div>
+    <md-divider></md-divider>
+</md-list>

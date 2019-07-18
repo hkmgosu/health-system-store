@@ -1,0 +1,29 @@
+{
+    "name": "PRIVILEGES.BED_MANAGER.DERIVATION_SETTINGS.NAME",
+    "description": "PRIVILEGES.BED_MANAGER.DERIVATION_SETTINGS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.bed-manager-derivation-settings",
+            "url": "/derivaciones/configuracion",
+            "template": "<ssvq-bm-derivation-settings></ssvq-bm-derivation-settings>",
+            "icon": "fa fa-cogs"
+        },
+        "_controllers": {
+            "read": [
+                "EmployeeController.getList",
+                "EstablishmentController.getBedManagementSupervisors",
+                "DerivationController.getUnitListAvailable"
+            ],
+            "update": [
+                "EstablishmentController.setBedManagementModuleAvailable",
+                "EstablishmentController.addBedManagementSupervisor",
+                "EstablishmentController.removeBedManagementSupervisor",
+                "DerivationController.setUnitDerivationModuleAvailable"
+            ]
+        }
+    }
+}

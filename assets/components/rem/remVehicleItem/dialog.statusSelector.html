@@ -1,0 +1,56 @@
+<md-dialog aria-label="Vehículo"
+           flex="60"
+           flex-xs="100">
+    <form name="saveForm"
+          ng-submit="saveForm.$valid && vm.confirm()"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                </md-button>
+                <h3 flex>Cambio de estado</h3>
+                <md-button type="submit"
+                           aria-label="{{ 'CRUD.SAVE' | translate }}"
+                           ng-disabled="!vm.newStatus">
+                    Cambiar estado
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-list>
+                <md-list-item ng-click="vm.selectStatus(status)"
+                              ng-disabled="vm.currentStatus.id === status.id"
+                              ng-repeat="status in vm.vehicleStatusList | orderBy:['type','order']">
+                    <md-icon class="md-primary"
+                             style="font-size:20px;"
+                             ng-class="{'zmdi zmdi-check-square': status.selected}"></md-icon>
+                    <span class="md-body-1"
+                          flex
+                          ng-class="{'selected md-body-2': status.selected}">
+                        {{status.name}}
+                    </span>
+                    <div>
+                        <p class="md-body-1">{{status.log.createdAt | date:"HH:mm"}}</p>
+                    </div>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-accent"
+                       ng-click="vm.cancel()"
+                       aria-label="{{ 'CRUD.CANCEL' | translate }}">
+                Volver
+            </md-button>
+            <md-button class="md-primary"
+                       type="submit"
+                       aria-label="{{ 'CRUD.SAVE' | translate }}"
+                       ng-disabled="!vm.newStatus">
+                Cambiar estado
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

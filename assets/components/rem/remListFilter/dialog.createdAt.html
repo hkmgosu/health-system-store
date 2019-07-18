@@ -1,0 +1,33 @@
+<md-dialog flex-gt-md="40"
+           flex="70"
+           flex-xs="90"
+           aria-label="Filtro por fecha de creación">
+    <md-dialog-content class="md-dialog-content">
+        <h2 class="md-title">Filtrar por fecha de creación</h2>
+        <div layout-gt-xs="row"
+             layout-align="space-around center"
+             class="md-padding">
+            <md-input-container>
+                <label>Desde</label>
+                <md-datepicker ng-model="vm.filter.minDate"
+                               md-max-date="vm.filter.maxDate"
+                               md-open-on-focus>
+                </md-datepicker>
+            </md-input-container>
+            <md-input-container>
+                <label>Hasta</label>
+                <md-datepicker ng-model="vm.filter.maxDate"
+                               md-min-date="vm.filter.minDate"
+                               md-max-date="::vm.today"
+                               md-open-on-focus>
+                </md-datepicker>
+            </md-input-container>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-accent"
+                   ng-click="vm.cancel()">Cancelar</md-button>
+        <md-button class="md-primary"
+                   ng-click="vm.applyFilter()">Aplicar filtro</md-button>
+    </md-dialog-actions>
+</md-dialog>

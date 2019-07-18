@@ -1,0 +1,47 @@
+{
+	"name": "PRIVILEGES.STORAGE_MOVEMENT.EDIT_NAME",
+	"description": "PRIVILEGES.STORAGE_MOVEMENT.EDIT_DESCRIPTION",
+	"config": {
+		"privileges": {
+			"read": false,
+			"update": false,
+			"delete": false
+		},
+		"menu": {
+			"state": "triangular.mi-ssvq.storage-movement-edit",
+			"url": "/bodega/movimientos/:id",
+			"template": "<ssvq-storage-movement-edit></ssvq-storage-movement-edit>",
+			"hidden": true
+		},
+		"_controllers": {
+			"read": [
+				"Storage/MovementController.get",
+				"Storage/MovementController.getAll",
+				"Storage/MovementController.getDetail",
+				"Storage/MovementController.getExternalUnits",
+				"Storage/MovementController.unsubscribe",
+				"Storage/LocationController.getAll",
+				"Storage/ProductRequestController.get",
+				"Storage/ProductRequestController.getAll",
+				"Storage/ProductController.getLots",
+				"Storage/ProductController.getStocks",
+				"Storage/ProductController.getPackTypes",
+				"Storage/ProductController.getPacks",
+				"Storage/CompanyController.getAll",
+				"Storage/UnitProductsManagerController.getAllowedUnits",
+				"Storage/UnitProductsManagerController.getProductUnits",
+				"Storage/ProgramController.getAll",
+				"Storage/ProductRequestController.getOriginUnits"
+			],
+			"update": [
+				"Storage/MovementController.update",
+				"Storage/MovementController.addDetail",
+				"Storage/MovementController.delDetail",
+				"Storage/MovementController.saveDetail"
+			],
+			"delete": [
+				"Storage/MovementController.delete"
+			]
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+    "name": "Protocolos",
+    "description": "Protocolos",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.publications-protocolos",
+            "url": "/publicaciones/protocolos",
+            "template": "<ssvq-publications category='2'></ssvq-publications>"
+        },
+        "_controllers": {
+            "read": [
+                "ArticleController.getList"
+            ]
+        }
+    }
+}

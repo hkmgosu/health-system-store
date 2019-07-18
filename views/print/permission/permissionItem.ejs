@@ -1,0 +1,21 @@
+<md-list-item class="md-3-line md-no-proxy _md">
+    <div class="md-list-item-text">
+        <h3><b>Fecha permiso:</b>
+            <%= data[i].fromDate + ' al ' + data[i].untilDate %>
+        </h3>
+        <h4><b>Empleado:</b>
+            <%= data[i].owner.fullname %> • <b>rut: </b>
+            <%= data[i].owner.rut %>
+        </h4>
+    </div>
+    <% if(data[i].correlativeNumber) { %>
+    <div class="md-secondary-container layout-align-center-center layout-column">
+        <span class="md-caption">Correlativo</span>
+        <span class="md-body-2">
+            <%= data[i].correlativeNumber %></span>
+    </div>
+    <% } %>
+    <% if (i < (data.length - 1) && !(i !== 0 && (i + 1) % perPage === 0)) { %>
+    <md-divider class="md-divider-print"></md-divider>
+    <% } %>
+</md-list-item>

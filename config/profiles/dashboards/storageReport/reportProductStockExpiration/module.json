@@ -1,0 +1,23 @@
+{
+    "name": "PRIVILEGES.STORAGE_REPORT.PRODUCT_STOCK_EXPIRATION.NAME",
+    "description": "PRIVILEGES.STORAGE_REPORT.PRODUCT_STOCK_EXPIRATION.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.report-product-stock-expiration",
+            "url": "/bodega/reporte-stock-productos-fecha-vencimiento",
+            "template": "<ssvq-report-product-stock-expiration></ssvq-report-product-stock-expiration>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/StorageReportController.getStockExpiration",
+                "Storage/ProductTypeController.getAll",
+                "Storage/ProductController.getAll",
+                "Storage/UnitProductsManagerController.getAll",
+                "Storage/UnitProductsManagerController.getAllowedUnits"
+            ]
+        }
+    }
+}

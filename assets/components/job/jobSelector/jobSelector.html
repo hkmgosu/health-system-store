@@ -1,0 +1,46 @@
+<md-subheader>
+    <div layout="row"
+         layout-align="center center">
+        <span flex>{{'EMPLOYEE.JOB.PRIMARY' | translate}} *</span>
+    </div>
+</md-subheader>
+<div layout="row"
+     layout-align="center center">
+    <md-icon md-font-icon="zmdi zmdi-label-heart"
+             class="md-padding"></md-icon>
+    <ssvq-job-autocomplete flex
+                      selected="primaryJob.job"
+                      required="true"></ssvq-job-autocomplete>
+</div>
+<md-subheader>
+    <div layout="row"
+         layout-align="center center">
+        <span flex
+              translate>EMPLOYEE.JOB.OTHERS</span>
+        <md-button class="md-primary"
+                   ng-click="addJob()"
+                   aria-label="Agregar cargo"
+                   ng-disabled="( othersJobs | filter: {'deleted': false} ).length  >= 2">
+            Nuevo
+        </md-button>
+    </div>
+</md-subheader>
+<div ng-repeat="job in othersJobs | filter: {'deleted': false}"
+     layout="row"
+     layout-align="center center">
+    <md-button class="md-primary md-icon-button"
+               ng-click="swapJob(job)"
+               aria-label="Intercambiar con cargo principal"
+               ng-disabled="!job.job">
+        <md-icon md-font-icon="zmdi zmdi-swap"></md-icon>
+    </md-button>
+    <ssvq-job-autocomplete flex
+                      selected="job.job"
+                      required="false"></ssvq-job-autocomplete>
+    <md-button class="md-primary md-icon-button"
+               ng-click="removeJob(job)"
+               aria-label="Eliminar cargo"
+               ng-disabled="( othersJobs | filter: {'deleted': false} ).length  <= 1">
+        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+    </md-button>
+</div>

@@ -1,0 +1,42 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             hide-xs
+             flex>
+            <span class="md-subhead">Perfiles</span>
+            <span class="md-caption">{{found}} resultados</span>
+        </div>
+        <!-- Buscar -->
+        <ssvq-search-input search-text="vm.searchText"
+                           label="Buscar perfiles"
+                           flex
+                           flex-gt-xs="50"></ssvq-search-input>
+        <span flex
+              hide-xs></span>
+    </div>
+</md-toolbar>
+<md-button required-privilege="['create','update']"
+           class="md-fab md-fab-top-right md-primary"
+           ng-click="vm.showCreateDialog()">
+    <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+    <md-tooltip md-direction="top">
+        <span translate>CRUD.CREATE</span>
+    </md-tooltip>
+</md-button>
+<md-content class="profile-list-container">
+    <md-list>
+        <md-list-item class="md-2-line"
+                      ng-repeat="profile in vm.profileList"
+                      ng-href="#/perfiles/detalles/{{profile.id}}">
+            <div class="md-list-item-text">
+                <h4>{{profile.name}}</h4>
+                <p>{{profile.employeeListCount || '0'}} funcionarios</p>
+            </div>
+            <ssvq-profile-actions on-delete="vm.onDelete"
+                                  id-profile="profile.id"></ssvq-profile-actions>
+        </md-list-item>
+    </md-list>
+
+    <ssvq-loading ng-show="!vm.profileList"></ssvq-loading>
+    <ssvq-no-results ng-show="vm.profileList.length == 0"></ssvq-no-results>
+</md-content>

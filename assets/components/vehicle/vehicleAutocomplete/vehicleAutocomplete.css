@@ -1,0 +1,21 @@
+.vehicle-autocomplete-item .vehicle-status{
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 8px;
+    font-size: 10px;
+    font-weight: 400;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+.vehicle-autocomplete-item .vehicle-status.ensalida{
+    border-color: #5165e8;
+    color: #424fa8;
+}
+.vehicle-autocomplete-item .vehicle-status.disponible{
+    border-color: #30ba40;
+    color: #1f8629;
+}
+.vehicle-autocomplete-item .vehicle-status.nodisponible{
+    border-color: #de1d10;
+    color: #b31e16;
+}

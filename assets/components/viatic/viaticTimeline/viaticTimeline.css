@@ -1,0 +1,14 @@
+ssvq-viatic-timeline i{
+    font-size: 11px !important;
+    background: gray;
+    color: white !important;
+    width: 20px;
+    border-radius: 50%;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex !important;
+    position: absolute;
+    bottom: -7px;
+    right: -5px;
+}

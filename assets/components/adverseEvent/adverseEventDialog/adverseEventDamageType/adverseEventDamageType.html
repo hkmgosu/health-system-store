@@ -1,0 +1,23 @@
+<md-subheader class="md-primary">{{::('ADVERSEEVENT.DAMAGETYPE.TITLE' | translate)}}</md-subheader>
+<div class="md-dialog-content tab-dialog-content adverse-list-item" ng-if="vm.completed">
+    <md-list>
+        <input type="hidden"
+               name="damageType"
+               required
+               ng-model="vm.data.damageType" />
+        <md-list-item ng-repeat="damageType in vm.damageTypes | filter : vm.customFilter | orderBy: 'id'"
+                      ng-click="vm.selectOption(damageType.id)">
+            <p ng-class="{active: vm.data.damageType === damageType.id}">
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon padding-right-0">
+                </md-icon>
+                {{::(damageType.name)}}
+            </p>
+            <md-icon md-font-icon="zmdi zmdi-check-circle"
+                     class="md-primary margin-left-10"
+                     ng-show="vm.data.damageType === {{::(damageType.id)}}"
+                     style="font-size: 30px;">
+            </md-icon>
+        </md-list-item>
+    </md-list>
+</div>

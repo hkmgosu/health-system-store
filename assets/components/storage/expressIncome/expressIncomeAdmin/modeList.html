@@ -1,0 +1,59 @@
+<!-- Modo Lista -->
+<md-content class="product-list-container"
+            ssvq-infinite-load
+            next-page="vm.nextPage"
+            md-promise="vm.promise">
+
+    <!-- BOTON VER FILTRO -->
+    <md-button class="md-fab md-mini md-accent md-fab-top-right hide-gt-xs"
+               ng-click="vm.toggleFilter()">
+        <md-tooltip>Ver filtro</md-tooltip>
+        <md-icon md-font-icon="zmdi zmdi-filter-list"></md-icon>
+    </md-button>
+
+    <ssvq-loading ng-show="!vm.expressIncomeses"></ssvq-loading>
+    <ssvq-no-results ng-show="vm.expressIncomeses.length == 0"></ssvq-no-results>
+
+    <md-list class="animated slideInDown animation-stop padding-0"
+             ng-if="vm.expressIncomeses">
+        <md-list-item ng-repeat="item in vm.expressIncomeses"
+                      ng-href="#/bodega/consumo-inmediato/{{item.id}}"
+                      class="md-2-line">
+
+            <md-icon md-font-icon="fa fa-arrow-up"
+                     class="md-avatar-icon text-center"
+                     style="background: green;"></md-icon>
+
+            <div class="md-list-item-text">
+                <h3 class="md-body-2"
+                    layout="row">
+                    <span md-highlight-text="vm.searchText"
+                          md-highlight-flags="gi"
+                          flex>
+                        {{item.destinyUnit.name}}: {{item.requestBy}}
+                    </span>
+                    <span ng-if="item.status!==2"
+                          flex
+                          class="text-right">(En Preparación)</span>
+                    <span ng-if="item.status==2"
+                          style="color: green;"
+                          flex
+                          class="text-right">(Confirmado)</span>
+                </h3>
+                <p class="md-caption">
+                    <span ng-if="item.company && item.company.name">{{item.company.name}}</span>
+                    <span ng-if="item.idChileCompra"
+                          md-highlight-text="vm.searchText"
+                          md-highlight-flags="gi">Chile Compra: {{item.idChileCompra}}</span>
+                    <span ng-if="item.numInvoice"
+                          md-highlight-text="vm.searchText"
+                          md-highlight-flags="gi">Factura: {{item.numInvoice}}</span>
+                    <span ng-if="item.numShippingOrder"
+                          md-highlight-text="vm.searchText"
+                          md-highlight-flags="gi">Envio ID#: {{item.numShippingOrder}}</span>
+                </p>
+            </div>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+</md-content>

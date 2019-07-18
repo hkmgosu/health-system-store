@@ -1,0 +1,64 @@
+<ssvq-comment-box on-create="vm.sendComment"></ssvq-comment-box>
+<md-divider></md-divider>
+
+<p ng-show="!vm.comments"
+   class="text-center">Cargando actividad reciente...</p>
+<p ng-show="vm.comments.length === 0"
+   class="text-center">No hay actividad reciente</p>
+<!-- Comentarios -->
+<div ng-repeat="item in vm.commentsView"
+     class="md-padding fade timeline-item">
+
+
+    <div ng-if="!item.type || item.type=='comment'">
+        <div style="width:44px; height:44px; float:left;">
+            <ssvq-employee-avatar employee="item.createdBy"></ssvq-employee-avatar>
+        </div>
+        <div layout="column"
+             class="padding-left-10">
+            <span class="md-body-1">
+                <b ssvq-employee-profile-link
+                   id-employee="{{item.createdBy.id}}">{{item.createdBy.fullname}}</b> comentó
+                <span am-time-ago="item.createdAt"></span>
+            </span>
+            <span class="md-body-1 respect-line-break"
+                  ng-bind-html="item.description | linky:'_blank'"></span>
+            <ssvq-upload-list-files mode="Viewer"
+                                    files="item.attachments"
+                                    request-id="{{item.request}}"
+                                    comment-id="{{item.id}}"
+                                    ng-if="item.attachments && item.attachments.length > 0"
+                                    flex
+                                    class="tiny-files">
+            </ssvq-upload-list-files>
+        </div>
+    </div>
+
+    <div layout="column"
+         flex
+         ng-if="item.type!=='comment'">
+        <div layout="row">
+            <md-icon md-font-icon="zmdi zmdi-label"
+                     class="margin-left-20 margin-right-10">
+            </md-icon>
+            <span class="md-body-1"
+                  flex>
+                <b ssvq-employee-profile-link
+                   id-employee="{{item.createdBy.id}}">{{item.createdBy.fullname}}</b><br>
+                <span ng-bind-html="vm.commentDictionary[item.type]"></span>
+                <b ng-if="item.description">{{item.description}}</b>
+                <span am-time-ago="item.createdAt"></span>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div layout="row"
+     layout-align="center center"
+     ng-show="vm.comments.length > 3 && !vm.showAll">
+    <md-button aria-label="Mostrar toda la actividad"
+               class="md-primary md-raised md-block"
+               ng-click="vm.setShowAll()">
+        Mostrar toda la actividad
+    </md-button>
+</div>

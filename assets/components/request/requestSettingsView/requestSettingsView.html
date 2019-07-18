@@ -1,0 +1,73 @@
+<div class="md-padding">
+    <span class="md-title">Configuraciones de solicitudes</span>
+</div>
+<div layout="row"
+     layout-align="center center">
+    <md-card flex="70"
+             flex-sm="80"
+             flex-xs="100">
+        <md-card-content class="padding-0">
+            <md-tabs class="md-primary md-hue-1"
+                     style="min-height:80vh;">
+                <md-tab label="Unidades públicas">
+                    <div class="md-padding padding-bottom-0">
+                        <ssvq-unit-autocomplete on-select="vm.addPublicUnit"
+                                                clear-on-select="true"></ssvq-unit-autocomplete>
+                    </div>
+                    <div class="md-whiteframe-1dp overlay-5 padding-top-10 padding-bottom-10 md-margin">
+                        <p class="text-center">
+                            <md-icon md-font-icon="zmdi zmdi-info"></md-icon>
+                            &nbsp; Utiliza el buscador para agregar una unidad
+                        </p>
+                    </div>
+                    <md-list>
+                        <md-list-item ng-repeat="unit in vm.publicUnits"
+                                      class="md-2-line"
+                                      ng-click="vm.showSupervisors(unit, $event)">
+                            <div class="md-list-item-text">
+                                <h4>{{unit.name}}</h4>
+                                <p>{{unit.supervisorsCount}} supervisores</p>
+                            </div>
+                            <md-button class="md-secondary md-warn md-raised"
+                                       ng-click="vm.rmPublicUnit(unit)">
+                                Quitar
+                                <md-tooltip>
+                                    Quitar de unidades públicas
+                                </md-tooltip>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-tab>
+                <md-tab label="Unidades privadas">
+                    <div class="md-padding padding-bottom-0">
+                        <ssvq-unit-autocomplete on-select="vm.addPrivateUnit"
+                                                clear-on-select="true"></ssvq-unit-autocomplete>
+                    </div>
+                    <div class="md-whiteframe-1dp overlay-5 padding-top-10 padding-bottom-10 md-margin">
+                        <p class="text-center">
+                            <md-icon md-font-icon="zmdi zmdi-info"></md-icon>
+                            &nbsp; Utiliza el buscador para agregar una unidad
+                        </p>
+                    </div>
+                    <md-list>
+                        <md-list-item ng-repeat="unit in vm.privateUnits"
+                                      class="md-2-line"
+                                      ng-click="vm.showSupervisors(unit, $event)">
+                            <div class="md-list-item-text">
+                                <h4>{{unit.name}}</h4>
+                                <p>{{unit.supervisorsCount}} supervisores</p>
+                            </div>
+                            <md-button class="md-secondary md-warn md-raised"
+                                       ng-click="vm.rmPrivateUnit(unit)">
+                                Quitar
+                                <md-tooltip>
+                                    Quitar de unidades privadas
+                                </md-tooltip>
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-tab>
+            </md-tabs>
+        </md-card-content>
+    </md-card>
+</div>

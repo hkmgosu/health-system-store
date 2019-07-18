@@ -1,0 +1,88 @@
+<div style="height: 100vh;">
+    <div id="details-container"
+         style="padding: 20px">
+        <div class="layout-row layout-align-space-between-center">
+            <h2>Resumen permiso</h2>
+            <h2 style="color: #0000008a">#
+                <%= data.id %>
+            </h2>
+        </div>
+        <md-divider class="md-divider-print"></md-divider>
+        <p style="margin-top: 10px; margin-bottom: 25px;">
+            Ingresado el
+            <%= data.createdDate %>
+        </p>
+        <h3>Datos del permiso</h3>
+        <md-divider class="md-divider-print"></md-divider>
+        <md-list class="layout-row layout-wrap">
+            <md-list-item class="md-2-line md-no-proxy _md flex-100">
+                <div class="md-list-item-text">
+                    <h3>
+                        <%= data.reason || '--' %>
+                    </h3>
+                    <p>Observación</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line md-no-proxy _md flex">
+                <div class="md-list-item-text">
+                    <h3>
+                        <%= data.type.name || '--' %>
+                    </h3>
+                    <p>Tipo de permiso</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line md-no-proxy _md flex">
+                <div class="md-list-item-text">
+                    <h3>
+                        <%= data.fromDate || '--' %>
+                    </h3>
+                    <p>Desde</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line md-no-proxy _md flex">
+                <div class="md-list-item-text">
+                    <h3>
+                        <%= data.untilDate || '--' %>
+                    </h3>
+                    <p>Hasta</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line md-no-proxy _md flex">
+                <div class="md-list-item-text">
+                    <h3>
+                        <%= data.duration || '--' %>
+                    </h3>
+                    <p>Duración</p>
+                </div>
+            </md-list-item>
+        </md-list>
+        <h3>Datos del solicitante</h3>
+        <md-divider class="md-divider-print"></md-divider>
+        <md-list class="layout-row layout-wrap">
+            <md-list-item class="md-2-line md-no-proxy _md flex-50">
+                <div class="md-list-item-text">
+                    <h3>
+                        <%= data.owner.fullname || '--' %>
+                    </h3>
+                    <p>Nombre</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line md-no-proxy _md flex-50">
+                <div class="md-list-item-text">
+                    <h3>
+                        <%= data.owner.rut || '--' %>
+                    </h3>
+                    <p>Rut</p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line md-no-proxy _md flex-50">
+                <div class="md-list-item-text">
+                    <h3>
+                        <%= data.unit.name || '--' %>
+                    </h3>
+                    <p>Unidad administrativa</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </div>
+</div>

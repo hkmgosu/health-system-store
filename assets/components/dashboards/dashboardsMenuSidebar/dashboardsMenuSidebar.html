@@ -1,0 +1,25 @@
+<md-toolbar md-theme="white"
+            class="app-toolbar">
+    <div class="custom-border full-width"
+         layout="row">
+        <div flex="40"
+             class="blue"></div>
+        <div flex="60"
+             class="red"></div>
+    </div>
+    <div class="md-toolbar-tools">
+        <md-icon md-font-icon="zmdi zmdi-cloud-outline-alt"
+                 class="padding-right-10"></md-icon>
+        <span class="md-title sidebar-left-title"
+              md-truncate
+              flex>Mi SSVQ</span>
+        <md-button class="md-icon-button sidebar-left-icon"
+                   ng-click="vm.toggleIconMenu()"
+                   aria-label="Abrir menú lateral">
+            <md-icon ng-class="{ 'zmdi zmdi-unfold-more' : vm.layout.sideMenuSize == 'icon', 'zmdi zmdi-unfold-less' : vm.layout.sideMenuSize == 'full' }"></md-icon>
+            <md-tooltip>Alternar panel lateral</md-tooltip>
+        </md-button>
+    </div>
+</md-toolbar>
+<tri-menu md-theme="white"
+          flex=""></tri-menu>

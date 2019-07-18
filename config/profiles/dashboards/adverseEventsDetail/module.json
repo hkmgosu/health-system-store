@@ -1,0 +1,30 @@
+{
+    "name": "PRIVILEGES.ADVERSEEVENTS.DETAILS.NAME",
+    "description": "PRIVILEGES.ADVERSEEVENTS.DETAILS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.adverse-event-details",
+            "url": "/eventos-adversos/detalles/:id",
+            "template": "<ssvq-adverse-event-details-view></ssvq-adverse-event-details-view>",
+            "params": {
+                "id": null,
+                "event": null
+            },
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "AdverseEventController.*",
+                "MedicineController.*"
+            ],
+            "update": [
+                "AdverseEventController.saveStatus",
+                "AdverseEventController.updateEvent"
+            ]
+        }
+    }
+}

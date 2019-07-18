@@ -1,0 +1,249 @@
+<form name="vm.saveForm"
+      novalidate>
+    <div>
+        <ssvq-timing-selector date="vm.tempVitalSigns.takenAt"></ssvq-timing-selector>
+        <div layout="row"
+             layout-wrap
+             layout-align="space-between none">
+            <md-input-container class="md-block flex-14-custom"
+                                flex-xs="50">
+                <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.TEMPERATURE' | translate)}}</label>
+                <input type="text"
+                       name="name"
+                       ng-model="vm.tempVitalSigns.temperature" />
+            </md-input-container>
+            <md-input-container class="md-block flex-14-custom"
+                                flex-xs="50">
+                <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.PAS' | translate)}}</label>
+                <input type="text"
+                       name="name"
+                       ng-model="vm.tempVitalSigns.pas" />
+            </md-input-container>
+            <md-input-container class="md-block flex-14-custom"
+                                flex-xs="50">
+                <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.PAD' | translate)}}</label>
+                <input type="text"
+                       name="name"
+                       ng-model="vm.tempVitalSigns.pad" />
+            </md-input-container>
+            <md-input-container class="md-block flex-14-custom"
+                                flex-xs="50">
+                <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.PULSE' | translate)}}</label>
+                <input type="text"
+                       name="name"
+                       ng-model="vm.tempVitalSigns.pulse" />
+            </md-input-container>
+            <md-input-container class="md-block flex-14-custom"
+                                flex-xs="50">
+                <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.BREATHINGFREQUENCY' | translate)}}</label>
+                <input type="text"
+                       name="name"
+                       ng-model="vm.tempVitalSigns.breathingFrequency" />
+            </md-input-container>
+            <md-input-container class="md-block flex-14-custom"
+                                flex-xs="50">
+                <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.O2' | translate)}}</label>
+                <input type="text"
+                       name="name"
+                       ng-model="vm.tempVitalSigns.o2" />
+            </md-input-container>
+            <md-input-container class="md-block flex-14-custom"
+                                flex-xs="50">
+                <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.FIO2' | translate)}}</label>
+                <input type="text"
+                       name="name"
+                       ng-model="vm.tempVitalSigns.fio2" />
+            </md-input-container>
+            <md-input-container class="md-block flex-14-custom"
+                                flex-xs="50">
+                <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.HGT' | translate)}}</label>
+                <input type="text"
+                       name="name"
+                       ng-model="vm.tempVitalSigns.hgt" />
+            </md-input-container>
+            <md-input-container class="md-block flex-14-custom"
+                                flex-xs="50">
+                <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.GLASGOW' | translate)}}</label>
+                <input type="text"
+                       name="name"
+                       ng-model="vm.tempVitalSigns.glasgow" />
+            </md-input-container>
+            <md-input-container class="md-block flex-14-custom"
+                                flex-xs="50">
+                <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.RTS' | translate)}}</label>
+                <input type="text"
+                       name="name"
+                       ng-model="vm.tempVitalSigns.rts" />
+            </md-input-container>
+            <md-input-container class="md-block flex-14-custom"
+                                flex-xs="50">
+                <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.CO2' | translate)}}</label>
+                <input type="text"
+                       name="name"
+                       ng-model="vm.tempVitalSigns.co2" />
+            </md-input-container>
+            <md-input-container class="md-block"
+                                flex>
+                <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.ECG' | translate)}}</label>
+                <md-select ng-model="vm.tempVitalSigns.ecg">
+                    <md-option ng-repeat="item in ::vm.ecg"
+                               value="{{::item.id}}">
+                        {{ ::item.name | translate }}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+    </div>
+    <div layout="row"
+         layout-align="end center"
+         class="margin-bottom-20">
+        <md-button class="md-primary md-raised"
+                   aria-label="{{ ::('PATIENT.EVOLUTION.VITALSIGNS.SAVE' | translate) }}"
+                   ng-click="vm.saveForm.$submitted = true; vm.saveForm.$valid && vm.save(vm.tempVitalSigns)"
+                   ng-disabled="(vm.saveForm.$submitted && vm.saveForm.$invalid) || vm.saveForm.$pristine">
+            {{::('PATIENT.EVOLUTION.VITALSIGNS.SAVE' | translate)}}
+        </md-button>
+    </div>
+</form>
+<div>
+    <md-subheader ng-if="vm.vitalSigns.length > 0"
+                  class="md-no-sticky">Signos Vitales agregados</md-subheader>
+    <div ng-repeat="item in vm.vitalSigns | orderBy: '-takenAt'"
+         class="animation-stop animated shake">
+        <div layout="row"
+             ng-click="item.show = !item.show"
+             class="list-intervention"
+             layout-align="space-between center">
+            <p>{{ item.takenAt | date : 'short' }} - Agregado por {{item.createdBy.fullname}}</p>
+            <md-button class="md-primary md-icon-button"
+                       aria-label="Desplegar sección">
+                <md-icon ng-show="item.show"
+                         md-font-icon="zmdi zmdi-chevron-up"></md-icon>
+                <md-icon ng-show="!item.show"
+                         md-font-icon="zmdi zmdi-chevron-down"></md-icon>
+            </md-button>
+        </div>
+        <div ng-class="item.show ? '' : 'hide-area'"
+             class="padding-10 animated fadeIn">
+            <div layout="row"
+                 layout-wrap
+                 layout-align="space-between none"
+                 class="margin-top-30">
+                <md-input-container class="md-block flex-14-custom margin-0"
+                                    flex-xs="50">
+                    <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.TEMPERATURE' | translate)}}</label>
+                    <input type="text"
+                           name="name"
+                           ng-init="item.temperature = item.temperature || '--'"
+                           ng-model="::item.temperature"
+                           disabled/>
+                </md-input-container>
+                <md-input-container class="md-block flex-14-custom margin-0"
+                                    flex-xs="50">
+                    <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.PAS' | translate)}}</label>
+                    <input type="text"
+                           name="name"
+                           ng-init="item.pas = item.pas || '--'"
+                           ng-model="::item.pas"
+                           disabled/>
+                </md-input-container>
+                <md-input-container class="md-block flex-14-custom margin-0"
+                                    flex-xs="50">
+                    <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.PAD' | translate)}}</label>
+                    <input type="text"
+                           name="name"
+                           ng-init="item.pad = item.pad || '--'"
+                           ng-model="::item.pad"
+                           disabled/>
+                </md-input-container>
+                <md-input-container class="md-block flex-14-custom margin-0"
+                                    flex-xs="50">
+                    <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.PULSE' | translate)}}</label>
+                    <input type="text"
+                           name="name"
+                           ng-init="item.pulse = item.pulse || '--'"
+                           ng-model="::item.pulse"
+                           disabled/>
+                </md-input-container>
+                <md-input-container class="md-block flex-14-custom margin-0"
+                                    flex-xs="50">
+                    <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.BREATHINGFREQUENCY' | translate)}}</label>
+                    <input type="text"
+                           name="name"
+                           ng-init="item.breathingFrequency = item.breathingFrequency || '--'"
+                           ng-model="::item.breathingFrequency"
+                           disabled/>
+                </md-input-container>
+                <md-input-container class="md-block flex-14-custom margin-0"
+                                    flex-xs="50">
+                    <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.O2' | translate)}}</label>
+                    <input type="text"
+                           name="name"
+                           ng-init="item.o2 = item.o2 || '--'"
+                           ng-model="::item.o2"
+                           disabled/>
+                </md-input-container>
+                <md-input-container class="md-block flex-14-custom margin-0"
+                                    flex-xs="50">
+                    <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.FIO2' | translate)}}</label>
+                    <input type="text"
+                           name="name"
+                           ng-init="item.fio2 = item.fio2 || '--'"
+                           ng-model="::item.fio2"
+                           disabled/>
+                </md-input-container>
+                <md-input-container class="md-block flex-14-custom margin-0"
+                                    flex-xs="50">
+                    <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.HGT' | translate)}}</label>
+                    <input type="text"
+                           name="name"
+                           ng-init="item.hgt = item.hgt || '--'"
+                           ng-model="::item.hgt"
+                           disabled/>
+                </md-input-container>
+                <md-input-container class="md-block flex-14-custom margin-0"
+                                    flex-xs="50">
+                    <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.GLASGOW' | translate)}}</label>
+                    <input type="text"
+                           name="name"
+                           ng-init="item.glasgow = item.glasgow || '--'"
+                           ng-model="::item.glasgow"
+                           disabled/>
+                </md-input-container>
+                <md-input-container class="md-block flex-14-custom margin-0"
+                                    flex-xs="50">
+                    <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.RTS' | translate)}}</label>
+                    <input type="text"
+                           name="name"
+                           ng-init="item.rts = item.rts || '--'"
+                           ng-model="::item.rts"
+                           disabled/>
+                </md-input-container>
+                <md-input-container class="md-block flex-14-custom margin-0"
+                                    flex-xs="50">
+                    <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.CO2' | translate)}}</label>
+                    <input type="text"
+                           name="name"
+                           ng-init="item.co2 = item.co2 || '--'"
+                           ng-model="::item.co2"
+                           disabled/>
+                </md-input-container>
+                <md-input-container class="md-block margin-0"
+                                    flex>
+                    <label>{{::('PATIENT.EVOLUTION.VITALSIGNS.ECG' | translate)}}</label>
+                    <md-select ng-init="item.ecg = item.ecg || '--'"
+                               ng-model="::item.ecg"
+                               disabled>
+                        <md-option value="--">
+                            --
+                        </md-option>
+                        <md-option ng-repeat="item in ::vm.ecg"
+                                   value="{{::item.id}}">
+                            {{ ::item.name | translate }}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+</div>

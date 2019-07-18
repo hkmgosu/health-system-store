@@ -1,0 +1,629 @@
+{
+    "PROFILE": {
+        "RUT": {
+            "LABEL": "Rut"
+        },
+        "NAME": {
+            "LABEL": "Nombre",
+            "ERROR": "ingrese un nombre"
+        },
+        "LASTNAME": {
+            "LABEL": "Apellido",
+            "ERROR": "Ingrese apellido"
+        },
+        "EMAIL": {
+            "LABEL": "Correo",
+            "ERROR": "Correo no válido"
+        },
+        "PHONE": {
+            "LABEL": "Teléfono"
+        },
+        "CELLPHONE": {
+            "LABEL": "Celular",
+            "ERROR": "ingrese un numero"
+        }
+    },
+    "AUTOCOMPLETE": {
+        "PLACEHOLDER": "Buscar funcionarios",
+        "CREATE": "Nuevo usuario"
+    },
+    "UNIT": {
+        "AUTOCOMPLETE": {
+            "PLACEHOLDER": "Unidad Administrativa",
+            "REQUIRED": "Ingrese una unidad"
+        }
+    },
+    "ESTABLISHMENT": {
+        "AUTOCOMPLETE": {
+            "PLACEHOLDER": "Establecimiento"
+        }
+    },
+    "JOB": {
+        "AUTOCOMPLETE": {
+            "PLACEHOLDER": "Cargo",
+            "REQUIRED": "Cargo obligatorio"
+        }
+    },
+    "UNITSEARCH": {
+        "AUTOCOMPLETE": {
+            "PLACEHOLDER": "Buscar unidad"
+        }
+    },
+    "RESOURCES": {
+        "ADD": "Agregar recurso",
+        "DELETE": "Eliminar recurso"
+    },
+    "ARCHIVE": {
+        "UPLOAD": "Subir archivos",
+        "REMOVE": "Quitar archivo",
+        "DOWNLOAD": "Bajar archivo"
+    },
+    "UNITASSIGNMENT": {
+        "TITLE": "Confirmar la derivación de unidad",
+        "COMMENT": "Puedes agregar un comentario",
+        "CONFIRM": "Derivar",
+        "CANCEL": "Cancelar"
+    },
+    "REQUEST": {
+        "SUCCESS": {
+            "UPDATE": {
+                "EMPLOYEE_ASSIGNED": "Solicitud asignada a funcionario exitosamente",
+                "UNIT_ASSIGNED": "Solicitud derivada a unidad exitosamente",
+                "LABEL": "Solicitud actualizada exitosamente",
+                "DUEDATE": "Solicitud actualizada exitosamente"
+            }
+        },
+        "ERROR": {
+            "UPDATE": "Error actualizando solicitud"
+        }
+    },
+    "EPD": {
+        "NAME": {
+            "LABEL": "Nombre",
+            "REQUIRED": "Ingresa tu nombre"
+        },
+        "LASTNAME": {
+            "LABEL": "Apellido paterno",
+            "REQUIRED": "Ingresa tu apellido paterno"
+        },
+        "MLASTNAME": {
+            "LABEL": "Apellido Materno"
+        },
+        "EMAIL": {
+            "LABEL": "Correo institucional",
+            "INVALID_EMAIL": "Correo inválido"
+        },
+        "PERSONAL_EMAIL": {
+            "LABEL": "Correo personal",
+            "INVALID_EMAIL": "Correo inválido"
+        },
+        "ANNEXE": {
+            "LABEL": "Anexo"
+        },
+        "PASSWORD": {
+            "LABEL": "Contraseña",
+            "REQUIRED": "Ingresa una contraseña",
+            "MINLENGTH": "Tu contraseña debe tener más de 8 caracteres",
+            "SAMEPASSWORD": "Las contraseñas no coinciden"
+        },
+        "PASSWORD_CONFIRM": {
+            "LABEL": "Confirmación de contraseña",
+            "REQUIRED": "Ingresa una contraseña",
+            "MINLENGTH": "Tu contraseña debe tener más de 8 caracteres",
+            "SAMEPASSWORD": "Las contraseñas no coinciden"
+        }
+    },
+    "VEHICLE": {
+        "TABLE": {
+            "NAME": "Nombre",
+            "STATE": "Estado",
+            "ESTABLISHMENT": "Establecimiento",
+            "REQUIRED": "Campo obligatorio"
+        },
+        "OTHERS": {
+            "TITLE": "Vehículos",
+            "SAVING": "Guardando Vehículo...",
+            "CREATETITLE": "Nuevo Vehículo",
+            "EDITTITLE": "Editar Vehículo",
+            "DELETING": "Eliminando Vehículo"
+        },
+        "DELETE": {
+            "TITLE": "Confirmación de eliminación",
+            "TEXTCONTENT": "¿Desea eliminar el vehículo seleccionado?",
+            "OK": "Confirmar",
+            "CANCEL": "Cancelar"
+        },
+        "ERROR": {
+            "UPDATE": "Error al actualizar vehículo",
+            "CREATE": "Error al crear vehículo",
+            "SAVE": "Error al guardar vehículo",
+            "DELETE": "Error al eliminar vehículo"
+        },
+        "SUCCESS": {
+            "UPDATE": "Vehículo actualizado con éxito",
+            "CREATE": "Vehículo creado con éxito",
+            "SAVE": "Vehículo guardado con éxito",
+            "DELETE": "Vehículo eliminado con éxito"
+        },
+        "TAB": {
+            "DATAVEHICLE": "Datos vehículo"
+        },
+        "FORM": {
+            "PUBLIC": "Público",
+            "PRIVATE": "Privado",
+            "TYPE": "Tipo",
+            "EXITKEY": "Clave de salida",
+            "KMDEPARTURE": "Kms salida",
+            "KMARRIVAL": "Kms llegada",
+            "VEHICLE": "Vehículo",
+            "TYPEOFTRANSFERS": "Tipo de traslado",
+            "DRIVER": "Conductor",
+            "DISPATCH": "Despacho",
+            "ARRIVALATPAC": "Llegada al PAC",
+            "ARRIVALATCA": "Llegada CA",
+            "DEPARTURE": "Salida",
+            "RETURN": "Retorno",
+            "AVAILABLE": "Disponible"
+        }
+    },
+    "PATIENT": {
+        "TABLE": {
+            "NAME": "Nombre",
+            "LASTNAME": "Apellido Paterno",
+            "MLASTNAME": "Apellido Materno",
+            "AGE": "Edad",
+            "YEAR": "Año",
+            "MONTH": "Mes",
+            "DAY": "Día",
+            "YEARS": "Años",
+            "MONTHS": "Meses",
+            "DAYS": "Días",
+            "BIRTHDATE": "Fecha de Nacimiento",
+            "GENDER": "Género",
+            "IDTYPE": "Tipo Identificación",
+            "IDNUMBER": "N° Identificación",
+            "ADDRESS": "Dirección",
+            "PHONE": "Teléfono",
+            "EXACTDATE": "Fecha de Nacimiento",
+            "ESTIMATEDATE": "Edad Estimada",
+            "DESCRIPTION": "Descripción",
+            "SAVE": "Guardar Datos Personales",
+            "OTHERS": "Otros"
+        },
+        "OTHERS": {
+            "TITLE": "Pacientes",
+            "SAVING": "Guardando Pacientes...",
+            "CREATETITLE": "Nuevo Paciente",
+            "EDITTITLE": "Editar Paciente",
+            "DELETING": "Eliminando Paciente"
+        },
+        "DELETE": {
+            "TITLE": "Confirmación de eliminación",
+            "TEXTCONTENT": "¿Desea eliminar el paciente seleccionado?",
+            "OK": "Confirmar",
+            "CANCEL": "Cancelar"
+        },
+        "ERROR": {
+            "UPDATE": "Error al actualizar paciente",
+            "CREATE": "Error al crear paciente",
+            "SAVE": "Error al guardar paciente",
+            "DELETE": "Error al eliminar paciente"
+        },
+        "SUCCESS": {
+            "UPDATE": "Paciente actualizado con éxito",
+            "CREATE": "Paciente creado con éxito",
+            "SAVE": "Paciente guardado con éxito",
+            "DELETE": "Paciente eliminado con éxito",
+            "EXISTS": "Paciente ya se encuentra registrado"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Campo obligatorio",
+            "DATE": "Fecha no valida",
+            "MAXDATE": "Fecha no valida",
+            "MINYEAR": "Valor invalido",
+            "MINMONTH": "Valor invalido",
+            "MAXMONTH": "Valor invalido",
+            "MINDAY": "Valor invalido",
+            "MAXDAY": "Valor invalido"
+        },
+        "TAB": {
+            "PERSONAL": "Datos Personales",
+            "REGULATOR": "Regulación",
+            "INTERVENTION": "Intervención",
+            "EVOLUTION": "Evolución",
+            "HISTORY": "Historial",
+            "INITIALS": "Datos Iniciales"
+        },
+        "FORM": {
+            "DOCTOR": "Médico",
+            "NURSE": "Enfermero",
+            "PARAMEDIC": "Paramédico",
+            "ATTENTION": "Prestaciones",
+            "ATTENTIONOBS": "Observación Prestaciones",
+            "DOCTORTIPS": "Consejería Médico",
+            "NURSETIPS": "Consejería Enfermero",
+            "WITHMOVE": "Con traslado",
+            "WITHOUTMOVE": "Sin traslado",
+            "MOVEOBS": "Observación traslado",
+            "STATUSONMOVE": "Estado paciente durate traslado",
+            "TYPEMOVE": "Tipo de traslado"
+        },
+        "REGULATOR": {
+            "BENEFITS": "Prestaciones",
+            "MEDICAL": "Médica",
+            "DIAGNOSTIC": "Diagnóstico",
+            "ADMINISTRATIVE": "Administrativa",
+            "OBSERVATIONS": "Observaciones",
+            "COORDINATION": "Coordinación",
+            "ADDOBS": "Agregar Observación",
+            "NEWOBSERVATION": "Nueva Observación",
+            "NURSEADVICE": "Consejo Enfermería",
+            "MEDICALADVICE": "Consejo Médico",
+            "SAVEOBSERVATIONS": "Observación ingresada con éxito",
+            "ERRORREMPATIENT": "Guarde al nuevo paciente antes de ingresar una observación"
+        },
+        "INTERVENTION": {
+            "DESCRIPTION": "Descripción",
+            "DIAGNOSTIC": "Diagnóstico",
+            "SAVE": "Guardar Intervención"
+        },
+        "EVOLUTION": {
+            "TITLE": "Datos Evolución",
+            "BASICINFORMATION": "Triage de Campo",
+            "PRIORITY": "Prioridad",
+            "SAVE": "Guardar datos evolución",
+            "OBSGROUND": "Observación en terreno",
+            "CRITICAL": "Intervención crítica",
+            "ADHOCCALL": "Motivo de llamada ad-hoc",
+            "TRIAGE": {
+                "NAME": "Triage",
+                "RED": "Rojo",
+                "GREEN": "Verde",
+                "YELLOW": "Amarillo",
+                "BLACK": "Negro",
+                "OBSERVATION": "Observación triage",
+                "SAVE": "Guardar datos de triage"
+            },
+            "VITALSIGNS": {
+                "NAME": "Signos Vitales",
+                "TEMPERATURE": "Temperatura",
+                "BREATHINGFREQUENCY": "Frecuencia Respiratoria",
+                "GLASGOW": "Glasgow",
+                "ECG": "ECG",
+                "PAD": "PAD",
+                "O2": "Saturación O2",
+                "RTS": "RTS",
+                "HGT": "HGT",
+                "PAS": "PAS",
+                "FIO2": "Fi O2",
+                "CO2": "CO2",
+                "PULSE": "Pulso",
+                "SAVE": "Agregar signos vitales"
+            },
+            "TRANSFER": {
+                "NAME": "Trasladado",
+                "PACIENTTRANSFER": "Paciente trasladado",
+                "TYPETRANSFER": "Tipo de traslado",
+                "OBSERVATION": "Observaciones traslado"
+            },
+            "MEDICINES": {
+                "NAME": "Fármacos",
+                "MEDICINE": "Fármaco",
+                "VIA": "Vía",
+                "REMOVEMEDICINE": "Quitar fármaco",
+                "QUANTITY": "Cantidad",
+                "DOSE": "Dosis",
+                "SAVE": "Agregar fármaco",
+                "ADDED": "Fármacos agregados"
+            },
+            "SUPPLIES": {
+                "NAME": "Prestaciones",
+                "SUPPLY": "Prestación",
+                "REMOVESUPPLY": "Quitar prestación",
+                "QUANTITY": "Cantidad"
+            },
+            "DIAGNOSTIC": {
+                "NAME": "Diagnóstico",
+                "OBSERVATION": "Observación",
+                "DIAGNOSTICCATEGORY": "Diagnóstico padre",
+                "DIAGNOSTICSUBCATEGORY": "Diagnóstico hijo"
+            },
+            "COUNSELING": {
+                "NAME": "Consejería",
+                "NURSINGADVICE": "Consejería enfermería",
+                "DOCTORADVICE": "Consejería médica"
+            }
+        },
+        "RELATIONSHIPS": {
+            "FATHER": "Padre",
+            "MOTHER": "Madre"
+        }
+    },
+    "GENDER": {
+        "MALE": "Masculino",
+        "FEMALE": "Femenino"
+    },
+    "IDTYPE": {
+        "NN": "NN",
+        "PASSPORT": "Pasaporte",
+        "RUT": "Rut",
+        "NEWBORN": "Recién nacido sin Rut",
+        "FOREIGNID": "Cédula extranjera"
+    },
+    "male": "Masculino",
+    "female": "Femenino",
+    "MODAL": {
+        "CONFIRMEXIT": {
+            "TITLE": "Confirmar Salida",
+            "TEXTCONTENT": "Está seguro que desea salir?",
+            "OK": "Salir",
+            "CANCEL": "Quedarme"
+        }
+    },
+    "ATTENTIONITEM": {
+        "OTHERS": {
+            "TITLE": "Atenciones",
+            "CREATETITLE": "Nueva Atención",
+            "EDITTITLE": "Editar Atención",
+            "DELETING": "Borrando Atención...",
+            "SAVING": "Guardando Atención..."
+        },
+        "TABLE": {
+            "NAME": "Nombre",
+            "DESCRIPTION": "Descripción",
+            "TYPEATTENTION": "Tipo de Atención",
+            "CLASSATTENTION": "Clase de Atención",
+            "PRIMARYTYPE": "Atención Primaria",
+            "SECONDARYTYPE": "Atención Secundaria",
+            "PRIMARY": "Primaria",
+            "SECONDARY": "Secundaria",
+            "OBSERVATION": "Observación"
+        },
+        "DELETE": {
+            "TITLE": "Eliminar Atención",
+            "TEXTCONTENT": "¿Desea eliminar Atención seleccionada?",
+            "OK": "Confirmar",
+            "CANCEL": "Cancelar"
+        },
+        "SUCCESS": {
+            "DELETE": "Atención eliminada con éxito",
+            "SAVE": "Atención guardada con éxito"
+        },
+        "ERROR": {
+            "UPDATE": "Error al guardar Atención",
+            "CREATE": "Error al crear Atención",
+            "DELETE": "Error al eliminar Atención"
+        }
+    },
+    "ATTENTIONCLASS": {
+        "OTHERS": {
+            "TITLE": "Clases de Atenciones",
+            "CREATETITLE": "Nueva Clase de Atención",
+            "EDITTITLE": "Editar Clase de Atención",
+            "DELETING": "Borrando Clase de Atención...",
+            "SAVING": "Guardando Clase de Atención..."
+        },
+        "TABLE": {
+            "NAME": "Nombre",
+            "DESCRIPTION": "Descripción",
+            "TYPEATTENTION": "Tipo de Atención",
+            "CLASSATTENTION": "Clase de Atención",
+            "PRIMARY": "Primaria",
+            "SECONDARY": "Secundaria"
+        },
+        "DELETE": {
+            "TITLE": "Eliminar clase de atención",
+            "TEXTCONTENT": "¿Desea eliminar la clase de atención seleccionada?",
+            "OK": "Confirmar",
+            "CANCEL": "Cancelar"
+        },
+        "SUCCESS": {
+            "DELETE": "Clase de Atención eliminada con éxito",
+            "SAVE": "Clase de Atención guardada con éxito"
+        },
+        "ERROR": {
+            "UPDATE": "Error al guardar Clase de Atención",
+            "CREATE": "Error al crear Clase de Atención",
+            "DELETE": "Error al eliminar Clase de Atención"
+        }
+    },
+    "TRANSFERSTATUS": {
+        "OTHERS": {
+            "TITLE": "Estados de Traslado",
+            "CREATETITLE": "Nuevo Estado de Traslado",
+            "EDITTITLE": "Editar Estado de Traslado",
+            "SAVING": "Guardando Estado de Traslado...",
+            "DELETING": "Borrando Estado de Traslado..."
+        },
+        "TABLE": {
+            "NAME": "Nombre",
+            "DESCRIPTION": "Descripción"
+        },
+        "DELETE": {
+            "TITLE": "Eliminar estado de traslado",
+            "TEXTCONTENT": "¿Desea eliminar el estado de traslado seleccionado?",
+            "CANCEL": "Cancelar",
+            "OK": "Confirmar"
+        },
+        "SUCCESS": {
+            "DELETE": "Estado de Traslado eliminado con éxito",
+            "SAVE": "Estado de Traslado guardado con éxito"
+        },
+        "ERROR": {
+            "UPDATE": "Error al guardar Estado de Traslado",
+            "CREATE": "Error al crear Estado de Traslado",
+            "DELETE": "Error al eliminar Estado de Traslado"
+        }
+    },
+    "TIMING": {
+        "TIME": "Hora",
+        "DATE": "Fecha",
+        "MARKNOW": "Marcar ahora",
+        "VALIDATOR": {
+            "DATE": "Fecha no valida"
+        }
+    },
+    "MEDICINE": {
+        "OTHERS": {
+            "TITLE": "Medicamentos",
+            "CREATETITLE": "Nuevo Medicamento",
+            "EDITTITLE": "Editar Medicamento",
+            "SAVING": "Guardando Medicamento...",
+            "DELETING": "Borrando Medicamento..."
+        },
+        "TABLE": {
+            "NAME": "Nombre",
+            "COD": "Código",
+            "PRESENTATION": "Presentación",
+            "CATEGORY": "Categoría",
+            "SUBCATEGORY": "Subcategoría",
+            "DRUGCATEGORY": "Categoría droga"
+        },
+        "DELETE": {
+            "TITLE": "Eliminar medicamento",
+            "TEXTCONTENT": "¿Desea eliminar el medicamento seleccionado?",
+            "CANCEL": "Cancelar",
+            "OK": "Confirmar"
+        },
+        "SUCCESS": {
+            "DELETE": "Medicamento eliminado con éxito",
+            "SAVE": "Medicamento guardado con éxito"
+        },
+        "ERROR": {
+            "UPDATE": "Error al guardar Medicamento",
+            "CREATE": "Error al crear Medicamento",
+            "DELETE": "Error al eliminar Medicamento"
+        }
+    },
+    "ADVERSEEVENT": {
+        "TAB": {
+            "INIT": "Inicio",
+            "PATIENT": "Datos paciente",
+            "DATAOCCURRENCE": "Datos ocurrencia",
+            "DAMAGETYPE": "Tipo de daño",
+            "EVENTTYPE": "Tipo de evento",
+            "FORM": "Detalles",
+            "FINAL": "Generalidades"
+        },
+        "PATIENT": {
+            "GENERALDATA": "Datos generales del paciente",
+            "HOSPITALDATA": "Datos hospitalarios del paciente",
+            "ENTRYDATE": "Fecha de ingreso al hospital",
+            "TYPEPATIENT": "Tipo de paciente",
+            "MEDICALDIAGNOSTIC": "Diagnóstico médico",
+            "FAMILIARDATA": "Datos de la madre del recién nacido",
+            "MOTHERRUT": "Rut de la madre",
+            "MOTHERNAME": "Nombre y apellido de la madre"
+        },
+        "TYPEPATIENT": {
+            "AMBULATORY": "Ambulatorio",
+            "HOSPITALIZED": "Hospitalizado",
+            "HOMEHOSPITALIZATION": "Hospitalización domiciliaria"
+        },
+        "DATAOCCURRENCE": {
+            "TITLE": "Datos generales de la ocurrencia del evento",
+            "TIMEDATA": "Datos horarios de la ocurrencia del evento",
+            "OCCURRENCESERVICE": "Servicio de ocurrencia",
+            "REPORTSERVICE": "Servicio que reporta",
+            "DATEOCCURRENCE": "Fecha de la ocurrencia",
+            "TIMEOCCURRENCE": "Hora de la ocurrencia"
+        },
+        "DAMAGETYPE": {
+            "TITLE": "Indique el tipo de daño del evento"
+        },
+        "EVENTTYPE": {
+            "TITLE": "Indique el tipo de evento"
+        },
+        "FALLFORM": {
+            "TITLE": "Formulario de Caída",
+            "FALLDATA": "Datos de la caída",
+            "WHERE": "¿Donde se cayó?",
+            "FROM": "¿Desde donde se cayó?",
+            "ACTIVITYFALL": "¿Que realizaba al momento de la caída?",
+            "FALLCONSEQUENCES": "Consecuencias del evento",
+            "TYPEINJURY": "Tipo de lesión",
+            "LOCALIZATION": "Localización de la lesión",
+            "EVENTFACTORS": "Factores constribuyentes del evento",
+            "PREVENTIVEMEASURE": "Medidas de prevención existentes previas",
+            "PREVENTIVEMEASUREATMOMENT": "Medidas de prevención en uso al momento de la caída",
+            "RISKFALL": "Evaluación de riesgo al momento de la caída",
+            "PREVIOUSFALL": "Historia de caídas previas",
+            "CONSCIOUSNESSSTATE": "Estado de conciencia",
+            "TYPEMEDICATION": "Uso de medicamentos",
+            "SENSORYDEFICIT": "Alteraciones o deficit sensorial",
+            "PATIENTMOVILITY": "Movilidad",
+            "PATIENTWALK": "Paso o caminata"
+        },
+        "MEDICATIONFORM": {
+            "TITLE": "Formulario de error de medicación",
+            "MEDICATIONVIA": "Vía de administración indicada",
+            "EVENTDATA": "Datos del evento",
+            "EVENTDESCRIPTION": "Describa el evento",
+            "TYPEINJURY": "Consecuencias del evento",
+            "STAGEERROR": "Etapa en que se produjo el error",
+            "TYPEERROR": "Tipo de error"
+        },
+        "UPPFORM": {
+            "TITLE": "Formulario de LPP",
+            "UPPSET": "LPPs ingresadas",
+            "UPPDATA": "Datos de la LPP",
+            "ORIGINUPP": "Origen LPP",
+            "UPPCAUSED": "Causa LPP",
+            "DEVICECAUSED": "Causada por dispositivo",
+            "GRADE": "Grado",
+            "LOCALIZATION": "Localización",
+            "BODYAREA": "Área del cuerpo",
+            "TRACINGUPP": "Seguimiento LPP",
+            "EVENTFACTORS": "Factores contribuyentes del evento",
+            "RISKCATEGORIZATION": "Categorización de riesgo",
+            "RISKCATEGORIZATIONDESCRIBE": "Indique en la escala de braden el riesgo",
+            "DEPENDENCERISK": "Categorización de riesgo dependencia al momento que pesquisa la LPP",
+            "PREVENTIVEMEASURE": "Medidas preventivas aplicadas al momento que pesquisa la LPP",
+            "HEAD": "Cabeza",
+            "UPPERLIMB": "Extremidades superiores",
+            "LOWERLIMB": "Extremidades inferiores",
+            "TRUNK": "Tronco"
+        },
+        "FINAL": {
+            "IMMEDIATEACTIONS": "Acciones inmediatas",
+            "IMMEDIATEACTIONSDESCRIBE": "Describa acciones inmediatas implementadas",
+            "INFORMEDPATIENT": "Paciente informado",
+            "INFORMEDPATIENTDESCRIBE": "¿Se informó al paciente o representante?",
+            "DAMAGEPATIENT": "Daño al paciente",
+            "DAMAGEPATIENTDESCRIBE": "Describa el daño al paciente",
+            "EVENTDESCRIPTION": "Descripción del evento",
+            "EVENTDESCRIPTIONDESCRIBE": "Ingrese descripción del evento"
+        },
+        "VALIDATOR": {
+            "REQUIRED": "Campo obligatorio",
+            "DATE": "Fecha no valida",
+            "MAXDATE": "Fecha no valida",
+            "MINYEAR": "Valor invalido"
+        },
+        "SUCCESS": {
+            "CREATE": "Evento enviado con éxito",
+            "UPDATE": "Evento actualizado con éxito"
+        },
+        "ERROR": {
+            "CREATE": "Evento no ha podido ser enviado, intente más tarde"
+        },
+        "DUPLICATEEVENT": {
+            "SUCCESSNOTDUPLICATE": "Evento se ha quitado como posible duplicado",
+            "SUCCESSDUPLICATE": "Evento se ha marcado como duplicado",
+            "ERROR": "No se ha podido completar la acción, intente más tarde"
+        }
+    },
+    "PRODUCT_TYPE": {
+        "TABLE": {
+            "DESCRIPTION": "Descripción"
+        },
+        "MODAL": {
+            "NEW": {
+                "TITLE": "Nuevo tipo de Producto"
+            }
+        },
+        "SHOW": {
+            "DESCRIPTION": "Descripción"
+        }
+    }
+}

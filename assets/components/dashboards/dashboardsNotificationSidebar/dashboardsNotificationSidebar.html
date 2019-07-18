@@ -1,0 +1,25 @@
+<div layout="column"
+     flex
+     layout-fill>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span flex
+                  translate>NOTIFICATION.MENU.TITLE</span>
+            <md-button class="md-icon-button"
+                       ng-disabled="vm.count === 0"
+                       ng-click="markAllAsReaded()">
+                <md-icon md-font-icon="zmdi zmdi-format-clear-all"></md-icon>
+                <md-tooltip md-direction="left">
+                    Marcar todas como leídas
+                </md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content flex
+                layout="column"
+                layout-fill
+                ssvq-infinite-load
+                next-page="vm.nextPage">
+        <ssvq-dashboards-notification-list notification-list="vm.notificationList"></ssvq-dashboards-notification-list>
+    </md-content>
+</div>

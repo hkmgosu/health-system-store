@@ -1,0 +1,22 @@
+<md-list>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h4>Nombre</h4>
+            <p>{{vm.patient.fullname}}</p>
+        </div>
+    </md-list-item>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h4>Edad</h4>
+            <p>
+                <ssvq-patient-age patient="vm.patient"></ssvq-patient-age>
+            </p>
+        </div>
+    </md-list-item>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h4>Género</h4>
+            <p>{{vm.patient.gender | translate}}</p>
+        </div>
+    </md-list-item>
+</md-list>

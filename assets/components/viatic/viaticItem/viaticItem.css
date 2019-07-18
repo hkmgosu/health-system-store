@@ -1,0 +1,6 @@
+span.dot-status-open {
+    color: green;
+}
+span.dot-status-closed {
+    color: red;    
+}

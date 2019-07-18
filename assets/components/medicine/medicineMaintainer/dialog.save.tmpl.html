@@ -1,0 +1,119 @@
+<md-dialog aria-label=""
+           flex="75"
+           class="mobile-fullwidth-dialog">
+    <form name="saveForm"
+          ng-submit="saveForm.$isValid"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>
+                    {{ ::( (!vm.temp.id) ? 'MEDICINE.OTHERS.CREATETITLE' : 'MEDICINE.OTHERS.EDITTITLE' ) | translate }}
+                </h2>
+                <span flex></span>
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Cancelar">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-toolbar class="md-warn"
+                    ng-show="vm.msg !== ''">
+            <div class="md-toolbar-tools">
+                <h2 class="md-flex">{{vm.msg|translate}}</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <div flex
+                     layout="column"
+                     layout-gt-sm="row">
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label translate>MEDICINE.TABLE.NAME</label>
+                        <input type="text"
+                               name="name"
+                               ng-model="vm.temp.name"
+                               md-autofocus
+                               required>
+                        <div ng-messages="saveForm.name.$error">
+                            <div ng-message="required">
+                                <span translate>MEDICINE.TABLE.REQUIRED</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label translate>MEDICINE.TABLE.PRESENTATION</label>
+                        <input type="text"
+                               name="presentation"
+                               ng-model="vm.temp.presentation">
+                    </md-input-container>
+                </div>
+                <div flex
+                     layout="column"
+                     layout-gt-sm="row">
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label>{{::('MEDICINE.TABLE.CATEGORY' | translate)}}</label>
+                        <md-select ng-model="vm.temp.categoryMedicine">
+                            <md-option>--</md-option>
+                            <md-option ng-repeat="category in ::vm.categoryMedicines"
+                                       ng-value="::category.id">
+                                {{ ::category.description }}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label>{{::('MEDICINE.TABLE.SUBCATEGORY' | translate)}}</label>
+                        <md-select ng-model="vm.temp.subCategoryMedicine">
+                            <md-option>--</md-option>
+                            <md-option ng-repeat="subCategory in vm.subCategoryMedicines | filter: {categoryMedicine: vm.temp.categoryMedicine}:true"
+                                       ng-value="::subCategory.id">
+                                {{ ::subCategory.description }}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div flex
+                     layout="column"
+                     layout-gt-sm="row">
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label>{{::('MEDICINE.TABLE.DRUGCATEGORY' | translate)}}</label>
+                        <md-select ng-model="vm.temp.drugCategory">
+                            <md-option>--</md-option>
+                            <md-option ng-repeat="drug in ::vm.drugCategories"
+                                       value="{{::drug.id}}">
+                                {{ ::drug.description }}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label translate>MEDICINE.TABLE.COD</label>
+                        <input type="text"
+                               name="cod"
+                               ng-model="vm.temp.cod">
+                    </md-input-container>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-accent"
+                       ng-click="vm.cancel()"
+                       aria-label="{{ 'CRUD.CANCEL' | translate }}"
+                       translate="CRUD.CANCEL">
+            </md-button>
+            <md-button ng-click="vm.save(vm.temp)"
+                       class="md-primary"
+                       type="submit"
+                       aria-label="{{ 'CRUD.SAVE' | translate }}"
+                       ng-disabled="saveForm.$submitted && saveForm.$invalid"
+                       translate="CRUD.SAVE">
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

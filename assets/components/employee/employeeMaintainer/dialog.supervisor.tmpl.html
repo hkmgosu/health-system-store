@@ -1,0 +1,42 @@
+<md-dialog flex="60"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog"
+           aria-label="Selección de Unidades supervisadas">
+    <md-toolbar>
+        <div class="md-toolbar-tools"
+             layout="row"
+             layout-align="end center">
+            <div layout="column"
+                 layout-align="center first"
+                 flex
+                 class="ssvq-breadcrumbs">
+                <span class="md-caption">
+                    Unidades supervisadas &nbsp;
+                    <md-icon md-font-icon="zmdi zmdi-chevron-right"></md-icon>
+                </span>
+                <span class="md-body-2">
+                    {{vm.employee.fullname}}
+                </span>
+            </div>
+            <md-button class="md-icon-button"
+                       ng-click="vm.close()">
+                <md-tooltip>Volver</md-tooltip>
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <form name="passwordForm">
+        <md-dialog-content layout="column"
+                           class="md-padding margin-top-10">
+            <ssvq-employee-supervised-unit-manager id-employee="{{::vm.employee.id}}">
+            </ssvq-employee-supervised-unit-manager>
+        </md-dialog-content>
+    </form>
+    <md-dialog-actions>
+        <md-button aria-label="Listo"
+                   class="md-primary"
+                   ng-click="vm.close()">
+            <span translate>Volver</span>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

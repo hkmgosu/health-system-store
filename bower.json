@@ -1,0 +1,54 @@
+{
+  "name": "missvq",
+  "description": "Intranet Oficial Servicio de Salud Viña del Mar - Quillota",
+  "main": "app.js",
+  "authors": [
+    "pedrohernandezletelier"
+  ],
+  "license": "MIT",
+  "homepage": "http://ssvq.cl",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "animate.css": "https://github.com/daneden/animate.css.git#master",
+    "geojson-js-utils": "https://github.com/maxogden/geojson-js-utils.git",
+    "triangular": "git@gitlab.ssvq.cl:ssvq/triangular-bower.git",
+    "angular-rut": "^1.0.2",
+    "md-letter-avatar": "dancol90/md-letter-avatar",
+    "angulartics": "^1.4.0",
+    "angulartics-google-analytics": "^0.4.0",
+    "angular-google-maps": "2.4.1",
+    "ngjs-color-picker": "^1.1.0",
+    "angular-aria": "1.4.8",
+    "font-awesome": "4.7.0",
+    "async": "2.4.1",
+    "ng-img-crop": "ngImgCrop#0.3.2",
+    "angular-material": "1.1.5",
+    "angular-i18n": "1.6.6",
+    "angular-material-data-table": "0.10.10",
+    "js-xlsx": "0.12.4",
+    "angular-swiper": "0.4.0",
+    "angular-leaflet-directive": "^0.10.0",
+    "leaflet-draw": "leaflet.draw#^1.0.3",
+    "angular-filter": "^0.5.17",
+    "ment.io": "^0.9.24",
+    "angular-bind-html-compile": "^1.4.1",
+    "angular-media-queries": "^0.6.1",
+    "pdfmake": "0.1.38"
+  },
+  "resolutions": {
+    "angular": "1.4.8",
+    "angular-aria": "1.4.8",
+    "angular-material": "1.1.5",
+    "angular-google-maps": "2.4.1",
+    "font-awesome": "4.7.0",
+    "angular-material-data-table": "0.10.10"
+  }
+}

@@ -1,0 +1,25 @@
+{
+    "name": "PRIVILEGES.PERMISSIONMANAGEMENT.SETTINGS.NAME",
+    "description": "PRIVILEGES.PERMISSIONMANAGEMENT.SETTINGS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.permission-management-settings",
+            "url": "/permisos/configuraciones",
+            "template": "<ssvq-workflow-status-settings-view module=\"permission\"></ssvq-workflow-status-settings-view>"
+        },
+        "_controllers": {
+            "read": [
+                "EmployeeController.getList",
+                "WorkflowController.getStatus"
+            ],
+            "update": [
+                "WorkflowController.addSupervisor",
+                "WorkflowController.rmSupervisor"
+            ]
+        }
+    }
+}

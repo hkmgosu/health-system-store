@@ -1,0 +1,100 @@
+<div ng-form="vm.autocompleteForm"
+     flex
+     class="full-width">
+    <md-autocomplete md-delay="500"
+                     md-input-name="productAutocomplete"
+                     md-selected-item="vm.selected"
+                     md-search-text="vm.searchText"
+                     md-items="item in vm.getMatches(vm.searchText)"
+                     md-selected-item-change="vm.onSelected(item)"
+                     md-item-text="item.description"
+                     md-select-on-match="false"
+                     md-autoselect="false"
+                     md-no-cache="true"
+                     md-min-length="0"
+                     md-floating-label="{{vm.label}}"
+                     md-dropdown-position="bottom"
+                     md-dropdown-items="15"
+                     ng-required="vm.required"
+                     ng-disabled="vm.disabled">
+        <md-item-template>
+            <div layout="row"
+                 layout-align="start center"
+                 flex>
+                <md-letter-avatar ng-show="!item.hasProfilePicture"
+                                  length="1"
+                                  font-size="18px"
+                                  shape="round"
+                                  data="{{item.description}}"
+                                  width="40px"
+                                  height="40px"
+                                  layout="row"
+                                  layout-align="center center">
+                </md-letter-avatar>
+                <img style="border-radius:50%;
+                           overflow:hidden;
+                           width: 40px !important;
+                           height: 40px !important;
+                           display: flex;"
+                     ng-show="item.hasProfilePicture"
+                     ng-src="storage/product/downloadProductProfilePicture/{{item.id}}?{{vm.timestamp(item)}}">
+                <div flex
+                     layout="column"
+                     class="md-padding md-3-line"
+                     style="overflow: hidden;">
+                    <span class="md-body-2">
+                        <span md-highlight-text="vm.searchText"
+                              md-highlight-flags="gi">{{item.productCode}}</span>
+                        <span> - </span>
+                        <span md-highlight-text="vm.searchText"
+                              md-highlight-flags="gi">{{item.description}}</span>
+                    </span>
+                    <span class="md-caption">
+                        <span md-highlight-text="vm.searchText"
+                              md-highlight-flags="gi">
+                            {{item.productType.description}}
+                        </span>
+                        <span>-</span>
+                        <span md-highlight-text="vm.searchText"
+                              md-highlight-flags="gi">{{item.drugType.description}}
+                        </span>
+                        <span ng-if="item.activeComponents.length > 0">-</span>
+                        <span ng-if="item.activeComponents.length > 0">
+                            <span ng-repeat="activeComponent in item.activeComponents">
+                                <span md-highlight-text="vm.searchText"
+                                      md-highlight-flags="gi">
+                                    {{activeComponent.description}}
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                    <span class="md-caption">
+                        <span ng-if="item.productPacks.length > 0">
+                            Packs:
+                            <span ng-repeat="pack in item.productPacks">
+                                <span md-highlight-text="vm.searchText"
+                                      md-highlight-flags="gi">{{pack.code}}</span>
+                            </span>
+                        </span>
+                        <span ng-if="item.productPacks.length == 0">
+                            <span md-highlight-text="vm.searchText"
+                                  md-highlight-flags="gi">
+                                sin pack
+                            </span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </md-item-template>
+        <div ng-messages="vm.autocompleteForm.productAutocomplete.$error">
+            <div ng-message="required">
+                <span>Campo Requerido</span>
+            </div>
+        </div>
+        <md-not-found>
+            <div class="md-padding">
+                <span>{{'AUTOCOMPLETE.NOMATCHFOUND' | translate}}</span>
+            </div>
+        </md-not-found>
+    </md-autocomplete>
+</div>

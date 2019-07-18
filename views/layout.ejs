@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%=typeof title == 'undefined' ? 'New Sails App' : title%>
+    </title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    <!--
+        Stylesheets and Preprocessors
+        ==============================
+
+        You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+        of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+        By default, stylesheets from your `assets/styles` folder are included
+        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        are supported. In production, your styles will be minified and concatenated into
+        a single file.
+
+        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/bower_components/angular-material-data-table/dist/md-data-table.min.css">
+    <link rel="stylesheet" href="/bower_components/fullcalendar/dist/fullcalendar.min.css">
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="/bower_components/textAngular/src/textAngular.css">
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="/bower_components/triangular/triangular.min.css">
+    <link rel="stylesheet" href="/bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/bower_components/ng-img-crop/compile/unminified/ng-img-crop.css">
+    <link rel="stylesheet" href="/bower_components/swiper/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="/bower_components/leaflet/dist/leaflet.css">
+    <link rel="stylesheet" href="/bower_components/leaflet-draw/dist/leaflet.draw.css">
+    <link rel="stylesheet" href="/leaflet.iconlabel.css">
+    <link rel="stylesheet" href="/custom.css">
+    <link rel="stylesheet" href="/preloader.css">
+    <link rel="stylesheet" href="/components/addressForm/addressForm.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventDetailsView/adverseEventDetailsView.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventDialog/adverseEventDamageType/adverseEventDamageType.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventDialog/adverseEventDialog.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventDuplicatesView/adverseEventDuplicatesView.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventForm/uppForm/uppForm.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventListItem/adverseEventListItem.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventListView/adverseEventListView.css">
+    <link rel="stylesheet" href="/components/adverseEvent/adverseEventSettingsView/adverseEventSettingsView.css">
+    <link rel="stylesheet" href="/components/archive/uploadItemFile/uploadItemFile.css">
+    <link rel="stylesheet" href="/components/article/articleList/articleList.css">
+    <link rel="stylesheet" href="/components/bed/bedContingency/bmContingencyManager.css">
+    <link rel="stylesheet" href="/components/bed/bedDerivationSettings/bmDerivationSettings.css">
+    <link rel="stylesheet" href="/components/bed/bedMonitoring/bedMonitoring.css">
+    <link rel="stylesheet" href="/components/dashboards/dashboardsNotificationList/dashboardsNotificationList.css">
+    <link rel="stylesheet" href="/components/dashboards/dashboardsNotificationSidebar/dashboardsNotificationSidebar.css">
+    <link rel="stylesheet" href="/components/dashboards/dashboardsToolbar/dashboardsToolbar.css">
+    <link rel="stylesheet" href="/components/derivation/derivationList/derivationList.css">
+    <link rel="stylesheet" href="/components/derivation/derivationManager/derivationManager.css">
+    <link rel="stylesheet" href="/components/employee/employeeAvatar/employeeAvatar.css">
+    <link rel="stylesheet" href="/components/employee/employeeItemList/employeeItemList.css">
+    <link rel="stylesheet" href="/components/employee/employeeMaintainer/employeeMaintainer.css">
+    <link rel="stylesheet" href="/components/employee/employeeProfileLink/employeeProfileLink.css">
+    <link rel="stylesheet" href="/components/employee/employeeProfilePictureSelector/employeeProfilePictureSelector.css">
+    <link rel="stylesheet" href="/components/generic/commentBox/commentBox.css">
+    <link rel="stylesheet" href="/components/generic/customCheckboxSelector/customCheckBoxSelector.css">
+    <link rel="stylesheet" href="/components/generic/customOptionSelector/customOptionSelector.css">
+    <link rel="stylesheet" href="/components/generic/logComparison/logComparison.css">
+    <link rel="stylesheet" href="/components/generic/searchInput/searchInput.css">
+    <link rel="stylesheet" href="/components/patient/patientAutocomplete/patientAutocomplete.css">
+    <link rel="stylesheet" href="/components/patient/patientClinicalHistory/patientClinicalHistory.css">
+    <link rel="stylesheet" href="/components/patient/patientEvolution/basicEvolution/basicEvolution.css">
+    <link rel="stylesheet" href="/components/patient/patientEvolution/vitalSignsEvolution/vitalSignsEvolution.css">
+    <link rel="stylesheet" href="/components/patient/patientIntervention/patientIntervention.css">
+    <link rel="stylesheet" href="/components/patient/patientItemList/patientItemList.css">
+    <link rel="stylesheet" href="/components/patient/patientPersonalData/patientPersonalData.css">
+    <link rel="stylesheet" href="/components/permission/permissionItem/permissionItem.css">
+    <link rel="stylesheet" href="/components/permission/permissionListView/permissionListView.css">
+    <link rel="stylesheet" href="/components/permission/permissionTimeline/permissionTimeline.css">
+    <link rel="stylesheet" href="/components/profile/profileDetails/profileDetails.css">
+    <link rel="stylesheet" href="/components/profile/profileMaintainer/profileMaintainer.css">
+    <link rel="stylesheet" href="/components/rem/remAccessView/remAccessView.css">
+    <link rel="stylesheet" href="/components/rem/remAddressRead/remAddressRead.css">
+    <link rel="stylesheet" href="/components/rem/remBasicInformation/remBasicInformation.css">
+    <link rel="stylesheet" href="/components/rem/remDetailsView/remDetailsView.css">
+    <link rel="stylesheet" href="/components/rem/remGrid/remGrid.css">
+    <link rel="stylesheet" href="/components/rem/remListFilter/remListFilter.css">
+    <link rel="stylesheet" href="/components/rem/remPatientDialogProvider/remPatientDialogProvider.css">
+    <link rel="stylesheet" href="/components/rem/remPatientItem/remPatientItem.css">
+    <link rel="stylesheet" href="/components/rem/remPatientVehicle/remPatientVehicle.css">
+    <link rel="stylesheet" href="/components/rem/remSettings/remSettings.css">
+    <link rel="stylesheet" href="/components/rem/remTimeline/remTimeline.css">
+    <link rel="stylesheet" href="/components/rem/remVehicleDialogProvider/remVehicleDialogProvider.css">
+    <link rel="stylesheet" href="/components/rem/remVehicleRoute/remVehicleRoute.css">
+    <link rel="stylesheet" href="/components/request/requestListItem/requestListItem.css">
+    <link rel="stylesheet" href="/components/request/requestListView/requestListView.css">
+    <link rel="stylesheet" href="/components/resourceMaintainer/resourceMaintainer.css">
+    <link rel="stylesheet" href="/components/storage/activeComponent/activeComponentAdmin/activeComponentAdmin.css">
+    <link rel="stylesheet" href="/components/storage/administrationWay/administrationWayAdmin/administrationWayAdmin.css">
+    <link rel="stylesheet" href="/components/storage/category/categoryAdmin/categoryAdmin.css">
+    <link rel="stylesheet" href="/components/storage/company/companyAdmin/companyAdmin.css">
+    <link rel="stylesheet" href="/components/storage/costCenter/costCenterMaintainer/costCenterMaintainer.css">
+    <link rel="stylesheet" href="/components/storage/dosageType/dosageTypeAdmin/dosageTypeAdmin.css">
+    <link rel="stylesheet" href="/components/storage/drugType/drugTypeMaintainer/drugTypeMaintainer.css">
+    <link rel="stylesheet" href="/components/storage/expressIncome/expressIncomeEdit/expressIncomeEdit.css">
+    <link rel="stylesheet" href="/components/storage/movement/movementEdit/movementEdit.css">
+    <link rel="stylesheet" href="/components/storage/movementType/movementTypeAdmin/movementTypeAdmin.css">
+    <link rel="stylesheet" href="/components/storage/presentationType/presentationTypeAdmin/presentationTypeAdmin.css">
+    <link rel="stylesheet" href="/components/storage/product/productAutocomplete/productAutocomplete.css">
+    <link rel="stylesheet" href="/components/storage/product/productMaintainer/productMaintainer.css">
+    <link rel="stylesheet" href="/components/storage/product/productMaintainerSimple/productMaintainer.css">
+    <link rel="stylesheet" href="/components/storage/product/productProfilePictureSelector/productProfilePictureSelector.css">
+    <link rel="stylesheet" href="/components/storage/productRequest/productRequestAdmin/productRequestAdmin.css">
+    <link rel="stylesheet" href="/components/storage/productRequest/productRequestEdit/productRequestEdit.css">
+    <link rel="stylesheet" href="/components/storage/productType/productTypeItemList/productTypeItemList.css">
+    <link rel="stylesheet" href="/components/storage/productType/productTypeMaintainer/productTypeMaintainer.css">
+    <link rel="stylesheet" href="/components/storage/program/programAdmin/programAdmin.css">
+    <link rel="stylesheet" href="/components/storage/report/reportAutocomplete/reportAutocomplete.css">
+    <link rel="stylesheet" href="/components/typecasting/typecastingDetails/typecastingDetails.css">
+    <link rel="stylesheet" href="/components/unit/unitEmployees/unitEmployees.css">
+    <link rel="stylesheet" href="/components/unit/unitMaintainer/unitMaintainer.css">
+    <link rel="stylesheet" href="/components/unit/unitManagers/unitManagers.css">
+    <link rel="stylesheet" href="/components/unit/unitSupervisors/unitSupervisors.css">
+    <link rel="stylesheet" href="/components/vehicle/vehicleAutocomplete/vehicleAutocomplete.css">
+    <link rel="stylesheet" href="/components/vehicle/vehicleMaintainer/vehicleMaintainer.css">
+    <link rel="stylesheet" href="/components/viatic/viaticCalendar/viaticCalendar.css">
+    <link rel="stylesheet" href="/components/viatic/viaticDetails/viaticDetails.css">
+    <link rel="stylesheet" href="/components/viatic/viaticItem/viaticItem.css">
+    <link rel="stylesheet" href="/components/viatic/viaticTimeline/viaticTimeline.css">
+    <link rel="stylesheet" href="/views/public/modules/sidebar-left/sidebar-left.css">
+    <!--STYLES END-->
+</head>
+
+<body>
+    <%- body %>
+
+
+
+    <!--
+        Client-side Templates
+        ========================
+
+        HTML templates are important prerequisites of modern, rich client applications.
+        To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
+        that you load these templates client-side.
+
+        By default, your Gruntfile is configured to automatically load and precompile
+        client-side JST templates in your `assets/templates` folder, then
+        include them here automatically (between TEMPLATES and TEMPLATES END).
+
+        To customize this behavior to fit your needs, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Import templates from other directories
+            + Use a different template engine (handlebars, jade, dust, etc.)
+            + Internationalize your client-side templates using a server-side
+              stringfile before they're served.
+    -->
+
+    <!--TEMPLATES-->
+    
+    <!--TEMPLATES END-->
+
+    <!--
+
+      Client-side Javascript
+      ========================
+
+      You can always bring in JS files manually with `script` tags, or asynchronously
+      on the client using a solution like AMD (RequireJS).  Or, if you like, you can
+      take advantage of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+      By default, files in your `assets/js` folder are included here
+      automatically (between SCRIPTS and SCRIPTS END).  Both JavaScript (.js) and
+      CoffeeScript (.coffee) are supported. In production, your scripts will be minified
+      and concatenated into a single file.
+
+      To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+      For example, here are a few things you could do:
+
+          + Change the order of your scripts
+          + Import scripts from other directories
+          + Use a different preprocessor, like TypeScript
+
+    -->
+        <script type="text/javascript"
+            src="/sails.io.js"></script>
+        <script>io.sails.transports=['websocket']</script>
+        <!--SCRIPTS-->
+        <script src="/service-worker-registration.js" defer></script>
+        <script src="/utils.js" defer></script>
+        <script src="/bower_components/jquery/dist/jquery.min.js" defer></script>
+        <script src="/bower_components/lodash/dist/lodash.min.js" defer></script>
+        <script src="/bower_components/async/dist/async.js" defer></script>
+        <script src="/bower_components/angular/angular.js" defer></script>
+        <script src="/bower_components/angular-filter/dist/angular-filter.js" defer></script>
+        <script src="/bower_components/angular-animate/angular-animate.min.js" defer></script>
+        <script src="/bower_components/angular-cookies/angular-cookies.min.js" defer></script>
+        <script src="/bower_components/angular-digest-hud/digest-hud.js" defer></script>
+        <script src="/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js" defer></script>
+        <script src="/bower_components/angular-linkify/angular-linkify.min.js" defer></script>
+        <script src="/bower_components/angular-local-storage/dist/angular-local-storage.min.js" defer></script>
+        <script src="/bower_components/angular-aria/angular-aria.js" defer></script>
+        <script src="/bower_components/angular-material/angular-material.js" defer></script>
+        <script src="/bower_components/triangular/triangular.js" defer></script>
+        <script src="/bower_components/angular-messages/angular-messages.min.js" defer></script>
+        <script src="/bower_components/moment/min/moment.min.js" defer></script>
+        <script src="/bower_components/moment/locale/es.js" defer></script>
+        <script src="/bower_components/angular-moment/angular-moment.min.js" defer></script>
+        <script src="/bower_components/angular-resource/angular-resource.js" defer></script>
+        <script src="/bower_components/angular-translate/angular-translate.js" defer></script>
+        <script src="/bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js" defer></script>
+        <script src="/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js" defer></script>
+        <script src="/bower_components/angular-translate-storage-local/angular-translate-storage-local.js" defer></script>
+        <script src="/bower_components/angular-ui-router/release/angular-ui-router.js" defer></script>
+        <script src="/bower_components/rangy/rangy-core.min.js" defer></script>
+        <script src="/bower_components/rangy/rangy-classapplier.min.js" defer></script>
+        <script src="/bower_components/rangy/rangy-highlighter.min.js" defer></script>
+        <script src="/bower_components/rangy/rangy-selectionsaverestore.min.js" defer></script>
+        <script src="/bower_components/rangy/rangy-serializer.min.js" defer></script>
+        <script src="/bower_components/rangy/rangy-textrange.min.js" defer></script>
+        <script src="/bower_components/textAngular/src/textAngular-sanitize.js" defer></script>
+        <script src="/bower_components/angulartics/dist/angulartics.min.js" defer></script>
+        <script src="/bower_components/angulartics-google-analytics/dist/angulartics-ga.min.js" defer></script>
+        <script src="/bower_components/ng-file-upload/ng-file-upload-shim.min.js" defer></script>
+        <script src="/bower_components/ng-file-upload/ng-file-upload.min.js" defer></script>
+        <script src="/bower_components/ng-img-crop/compile/unminified/ng-img-crop.js" defer></script>
+        <script src="/bower_components/angular-i18n/angular-locale_es-es.js" defer></script>
+        <script src="/bower_components/Chart.js/Chart.min.js" defer></script>
+        <script src="/bower_components/angular-chart.js/dist/angular-chart.min.js" defer></script>
+        <script src="/bower_components/angular-material-data-table/dist/md-data-table.min.js" defer></script>
+        <script src="/bower_components/angular-rut/dist/angular-rut.js" defer></script>
+        <script src="/bower_components/md-letter-avatar/md-letter-avatar.js" defer></script>
+        <script src="/bower_components/fullcalendar/dist/fullcalendar.js" defer></script>
+        <script src="/bower_components/angular-ui-calendar/src/calendar.js" defer></script>
+        <script src="/bower_components/ngjs-color-picker/dist/ngjs-color-picker.js" defer></script>
+        <script src="/bower_components/js-xlsx/dist/xlsx.full.min.js" defer></script>
+        <script src="/bower_components/swiper/dist/js/swiper.js" defer></script>
+        <script src="/bower_components/angular-swiper/dist/angular-swiper.js" defer></script>
+        <script src="/bower_components/leaflet/dist/leaflet.js" defer></script>
+        <script src="/bower_components/ment.io/dist/mentio.min.js" defer></script>
+        <script src="/bower_components/ment.io/dist/templates.js" defer></script>
+        <script src="/bower_components/angular-media-queries/match-media.js" defer></script>
+        <script src="/bower_components/angular-bind-html-compile/angular-bind-html-compile.js" defer></script>
+        <script src="/leaflet.iconlabel.js" defer></script>
+        <script src="/bower_components/leaflet-draw/dist/leaflet.draw.js" defer></script>
+        <script src="/leaflet.markercluster-src.js" defer></script>
+        <script src="/Edit.Poly.js" defer></script>
+        <script src="/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js" defer></script>
+        <script src="/bower_components/pdfmake/build/pdfmake.min.js" defer></script>
+        <script src="/bower_components/pdfmake/build/vfs_fonts.js" defer></script>
+        <script src="/app.js" defer></script>
+        <script src="/config/configSettings.js" defer></script>
+        <script src="/config/configThemes.js" defer></script>
+        <script src="/config/configTranslate.js" defer></script>
+        <!--SCRIPTS END-->
+</body>
+
+</html>

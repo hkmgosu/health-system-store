@@ -1,0 +1,9 @@
+.status-button .md-button{
+    line-height: 18px;
+    min-height: 18px;
+}
+
+.status-button .label{
+    line-height: 10px;
+    padding-left: 14px;
+}

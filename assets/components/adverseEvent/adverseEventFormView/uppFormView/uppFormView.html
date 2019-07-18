@@ -1,0 +1,79 @@
+<md-list ng-if="vm.data" class="padding-top-0">
+    <div ng-repeat="cause in ::vm.data.causes">
+        <md-subheader class="md-no-sticky">
+            <span flex>LPP {{ ::cause.uppNumber }}</span>
+        </md-subheader>
+        <md-divider></md-divider>
+        <md-list-item class="md-3-line md-long-text ae-list-details">
+            <div class="md-list-item-text">
+                <!-- <p ng-if="cause.origin.id">
+                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                             class="date-icon">
+                    </md-icon>
+                    <strong>Origen:</strong>
+                    <span>{{ ::(cause.origin || {}).name || '--' }}</span>
+                </p> -->
+                <p>
+                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                             class="date-icon">
+                    </md-icon>
+                    <strong>Grado:</strong>
+                    <span>{{ ::(cause.grade || {}).name || '--' }}</span>
+                </p>
+                <p>
+                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                             class="date-icon">
+                    </md-icon>
+                    <strong>Causado por dispositivo:</strong>
+                    <span> {{ ::cause.causedByDevice ? 'Si, causado por dispositivo' : 'No, no causado por dispositivo' }}</span>
+                </p>
+                <p>
+                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                             class="date-icon">
+                    </md-icon>
+                    <strong>Localización:</strong>
+                    <span>{{ ::(cause.localization || {}).name || '--' }}</span>
+                </p>
+                <p>
+                    <md-icon md-font-icon="zmdi zmdi-caret-right"
+                             class="date-icon">
+                    </md-icon>
+                    <strong>Seguimiento:</strong>
+                    <span>{{ ::(cause.tracingUpp || {}).name || '--' }}</span>
+                </p>
+            </div>
+        </md-list-item>
+    </div>
+    <md-subheader class="md-no-sticky">
+        <span flex>Datos generales LPP(s)</span>
+    </md-subheader>
+    <md-divider></md-divider>
+    <md-list-item class="md-3-line md-long-text ae-list-details">
+        <div class="md-list-item-text">
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Categorización riesgo dependencia:</strong>
+                <span>{{ ::(vm.data.dependenceRisk || {}).name || '--' }}</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Categorización de riesgo:</strong>
+                <span>{{ ::(vm.data.uppRisk || {}).name || '--' }}</span>
+            </p>
+            <p>
+                <md-icon md-font-icon="zmdi zmdi-caret-right"
+                         class="date-icon">
+                </md-icon>
+                <strong>Medidas preventivas:</strong>
+                <span ng-repeat="preventive in ::vm.data.preventiveMeasures">
+                    {{ ::preventive.name }}{{ ::preventive.hasObservation ? ' ' + preventive.description + ' ' + preventive.value + ' ' + preventive.predicated : ''}}{{ ::(!$last ? ', ' : '') }}
+                </span>
+                <span ng-if="::vm.data.preventiveMeasures.length === 0">--</span>
+            </p>
+        </div>
+    </md-list-item>
+</md-list>

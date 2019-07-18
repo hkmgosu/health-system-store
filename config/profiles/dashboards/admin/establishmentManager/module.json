@@ -1,0 +1,39 @@
+{
+    "name": "PRIVILEGES.ESTABLISHMENTS.NAME",
+    "description": "PRIVILEGES.ESTABLISHMENTS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.admin-establishments",
+            "url": "/establecimientos",
+            "template": "<ssvq-establishment-maintainer></ssvq-establishment-maintainer>",
+            "priority": 2
+        },
+        "_controllers": {
+            "read": [
+                "EstablishmentController.get",
+                "EstablishmentTypeController.getAll",
+                "EstablishmentTypeController.icon",
+                "AddressController.getAddressAutocomplete",
+                "AddressController.getAddressAutocompleteReverse",
+                "RegionController.getAll",
+                "CommuneController.getAll",
+                "CommuneController.get"
+            ],
+            "create": [
+                "EstablishmentController.save"
+            ],
+            "update": [
+                "EstablishmentController.save"
+            ],
+            "delete": [
+                "EstablishmentController.delete"
+            ]
+        }
+    }
+}

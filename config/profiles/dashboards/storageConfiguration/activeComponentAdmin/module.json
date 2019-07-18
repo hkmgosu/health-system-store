@@ -1,0 +1,32 @@
+{
+    "name": "PRIVILEGES.STORAGE_ACTIVE_COMPONENT.NAME",
+    "description": "PRIVILEGES.STORAGE_ACTIVE_COMPONENT.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-active-component-admin",
+            "url": "/bodega/componente-activo",
+            "template": "<ssvq-storage-active-component-admin></ssvq-storage-active-component-admin>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/ActiveComponentController.get",
+                "Storage/ActiveComponentController.getAll"
+            ],
+            "create": [
+                "Storage/ActiveComponentController.create"
+            ],
+            "update": [
+                "Storage/ActiveComponentController.update"
+            ],
+            "delete": [
+                "Storage/ActiveComponentController.delete"
+            ]
+        }
+    }
+}

@@ -1,0 +1,60 @@
+<ng-form name="vm.productActiveComponentForm">
+    <div flex
+         layout-gt-sm="row"
+         class="md-padding">
+        <md-input-container class="md-block"
+                            flex>
+            <label for="productActiveComponent"
+                   translate>Componente Activo</label>
+            <md-select ng-model="vm.productActiveComponent.activeComponent"
+                       ng-change="vm.addProductActiveComponent()"
+                       required
+                       name="productActiveComponent">
+                <md-option ng-value="item.id"
+                           ng-repeat="item in vm.activeComponents">
+                    {{item.description}}
+                </md-option>
+            </md-select>
+            <div ng-messages="vm.productActiveComponentForm.productActiveComponent.$error">
+                <div ng-message="required">
+                    <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                </div>
+            </div>
+        </md-input-container>
+    </div>
+</ng-form>
+<div class="md-whiteframe-1dp overlay-5 padding-top-10 padding-bottom-10 md-margin">
+    <p class="text-center">
+        <md-icon md-font-icon="zmdi zmdi-info"></md-icon>
+        &nbsp; utiliza el buscador para agregar un componente activo al producto
+    </p>
+</div>
+<div style="min-height: 100px;">
+    <md-list md-dynamic-height
+             ng-show="vm.productActiveComponents.length !== 0">
+        <md-list-item ng-repeat="item in vm.productActiveComponents track by $index"
+                      class="md-2-line">
+            <div flex
+                 layout-gt-sm="row"
+                 class="md-list-item-text">
+                <h4 class="md-padding">{{item.activeComponent.description}}</h4>
+            </div>
+            <md-button class="md-secondary md-warn md-raised"
+                       ng-click="vm.removeProductActiveComponent(item)">
+                Quitar
+                <md-tooltip>
+                    Quitar Componente Activo
+                </md-tooltip>
+            </md-button>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+    <p class="text-center md-padding"
+       ng-show="vm.productActiveComponents.length === 0">
+        Sin Componente Activo
+    </p>
+    <p class="text-center md-padding"
+       ng-show="vm.productActiveComponents === null">
+        Cargando Componentes...
+    </p>
+</div>

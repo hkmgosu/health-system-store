@@ -1,0 +1,29 @@
+<md-dialog aria-label="Detalles del item"
+           ng-scope
+           flex="60"
+           flex-xs="100">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 translate
+                flex>PRODUCT_REQUEST.DIALOG.TITLE</h2>
+            <span flex></span>
+
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()"
+                       aria-label="Cancelar">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content md-border-bottom>
+        <div class="md-padding"
+             ng-include="'/components/storage/productRequest/productRequestEdit/formGeneral.html'"></div>
+    </md-dialog-content>
+    <md-dialog-actions class="text-right">
+        <md-button class="md-raised md-primary"
+                   ng-click="vm.confirm()"
+                   ng-disabled="!vm.productRequest.originUnit || !vm.productRequest.destinyUnit || !vm.productRequest.date"
+                   aria-label="CRUD.SAVE"
+                   translate="CRUD.SAVE"></md-button>
+    </md-dialog-actions>
+</md-dialog>

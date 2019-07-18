@@ -1,0 +1,47 @@
+<p class="md-caption margin-bottom-0">{{vm.label}}</p>
+<div layout="row">
+    <md-input-container flex
+                        class="margin-bottom-0 md-block"
+                        md-no-float>
+        <label>dd/mm/aaaa</label>
+        <md-icon md-font-icon="zmdi zmdi-calendar"
+                 class="md-accent"></md-icon>
+        <input type="date"
+               ssvq-date-input
+               name="dispatch"
+               ng-change="vm.setDateTime()"
+               max="{{ ::(vm.max ? vm.max : undefined) }}"
+               min="{{ ::(vm.min ? vm.min : undefined) }}"
+               ng-required="vm.required"
+               ng-model="vm.date">
+        <div ng-messages="saveForm.dispatch.$error">
+            <div ng-message="date">
+                <span>{{::('TIMING.VALIDATOR.DATE' | translate)}}</span>
+            </div>
+            <div ng-message="required">
+                <span>Campo obligatorio</span>
+            </div>
+        </div>
+    </md-input-container>
+    <md-input-container flex
+                        class="margin-bottom-0 md-block"
+                        md-no-float>
+        <label>hh:mm</label>
+        <input type="time"
+               ssvq-date-input
+               name="dispatch"
+               ng-change="vm.setDateTime()"
+               ng-required="vm.required"
+               ng-model="vm.time">
+        <div ng-messages="saveForm.dispatch.$error">
+            <div ng-message="date">
+                <span>{{::('TIMING.VALIDATOR.DATE' | translate)}}</span>
+            </div>
+            <div ng-message="required">
+                <span>Campo obligatorio</span>
+            </div>
+        </div>
+    </md-input-container>
+    <md-button ng-click="vm.setNow()"
+               ng-if="vm.viewNowButton">{{ ::('TIMING.MARKNOW' | translate) }}</md-button>
+</div>

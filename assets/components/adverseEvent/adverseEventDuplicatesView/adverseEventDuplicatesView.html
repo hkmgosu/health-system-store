@@ -1,0 +1,86 @@
+<div flex
+     layout="row"
+     style="height: calc(100vh - 64px)"
+     id="duplicated-managed-view">
+    <md-content flex="100"
+                flex-gt-xs="45">
+        <md-list class="padding-0">
+            <div ng-repeat="(date, groupDate) in vm.duplicateEvents">
+                <md-subheader class="md-primary">{{date}}</md-subheader>
+                <div ng-repeat="duplicated in groupDate | orderBy: 'origin.createdAt'">
+                    <md-list-item class="md-2-line list-ea-item"
+                                  ng-hide="vm.select == duplicated.id && !vm.loadingDetail"
+                                  ng-click="vm.loadDuplicate(duplicated)">
+                        <md-letter-avatar class="event-avatar-tiny"
+                                          length="3"
+                                          color="{{ ::vm.getColor(duplicated.origin.damageType.categoryDamage) }}"
+                                          font-size="22px"
+                                          shape="round"
+                                          data="{{::duplicated.origin.damageType.categoryDamage}}"
+                                          layout="row"
+                                          layout-align="center center">
+                        </md-letter-avatar>
+                        <div class="md-list-item-text padding-left-10">
+                            <h4>{{::(duplicated.origin.eventType.name || duplicated.origin.damageType.name) }}</h4>
+                            <p md-truncate>
+                                <span>#{{duplicated.origin.id}}</span>
+                                <span class="ea-bullet">•</span>
+                                <md-icon md-font-icon="zmdi zmdi-account"></md-icon>
+                                <span>{{ ::(duplicated.origin.patient.fullname ? duplicated.origin.patient.fullname : '--') }}</span>
+                                <span class="ea-bullet">•</span>
+                                <md-icon md-font-icon="zmdi zmdi-time"></md-icon>
+                                <span>{{ ::((duplicated.origin.occurrenceAt  | date : 'mediumDate') || '--') }}</span>
+                            </p>
+                        </div>
+                        <div class="hide-xs hide-sm hide-md duplicate-cant-ea">
+                            <p class="">
+                                {{duplicated.duplicated.length }}
+                                <md-icon md-font-icon="fa fa-files-o"></md-icon>
+                            </p>
+                        </div>
+                        <md-divider ng-if="!$last"></md-divider>
+                    </md-list-item>
+                    <div class="animated flipInX animation-stop"
+                         ng-if="vm.select == duplicated.id && !vm.loadingDetail">
+                        <ssvq-adverse-event-duplicate-card data="vm.detailsDuplicated.origin"
+                                                           select-border="true">
+                        </ssvq-adverse-event-duplicate-card>
+                    </div>
+                </div>
+            </div>
+        </md-list>
+        <div layout="row"
+             layout-align="center center"
+             style="height: 100%"
+             ng-if="vm.loading">
+            Cargando...
+        </div>
+        <div layout="row"
+             layout-align="center center"
+             style="height: 100%"
+             ng-if="!vm.loading && vm.duplicateEventsLength === 0">
+            <ssvq-no-results message="No hay probables eventos duplicados"></ssvq-no-results>
+        </div>
+    </md-content>
+    <div flex
+         style="overflow: auto"
+         class="md-whiteframe-z1 duplicate-body-content">
+        <div layout="column"
+             layout-align="start center"
+             class="animated slideInLeft animation-stop"
+             ng-repeat="duplicate in vm.detailsDuplicated.duplicated">
+            <div class=" full-width">
+                <ssvq-adverse-event-duplicate-card original-id="{{vm.detailsDuplicated.origin.id}}"
+                                                   data="duplicate"
+                                                   clean-list="vm.cleanList"
+                                                   option-buttons="true"></ssvq-adverse-event-duplicate-card>
+            </div>
+        </div>
+        <div layout="row"
+             layout-align="center center"
+             style="height: 100%"
+             ng-if="!vm.detailsDuplicated && !vm.loadingDetail">
+            <h3 class="lighter"><span>Evento no seleccionado</span></h3>
+        </div>
+    </div>
+</div>

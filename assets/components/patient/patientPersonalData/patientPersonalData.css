@@ -1,0 +1,10 @@
+.float-age-text{
+    position: absolute;
+    width: 100%;
+    bottom: 15px;
+}
+
+.my-divider{
+    background: #b3b3b354;
+    height: 1px;
+}

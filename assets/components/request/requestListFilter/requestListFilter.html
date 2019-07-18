@@ -1,0 +1,126 @@
+<md-toolbar md-theme="white">
+    <div class="md-toolbar-tools">
+        <md-icon md-font-icon="fa fa-filter"></md-icon>
+        <h2 flex>Filtros</h2>
+        <md-button ng-click="vm.cleanFilters()"
+                   ng-disabled="vm.filterCleaned">Limpiar</md-button>
+    </div>
+</md-toolbar>
+<md-content layout="column"
+            style="height: calc(100% - 64px)">
+    <md-input-container md-no-float
+                        class="md-block margin-left-10 margin-right-10 margin-bottom-0">
+        <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+        <input ng-model="vm.filter.searchText"
+               ng-model-options="{ debounce: 800 }"
+               type="search"
+               id="search"
+               autofocus
+               placeholder="{{ 'CRUD.SEARCH' | translate }}">
+    </md-input-container>
+    <md-divider></md-divider>
+    <!-- Creado por -->
+    <md-list-item class="md-2-line"
+                  ng-disabled="vm.filterOpened == 'createdBy'"
+                  ng-click="vm.filterOpened = 'createdBy'">
+        <div class="md-list-item-text">
+            <h3>Creado por</h3>
+            <p>
+                {{vm.filter.createdBy.fullname || 'Cualquiera'}}
+            </p>
+        </div>
+        <md-button class="md-secondary"
+                   ng-click="vm.selectMeAsCreatedBy()"
+                   ng-hide="vm.filter.createdBy">
+            <span class="md-caption">Por mi</span>
+        </md-button>
+        <md-button class="md-secondary md-icon-button"
+                   ng-click="vm.filter.createdBy = null"
+                   ng-show="vm.filter.createdBy">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            <md-tooltip>Limpiar filtro</md-tooltip>
+        </md-button>
+    </md-list-item>
+    <ssvq-employee-autocomplete ng-show="vm.filterOpened === 'createdBy'"
+                                on-select="vm.cleanFilterOpened"
+                                selected="vm.filter.createdBy">
+    </ssvq-employee-autocomplete>
+    <md-divider style="width:98%; margin:auto;"></md-divider>
+
+    <!-- Asignado a -->
+    <md-list-item class="md-2-line"
+                  ng-disabled="vm.filterOpened == 'employeeAssigned'"
+                  ng-click="vm.filterOpened = 'employeeAssigned'">
+        <div class="md-list-item-text">
+            <h3>Asignado a</h3>
+            <p>
+                {{vm.filter.employeeAssigned.fullname || 'Cualquiera'}}
+            </p>
+        </div>
+        <md-button class="md-secondary"
+                   ng-click="vm.selectMeAsEmployeeAssigned()"
+                   ng-hide="vm.filter.employeeAssigned">
+            <span class="md-caption">a mi</span>
+        </md-button>
+        <md-button class="md-secondary md-icon-button"
+                   ng-click="vm.filter.employeeAssigned = null"
+                   ng-show="vm.filter.employeeAssigned">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            <md-tooltip>Limpiar filtro</md-tooltip>
+        </md-button>
+    </md-list-item>
+    <ssvq-employee-autocomplete ng-show="vm.filterOpened === 'employeeAssigned'"
+                                on-select="vm.cleanFilterOpened"
+                                selected="vm.filter.employeeAssigned">
+    </ssvq-employee-autocomplete>
+
+    <md-divider style="width:98%; margin:auto;"></md-divider>
+
+    <md-list-item class="md-2-line"
+                  ng-click="vm.showCreatedAtFilter($event)">
+        <div class="md-list-item-text">
+            <h3>Fecha de creación</h3>
+            <p>
+                <span ng-show="vm.filter.minDate || vm.filter.maxDate">
+                    {{(vm.filter.minDate | date : "dd MMM y") || '--'}} al
+                    {{(vm.filter.maxDate | date : "dd MMM y") || '--'}}
+                </span>
+                <span ng-show="!vm.filter.minDate && !vm.filter.maxDate">
+                    Cualquiera
+                </span>
+            </p>
+        </div>
+        <md-button class="md-secondary md-icon-button"
+                   ng-click="vm.filter.minDate = vm.filter.maxDate = null"
+                   ng-show="vm.filter.minDate || vm.filter.maxDate">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            <md-tooltip>Limpiar filtro</md-tooltip>
+        </md-button>
+    </md-list-item>
+    <div ng-if="vm.supervisedUnits.length > 1 && vm.filter.mode === 'supervised'"
+         class="animated fadeIn animation-stop">
+        <md-divider style="width:98%; margin:auto;"></md-divider>
+        <md-list-item>
+            Unidades supervisadas
+        </md-list-item>
+        <md-list-item ng-repeat="item in vm.supervisedUnits">
+            <span class="md-body-2">{{::item.name}}</span>
+            <md-checkbox class="md-secondary md-primary"
+                         aria-label="{{::item.name}}"
+                         ng-model="item.checked"></md-checkbox>
+        </md-list-item>
+    </div>
+    <md-divider></md-divider>
+    <span flex></span>
+    <div layout="row"
+         ng-if="vm.supervisedUnits.length">
+        <md-button ng-click="vm.filter.mode = 'subscribed'"
+                   class="md-raised"
+                   flex
+                   ng-class="{'md-primary': vm.filter.mode === 'subscribed'}">Suscritas</md-button>
+        <md-button ng-click="vm.filter.mode = 'supervised'"
+                   class="md-raised"
+                   flex
+                   ng-class="{'md-primary': vm.filter.mode === 'supervised'}">Supervisadas</md-button>
+    </div>
+</md-content>

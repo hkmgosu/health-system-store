@@ -1,0 +1,48 @@
+<div hide-xs
+     layout="row">
+    <md-button required-privilege="['update']"
+               class="md-icon-button"
+               ng-click="vm.showSupervisedUnitList($event)">
+        <md-icon md-font-icon="zmdi zmdi-notifications-active"></md-icon>
+        <md-tooltip>Supervisión de unidades</md-tooltip>
+    </md-button>
+    <md-button ng-click="vm.restoreAccount()"
+               class="md-icon-button">
+        <md-icon md-font-icon="zmdi zmdi-lock-open"></md-icon>
+        <md-tooltip>Restaurar cuenta</md-tooltip>
+    </md-button>
+    <md-button required-privilege="['delete']"
+               ng-click="vm.deleteItem()"
+               class="md-icon-button">
+        <md-icon md-font-icon="fa fa-trash"></md-icon>
+        <md-tooltip>Eliminar funcionario</md-tooltip>
+    </md-button>
+</div>
+<md-menu hide-gt-xs>
+    <md-button class="md-icon-button"
+               ng-click="$mdMenu.open()">
+        <md-icon md-font-icon="zmdi zmdi-more-vert"></md-icon>
+    </md-button>
+    <md-menu-content width="4">
+        <md-menu-item>
+            <md-button required-privilege="['update']"
+                       ng-click="vm.showSupervisedUnitList($event)">
+                <md-icon md-font-icon="zmdi zmdi-notifications-active"></md-icon>
+                <span translate>EMPLOYEE.TOOLTIP.SET_SUPERVISED_UNITS</span>
+            </md-button>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button ng-click="vm.restoreAccount()">
+                <md-icon md-font-icon="zmdi zmdi-lock-open"></md-icon>
+                <span translate>Restaurar cuenta</span>
+            </md-button>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button required-privilege="['delete']"
+                       ng-click="vm.deleteItem()">
+                <md-icon md-font-icon="fa fa-trash"></md-icon>
+                <span translate>Eliminar funcionario</span>
+            </md-button>
+        </md-menu-item>
+    </md-menu-content>
+</md-menu>

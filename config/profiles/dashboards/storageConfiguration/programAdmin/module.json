@@ -1,0 +1,33 @@
+{
+    "name": "PRIVILEGES.STORAGE_PROGRAM.NAME",
+    "description": "PRIVILEGES.STORAGE_PROGRAM.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-program-admin",
+            "url": "/bodega/programa",
+            "template": "<ssvq-storage-program-admin></ssvq-storage-program-admin>"
+        },
+        "_controllers": {
+            "read": [
+                "Storage/ProgramController.get",
+                "Storage/ProgramController.getAll",
+                "Storage/ProgramController.getBreadcrumbs"
+            ],
+            "create": [
+                "Storage/ProgramController.create"
+            ],
+            "update": [
+                "Storage/ProgramController.update"
+            ],
+            "delete": [
+                "Storage/ProgramController.delete"
+            ]
+        }
+    }
+}

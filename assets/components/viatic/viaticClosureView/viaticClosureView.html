@@ -1,0 +1,36 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <h4 flex>Cierres {{ vm.type }}</h4>
+        <md-button ng-click="vm.createClosure()">Nuevo</md-button>
+    </div>
+</md-toolbar>
+<md-content style="min-height: calc(100vh - 128px);"
+            layout="column">
+    <md-list>
+        <md-list-item ng-repeat="closure in vm.closureList"
+                      href="#/viaticos/cierres/detalles/{{closure.id}}"
+                      class="md-3-line">
+            <div class="md-avatar">
+                <ssvq-employee-avatar employee="closure.createdBy"
+                                      class="margin-right-10"></ssvq-employee-avatar>
+            </div>
+            <div class="md-list-item-text">
+                <h3>#{{closure.id}} • {{closure.createdAt | date:"dd 'de' MMM"}}</h3>
+                <h4>Ingresado por <b>{{closure.createdBy.fullname}}</b></h4>
+                <p>Total ${{ closure.totalAmount | number }} • {{ closure.viaticCount }} viáticos</p>
+            </div>
+            <div class="md-secondary">
+                <span class="md-body-2"
+                      ng-if="closure.confirmed">Confirmado</span>
+                <span class="md-body-2"
+                      ng-if="!closure.confirmed"
+                      style="color: green">Por confirmar</span>
+            </div>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+
+    <ssvq-loading ng-if="!vm.closureList"></ssvq-loading>
+    <ssvq-no-results ng-if="vm.closureList.length === 0"
+                     flex></ssvq-no-results>
+</md-content>

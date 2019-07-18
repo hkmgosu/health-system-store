@@ -1,0 +1,36 @@
+<div flex
+     layout-gt-sm="row">
+    <md-input-container class="md-block"
+                        flex>
+        <label for="program"
+               translate>PROGRAM.TABLE.PROGRAM</label>
+        <md-select name="program"
+                   ng-model="vm.program"
+                   required>
+            <md-option ng-repeat="program in vm.programs | filter:{ program:null }"
+                       ng-value="program.id">{{program.description}}</md-option>
+        </md-select>
+        <div ng-messages="formGeneral.program.$error">
+            <div ng-message="required">
+                <span translate>PRODUCT_REQUEST.VALIDATOR.REQUIRED</span>
+            </div>
+        </div>
+    </md-input-container>
+
+    <md-input-container class="md-block"
+                        flex>
+        <label for="subprogram"
+               translate>PRODUCT_REQUEST.TABLE.SUBPROGRAM</label>
+        <md-select name="subprogram"
+                   ng-model="vm.subprogram"
+                   required>
+            <md-option ng-repeat="program in vm.programs | filter:{ program: vm.program||0  }"
+                       ng-value="program.id">{{program.description}}</md-option>
+        </md-select>
+        <div ng-messages="formGeneral.subprogram.$error">
+            <div ng-message="required">
+                <span translate>PRODUCT_REQUEST.VALIDATOR.REQUIRED</span>
+            </div>
+        </div>
+    </md-input-container>
+</div>

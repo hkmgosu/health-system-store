@@ -1,0 +1,32 @@
+{
+    "name": "PRIVILEGES.BED_MANAGER.MONITORING.NAME",
+    "description": "PRIVILEGES.BED_MANAGER.MONITORING.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.bed-manager-monitoring",
+            "url": "/gestion-camas/monitoreo",
+            "template": "<ssvq-bed-monitoring></ssvq-bed-monitoring>",
+            "icon": "fa fa-eye",
+            "data": {
+                "layout": {
+                    "sideMenuSize": "icon"
+                }
+            }
+        },
+        "_controllers": {
+            "read": [
+                "BedController.getRoomList",
+                "BedController.getUnitList"
+            ],
+            "update": [
+                "BedController.addRoom",
+                "BedController.addBed",
+                "BedController.addBedPatient"
+            ]
+        }
+    }
+}

@@ -1,0 +1,74 @@
+<md-dialog aria-label="Detalles de Tipo Producto"
+           flex="60"
+           flex-xs="100">
+    <form name="vm.createForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Cancelar">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                </md-button>
+                <h2 flex>{{ !vm.productType.id ? 'Nuevo tipo de producto' : 'Editar tipo de producto' }}</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content class="md-padding">
+            <div ng-form="vm.generalDataForm">
+                <div flex
+                     layout-gt-sm="row">
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label for="description"
+                               translate>Descripción</label>
+                        <input type="text"
+                               name="description"
+                               ng-model="vm.productType.description"
+                               required>
+                        <div ng-messages="vm.createForm.description.$error">
+                            <div ng-message="required">
+                                <span translate>requerido</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        flex>
+                        <md-checkbox name="isPharmaceutical"
+                                     md-no-ink
+                                     aria-label="Tipo Fármaceutico"
+                                     ng-model="vm.productType.isPharmaceutical"
+                                     class="md-primary">
+                            Tipo Fármaceutico
+                        </md-checkbox>
+                        <div ng-messages="vm.createForm.isPharmaceutical.$error">
+                            <div ng-message="required">
+                                <span translate>requerido</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block"
+                                        flex>
+                        <label for="accountPlan"
+                               translate>Plan de Cuenta</label>
+                        <md-select ng-model="vm.productType.accountPlan"
+                                   name="accountPlan"
+                                   required>
+                            <md-option ng-value="item.id"
+                                       ng-repeat="item in vm.accounts">
+                                {{item.description}}-{{item.code}}
+                            </md-option>
+                        </md-select>
+                        <div ng-messages="vm.createForm.accountPlan.$error">
+                            <div ng-message="required">
+                                <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-raised md-primary"
+                       ng-click="vm.confirm()">{{ !vm.productType.id ? 'Crear' : 'Actualizar' }}</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

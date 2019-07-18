@@ -1,0 +1,132 @@
+<div layout="row">
+
+    <ssvq-unit-autocomplete flex="70"
+                            label="Unidad que Solicita"
+                            required="true"
+                            type="input"
+                            selected="vm.expressIncome.destinyUnit"
+                            on-selected="unit => vm.expressIncome.destinyUnit = unit"
+                            ng-if="vm.expressIncome.status !== 2">
+    </ssvq-unit-autocomplete>
+
+    <md-input-container flex
+                        class="md-block"
+                        ng-if="vm.expressIncome.status == 2">
+        <label for="destinyUnit">Unidad que Solicita</label>
+        <input type="text"
+               name="destinyUnit"
+               disabled
+               ng-value="vm.expressIncome.destinyUnit.name">
+    </md-input-container>
+
+    <md-input-container flex
+                        class="md-block">
+        <label for="requestBy">Consumo Solicitado por</label>
+        <input type="text"
+               name="requestBy"
+               required
+               ng-disabled="vm.expressIncome.status==2"
+               ng-model="vm.expressIncome.requestBy">
+        <div ng-messages="formGeneral.requestBy.$error">
+            <div ng-message="required">
+                <span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+            </div>
+        </div>
+    </md-input-container>
+</div>
+
+<div layout="row">
+    <md-input-container flex
+                        class="md-block">
+        <label for="date">Fecha</label>
+        <md-datepicker ng-model="vm.expressIncome.date"
+                       required
+                       ng-disabled="vm.expressIncome.status==2"
+                       md-aria-label="Fecha del consumo">
+        </md-datepicker>
+        <div ng-messages="formGeneral.date.$error">
+            <div ng-message="required">
+                <span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+            </div>
+        </div>
+    </md-input-container>
+
+    <md-input-container flex
+                        class="md-block">
+        <label for="priceTotal">Precio Neto Total</label>
+        <input type="number"
+               name="priceTotal"
+               ng-disabled="vm.expressIncome.status==2"
+               ng-model="vm.expressIncome.priceTotal">
+    </md-input-container>
+</div>
+
+<div layout="row">
+    <md-input-container flex
+                        class="md-block">
+        <label for="numShippingOrder">Orden de Envío</label>
+        <input type="text"
+               ng-disabled="vm.expressIncome.status==2"
+               ng-model="vm.expressIncome.numShippingOrder"
+               id="numShippingOrder">
+    </md-input-container>
+
+    <md-input-container flex
+                        class="md-block">
+        <label for="numInvoice">Nro. Factura</label>
+        <input type="number"
+               ng-disabled="vm.expressIncome.status==2"
+               ng-model="vm.expressIncome.numInvoice"
+               id="numInvoice">
+    </md-input-container>
+
+    <md-input-container flex
+                        class="md-block">
+        <label for="idChileCompra">ID Chile Compra</label>
+        <input type="text"
+               ng-disabled="vm.expressIncome.status==2"
+               ng-model="vm.expressIncome.idChileCompra"
+               id="idChileCompra">
+    </md-input-container>
+</div>
+
+<div layout="row">
+    <md-input-container flex
+                        class="md-block">
+        <label for="numPurchaseOrder">Orden de Compra</label>
+        <input type="number"
+               ng-disabled="vm.expressIncome.status==2"
+               ng-model="vm.expressIncome.numPurchaseOrder"
+               id="numPurchaseOrder">
+    </md-input-container>
+
+    <md-input-container flex
+                        class="md-block">
+        <label for="numInvoice">Fecha Orden Compra</label>
+        <md-datepicker ng-model="vm.expressIncome.datePurchaseOrder"
+                       ng-required="vm.expressIncome.numPurchaseOrder"
+                       ng-disabled="vm.expressIncome.status==2"
+                       md-aria-label="Fecha de la Factura">
+        </md-datepicker>
+        <div ng-messages="formGeneral.datePurchaseOrder.$error">
+            <div ng-message="required">
+                <span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+            </div>
+        </div>
+    </md-input-container>
+
+    <md-input-container flex
+                        class="md-block">
+        <label for="yearPurchaseOrder">Año de Orden Compra</label>
+        <input type="number"
+               ng-model="vm.expressIncome.yearPurchaseOrder"
+               id="yearPurchaseOrder"
+               ng-disabled="vm.expressIncome.status==2"
+               ng-required="vm.expressIncome.numPurchaseOrder">
+        <div ng-messages="formGeneral.numPurchaseOrder.$error">
+            <div ng-message="required">
+                <span translate>STORAGE_MOVEMENT.VALIDATOR.REQUIRED</span>
+            </div>
+        </div>
+    </md-input-container>
+</div>

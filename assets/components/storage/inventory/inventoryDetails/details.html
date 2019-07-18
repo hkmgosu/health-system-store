@@ -1,0 +1,58 @@
+<md-subheader class="md-primary">
+    <div layout="row"
+         layout-align="center center">
+        <span flex>Detalle
+        </span>
+    </div>
+</md-subheader>
+<md-card>
+    <md-card-header layout="row"
+                    class="padding-bottom-0">
+        <div flex>
+            <span class="md-subheader">Productos</span>
+        </div>
+    </md-card-header>
+    <md-card-content class="padding-top-0">
+        <md-list class="animated slideInUp animation-stop padding-0">
+            <md-list-item ng-repeat="item in vm.inventoryDetail | orderBy: -'product.description'"
+                          ng-click="vm.showItemDetail($event, item)">
+                <div class="md-list-item-text">
+                    <div layout="row"
+                         class="md-padding"
+                         flex>
+                        <md-letter-avatar class="md-avatar"
+                                          ng-show="!item.product.hasProfilePicture"
+                                          length="1"
+                                          font-size="18px"
+                                          shape="round"
+                                          data="{{item.product.description}}">
+                        </md-letter-avatar>
+                        <img class="md-avatar"
+                             ng-show="item.product.hasProfilePicture"
+                             ng-src="storage/product/downloadProductProfilePicture/{{item.product.id}}?{{vm.timestamp(item.product)}}">
+                        <div class="md-2-line">
+                            <div layout-gt-xs="column">
+                                <span class="md-body-2">
+                                    <span md-highlight-text="vm.searchText"
+                                          md-highlight-flags="gi">{{item.product.description}}</span>
+                                </span>
+                            </div>
+                            <div layout-gt-xs="column">
+                                <span class="md-caption"
+                                      ng-show="item.realStock">
+                                    Stock Real: {{item.realStock}}</span>
+                                <span class="md-caption"
+                                      md-colors="{ color: 'warn'}"
+                                      ng-show="!item.realStock">
+                                    Stock sin confirmar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-card-content>
+    <ssvq-loading ng-show="!vm.inventoryDetail"></ssvq-loading>
+    <ssvq-no-results ng-show="vm.inventoryDetail.length == 0"></ssvq-no-results>
+</md-card>

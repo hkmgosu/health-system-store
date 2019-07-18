@@ -1,0 +1,119 @@
+<section layout="column"
+         layout-fill
+         class="full-container"
+         id="bottom-sheet-content"
+         flex>
+    <md-toolbar class="md-hue-1"
+                md-scroll-shrink>
+        <div class="md-toolbar-tools"
+             layout="row">
+            <!-- home -->
+            <md-button class="md-icon-button"
+                       ng-click="vm.reloadList(false)">
+                <md-icon md-font-icon="zmdi zmdi-home"></md-icon>
+                <md-tooltip>Ir al inicio</md-tooltip>
+            </md-button>
+
+            <!-- ruta -->
+            <div layout="row"
+                 style="overflow-y:auto;"
+                 flex
+                 ng-show="vm.showLoading">
+                Cargando...
+            </div>
+            <div layout="row"
+                 style="overflow-y:auto;"
+                 flex
+                 ng-show="vm.showLoading == false">
+                <div ng-repeat="breadcrumb in vm.breadcrumbs track by $index"
+                     layout="row"
+                     layout-align="center center">
+                    <span>/</span>
+                    <md-button ng-click="vm.reloadList(breadcrumb)"
+                               ng-disabled="breadcrumb.id == vm.category.id">
+                        {{breadcrumb.description}}
+                        <md-tooltip>Ir a {{breadcrumb.description}}</md-tooltip>
+                    </md-button>
+                </div>
+            </div>
+
+            <!-- boton buscar -->
+            <md-button class="md-icon-button"
+                       ng-show="!vm.showSearch"
+                       ng-click="vm.showSearch = true;">
+                <md-icon md-font-icon="zmdi zmdi-search"></md-icon>
+                <md-tooltip>Buscar</md-tooltip>
+            </md-button>
+
+            <ssvq-search-input search-text="vm.searchText"
+                               label="Buscar Categoría"
+                               flex="30"
+                               ng-show="vm.showSearch"></ssvq-search-input>
+
+            <!-- menu top -->
+            <md-menu md-position-mode="target-right target"
+                     style="margin-right: 5px;">
+                <md-button class="md-icon-button"
+                           ng-click="$mdMenu.open()">
+                    <md-icon md-font-icon="zmdi zmdi-more"></md-icon>
+                    <md-tooltip>Ver más opciones</md-tooltip>
+                </md-button>
+                <md-menu-content width="4">
+                    <md-menu-item ng-show="vm.breadcrumbs.length < 2">
+                        <md-button ng-click="vm.addCategory($event);">
+                            <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+                            {{vm.category ? 'Agregar subcategoría':'Agregar categoría'}}
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item ng-show="vm.category">
+                        <md-button ng-click="vm.onEditItem(vm.category, $event);">
+                            <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                            Editar categoría
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </div>
+    </md-toolbar>
+
+
+    <md-content flex>
+        <ssvq-loading ng-show="vm.showLoading"></ssvq-loading>
+        <ssvq-no-results ng-show="!vm.childrenList.length && !vm.showLoading"></ssvq-no-results>
+
+        <md-list class="padding-0 category-list">
+            <md-list-item class="md-2-line"
+                          ng-click="!vm.category && vm.reloadList(category)"
+                          aria-label="{{category.description}}"
+                          ng-repeat="category in vm.childrenList track by $index"
+                          layout="row">
+                <div class="md-list-item-text"
+                     flex>
+                    <h4 md-truncate>{{category.description}}</h4>
+                </div>
+                <md-menu md-position-mode="target-right target">
+                    <md-button class="md-icon-button"
+                               ng-click="$mdMenu.open()">
+                        <md-icon md-font-icon="zmdi zmdi-more"></md-icon>
+                        <md-tooltip>Ver más opciones</md-tooltip>
+                    </md-button>
+                    <md-menu-content width="4">
+                        <md-menu-item>
+                            <md-button ng-click="vm.onEditItem(category, $event);">
+                                <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                                {{ vm.category ? 'Editar subcategoría' : 'Editar categoría'}}
+                            </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="vm.onDeleteItem(category, $event);">
+                                <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
+                                {{ vm.category ? 'Eliminar subcategoría' : 'Eliminar categoría'}}
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</section>

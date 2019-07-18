@@ -1,0 +1,31 @@
+md-letter-avatar.event-avatar,
+md-letter-avatar.event-avatar img {
+    width: 35px !important;
+    height: 35px !important;
+}
+
+md-letter-avatar.event-avatar .mini-avatar,
+md-letter-avatar.event-avatar .mini-avatar img {
+    width: 25px !important;
+    height: 25px !important;
+}
+
+md-letter-avatar.event-avatar .mega-avatar,
+md-letter-avatar.event-avatar .mega-avatar img {
+    width: 160px !important;
+    height: 160px !important;
+}
+
+.capitalize-text {
+    text-transform: capitalize;
+}
+
+div.padding-ea-item {
+    padding: 4px;
+}
+
+@media (min-width:960px){
+    div.padding-ea-item {
+        padding: 8px;
+    }
+} 

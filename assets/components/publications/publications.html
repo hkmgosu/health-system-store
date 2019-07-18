@@ -1,0 +1,13 @@
+<div layout="column">
+    <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools">
+            <span flex></span>
+            <ssvq-search-input on-change="vm.onSearchTextChange"
+                               flex="100"
+                               flex-md="80"
+                               flex-gt-md="60"></ssvq-search-input>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <ssvq-article-list filter="vm.filter"></ssvq-article-list>
+</div>

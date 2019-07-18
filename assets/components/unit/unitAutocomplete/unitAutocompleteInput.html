@@ -1,0 +1,38 @@
+<div ng-form="autocompleteForm">
+    <md-autocomplete md-delay="500"
+                     ng-attr-md-floating-label="{{vm.label || 'Unidad Administrativa'}}"
+                     md-selected-item="vm.selected"
+                     md-search-text="vm.filter.searchText"
+                     md-items="item in vm.getMatches(vm.filter.searchText)"
+                     md-selected-item-change="vm.localOnSelect(item)"
+                     md-item-text="vm.selected.name"
+                     md-select-on-match="false"
+                     md-min-length="vm.minLength || 0"
+                     md-input-name="unitAutocomplete"
+                     md-autocomplete-required="{{vm.required}}"
+                     md-clear-button="true"
+                     md-no-cache="true"
+                     flex>
+        <md-item-template>
+            <div layout="row"
+                 layout-align="start center">
+                <div layout="column"
+                     class="md-padding">
+                    <span class="md-body-2"
+                          md-highlight-text="filter.searchText"
+                          md-highlight-flags="^i">{{item.name}}</span>
+                    <span class="md-caption">{{'Depende de ' + (item.parent.name || '--')}}</span>
+                </div>
+            </div>
+        </md-item-template>
+        <div ng-messages="autocompleteForm.unitAutocomplete.$error"
+             ng-show="autocompleteForm.unitAutocomplete.$touched">
+            <div ng-message="selectedItem">{{'UNIT.AUTOCOMPLETE.REQUIRED' | translate}}</div>
+        </div>
+        <md-not-found>
+            <div class="md-padding">
+                <span>{{'AUTOCOMPLETE.NOMATCHFOUND' | translate}}</span>
+            </div>
+        </md-not-found>
+    </md-autocomplete>
+</div>

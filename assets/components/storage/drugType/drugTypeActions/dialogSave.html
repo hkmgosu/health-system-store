@@ -1,0 +1,46 @@
+<md-dialog aria-label="Detalles de tipo de droga"
+           flex="60"
+           flex-xs="100">
+    <form name="vm.createForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 translate
+                    flex>DRUG_TYPE.DIALOG.TITLE</h2>
+                <span flex></span>
+
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Cancelar">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content class="md-padding">
+            <div flex
+                 layout-gt-sm="row">
+                <md-input-container class="md-block"
+                                    flex>
+                    <label for="description"
+                           translate>DRUG_TYPE.TABLE.DESCRIPTION</label>
+                    <input type="text"
+                           name="description"
+                           ng-model="vm.drugType.description"
+                           required>
+                    <div ng-messages="vm.createForm.description.$error">
+                        <div ng-message="required">
+                            <span translate>DRUG_TYPE.VALIDATOR.REQUIRED</span>
+                        </div>
+                    </div>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-raised md-primary"
+                       ng-click="vm.confirm()"
+                       ng-disabled="vm.createForm.$invalid"
+                       aria-label="CRUD.SAVE"
+                       translate="CRUD.SAVE"></md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

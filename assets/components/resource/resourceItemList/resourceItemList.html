@@ -1,0 +1,19 @@
+<md-list-item class="md-3-line">
+    <md-icon class="md-avatar-icon"
+             layout="row"
+             layout-align="center center"
+             style="background: #5fa0bf;"
+             ng-class="vm.getResourceIcon(vm.resource.resource.type)"></md-icon>
+    <div class="md-list-item-text">
+        <h3>{{vm.resource.resource.model}} {{vm.resource.resource.serialNumber}}</h3>
+        <h4>
+            <span ng-if="vm.resource.resource.ipAddress">IP {{vm.resource.resource.ipAddress}} •</span>
+            <span ng-if="vm.resource.resource.macAddress">MAC {{vm.resource.resource.macAddress}} •</span>
+            <span>{{vm.resource.resource.phoneNumber}}</span>
+        </h4>
+        <p class="text-right">
+            <span>{{vm.resource.startDate | date:"dd 'de' MMM yyyy"}}</span> -
+            <span>{{(vm.resource.endDate | date:"dd 'de' MMM yyyy") || 'Actualidad'}}</span>
+        </p>
+    </div>
+</md-list-item>

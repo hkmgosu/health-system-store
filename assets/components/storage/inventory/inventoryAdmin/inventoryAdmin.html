@@ -1,0 +1,14 @@
+<section layout="row">
+
+    <div flex>
+        <div ng-include="'/components/storage/inventory/inventoryAdmin/toolbar.html'"></div>
+        <div ng-include="'/components/storage/inventory/inventoryAdmin/modeList.html'"></div>
+    </div>
+
+    <!-- SECCION FILTRO -->
+    <md-sidenav class="md-sidenav-right md-whiteframe-1dp"
+                md-is-locked-open="$mdMedia('gt-xs')"
+                md-component-id='inventories-filter'>
+        <div ng-include="'/components/storage/inventory/inventoryAdmin/filter.html'"></div>
+    </md-sidenav>
+</section>

@@ -1,0 +1,26 @@
+{
+    "name": "PRIVILEGES.PERMISSIONMANAGEMENT.SUPERVISION.NAME",
+    "description": "PRIVILEGES.PERMISSIONMANAGEMENT.SUPERVISION.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.permission-supervision",
+            "url": "/permisos/supervision",
+            "template": "<ssvq-permission-list-view></ssvq-permission-list-view>"
+        },
+        "_controllers": {
+            "read": [
+                "PermissionController.getSupervised",
+                "PermissionController.getPermissionTypeList",
+                "HolidayController.getHolidays",
+                "EmployeeController.getList"
+            ],
+            "create": [
+                "PermissionController.create"
+            ]
+        }
+    }
+}

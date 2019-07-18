@@ -1,0 +1,102 @@
+<md-toolbar class="md-hue-1" md-scroll-shrink>
+    <div class="md-toolbar-tools">
+        <div layout="column" hide-xs flex>
+            <span class="md-subhead">Plan de Cuenta</span>
+            <span class="md-caption">
+                Mostrando {{accounts.length}} de {{found}} resultados
+            </span>
+        </div>
+        <!-- Buscar -->
+        <ssvq-search-input search-text="searchText" label="Buscar Cuenta" flex flex-gt-xs="50"></ssvq-search-input>
+        <span flex hide-xs></span>
+
+        <md-button class="md-icon-button" ng-show="viewMode == 'list'" ng-click="viewMode = 'table'">
+            <md-icon md-font-icon="fa fa-table"></md-icon>
+            <md-tooltip>Ver como tabla</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button" ng-show="viewMode == 'table'" ng-click="viewMode = 'list'">
+            <md-icon md-font-icon="fa fa-list"></md-icon>
+            <md-tooltip>Ver como lista</md-tooltip>
+        </md-button>
+        <md-divider class="vertical-divider"></md-divider>
+
+        <md-button required-privilege="['create','update']" class="md-icon-button" ng-click="onCreate($event)">
+            <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+            <md-tooltip>Crear nueva cuenta</md-tooltip>
+        </md-button>
+    </div>
+</md-toolbar>
+
+
+<md-content ng-if="viewMode == 'table'">
+    <!-- Modo Tabla -->
+    <div ssvq-infinite-load>
+        <md-table-container class="full-table-container animated slideInUp animation-stop">
+            <table md-table ng-if="accounts && accounts.length > 0" class="animated fadeIn animation-stop">
+                <thead md-head>
+                    <tr md-row>
+                        <th md-column>{{ 'ACCOUNT_PLAN.TABLE.YEAR' | translate}}</th>
+                        <th md-column>{{ 'ACCOUNT_PLAN.TABLE.CODE' | translate}}</th>
+                        <th md-column>{{ 'ACCOUNT_PLAN.TABLE.DESCRIPTION' | translate}}</th>
+                        <th md-column></th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row ng-repeat="item in accounts">
+                        <td md-cell>
+                            <span class="force-line">{{item.year}}</span>
+                        </td>
+                        <td md-cell>
+                            <span class="force-line">{{item.code}}</span>
+                        </td>
+                        <td md-cell>
+                            <span class="force-line capitalize" md-highlight-text="searchText">{{item.description}}</span>
+                        </td>
+                        <td md-cell>
+                            <ssvq-storage-account-actions account-plan="item" on-delete="reload"></ssvq-storage-account-actions>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ssvq-loading ng-show="!accounts"></ssvq-loading>
+            <ssvq-no-results ng-show="accounts.length == 0"></ssvq-no-results>
+        </md-table-container>
+
+        <md-table-pagination md-limit="limit" md-page="page" md-total="{{found}}"                          md-on-paginate="reload" md-page-select></md-table-pagination>
+    </div>
+</md-content>
+
+
+<!-- Modo Lista -->
+<md-content ng-if="viewMode == 'list'">
+    <div ssvq-infinite-load>
+
+        <ssvq-loading ng-show="!accounts"></ssvq-loading>
+        <ssvq-no-results ng-show="accounts.length == 0"></ssvq-no-results>
+    
+        <md-list class="animated slideInUp animation-stop padding-0" ng-if="accounts">
+            <md-list-item ng-repeat="item in accounts">
+    
+                <div layout="row" layout-align="start center" flex>
+                    <!-- avatar -->
+                    <md-letter-avatar length="2" font-size="18px" shape="round" data="{{item.description}}" layout="row" layout-align="center center"></md-letter-avatar>
+
+                    <div flex layout="column" class="md-padding" style="overflow: hidden;">
+                        <span class="md-body-2" md-highlight-text="searchText" md-highlight-flags="gi">
+                            {{item.description}}
+                        </span>
+                        <span class="md-caption" md-highlight-text="searchText" md-highlight-flags="gi">
+                            {{item.year || '--'}}: {{item.code || '--'}}
+                        </span>
+                    </div>
+                </div>
+    
+                <ssvq-storage-account-actions account-plan="item"></ssvq-storage-account-actions>
+    
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </div>
+</md-content>
+

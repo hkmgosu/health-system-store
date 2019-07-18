@@ -1,0 +1,152 @@
+<md-dialog aria-label=""
+           flex="60"
+           class="mobile-fullwidth-dialog"
+           ng-form="saveForm">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>
+                {{ ( (!vm.establishment.id)? 'ESTABLISHMENT.OTHERS.CREATETITLE' : 'ESTABLISHMENT.OTHERS.EDITTITLE' ) | translate }}
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()"
+                       aria-label="Cancelar">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-tabs flex
+                 md-no-pagination
+                 md-dynamic-height
+                 class="md-primary md-hue-1">
+            <md-tab label="Datos básicos">
+                <div class="md-padding">
+                    <div flex>
+                        <md-input-container class="md-block">
+                            <label translate>ESTABLISHMENT.NAME</label>
+                            <input type="text"
+                                   name="name"
+                                   ng-model="vm.establishment.name"
+                                   md-autofocus
+                                   required>
+                            <div ng-messages="saveForm.name.$error">
+                                <div ng-message="required">
+                                    <span translate>ESTABLISHMENT.VALIDATOR.REQUIRED</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div flex>
+                        <md-input-container class="md-block">
+                            <label translate>ESTABLISHMENT.SHORTNAME</label>
+                            <input type="text"
+                                   ng-model="vm.establishment.shortname">
+                        </md-input-container>
+                    </div>
+                    <div flex>
+                        <md-input-container class="md-block">
+                            <label translate>ESTABLISHMENT.DESCRIPTION</label>
+                            <input type="text"
+                                   ng-model="vm.establishment.description">
+                        </md-input-container>
+                    </div>
+                    <div flex>
+                        <md-input-container class="md-block">
+                            <label translate>ESTABLISHMENT.TYPE</label>
+                            <md-select name="type"
+                                       ng-model="vm.establishment.type"
+                                       required>
+                                <md-option ng-value="type.id"
+                                           ng-repeat="type in vm.types">
+                                    <div layout="row"
+                                         layout-align="start center"
+                                         class="margin-top-10 margin-bottom-10 type-item">
+                                        <div>
+                                            <img ng-src="{{'/establishmentType/icon?id=' + type.id}}"
+                                                 width="36"
+                                                 height="36"
+                                                 class="margin-right-10"
+                                                 style="width:36px;padding:5px 0 5px 0;">
+                                        </div>
+                                        <div layout="column"
+                                             flex>
+                                            <span class="md-body-2">{{type.shortname}}</span>
+                                            <span class="md-caption">{{type.name}}</span>
+                                        </div>
+                                    </div>
+                                </md-option>
+                            </md-select>
+                            <div ng-messages="saveForm.type.$error">
+                                <div ng-message="required">
+                                    <span translate>ESTABLISHMENT.VALIDATOR.REQUIRED</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </div>
+            </md-tab>
+            <md-tab label="Contacto">
+                <div class="md-padding">
+                    <div flex>
+                        <md-input-container class="md-block">
+                            <md-icon md-font-icon="zmdi zmdi-email"></md-icon>
+                            <label translate>ESTABLISHMENT.EMAIL</label>
+                            <input type="email"
+                                   name="email"
+                                   ng-model="vm.establishment.email">
+                            <div ng-messages="saveForm.email.$error">
+                                <div ng-message="email">
+                                    <span translate>ESTABLISHMENT.VALIDATOR.EMAIL</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+
+                    <div flex>
+                        <md-input-container class="md-block">
+                            <md-icon md-font-icon="zmdi zmdi-phone"></md-icon>
+                            <label translate>ESTABLISHMENT.PHONO</label>
+                            <input type="text"
+                                   ng-model="vm.establishment.phone">
+                        </md-input-container>
+                    </div>
+
+                    <div flex>
+                        <md-input-container class="md-block">
+                            <md-icon md-font-icon="zmdi zmdi-globe-alt"></md-icon>
+                            <label translate>ESTABLISHMENT.WEBSITE</label>
+                            <input type="url"
+                                   name="website"
+                                   ng-model="vm.establishment.website">
+                            <div ng-messages="saveForm.website.$error">
+                                <div ng-message="url">
+                                    <span translate>ESTABLISHMENT.VALIDATOR.URL</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </div>
+            </md-tab>
+            <md-tab label="Ubicación">
+                <div class="md-padding">
+                    <ssvq-address-form address="vm.establishment.address"></ssvq-address-form>
+                </div>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-accent"
+                   ng-click="vm.cancel()"
+                   translate="CRUD.CANCEL"
+                   aria-label="Cancelar">
+        </md-button>
+        <md-button class="md-primary"
+                   ng-click="vm.save()"
+                   type="submit"
+                   ng-disabled="saveForm.$submitted && saveForm.$invalid"
+                   translate="CRUD.SAVE"
+                   aria-label="Guardar establecimiento">
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

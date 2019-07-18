@@ -1,0 +1,38 @@
+<md-toolbar ng-show="!vm.opts.onlyRead"
+            md-theme="vm.opts.theme"
+            ng-class="{'md-hue-1': (vm.opts.theme === 'my-theme') }">
+    <div class="md-toolbar-tools">
+        <ssvq-employee-autocomplete type="search"
+                                    label="Agregar participante"
+                                    clear-on-select="true"
+                                    on-select="vm.addParticipant"
+                                    flex></ssvq-employee-autocomplete>
+    </div>
+</md-toolbar>
+<md-list>
+    <md-list-item ng-repeat="participant in vm.participantList | filter: {deleted: false}"
+                  class="animated fadeIn animation-stop">
+        <div class="md-list-item-text"
+             flex>
+            <ssvq-employee-item-list fields="::vm.opts.employeeFields"
+                                     employee="participant.member"></ssvq-employee-item-list>
+        </div>
+        <md-select ng-if="vm.opts.showJobSelector"
+                   ng-model="participant.job"
+                   ng-change="vm.updateJob(participant, $event)"
+                   style="min-width: 400px">
+            <md-option ng-value="job.id"
+                       ng-repeat="job in vm.jobList">
+                {{job.name}}
+            </md-option>
+        </md-select>
+        <md-button class="md-warn md-secondary md-raised margin-left-20"
+                   ng-show="!vm.opts.onlyRead"
+                   ng-click="vm.removeParticipant(participant)">Quitar</md-button>
+        <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
+    <p class="text-center md-caption"
+       ng-if="(vm.participantList | filter: {deleted: false}).length == 0">
+        La lista de participantes está vacía
+    </p>
+</md-list>

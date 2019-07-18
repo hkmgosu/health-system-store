@@ -1,0 +1,75 @@
+<md-list>
+    <input type="hidden"
+           ng-required="vm.requiredOption"
+           name="{{vm.name}}"
+           ng-model="vm.model">
+    <md-subheader class="md-no-sticky"
+                  ng-class="{'required-selector': vm.requiredOption}">
+        {{::( vm.label | translate )}}
+    </md-subheader>
+    <md-divider></md-divider>
+    <div class="custom-option-list-item"
+         layout="row"
+         layout-wrap>
+        <md-list-item ng-repeat="item in vm.parametrics | orderBy: 'id'"
+                      ng-click="vm.toggle(item, vm.tempModel)"
+                      ng-class="{active: vm.exists(item.id, vm.tempModel)}"
+                      flex="100"
+                      flex-gt-sm="50">
+            <p>{{::item.name}}</p>
+            <div ng-if="item.hasObservation && vm.exists(item.id, vm.tempModel)" flex="60" flex-gt-sm="50"
+                 layout="row" layout-align="end center" class="observation-checkbox">
+                <span>{{::item.description}}</span>
+                <md-input-container class="md-block margin-0"
+                                    flex="20">
+                    <input type="text"
+                           name="observation"
+                           ng-required="vm.requiredOption"
+                           ng-model="vm.observations[item.id].value"/>
+                </md-input-container>
+                <span>{{::item.predicated}}</span>
+            </div>
+            <md-checkbox class="md-secondary"
+                         style="width:20px;"
+                         aria-label="{{::(item.name | translate)}}"
+                         ng-checked="vm.exists(item.id, vm.tempModel)"
+                         ng-click="vm.toggle(item, vm.tempModel)"></md-checkbox>
+        </md-list-item>
+        <md-list-item ng-click="vm.toggle(vm.other, vm.tempModel)"
+                      ng-class="{active: vm.exists(vm.other.id, vm.tempModel)}"
+                      ng-if="vm.otherOption"
+                      flex="100"
+                      flex-gt-sm="50">
+            <p flex>{{::('Otro ¿Cuál?' | translate)}}</p>
+            <md-autocomplete md-delay="500"
+                             md-selected-item="vm.other.item"
+                             md-autoselect="false"
+                             md-search-text="vm.other.name"
+                             md-items="item in vm.getMatches()"
+                             md-item-text="item.name"
+                             md-min-length="2"
+                             md-input-name="{{ 'other' + vm.name }}"
+                             md-clear-button="false"
+                             md-no-cache="true"
+                             ng-if="vm.exists(vm.other.id, vm.tempModel)"
+                             required>
+                <md-item-template>
+                    <div layout="row"
+                         layout-align="start center">
+                        <div layout="column"
+                             class="md-padding">
+                            <span class="md-body-2"
+                                  md-highlight-text="vm.other.name"
+                                  md-highlight-flags="^i">{{item.name}}</span>
+                        </div>
+                    </div>
+                </md-item-template>
+            </md-autocomplete>
+            <md-checkbox class="md-secondary"
+                         style="width:20px;"
+                         aria-label="{{::('Otro ¿Cuál?' | translate)}}"
+                         ng-checked="vm.exists(vm.other.id, vm.tempModel)"
+                         ng-click="vm.toggle(vm.other, vm.tempModel)"></md-checkbox>
+        </md-list-item>
+    </div>
+</md-list>

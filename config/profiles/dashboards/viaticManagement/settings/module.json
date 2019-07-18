@@ -1,0 +1,25 @@
+{
+    "name": "PRIVILEGES.VIATICMANAGEMENT.SETTINGS.NAME",
+    "description": "PRIVILEGES.VIATICMANAGEMENT.SETTINGS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.viatic-management-settings",
+            "url": "/viaticos/configuraciones",
+            "template": "<ssvq-workflow-status-settings-view module=\"viatic\"></ssvq-workflow-status-settings-view>"
+        },
+        "_controllers": {
+            "read": [
+                "EmployeeController.getList",
+                "WorkflowController.getStatus"
+            ],
+            "update": [
+                "WorkflowController.addSupervisor",
+                "WorkflowController.rmSupervisor"
+            ]
+        }
+    }
+}

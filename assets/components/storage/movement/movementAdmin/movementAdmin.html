@@ -1,0 +1,18 @@
+<section layout="row">
+
+    <div flex>
+        <div ng-include="'/components/storage/movement/movementAdmin/toolbar.html'"></div>
+        <div ng-include="'/components/storage/movement/movementAdmin/modeList.html'"
+             ng-if="vm.viewMode == 'list'"></div>
+        <md-content ng-include="'/components/storage/movement/movementAdmin/modeTable.html'"
+                    ng-if="vm.viewMode == 'table'"></md-content>
+    </div>
+
+    <!-- SECCION FILTRO -->
+    <md-sidenav class="md-sidenav-right md-whiteframe-1dp"
+                md-is-locked-open="$mdMedia('gt-xs')"
+                md-component-id='movements-filter'>
+
+        <div ng-include="'/components/storage/movement/movementAdmin/filter.html'"></div>
+    </md-sidenav>
+</section>

@@ -1,0 +1,65 @@
+<md-subheader class="md-primary">
+    <div layout="row"
+         layout-align="center center">
+        <span flex>Productos
+            ({{vm.expressIncome.details.length}} ítems)
+        </span>
+    </div>
+</md-subheader>
+
+<!-- SIN PROGRAMA -->
+<md-card>
+    <md-card-header layout="row"
+                    class="padding-bottom-0">
+        <div flex>
+            <md-icon md-font-icon="fa fa-home"></md-icon>Productos
+        </div>
+        <md-button ng-click="vm.addDetail($event, null)"
+                   ng-show="1 == (vm.expressIncome.status || 1)"
+                   class="md-icon-button">
+            <md-icon md-font-icon="fa fa-plus"></md-icon>
+        </md-button>
+    </md-card-header>
+    <md-card-content class="padding-top-0">
+        <md-list class="md-dense">
+            <md-list-item class="md-3-line md-with-secondary"
+                          ng-repeat="item in vm.expressIncome.details track by $index"
+                          ng-click="vm.editDetail($event, item)">
+                <div layout="row"
+                     layout-align="center center">
+                    <div class="top-border"></div>
+                    <md-letter-avatar class="md-avatar"
+                                      ng-show="!item.product.hasProfilePicture"
+                                      length="1"
+                                      font-size="18px"
+                                      shape="round"
+                                      data="item.product.description">
+                    </md-letter-avatar>
+                    <img class="md-avatar"
+                         ng-show="item.product.hasProfilePicture"
+                         ng-src="storage/product/downloadProductProfilePicture/{{item.product.id}}?{{vm.timestamp(item.product)}}">
+
+                    <div class="bottom-border"></div>
+                </div>
+                <div class="md-list-item-text"
+                     layout="column">
+                    <h3 truncate><b>{{item.product.productCode}}</b> : {{item.productDescription || item.product.description}}</h3>
+                    <p ng-style="{ color: item.quantity < 0 ? 'red':'green' }">
+                        Cantidad: {{ item.quantity | abs }}
+                    </p>
+                </div>
+                <div class="md-secondary-container">
+                    <md-button class="md-warn md-icon-button"
+                               ng-show="1 == (vm.expressIncome.status || 1)"
+                               ng-click="vm.delDetail($event, item)">
+                        <md-icon md-font-icon="fa fa-trash"></md-icon>
+                    </md-button>
+                </div>
+            </md-list-item>
+            <md-divider></md-divider>
+        </md-list>
+    </md-card-content>
+</md-card>
+
+
+<ssvq-loading ng-show="!vm.expressIncome.id"></ssvq-loading>

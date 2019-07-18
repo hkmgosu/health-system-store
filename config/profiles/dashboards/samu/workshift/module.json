@@ -1,0 +1,27 @@
+{
+    "name": "PRIVILEGES.SAMU.WORKSHIFT.NAME",
+    "description": "PRIVILEGES.SAMU.WORKSHIFT.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "create": false,
+            "read": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.samu-work-shift",
+            "url": "/samu/turnos",
+            "template": "<ssvq-workshift-manager></ssvq-workshift-manager>",
+            "priority": 4
+        },
+        "_controllers": {
+            "read": [
+                "WorkshiftController.getList",
+                "WorkshiftController.getEstablishmentVehicleList",
+                "WorkshiftController.getFullCareTeamList",
+                "WorkshiftController.remoteValidate"
+            ],
+            "create": [
+                "WorkshiftController.create"
+            ]
+        }
+    }
+}

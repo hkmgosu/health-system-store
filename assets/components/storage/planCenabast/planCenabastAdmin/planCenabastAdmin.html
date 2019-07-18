@@ -1,0 +1,63 @@
+<md-toolbar class="md-hue-1"
+            md-scroll-shrink>
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             hide-xs
+             flex>
+            <span class="md-subhead"
+                  translate>PRIVILEGES.STORAGE_CENABAST.NAME</span>
+            <span class="md-caption"
+                  ng-show="vm.viewMode=='list'">
+                Mostrando {{vm.products.length}} de {{vm.found}} resultados
+            </span>
+        </div>
+        <!-- Buscar -->
+        <ssvq-search-input search-text="vm.searchText"
+                           label="Buscar Producto"
+                           flex
+                           flex-gt-xs="60">
+        </ssvq-search-input>
+        <div flex
+             hide-xs></div>
+    </div>
+</md-toolbar>
+
+<div layout-gt-sm="row">
+    <md-card flex-gt-sm="40"
+             flex="100">
+        <md-card-header layout="row"
+                        class="padding-bottom-0">
+            <span flex>Plan anual</span>
+            <md-input-container flex>
+                <label>Año</label>
+                <input type="number"
+                       ng-model="vm.year">
+            </md-input-container>
+        </md-card-header>
+        <md-card-body>
+            <div ng-include="'/components/storage/planCenabast/planCenabastAdmin/plan.html'"></div>
+        </md-card-body>
+    </md-card>
+
+    <md-card flex>
+        <md-card-header>Productos</md-card-header>
+        <md-card-body style="margin-bottom: 70px;">
+            <div ng-include="'/components/storage/planCenabast/planCenabastAdmin/productos.html'"></div>
+        </md-card-body>
+    </md-card>
+</div>
+
+<!-- BOTON NUEVO -->
+<md-fab-speed-dial md-direction="up"
+                   required-privilege="['create']"
+                   class="md-fab-bottom-right md-fling md-hover-full ng-isolate-scope md-up _md-animations-ready"
+                   style="position: fixed;">
+    <md-fab-trigger>
+        <md-button aria-label="menu"
+                   ng-disabled="!vm.month || !vm.year"
+                   ng-click="vm.addProduct($event)"
+                   class="md-fab md-primary">
+            <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+        </md-button>
+    </md-fab-trigger>
+</md-fab-speed-dial>

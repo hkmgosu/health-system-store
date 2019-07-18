@@ -1,0 +1,13 @@
+{
+    "name": "PRIVILEGES.BED_MANAGER.NAME",
+    "description": "PRIVILEGES.BED_MANAGER.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "icon": "zmdi zmdi-hotel"
+        },
+        "_controllers": {}
+    }
+}

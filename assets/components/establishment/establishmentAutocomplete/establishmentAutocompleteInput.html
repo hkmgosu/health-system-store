@@ -1,0 +1,30 @@
+<md-autocomplete md-delay="500"
+                 ng-attr-md-floating-label="{{vm.label || 'Establecimiento'}}"
+                 md-selected-item="vm.selected"
+                 md-selected-item-change="vm.localOnSelect(item)"
+                 md-search-text="searchText"
+                 md-items="item in getMatches(searchText)"
+                 md-item-text="vm.selected.name"
+                 md-select-on-match="false"
+                 md-clear-button="vm.opts.clearButton"
+                 md-autocomplete-required="{{vm.required}}"
+                 ng-disabled="vm.opts.disabled"
+                 md-min-length="0"
+                 flex>
+    <md-item-template>
+        <div layout="row"
+             layout-align="start center">
+            <div layout="column"
+                 class="md-padding">
+                <span class="md-body-2"
+                      md-highlight-text="searchText"
+                      md-highlight-flags="^i">{{item.name}}</span>
+            </div>
+        </div>
+    </md-item-template>
+    <md-not-found>
+        <div class="md-padding">
+            <span>{{'AUTOCOMPLETE.NOMATCHFOUND' | translate}}</span>
+        </div>
+    </md-not-found>
+</md-autocomplete>

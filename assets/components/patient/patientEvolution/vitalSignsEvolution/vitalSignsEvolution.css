@@ -1,0 +1,8 @@
+.flex-14-custom {
+    -webkit-flex: 1 1 14.28%;
+    -ms-flex: 1 1 14.28%;
+    flex: 1 1 14.28%;
+    max-width: 14.28%;
+    max-height: 100%;
+    box-sizing: border-box;
+}

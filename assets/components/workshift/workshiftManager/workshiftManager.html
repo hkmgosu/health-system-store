@@ -1,0 +1,48 @@
+<div layout="row"
+     style="height: calc(100vh - 64px)"
+     layout-fill>
+    <div flex
+         layout="column">
+        <md-toolbar class="md-hue-1">
+            <div class="md-toolbar-tools">
+                <div layout="column"
+                     flex>
+                    <span class="md-subhead"
+                          hide-xs>Libro de turnos</span>
+                    <span class="md-caption">{{vm.title}}</span>
+                </div>
+                <md-button ng-click="vm.selectEstablishment($event)">
+                    {{ vm.establishmentSelected.name }}
+                    <md-icon md-font-icon="zmdi zmdi-caret-down"></md-icon>
+                    <md-tooltip>Cambiar establecimiento</md-tooltip>
+                </md-button>
+                <md-divider style="height: 56%; width: 1px; background: #ffffff29;"></md-divider>
+                <md-button class="md-icon-button"
+                           ng-click="vm.goPrev()">
+                    <md-icon md-font-icon="zmdi zmdi-chevron-left"></md-icon>
+                    <md-tooltip>Mes anterior</md-tooltip>
+                </md-button>
+                <md-button class="md-icon-button"
+                           ng-click="vm.goNext()">
+                    <md-icon md-font-icon="zmdi zmdi-chevron-right"></md-icon>
+                    <md-tooltip>Mes siguiente</md-tooltip>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <div style="height: calc(100vh - 128px);"
+             id="workshiftCalendar">
+            <div ui-calendar="vm.calendarConfig"
+                 calendar="workshiftCalendar"
+                 ng-model="vm.calendarQuery"
+                 ng-if="vm.initCalendar"></div>
+        </div>
+    </div>
+    <md-button class="md-fab md-fab-bottom-right md-primary"
+               ng-click="vm.showCreateDialog($event)">
+        <md-icon md-font-icon="fa fa-pencil-square-o"></md-icon>
+        <md-tooltip md-direction="top">
+            Nuevo turno
+        </md-tooltip>
+    </md-button>
+</div>

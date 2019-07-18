@@ -1,0 +1,141 @@
+<md-toolbar class="md-hue-1"
+            md-scroll-shrink>
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             hide-xs
+             flex>
+            <span class="md-subhead"
+                  translate>PRIVILEGES.COMPANY.NAME</span>
+            <span class="md-caption"
+                  ng-show="vm.viewMode=='list'">
+                Mostrando {{vm.companies.length}} de {{vm.found}} resultados
+            </span>
+        </div>
+        <!-- Buscar -->
+        <ssvq-search-input search-text="searchText"
+                           label="Buscar Compañía"
+                           flex
+                           flex-gt-xs="50"></ssvq-search-input>
+        <span flex
+              hide-xs></span>
+
+        <md-button class="md-icon-button"
+                   ng-show="vm.viewMode == 'list'"
+                   ng-click="vm.viewChange()">
+            <md-icon md-font-icon="fa fa-table"></md-icon>
+            <md-tooltip>Ver como tabla</md-tooltip>
+        </md-button>
+        <md-button class="md-icon-button"
+                   ng-show="vm.viewMode == 'table'"
+                   ng-click="vm.viewChange()">
+            <md-icon md-font-icon="fa fa-list"></md-icon>
+            <md-tooltip>Ver como lista</md-tooltip>
+        </md-button>
+
+        <md-divider class="vertical-divider"></md-divider>
+
+        <md-button required-privilege="['create','update']"
+                   class="md-icon-button"
+                   ng-click="vm.onCreate($event)">
+            <md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+            <md-tooltip>Crear nuevo tipo</md-tooltip>
+        </md-button>
+    </div>
+</md-toolbar>
+
+
+
+<!-- Modo Lista -->
+<md-content ssvq-infinite-load
+            ng-if="vm.viewMode == 'list'"
+            next-page="vm.nextPage"
+            md-promise="vm.promise">
+    <div class="company-list-container">
+        <ssvq-loading ng-show="!vm.companies"></ssvq-loading>
+        <ssvq-no-results ng-show="vm.companies.length == 0"></ssvq-no-results>
+
+        <md-list ng-if="vm.companies">
+            <md-list-item ng-repeat="item in vm.companies"
+                          class="md-2-line">
+                <div class="md-list-item-inner"
+                     layout="row"
+                     layout-align="start center"
+                     flex>
+                    <!-- avatar -->
+                    <md-letter-avatar length="2"
+                                      font-size="18px"
+                                      shape="round"
+                                      data="{{item.name}}"
+                                      class="md-avatar"
+                                      layout="row"
+                                      layout-align="center center">
+                    </md-letter-avatar>
+
+                    <div class="md-list-item-text">
+                        <h3><span class="md-body-3"
+                                  md-highlight-text="searchText"
+                                  md-highlight-flags="gi">
+						  {{item.name}}
+						</span></h3>
+                        <p>{{item.rut | rut}}</p>
+                    </div>
+                </div>
+
+                <ssvq-storage-company-actions after-delete="vm.afterDelete"
+                                              item="item"></ssvq-storage-company-actions>
+
+                <md-divider ng-if="!$last"></md-divider>
+            </md-list-item>
+        </md-list>
+    </div>
+</md-content>
+
+
+
+<!-- Modo Tabla -->
+<md-content ng-if="vm.viewMode == 'table'">
+    <!-- Modo Tabla -->
+    <md-table-container class="full-table-container">
+        <table md-table
+               ng-if="vm.companies && vm.companies.length > 0">
+            <thead md-head>
+                <tr md-row>
+                    <th md-column>{{ 'COMPANY.TABLE.NAME' | translate}}</th>
+                    <th md-column>{{ 'COMPANY.TABLE.RUT' | translate}}</th>
+                    <th md-column>{{ 'COMPANY.TABLE.ADDRESS' | translate}}</th>
+                    <th md-column></th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-row
+                    ng-repeat="item in vm.companies track by $index">
+                    <td md-cell>
+                        <span class="force-line capitalize"
+                              md-highlight-text="searchText">{{item.name}}</span>
+                    </td>
+                    <td md-cell>
+                        <span class="force-line capitalize"
+                              md-highlight-text="searchText">{{item.rut | rut}}</span>
+                    </td>
+                    <td md-cell>
+                        <span class="force-line capitalize">{{item.address}}</span>
+                    </td>
+                    <td md-cell>
+                        <ssvq-storage-company-actions after-delete="vm.afterDelete"
+                                                      item="item"></ssvq-storage-company-actions>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ssvq-loading ng-show="!vm.companies"></ssvq-loading>
+        <ssvq-no-results ng-show="vm.companies.length == 0"></ssvq-no-results>
+    </md-table-container>
+
+    <md-table-pagination md-limit="vm.limit"
+                         md-page="vm.page"
+                         md-total="{{vm.found}}"
+                         md-on-paginate="vm.nextTable"
+                         md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}"
+                         md-page-select></md-table-pagination>
+</md-content>

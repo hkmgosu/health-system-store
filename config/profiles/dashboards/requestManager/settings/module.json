@@ -1,0 +1,27 @@
+{
+    "name": "PRIVILEGES.REQUESTS.SETTINGS.NAME",
+    "description": "PRIVILEGES.REQUESTS.SETTINGS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.request-settings",
+            "url": "/solicitudes/configuraciones",
+            "template": "<ssvq-request-settings-view></ssvq-request-settings-view>"
+        },
+        "_controllers": {
+            "read": [
+                "UnitController.getRequestUnits",
+                "UnitController.getSupervisors",
+                "UnitController.getAutocomplete"
+            ],
+            "update": [
+                "UnitController.update",
+                "UnitController.addSupervisor",
+                "UnitController.rmSupervisor"
+            ]
+        }
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "name": "PRIVILEGES.ESTABLISHMENTSTYPES.NAME",
+    "description": "PRIVILEGES.ESTABLISHMENTSTYPES.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.admin-establishmentTypes",
+            "url": "/tipos-establecimientos",
+            "template": "<ssvq-establishment-type-maintainer></ssvq-establishment-type-maintainer>"
+        },
+        "_controllers": {
+            "read": [
+                "EstablishmentTypeController.get",
+                "EstablishmentTypeController.icon"
+            ],
+            "create": [
+                "EstablishmentTypeController.save",
+                "EstablishmentTypeController.uploadIcon"
+            ],
+            "update": [
+                "EstablishmentTypeController.save",
+                "EstablishmentTypeController.uploadIcon"
+            ],
+            "delete": [
+                "EstablishmentTypeController.delete"
+            ]
+        }
+    }
+}

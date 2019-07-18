@@ -1,0 +1,38 @@
+{
+    "name": "PRIVILEGES.PERMISSION.DETAILS.NAME",
+    "description": "PRIVILEGES.PERMISSION.DETAILS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.permission-details",
+            "url": "/permisos/detalles/:id",
+            "template": "<ssvq-permission-details></ssvq-permission-details>",
+            "params": {
+                "id": null,
+                "permission": null
+            },
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "PermissionController.getDetails",
+                "PermissionController.getTimeline",
+                "WorkflowController.getEnabledStatusList",
+                "ArchiveController.attachment",
+                "ArchiveController.attachmentByOwner",
+                "PermissionController.getPermissionDetailPdf"
+            ],
+            "create": [
+                "PermissionController.addComment",
+                "ArchiveController.uploadArchive"
+            ],
+            "update": [
+                "PermissionController.setStatus"
+            ]
+        }
+    }
+}

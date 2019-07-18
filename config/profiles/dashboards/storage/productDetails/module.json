@@ -1,0 +1,50 @@
+{
+    "name": "Detalles del Producto",
+    "description": "Detalles del Producto",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-product-details",
+            "url": "/bodega/producto/detalles/:id",
+            "template": "<ssvq-storage-product-details></ssvq-storage-product-details>",
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "Storage/ProductController.get",
+                "Storage/ProductController.getAll",
+                "Storage/ProductController.getLogs",
+                "Storage/ProductController.getParams",
+                "Storage/ProductController.getComments",
+                "Storage/ProductController.unsubscribe",
+                "Storage/ProductController.downloadProductProfilePicture",
+                "Storage/ProductController.getLots",
+                "Storage/ProductController.getStocks",
+                "UnitController.getUnitsForStorageManagement",
+                "EmployeeController.getProfileById",
+                "Storage/StorageReportController.getBincard",
+                "Storage/ProductController.getProductActiveComponents",
+                "Storage/ActiveComponentController.getAll"
+            ],
+            "create": [
+                "Storage/StockParameterController.save",
+                "Storage/ProductController.saveProductActiveComponent"
+            ],
+            "update": [
+                "Storage/ProductController.update",
+                "Storage/ProductController.deleteProductProfilePicture",
+                "Storage/ProductController.uploadProductProfilePicture",
+                "Storage/ProductController.createComment"
+            ],
+            "delete": [
+                "Storage/ProductController.delete",
+                "Storage/ProductController.removeProductActiveComponent"
+            ]
+        }
+    }
+}

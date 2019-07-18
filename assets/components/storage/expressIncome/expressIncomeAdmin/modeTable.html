@@ -1,0 +1,67 @@
+<!-- Modo Tabla -->
+<!-- BOTON VER FILTRO -->
+<md-button class="md-fab md-mini md-accent md-fab-top-right hide-gt-xs"
+           ng-click="vm.toggleFilter()">
+    <md-tooltip>Ver filtro</md-tooltip>
+    <md-icon md-font-icon="zmdi zmdi-filter-list"></md-icon>
+</md-button>
+
+<!-- Modo Tabla -->
+<md-table-container class="full-table-container">
+    <table md-table
+           ng-if="vm.expressIncomeses && vm.expressIncomeses.length > 0">
+        <thead md-head>
+            <tr md-row>
+                <th md-column>Unidad que Solicita</th>
+                <th md-column>Solicitado por</th>
+                <th md-column>Otros</th>
+                <th md-column></th>
+            </tr>
+        </thead>
+        <tbody md-body>
+            <tr md-row
+                ng-repeat="item in vm.expressIncomeses track by $index">
+                <td md-cell>
+                    <span class="force-line capitalize">{{item.destinyUnit.name}}</span>
+                </td>
+                <td md-cell>
+                    <span class="force-line capitalize">{{item.requestBy}}</span>
+                </td>
+                <td md-cell>
+                    <span class="force-line capitalize"
+                          ng-if="item.idChileCompra"
+                          md-highlight-text="searchText">ChileCompra: {{item.idChileCompra}}
+                    </span>
+                    <span class="force-line capitalize"
+                          ng-if="item.company && item.company.name"
+                          md-highlight-text="searchText">Entidad: {{item.company.name}}
+                    </span>
+                    <span class="force-line capitalize"
+                          ng-if="item.numShippingOrder"
+                          md-highlight-text="searchText">Nro. Despacho: {{item.numShippingOrder}}
+                    </span>
+                    <span class="force-line capitalize"
+                          ng-if="item.numInvoice"
+                          md-highlight-text="searchText">Factura: {{item.numInvoice}}
+                    </span>
+                </td>
+                <td md-cell>
+                    <md-button ng-href="#/bodega/consumo-inmediato/{{item.id}}">
+                        <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                    </md-button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ssvq-loading ng-show="!vm.expressIncomeses"></ssvq-loading>
+    <ssvq-no-results ng-show="vm.expressIncomeses.length == 0"></ssvq-no-results>
+</md-table-container>
+
+<md-table-pagination md-limit="vm.limit"
+                     md-page="vm.page"
+                     md-total="{{vm.found}}"
+                     md-on-paginate="vm.nextTable"
+                     md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}"
+                     md-page-select>
+</md-table-pagination>

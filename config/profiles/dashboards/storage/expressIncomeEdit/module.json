@@ -1,0 +1,39 @@
+{
+	"name": "Editar Consumo Inmediato",
+	"description": "Editar Consumo Inmediato",
+	"config": {
+		"privileges": {
+			"read": false,
+			"update": false,
+			"delete": false
+		},
+		"menu": {
+			"state": "triangular.mi-ssvq.storage-express-income-edit",
+			"url": "/bodega/consumo-inmediato/:id",
+			"template": "<ssvq-storage-express-income-edit></ssvq-storage-express-income-edit>",
+			"hidden": true
+		},
+		"_controllers": {
+			"read": [
+				"Storage/ExpressIncomeController.get",
+				"Storage/ExpressIncomeController.getAll",
+				"Storage/ExpressIncomeController.getDetail",
+				"Storage/ExpressIncomeController.unsubscribe",
+				"Storage/ProductRequestController.get",
+				"Storage/ProductRequestController.getAll",
+				"Storage/UnitProductsManagerController.getAllowedUnits",
+				"Storage/UnitProductsManagerController.getProductUnits",
+				"UnitController.getAutocomplete"
+			],
+			"update": [
+				"Storage/ExpressIncomeController.update",
+				"Storage/ExpressIncomeController.addDetail",
+				"Storage/ExpressIncomeController.delDetail",
+				"Storage/ExpressIncomeController.saveDetail"
+			],
+			"delete": [
+				"Storage/ExpressIncomeController.delete"
+			]
+		}
+	}
+}

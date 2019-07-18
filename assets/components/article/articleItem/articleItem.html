@@ -1,0 +1,55 @@
+<md-card ng-if="!vm.article.deleted">
+    <div layout="row">
+        <div style="height:200px;width:300px;"
+             hide-xs>
+            <ks-swiper-container loop="false"
+                                 slides-per-view="1"
+                                 pagination-is-active="true"
+                                 ng-if="vm.article.pictures.length > 0"
+                                 style="height: 200px;">
+                <ks-swiper-slide class="swiper-slide"
+                                 ng-repeat="picture in vm.article.pictures">
+                    <div layout="row"
+                         layout-align="center center"
+                         style="height:200px;width:300px;background-color:#d6d6d6;">
+                        <img ng-src="/archive/attachment?id={{picture.id}}">
+                    </div>
+                </ks-swiper-slide>
+            </ks-swiper-container>
+            <div ng-if="vm.article.pictures.length == 0"
+                 layout="row"
+                 layout-align="center center"
+                 style="height: 200px; background-color:#d6d6d6;">
+                <img src="/assets/images/logo.jpg"
+                     width="170px"
+                     height="155px"
+                     class="md-padding hide-xs">
+            </div>
+        </div>
+        <div layout="column"
+             flex
+             class="md-padding">
+            <a class="md-title md-primary md-hue-1"
+               ng-href="#/publicacion/{{vm.article.id}}">{{vm.article.title}}</a>
+            <span class="md-body-1">{{vm.article.category.name}}</span>
+            <span class="md-caption">{{vm.article.createdBy.fullname}} - {{vm.article.createdAt | date: 'short'}}</span>
+            <span flex></span>
+            <div layout="row"
+                 ng-if="::vm.admin">
+                <span flex></span>
+                <md-button class="md-warn"
+                           ng-click="vm.delete()">
+                    <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
+                    <span>Eliminar</span>
+                    <md-tooltip>Eliminar la publicación</md-tooltip>
+                </md-button>
+                <md-button ng-click="vm.edit()"
+                           class="md-primary md-raised">
+                    <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                    <span>Editar</span>
+                    <md-tooltip>Editar la publicación</md-tooltip>
+                </md-button>
+            </div>
+        </div>
+    </div>
+</md-card>

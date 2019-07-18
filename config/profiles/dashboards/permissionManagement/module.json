@@ -1,0 +1,13 @@
+{
+    "name": "PRIVILEGES.PERMISSIONMANAGEMENT.NAME",
+    "description": "PRIVILEGES.PERMISSIONMANAGEMENT.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false
+        },
+        "menu": {
+            "icon": "zmdi zmdi-wrench"
+        },
+        "_controllers": {}
+    }
+}

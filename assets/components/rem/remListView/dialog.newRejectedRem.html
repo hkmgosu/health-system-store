@@ -1,0 +1,55 @@
+<md-dialog aria-label="Nuevo incidente"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <form name="saveForm"
+          ng-submit="saveForm.$valid && vm.save(vm.opts)"
+          novalidate>
+        <md-toolbar class="md-warn">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                    <md-tooltip>Volver</md-tooltip>
+                </md-button>
+                <span class="md-subhead">
+                    Nueva llamada rechazada
+                </span>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content"
+                 layout="column">
+                <span class="md-title">Seleccione un motivo de cierre</span>
+                <md-radio-group ng-model="vm.opts.reason"
+                                class="md-padding">
+                    <md-radio-button ng-repeat="reason in vm.reasons"
+                                     class="md-primary"
+                                     ng-value="reason.description"
+                                     aria-label="{{ reason.description }}">
+                        {{ reason.description }}
+                    </md-radio-button>
+                </md-radio-group>
+                <md-divider></md-divider>
+                <md-input-container class="md-block"
+                                    md-no-float
+                                    flex>
+                    <md-icon md-font-icon="zmdi zmdi-comment-outline"></md-icon>
+                    <textarea ng-model="vm.opts.comment"
+                              md-maxlength="600"
+                              rows="3"
+                              placeholder="Agrega un comentario"></textarea>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-warn"
+                       type="submit"
+                       aria-label="Ingresar llamada rechazada"
+                       ng-disabled="saveForm.$submitted && saveForm.$invalid">
+                Ingresar llamada rechazada
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

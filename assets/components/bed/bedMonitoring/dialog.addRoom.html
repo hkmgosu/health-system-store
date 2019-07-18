@@ -1,0 +1,34 @@
+<md-dialog aria-label="Selección de establecimiento"
+           id="establishment-selector-dialog"
+           flex="40"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <form name="vm.saveForm"
+          ng-submit="vm.saveForm.$valid && vm.confirm()"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                Nueva sala
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content"
+                 layout="column">
+                <md-input-container flex>
+                    <label>Nombre</label>
+                    <input ng-model="vm.room.name"
+                           required
+                           type="text">
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-primary"
+                       type="submit"
+                       aria-label="Cambiar establecimiento">
+                Agregar sala
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

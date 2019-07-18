@@ -1,0 +1,158 @@
+<form name="vm.addressDataForm">
+    <div layout="column">
+        <div layout="row"
+             layout-xs="column">
+            <md-input-container flex>
+                <label translate>Región</label>
+                <md-select ng-model="vm.address.state"
+                           name="region"
+                           placeholder="Región"
+                           ng-change="vm.onRegionChange(vm.address.state)"
+                           ng-required="vm.opts.required">
+                    <md-option ng-value="reg.id"
+                               ng-repeat="reg in vm.regions">{{reg.name}}</md-option>
+                </md-select>
+                <div ng-messages="vm.addressDataForm.region.$error">
+                    <div ng-message="required">
+                        Ingrese una región
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container flex>
+                <label translate>Comuna</label>
+                <md-select ng-model="vm.address.district"
+                           name="commune"
+                           placeholder="Comuna"
+                           ng-change="vm.onCommuneChange(vm.address.district)"
+                           ng-required="vm.opts.required">
+                    <md-option ng-value="com.id"
+                               ng-repeat="com in vm.communes">{{com.name}}</md-option>
+                </md-select>
+                <div ng-messages="vm.addressDataForm.commune.$error">
+                    <div ng-message="required">
+                        Ingrese una comuna
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Sector</label>
+                <input type="text"
+                       name="zone"
+                       ng-model="vm.address.zone">
+                <div class="hint">Ej. Pob. Vergara</div>
+            </md-input-container>
+        </div>
+        <div layout="row"
+             layout-xs="column">
+            <md-autocomplete flex
+                             md-selected-item-change="vm.selectItem(item)"
+                             md-delay="1000"
+                             md-search-text="vm.address.text"
+                             md-items="item in search(vm.address.text)"
+                             md-item-text="item.address.road"
+                             md-min-length="2"
+                             md-floating-label="Dirección"
+                             md-max-length="40">
+                <md-item-template>
+                    <div class="md-padding"
+                         layout="column">
+                        <span class="md-body-1"
+                              md-highlight-text="searchText"
+                              md-highlight-flags="^i">
+                            {{item.address.road}}
+                        </span>
+                        <span class="md-caption">
+                            {{item.address.neighbourhood || item.address.town}}, {{item.address.city}} - {{item.address.state}}
+                        </span>
+                    </div>
+                </md-item-template>
+                <md-not-found>
+                    <div class="md-padding">
+                        <span>{{'AUTOCOMPLETE.NOMATCHFOUND' | translate}}</span>
+                    </div>
+                </md-not-found>
+            </md-autocomplete>
+            <md-input-container flex>
+                <label translate>Referencia del Lugar</label>
+                <input type="text"
+                       name="title"
+                       ng-model="vm.address.reference">
+            </md-input-container>
+        </div>
+
+        <div class="rem-map-container"
+             ng-hide="vm.opts.hideMap">
+            <leaflet class="ssvq-leaflet-map"
+                     bounds="vm.map.bounds"
+                     defaults="vm.map.defaults"
+                     maxbounds="vm.map.maxBounds"
+                     center="vm.map.center"></leaflet>
+            <div class="marker-static"
+                 layout="column"
+                 layout-align="center center">
+                <div class="marker-title"
+                     layout="row"
+                     layout-align="center center">
+                    <md-button class="md-fab md-mini md-icon-button md-primary"
+                               ng-click="vm.backPosition()"
+                               ng-disabled="vm.positionConfirmed || !vm.address.position">
+                        <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                        <md-tooltip>Volver a ubicación anterior</md-tooltip>
+                    </md-button>
+                    <div flex
+                         layout="column">
+                        <span class="md-body-2"
+                              ng-show="vm.positionConfirmed">Ubicación confirmada</span>
+                        <span class="md-body-2"
+                              ng-show="!vm.positionConfirmed">
+                            Presiona
+                            <i class="zmdi zmdi-check"></i> para confirmar</span>
+                    </div>
+                    <md-button class="md-fab md-mini md-icon-button md-primary"
+                               ng-click="vm.confirmPosition()"
+                               ng-disabled="vm.positionConfirmed">
+                        <md-icon md-font-icon="zmdi zmdi-check"></md-icon>
+                        <md-tooltip>Confirmar</md-tooltip>
+                    </md-button>
+                </div>
+                <div class="arrow-down"></div>
+            </div>
+            <md-button class="md-fab md-mini md-accent md-fab-top-right"
+                       ng-click="vm.sharePosition()"
+                       aria-label="Ver mapa en otra pestaña">
+                <md-tooltip>Ver mapa en otra pestaña</md-tooltip>
+                <md-icon md-font-icon="zmdi zmdi-{{::vm.shareIcon}}"></md-icon>
+            </md-button>
+
+        </div>
+
+        <!-- Mostrar dirección sugerida -->
+        <md-card ng-if="vm.suggestedAddress">
+            <md-card-content class="padding-0">
+                <md-list>
+                    <md-list-item class="md-2-line">
+                        <md-icon md-font-icon="zmdi zmdi-pin-drop"
+                                 layout="row"
+                                 layout-align="center center"></md-icon>
+                        <div class="md-list-item-text">
+                            <h4>{{vm.suggestedAddress.display_name}}</h4>
+                            <p>Dirección sugerida</p>
+                        </div>
+                        <md-button class="md-secondary md-raised md-primary md-hue-1"
+                                   ng-click="vm.applySuggestedAddress(vm.suggestedAddress)">Aplicar</md-button>
+                    </md-list-item>
+                </md-list>
+            </md-card-content>
+        </md-card>
+
+        <!-- Botón de confirmación -->
+        <div layout="row"
+             layout-align="end center">
+            <md-button class="md-primary md-raised"
+                       ng-click="vm.confirm()"
+                       ng-if="vm.opts.showConfirmButton"
+                       ng-disabled="vm.addressDataForm.$pristine || vm.saving">{{ vm.opts.confirmText || 'Actualizar
+                ubicación'}}</md-button>
+        </div>
+    </div>
+</form>

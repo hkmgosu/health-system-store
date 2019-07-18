@@ -1,0 +1,203 @@
+<md-dialog aria-label="Nuevo evento"
+           flex="75"
+           flex-sm="85"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog adverse-event-dialog"
+           id="adverse-event-dialog">
+    <div ssvq-wizard>
+        <form name="vm.saveForm">
+            <md-toolbar ng-class="{'incognito-mode': vm.anonimo}">
+                <div class="md-toolbar-tools">
+                    <md-icon md-font-icon="zmdi zmdi-receipt"></md-icon>
+                    <h2>Nuevo Evento <span ng-if="vm.anonimo">(anónimo)</span></h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button"
+                               ng-click="vm.cancel()">
+                        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                        <md-tooltip>Cerrar</md-tooltip>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-dialog-content>
+                <md-tabs class="md-primary md-hue-1 adverse-event-tab"
+                         md-selected="ssvqWizard.currentStep">
+                    <md-tab>
+                        <md-tab-label>
+                            <span class="adverse-event-step-label">1</span>
+                            {{::('ADVERSEEVENT.TAB.INIT' | translate)}}
+                        </md-tab-label>
+                        <md-tab-body>
+                            <md-subheader class="md-primary">Notificación</md-subheader>
+                            <div class="md-dialog-content tab-type-patient tab-dialog-content">
+                                <ng-form name="typeNotificationForm"
+                                         ssvq-wizard-form>
+                                    <md-radio-group ng-model="vm.event.typeNotification"
+                                                    ng-init="vm.event.typeNotification = vm.event.typeNotification || 'normal'"
+                                                    layout="column"
+                                                    ng-required="true"
+                                                    layout-gt-sm="row">
+                                        <md-card flex
+                                                 layout-align="center center"
+                                                 class="md-padding"
+                                                 ng-class="{ active: vm.event.typeNotification === 'normal' }"
+                                                 ng-click="vm.selectType('normal'); ssvqWizard.nextStep()">
+                                            <i class="zmdi zmdi-account-circle icon-type-patient"></i>
+                                            <md-radio-button value="normal">Relacionada a paciente</md-radio-button>
+                                        </md-card>
+                                        <md-card flex
+                                                 layout-align="center center"
+                                                 class="md-padding"
+                                                 ng-class="{ active: vm.event.typeNotification === 'withoutPatient' }"
+                                                 ng-click="vm.selectType('withoutPatient'); ssvqWizard.nextStep()">
+                                            <i class="zmdi zmdi-chart-donut icon-type-patient"></i>
+                                            <md-radio-button value="withoutPatient">No relacionada a paciente</md-radio-button>
+                                        </md-card>
+                                    </md-radio-group>
+                                </ng-form>
+                            </div>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab ng-disabled="typeNotificationForm.$invalid || vm.event.typeNotification == 'withoutPatient'">
+                        <md-tab-label>
+                            <span class="adverse-event-step-label">2</span>
+                            {{::('ADVERSEEVENT.TAB.PATIENT' | translate)}}
+                        </md-tab-label>
+                        <md-tab-body>
+                            <ng-form name="patientForm"
+                                     ssvq-wizard-form>
+                                <ssvq-adverse-event-patient data="vm.event"
+                                                            ng-if="!(typeNotificationForm.$invalid || vm.event.typeNotification == 'withoutPatient')"></ssvq-adverse-event-patient>
+                            </ng-form>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab ng-disabled="(typeNotificationForm.$invalid || patientForm.$invalid && vm.event.typeNotification != 'withoutPatient')">
+                        <md-tab-label>
+                            <span class="adverse-event-step-label">3</span>
+                            {{::('ADVERSEEVENT.TAB.DATAOCCURRENCE' | translate)}}
+                        </md-tab-label>
+                        <md-tab-body>
+                            <ng-form name="occurrForm"
+                                     ssvq-wizard-form>
+                                <ssvq-adverse-event-occurrence data="vm.event"></ssvq-adverse-event-occurrence>
+                            </ng-form>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab ng-disabled="occurrForm.$invalid || patientForm.$invalid">
+                        <md-tab-label>
+                            <span class="adverse-event-step-label">4</span>
+                            {{::('ADVERSEEVENT.TAB.DAMAGETYPE' | translate)}}
+                        </md-tab-label>
+                        <md-tab-body>
+                            <ng-form name="damageTypeForm"
+                                     ssvq-wizard-form>
+                                <ssvq-adverse-event-damage-type data="vm.event"
+                                                                related-to-patients="vm.event.typeNotification !== 'withoutPatient'"></ssvq-adverse-event-damage-type>
+                            </ng-form>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab ng-disabled="damageTypeForm.$invalid || patientForm.$invalid || occurrForm.$invalid || vm.event.typeNotification == 'withoutPatient'">
+                        <md-tab-label>
+                            <span class="adverse-event-step-label">5</span>
+                            {{::('ADVERSEEVENT.TAB.EVENTTYPE' | translate)}}
+                        </md-tab-label>
+                        <md-tab-body>
+                            <ng-form name="eventTypeForm"
+                                     ssvq-wizard-form>
+                                <ssvq-adverse-event-type data="vm.event"
+                                                         tuple-selected="vm.tupleSelected"
+                                                         ng-if="!(patientForm.$invalid || occurrForm.$invalid || vm.event.typeNotification == 'withoutPatient')"></ssvq-adverse-event-type>
+                            </ng-form>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab ng-disabled="occurrForm.$invalid || patientForm.$invalid || damageTypeForm.$invalid || eventTypeForm.$invalid || vm.tupleSelected.nameForm === 'FormGeneral' || vm.event.typeNotification == 'withoutPatient'">
+                        <md-tab-label>
+                            <span class="adverse-event-step-label">6</span>
+                            {{::('ADVERSEEVENT.TAB.FORM' | translate)}}
+                        </md-tab-label>
+                        <md-tab-body>
+                            <ng-form name="formForm"
+                                     ssvq-wizard-form>
+                                <ssvq-adverse-event-form data="vm.formData"
+                                                         patient="(vm.event.patient || {}).id"
+                                                         origin="vm.event.originOccurrence"
+                                                         tuple-selected="vm.tupleSelected"
+                                                         ng-if="!(occurrForm.$invalid || patientForm.$invalid || damageTypeForm.$invalid || eventTypeForm.$invalid)"></ssvq-adverse-event-form>
+                            </ng-form>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab ng-disabled="occurrForm.$invalid || patientForm.$invalid || damageTypeForm.$invalid || eventTypeForm.$invalid || formForm.$invalid">
+                        <md-tab-label>
+                            <span class="adverse-event-step-label">7</span>
+                            {{::('ADVERSEEVENT.TAB.FINAL' | translate)}}
+                        </md-tab-label>
+                        <md-tab-body>
+                            <md-subheader class="md-primary">{{ ::('ADVERSEEVENT.FINAL.EVENTDESCRIPTION' | translate) }}</md-subheader>
+                            <div class="event-content">
+                                <md-input-container class="md-block"
+                                                    flex="100">
+                                    <label>{{ ::('ADVERSEEVENT.FINAL.EVENTDESCRIPTIONDESCRIBE' | translate) }}</label>
+                                    <textarea rows="2"
+                                              required
+                                              ng-model="vm.event.eventDescription">{{ ::('ADVERSEEVENT.FINAL.EVENTDESCRIPTIONDESCRIBE' | translate) }}</textarea>
+                                </md-input-container>
+                            </div>
+                            <md-subheader class="md-primary">{{ ::('ADVERSEEVENT.FINAL.IMMEDIATEACTIONS' | translate) }}</md-subheader>
+                            <div class="event-content">
+                                <md-input-container class="md-block"
+                                                    flex="100">
+                                    <label>{{ ::('ADVERSEEVENT.FINAL.IMMEDIATEACTIONSDESCRIBE' | translate) }}</label>
+                                    <textarea rows="2"
+                                              required
+                                              ng-model="vm.event.immediateActions">{{ ::('ADVERSEEVENT.FINAL.IMMEDIATEACTIONSDESCRIBE' | translate) }}</textarea>
+                                </md-input-container>
+                            </div>
+                            <div ng-if="vm.damageCategorization.incident.indexOf(vm.event.damageType) == -1 && vm.tupleSelected.nameForm === 'FormGeneral'">
+                                <md-subheader class="md-primary">{{ ::('ADVERSEEVENT.FINAL.DAMAGEPATIENT' | translate) }}</md-subheader>
+                                <div class="event-content">
+                                    <md-input-container class="md-block"
+                                                        flex="100">
+                                        <label>{{ ::('ADVERSEEVENT.FINAL.DAMAGEPATIENTDESCRIBE' | translate) }}</label>
+                                        <textarea rows="2"
+                                                  required
+                                                  ng-model="vm.event.damagePatient">{{ ::('ADVERSEEVENT.FINAL.DAMAGEPATIENTDESCRIBE' | translate) }}</textarea>
+                                    </md-input-container>
+                                </div>
+                            </div>
+                            <div flex
+                                 layout="column"
+                                 style="padding: 0 24px;">
+                                <ssvq-custom-option-selector model="vm.event.notifiedPatient"
+                                                             required-option="true"
+                                                             label="{{::('ADVERSEEVENT.FINAL.INFORMEDPATIENTDESCRIBE' | translate)}}"
+                                                             parametrics="vm.booleanOptions"></ssvq-custom-option-selector>
+                            </div>
+                        </md-tab-body>
+                    </md-tab>
+                </md-tabs>
+            </md-dialog-content>
+            <md-dialog-actions layout="row"
+                               layout-align="end center">
+                <md-button class="md-accent"
+                           ng-click="vm.prevStep(ssvqWizard, vm.event.typeNotification, (vm.tupleSelected || {}).nameForm)"
+                           ng-show="ssvqWizard.currentStep > 0"
+                           translate="Anterior"
+                           aria-label="Anterior">
+                </md-button>
+                <md-button class="md-primary"
+                           ng-click="vm.nextStep(ssvqWizard, vm.event.typeNotification)"
+                           ng-show="ssvqWizard.currentStep < 6"
+                           translate="Siguiente"
+                           aria-label="Siguiente">
+                </md-button>
+                <md-button class="md-primary"
+                           type="button"
+                           ng-click="vm.sendForm()"
+                           ng-show="ssvqWizard.currentStep == 6 || vm.event.id"
+                           ng-disabled="vm.saveForm.$invalid || vm.sending"
+                           translate="{{ vm.sending ? 'Enviando...' : vm.event.id ? 'Actualizar' : 'Enviar' }}"
+                           aria-label="{{ vm.sending ? 'Enviando...' : vm.event.id ? 'Actualizar' : 'Enviar' }}">
+                </md-button>
+            </md-dialog-actions>
+        </form>
+    </div>
+</md-dialog>

@@ -1,0 +1,385 @@
+<md-toolbar class="md-hue-1">
+    <div class="md-toolbar-tools">
+        <h4 flex>REM 08</h4>
+        <ssvq-date-range-selector on-change="vm.updateReport"></ssvq-date-range-selector>
+        <md-button class="md-icon-button"
+                   ng-click="vm.downloadReport()">
+            <md-tooltip>Descargar reporte</md-tooltip>
+            <md-icon md-font-icon="fa fa-file-excel-o"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<md-subheader class="md-primary md-hue-1 overlay-5">SECCIÓN K: INTERVENCIONES PRE HOSPITALARIAS (SAMU)</md-subheader>
+<md-card>
+    <md-card-content class="padding-0">
+        <md-table-container>
+            <table md-table
+                   id="sectionK">
+                <thead md-head>
+                    <tr md-row>
+                        <th md-column></th>
+                        <th colspan="3"
+                            md-column
+                            class="text-center">Número de intervenciones</th>
+                        <th md-column></th>
+                        <th colspan="3"
+                            md-column
+                            class="text-center"> Tiempo de llegada críticas</th>
+                        <th colspan="3"
+                            md-column
+                            class="text-center"> Tiempo de llegada no críticas</th>
+                    </tr>
+                    <tr md-row>
+                        <th md-column>Tipo</th>
+                        <th md-column
+                            class="text-center">Total</th>
+                        <th md-column
+                            class="text-center">Críticas</th>
+                        <th md-column
+                            class="text-center">No críticas</th>
+                        <th md-column
+                            class="text-center">Beneficiarios</th>
+                        <th md-column
+                            class="text-center">0-20 Min</th>
+                        <th md-column
+                            class="text-center">20-40 Min</th>
+                        <th md-column
+                            class="text-center">Más de 40 Min</th>
+                        <th md-column
+                            class="text-center">0-20 Min</th>
+                        <th md-column
+                            class="text-center">20-40 Min</th>
+                        <th md-column
+                            class="text-center">Más de 40 Min</th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row
+                        ng-repeat="item in vm.report.sectionK | orderBy: 'item.order' track by $index">
+                        <td md-cell>{{item.InterventionType}}</td>
+                        <td md-cell
+                            class="text-center">{{item.totalIntervention}}</td>
+                        <td md-cell
+                            class="text-center">{{item.critical}}</td>
+                        <td md-cell
+                            class="text-center">{{item.noCritical}}</td>
+                        <td md-cell
+                            class="text-center">{{item.totalPatients}}</td>
+                        <td md-cell
+                            class="text-center">{{item.critical_0_20}}</td>
+                        <td md-cell
+                            class="text-center">{{item.critical_20_40}}</td>
+                        <td md-cell
+                            class="text-center">{{item.critical_40}}</td>
+                        <td md-cell
+                            class="text-center">{{item.noCritical_0_20}}</td>
+                        <td md-cell
+                            class="text-center">{{item.noCritical_20_40}}</td>
+                        <td md-cell
+                            class="text-center">{{item.noCritical_40}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+    </md-card-content>
+</md-card>
+<md-subheader class="md-primary md-hue-1 overlay-5">SECCIÓN L: TRASLADOS PRIMARIOS A UNIDADES DE URGENCIA (Desde el lugar del evento a unidad de Emergencia)</md-subheader>
+<md-card>
+    <md-card-content class="padding-0">
+        <md-table-container>
+            <table md-table
+                   id="sectionL">
+                <thead md-head>
+                    <tr md-row>
+                        <th md-column>Tipo</th>
+                        <th md-column
+                            class="text-center">Total</th>
+                        <th md-column
+                            class="text-center">Beneficiarios</th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row
+                        ng-repeat="item in vm.report.sectionL | orderBy: 'item.order' track by $index">
+                        <td md-cell>{{item.type}}</td>
+                        <td md-cell
+                            class="text-center">{{item.total}}</td>
+                        <td md-cell
+                            class="text-center">{{item.patients}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+    </md-card-content>
+</md-card>
+<md-subheader class="md-primary md-hue-1 overlay-5">SECCIÓN M: TRASLADO SECUNDARIO (Desde un Establecimiento a Otro)</md-subheader>
+<md-card>
+    <md-card-content class="padding-0">
+        <md-table-container>
+            <table md-table
+                   id="sectionM">
+                <thead md-head>
+                    <tr md-row>
+                        <th md-column>Tipo</th>
+                        <th md-column
+                            class="text-center">Total</th>
+                        <th md-column
+                            class="text-center">SAMU</th>
+                        <th md-column
+                            class="text-center">Enrutado</th>
+                        <th md-column
+                            class="text-center">No SAMU</th>
+                        <th md-column
+                            class="text-center">Sin categoría</th>
+                        <th md-column
+                            class="text-center">Beneficiarios</th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row
+                        ng-repeat="item in vm.report.sectionM | orderBy: 'item.order' track by $index">
+                        <td md-cell>{{item.type}}</td>
+                        <td md-cell
+                            class="text-center">{{item.total}}</td>
+                        <td md-cell
+                            class="text-center">{{item.samu}}</td>
+                        <td md-cell
+                            class="text-center">{{item.enrutado}}</td>
+                        <td md-cell
+                            class="text-center">{{item.no_samu}}</td>
+                        <td md-cell
+                            class="text-center">{{item.sin_categoria}}</td>
+                        <td md-cell
+                            class="text-center">{{item.patients}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+    </md-card-content>
+</md-card>
+<md-subheader class="md-primary md-hue-1 overlay-5">SECCION N: CLASIFICACION DE LAS INTERVENCIONES POR GRANDES GRUPOS DE DIAGNOSTICOS (SAMU)</md-subheader>
+<md-card>
+    <md-card-content class="padding-0">
+        <md-table-container>
+            <table md-table
+                   id="sectionN">
+                <thead md-head>
+                    <tr md-row>
+                        <th md-column></th>
+                        <th colspan="3"
+                            md-column
+                            class="text-center">Totales</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">0 a 4</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">5 a 9</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">10 a 14</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">15 a 19</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">20 a 24</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">25 a 29</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">30 a 34</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">35 a 39</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">40 a 44</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">45 a 49</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">50 a 54</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">55 a 59</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">60 a 64</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">65 a 69</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">70 a 74</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">75 a 79</th>
+                        <th colspan="2"
+                            md-column
+                            class="text-center">80 y más</th>
+                    </tr>
+                    <tr md-row>
+                        <th md-column>Causa de la Intervención</th>
+                        <th md-column
+                            class="text-center">Ambos géneros</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                        <th md-column
+                            class="text-center">Hombres</th>
+                        <th md-column
+                            class="text-center">Mujeres</th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr md-row
+                        ng-repeat="item in vm.report.sectionN | orderBy: 'item.order' track by $index">
+                        <td md-cell>{{item.interventionReason}}</td>
+                        <td md-cell
+                            class="text-center">{{item.both}}</td>
+                        <td md-cell
+                            class="text-center">{{item.male}}</td>
+                        <td md-cell
+                            class="text-center">{{item.female}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_0_4}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_0_4}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_5_9}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_5_9}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_10_14}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_10_14}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_15_19}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_15_19}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_20_24}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_20_24}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_25_29}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_25_29}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_30_34}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_30_34}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_35_39}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_35_39}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_40_44}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_40_44}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_45_49}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_45_49}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_50_54}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_50_54}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_55_59}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_55_59}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_60_64}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_60_64}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_65_69}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_65_69}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_70_74}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_70_74}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_75_79}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_75_79}}</td>
+                        <td md-cell
+                            class="text-center">{{item.h_80}}</td>
+                        <td md-cell
+                            class="text-center">{{item.m_80}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+    </md-card-content>
+</md-card>

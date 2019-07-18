@@ -1,0 +1,59 @@
+<md-dialog aria-label="Agregar programa"
+           flex-gt-sm="60"
+           flex="100">
+    <md-toolbar class="md-toolbar-tools">
+        <h2 flex>Agregar Programa</h2>
+        <md-button class="md-icon-button float-right"
+                   ng-click="vm.cancel()"
+                   aria-label="Cancelar">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+        </md-button>
+    </md-toolbar>
+
+    <form name="formProgram">
+        <md-dialog-content class="md-padding">
+            <div flex
+                 layout-gt-sm="row">
+                <md-input-container class="md-block"
+                                    flex>
+                    <label for="program"
+                           translate>PROGRAM.TABLE.PROGRAM</label>
+                    <md-select name="program"
+                               ng-model="vm.program"
+                               required>
+                        <md-option ng-repeat="item in vm.programs | filter:{program:null}"
+                                   ng-value="item.id">{{item.description}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="formProgram.program.$error">
+                        <div ng-message="required">
+                            <span translate>PRODUCT_REQUEST.VALIDATOR.REQUIRED</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block"
+                                    flex>
+                    <label for="subprogram"
+                           translate>PRODUCT_REQUEST.TABLE.SUBPROGRAM</label>
+                    <md-select name="subprogram"
+                               ng-model="vm.subprogram">
+                        <md-option ng-repeat="item in vm.programs | filter:{program:{id:vm.program}}"
+                                   ng-value="item.id">{{item.description}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button class="md-raised md-primary"
+                       type="submit"
+                       ng-click="vm.addProgram()"
+                       ng-disabled="formProgram.$invalid"
+                       aria-label="CRUD.SAVE"
+                       translate="CRUD.SAVE">
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

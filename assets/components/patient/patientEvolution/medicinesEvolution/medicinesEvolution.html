@@ -1,0 +1,75 @@
+<form name="vm.saveForm"
+      novalidate>
+    <div layout="column">
+        <div layout="column"
+             layout-gt-sm="row"
+             flex>
+            <ssvq-medicine-autocomplete flex
+                                        flex-gt-sm="50"
+                                        medicine="vm.tempPrescribed.medicine"></ssvq-medicine-autocomplete>
+            <md-input-container class="md-block"
+                                flex
+                                flex-gt-sm="20">
+                <label>{{::('PATIENT.EVOLUTION.MEDICINES.VIA' | translate)}}</label>
+                <md-select ng-model="vm.tempPrescribed.via"
+                           ng-disabled="!((vm.tempPrescribed.medicine || {}).vias)">
+                    <md-option ng-repeat="item in vm.tempPrescribed.medicine.vias"
+                               value="{{::item.id}}">
+                        {{ ::item.name | translate }}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container class="md-block"
+                                flex="50"
+                                flex-gt-sm="15">
+                <label>{{::('PATIENT.EVOLUTION.MEDICINES.QUANTITY' | translate)}}</label>
+                <input type="number"
+                       name="quantity"
+                       ng-model="vm.tempPrescribed.quantity" />
+            </md-input-container>
+            <md-input-container class="md-block"
+                                flex="50"
+                                flex-gt-sm="15">
+                <label>{{::('PATIENT.EVOLUTION.MEDICINES.DOSE' | translate)}}</label>
+                <input type="text"
+                       name="dose"
+                       ng-model="vm.tempPrescribed.dose" />
+            </md-input-container>
+        </div>
+        <div layout="row"
+             layout-align="end center">
+            <md-button class="md-primary md-raised"
+                       aria-label="{{ ::('PATIENT.EVOLUTION.MEDICINES.SAVE' | translate) }}"
+                       ng-click="vm.saveForm.$submitted = true; vm.saveForm.$valid && vm.save(vm.tempPrescribed)"
+                       ng-disabled="(vm.saveForm.$submitted && vm.saveForm.$invalid) || vm.saveForm.$pristine">
+                {{::('PATIENT.EVOLUTION.MEDICINES.SAVE' | translate)}}
+            </md-button>
+        </div>
+    </div>
+</form>
+<md-list>
+    <md-subheader ng-if="vm.prescribedMedicines.length > 0"
+                  class="md-no-sticky">{{::('PATIENT.EVOLUTION.MEDICINES.ADDED' | translate)}}</md-subheader>
+    <md-list-item class="animation-stop secondary-button-padding md-3-line animated shake"
+                  style="padding: 8px 16px;"
+                  ng-repeat="prescribedMedicine in vm.prescribedMedicines | orderBy: '-createdAt'">
+        <ssvq-employee-avatar employee="prescribedMedicine.createdBy"
+                              class="md-avatar"></ssvq-employee-avatar>
+        <div class="md-list-item-text">
+            <h4>
+                <b>{{prescribedMedicine.createdBy.fullname}}</b> agregó el fármaco:
+            </h4>
+            <p>{{ prescribedMedicine.medicine.name }} - {{ prescribedMedicine.medicine.presentation }}</p>
+            <p>Vía: {{ prescribedMedicine.via ? prescribedMedicine.via.name : '--' }}, Cantidad: {{ prescribedMedicine.quantity
+                ? prescribedMedicine.quantity : '--' }}, Dosis: {{ prescribedMedicine.dose ? prescribedMedicine.dose : '--'
+                }}
+            </p>
+            <p class="text-right md-body-1">{{::(prescribedMedicine.createdAt | date:"HH:mm '•' dd 'de' MMM")}}</p>
+        </div>
+        <md-button class="md-warn md-secondary md-icon-button"
+                   ng-click="vm.removeMedicine(prescribedMedicine)"
+                   aria-label="{{ ::('PATIENT.EVOLUTION.MEDICINES.REMOVEMEDICINE' | translate )}}">
+            <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+        </md-button>
+    </md-list-item>
+</md-list>

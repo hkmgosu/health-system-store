@@ -1,0 +1,203 @@
+<md-dialog aria-label="Vehículo"
+           flex="80"
+           flex-sm="90"
+           flex-xs="100"
+           id="vehicle-dialog"
+           class="mobile-fullwidth-dialog">
+    <form name="saveForm"
+          ng-submit="saveForm.$valid && vm.save(vm.temp)"
+          novalidate
+          style="min-height:509px;">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Volver">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                    <md-tooltip>Volver</md-tooltip>
+                </md-button>
+                <h2>
+                    {{ ::( (!vm.temp.id) ? 'VEHICLE.OTHERS.CREATETITLE' : 'VEHICLE.OTHERS.EDITTITLE' ) | translate }}
+                </h2>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <md-tabs class="md-hue-1 md-primary"
+                     md-selected="vm.selectedTabIndex"
+                     md-dynamic-height>
+                <md-tab label="Vehículo">
+
+                    <div class="md-padding">
+                        <div layout="row">
+                            <md-input-container flex>
+                                <label translate>VEHICLE.TABLE.NAME</label>
+                                <input type="text"
+                                       name="name"
+                                       ng-model="vm.temp.name"
+                                       required>
+                                <div ng-messages="saveForm.name.$error">
+                                    <div ng-message="required">
+                                        <span translate>VEHICLE.TABLE.REQUIRED</span>
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container style="min-width: 120px;">
+                                <label>Categoría</label>
+                                <md-select name="category"
+                                           ng-model="vm.temp.category">
+                                    <md-option value="samu">SAMU</md-option>
+                                    <md-option value="enrutado">Enrutado</md-option>
+                                    <md-option value="nosamu">Externo</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div flex>
+                            <ssvq-establishment-autocomplete selected="vm.temp.establishment"
+                                                             label="Establecimiento Base"></ssvq-establishment-autocomplete>
+                        </div>
+                        <md-input-container class="md-block">
+                            <label>GPS</label>
+                            <input ng-model="vm.temp.idGPS"
+                                   disabled>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>KM</label>
+                            <input ng-model="vm.temp.km">
+                        </md-input-container>
+                    </div>
+
+                    <div ng-if="vm.temp.id">
+                        <md-subheader class="md-primary md-hue-1">
+                            <div layout="row"
+                                 layout-align="center center">
+                                <span flex>Turno vigente</span>
+                                <span hide-xs
+                                      ng-if="vm.currentCareTeam.id">
+                                    <span>Inicio: {{vm.currentCareTeam.workshift.startTime | date:"HH:mm '•' dd 'de' MMM"}}</span> -
+                                    <span>Término: {{vm.currentCareTeam.workshift.endTime | date:"HH:mm '•' dd 'de' MMM"}}</span>
+                                </span>
+                            </div>
+                        </md-subheader>
+                        <p class="text-center md-caption"
+                           ng-if="!vm.currentCareTeam">Buscando turno vigente...</p>
+                        <p class="text-center md-caption"
+                           ng-if="vm.currentCareTeam === 'Not Found'">No se encontró turno vigente</p>
+                        <ssvq-participant-list-manager participant-list="vm.currentCareTeam.participantList"
+                                                       opts="vm.participantListOpts"
+                                                       ng-if="vm.currentCareTeam.id">
+                        </ssvq-participant-list-manager>
+                    </div>
+
+                </md-tab>
+                <md-tab label="Historial"
+                        ng-disabled="!vm.temp.id">
+                    <div layout="row"
+                         style="height: calc(100vh - 120px);">
+                        <md-card flex>
+                            <md-content>
+                                <md-list>
+                                    <md-list-item ng-repeat="remVehicle in vm.remVehicles"
+                                                  ng-href="#/samu/incidentes/{{remVehicle.rem.id}}"
+                                                  target="_BLANK"
+                                                  aria-label="{{remVehicle.rem.description}}"
+                                                  class="md-3-line">
+                                        <div class="md-list-item-text">
+                                            <h3>
+                                                #{{remVehicle.rem.id}} {{remVehicle.rem.description}}
+                                            </h3>
+                                            <p md-truncate>
+                                                {{ remVehicle.rem.callReason.name }} • {{
+                                                remVehicle.rem.subCallReason.name }}
+                                            </p>
+                                            <p class="text-right">
+                                                {{ remVehicle.rem.createdAt | date:"dd 'de' MMM yyyy" }}
+                                            </p>
+                                        </div>
+                                        <md-divider ng-if="!$last"></md-divider>
+                                    </md-list-item>
+                                </md-list>
+                            </md-content>
+                        </md-card>
+                        <!--                         <md-card flex="50"
+                                 ng-if="vm.remVehicleSelected"
+                                 hide-xs>
+                            <md-toolbar>
+                                <div class="md-toolbar-tools">
+                                    <md-button ng-click="vm.remVehicleSelected = null;"
+                                               class="md-icon-button">
+                                        <md-tooltip>Cerrar ventana</md-tooltip>
+                                        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                                    </md-button>
+                                    <div layout="column"
+                                         flex>
+                                        <span class="md-body-1">Incidente #{{vm.remVehicleSelected.rem.id}}</span>
+                                        <span class="md-caption">
+                                            {{ vm.remVehicleSelected.rem.createdAt | date:"dd 'de' MMM yyyy" }}
+                                        </span>
+                                    </div>
+                                    <md-button ng-href="#/samu/incidentes/{{vm.remVehicleSelected.rem.id}}"
+                                               target="_BLANK">ir</md-button>
+                                </div>
+                            </md-toolbar>
+                            <md-content layout="column"
+                                        layout-fill
+                                        class="padding-0">
+                                <md-subheader class="md-primary md-hue-1">Datos del incidente</md-subheader>
+                                <md-list>
+                                    <md-list-item class="md-2-line">
+                                        <div class="md-list-item-text">
+                                            <h4>Motivo del llamado</h4>
+                                            <p>{{ vm.remVehicleSelected.rem.callReason.name }} • {{
+                                                vm.remVehicleSelected.rem.subCallReason.name }}</p>
+                                        </div>
+                                    </md-list-item>
+                                </md-list>
+                                <md-list>
+                                    <md-list-item class="md-2-line">
+                                        <div class="md-list-item-text">
+                                            <h4>Descripción de la emergencia</h4>
+                                            <p>{{ vm.remVehicleSelected.rem.description }}</p>
+                                        </div>
+                                    </md-list-item>
+                                </md-list>
+                                <md-divider></md-divider>
+                                <md-subheader class="md-primary md-hue-1">Historial del vehículo</md-subheader>
+                                <ssvq-rem-vehicle-route default-layout="column"
+                                                        id-rem-vehicle="vm.remVehicleSelected.id"></ssvq-rem-vehicle-route>
+                            </md-content>
+                        </md-card> -->
+
+                        <p ng-show="vm.remVehicles.length === 0"
+                           class="text-center">
+                            El vehículo no tiene historial de incidentes
+                        </p>
+                    </div>
+                </md-tab>
+                <md-tab label="Opciones"
+                        ng-disabled="!vm.temp.id">
+                    <div class="md-padding">
+                        <md-list>
+                            <md-list-item class="md-warn"
+                                          ng-disabled="::!vm.temp.id"
+                                          ng-click="vm.delete()">
+                                <md-icon class="md-warn"
+                                         md-font-icon="zmdi zmdi-delete"></md-icon>
+                                <p>Eliminar vehículo</p>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+        <md-dialog-actions ng-if="vm.selectedTabIndex === 0">
+            <md-button class="md-primary"
+                       type="submit"
+                       aria-label="{{ ::('CRUD.SAVE' | translate) }}"
+                       ng-disabled="(saveForm.$submitted && saveForm.$invalid) || saveForm.$pristine"
+                       ng-show="vm.selectedTabIndex === 0">
+                {{vm.temp.id ? 'Actualizar vehículo': 'Agregar vehículo'}}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

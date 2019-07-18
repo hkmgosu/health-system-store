@@ -1,0 +1,45 @@
+{
+    "name": "Detalle Simple del Producto",
+    "description": "Detalle Simple del Producto",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false,
+            "delete": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.storage-product-details-simple",
+            "url": "/bodega/producto-simple/detalles/:id",
+            "template": "<ssvq-storage-product-details-simple></ssvq-storage-product-details-simple>",
+            "hidden": true
+        },
+        "_controllers": {
+            "read": [
+                "Storage/ProductController.get",
+                "Storage/ProductController.getAll",
+                "Storage/ProductController.getLogs",
+                "Storage/ProductController.getParams",
+                "Storage/ProductController.getComments",
+                "Storage/ProductController.unsubscribe",
+                "Storage/ProductController.downloadProductProfilePicture",
+                "Storage/ProductController.getLots",
+                "Storage/ProductController.getStocks",
+                "UnitController.getUnitsForStorageManagement",
+                "EmployeeController.getProfileById"
+            ],
+            "create": [
+                "Storage/StockParameterController.save"
+            ],
+            "update": [
+                "Storage/ProductController.update",
+                "Storage/ProductController.deleteProductProfilePicture",
+                "Storage/ProductController.uploadProductProfilePicture",
+                "Storage/ProductController.createComment"
+            ],
+            "delete": [
+                "Storage/ProductController.delete"
+            ]
+        }
+    }
+}

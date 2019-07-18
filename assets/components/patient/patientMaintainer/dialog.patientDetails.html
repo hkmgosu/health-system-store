@@ -1,0 +1,63 @@
+<md-dialog aria-label="Detalles paciente"
+           flex="70"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <div ng-form="vm.patientForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                    <md-tooltip>Volver</md-tooltip>
+                </md-button>
+                <span class="md-subhead"
+                      ng-show="!vm.patient.id"
+                      flex>
+                    Nuevo Paciente
+                </span>
+                <div flex
+                     layout="column"
+                     ng-show="vm.patient.id">
+                    <span class="md-subhead"
+                          ng-if="vm.patient">
+                        {{ vm.patient.fullname || 's/nombre' }}
+                    </span>
+                </div>
+
+                <md-button ng-click="vm.confirm()"
+                           ng-disabled="vm.patientForm.$invalid"
+                           ng-show="!vm.patient.id">
+                    Ingresar paciente
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-tabs flex
+                     md-dynamic-height
+                     style="min-height: 80vh;"
+                     class="md-primary md-hue-1">
+                <md-tab label="Datos básicos">
+                    <ssvq-patient-form patient="vm.patient"
+                                       opts="{showButtons: vm.patient.id, idTypeVisibility: vm.idTypeVisibility}">
+                    </ssvq-patient-form>
+                </md-tab>
+                <md-tab ng-disabled="!vm.patient.id">
+                    <md-tab-label>
+                        <span>{{::('PATIENT.TAB.HISTORY' | translate)}}</span>
+                        <span class="md-badge">
+                            {{vm.historyCount}}
+                        </span>
+                    </md-tab-label>
+                    <md-tab-body>
+                        <div class="md-dialog-content-full"
+                             ng-if="vm.patient.id">
+                            <ssvq-patient-clinical-history id-patient="{{ vm.patient.id }}"
+                                                           count="vm.historyCount"></ssvq-patient-clinical-history>
+                        </div>
+                    </md-tab-body>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+    </div>
+</md-dialog>

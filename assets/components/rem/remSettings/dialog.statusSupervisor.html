@@ -1,0 +1,40 @@
+<md-dialog aria-label="Listado de funcionarios"
+           flex="60"
+           flex-sm="60"
+           flex-xs="90"
+           class="mobile-fullwidth-dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button"
+                       ng-click="vm.cancel()"
+                       aria-label="Volver">
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                <md-tooltip>Volver</md-tooltip>
+            </md-button>
+            <div layout="column"
+                 flex>
+                <span class="md-body-1">Cargos supervisores</span>
+                <span class="md-caption">{{vm.statusSelected.description}}</span>
+            </div>
+        </div>
+    </md-toolbar>
+    <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools">
+            <ssvq-job-autocomplete on-select="vm.addSupervisor"
+                                   clear-on-select
+                                   type="search"
+                                   flex></ssvq-job-autocomplete>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="min-height: 200px;">
+        <md-list>
+            <md-list-item ng-repeat="job in vm.jobList">
+                <div class="md-list-item-text">
+                    <h4>{{job.name}}</h4>
+                </div>
+                <md-button class="md-secondary md-warn md-raised"
+                           ng-click="vm.removeSupervisor(job)">Quitar</md-button>
+            </md-list-item>
+        </md-list>
+    </md-dialog-content>
+</md-dialog>

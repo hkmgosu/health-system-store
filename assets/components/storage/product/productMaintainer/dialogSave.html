@@ -1,0 +1,291 @@
+<md-dialog aria-label="Detalles del producto"
+           flex="60"
+           flex-xs="100">
+    <form name="vm.createForm"
+          ng-submit="vm.createForm.$valid && vm.createForm()"
+          novalidate
+          tri-wizard>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 translate
+                    flex>PRODUCT.DIALOG.CREATE_TITLE</h2>
+                <span flex></span>
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()"
+                           aria-label="Cancelar">
+                    <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-tabs flex
+                     md-dynamic-height
+                     style="min-height: 80vh;"
+                     class="md-primary md-hue-1"
+                     md-selected="triWizard.currentStep">
+                <md-tab>
+                    <md-tab-label>
+                        <span class="product-step-label">1</span> Datos Generales
+                    </md-tab-label>
+                    <md-tab-body>
+                        <md-subheader class="md-primary">
+                            Datos generales del Producto
+                        </md-subheader>
+                        <ng-form name="basicForm"
+                                 tri-wizard-form
+                                 layout="column"
+                                 flex>
+                            <div layout="row"
+                                 class="md-padding"
+                                 flex>
+                                <ssvq-product-autocomplete product-search-text="vm.product.description"
+                                                           on-select="vm.onSelectProduct"
+                                                           allowed-only="false"
+                                                           label="Descripción"
+                                                           required="true"
+                                                           flex></ssvq-product-autocomplete>
+                            </div>
+                            <div flex
+                                 class="md-padding"
+                                 layout="row">
+                                <md-input-container class="md-block"
+                                                    flex>
+                                    <label for="productCode"
+                                           translate>PRODUCT.TABLE.PRODUCT_CODE</label>
+                                    <input type="text"
+                                           name="productCode"
+                                           ng-change="vm.getProductByCode(vm.product.productCode)"
+                                           ng-model="vm.product.productCode"
+                                           required>
+                                    <div ng-messages="vm.createForm.basicForm.productCode.$error">
+                                        <div ng-message="required">
+                                            <span>Campo Requerido</span>
+                                        </div>
+                                        <div ng-message="productCode">
+                                            <span>Código Existe</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block"
+                                                    flex>
+                                    <label translate>PRODUCT.TABLE.PRODUCT_TYPE</label>
+                                    <md-select ng-model="vm.product.productType"
+                                               ng-change="vm.productTypeSelected(vm.product.productType)"
+                                               required>
+                                        <md-option ng-value="item.id"
+                                                   ng-repeat="item in vm.parametricData.productTypes">
+                                            {{item.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="vm.createForm.basicForm.productType.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <div layout="row"
+                                 class="md-padding"
+                                 flex>
+                                <md-input-container class="md-block">
+                                    <md-switch class="md-primary margin-0"
+                                               aria-label="Público"
+                                               ng-model="vm.product.public">
+                                        Público
+                                    </md-switch>
+                                    <div ng-messages="vm.createForm.basicForm.public.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </ng-form>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab ng-disabled="basicForm.$invalid">
+                    <md-tab-label>
+                        <span class="product-step-label">2</span> Clasificación
+                    </md-tab-label>
+                    <md-tab-body>
+                        <md-subheader class="md-primary">
+                            Clasificación del producto
+                        </md-subheader>
+                        <ng-form name="clasificationForm"
+                                 tri-wizard-form>
+                            <div flex
+                                 layout-gt-sm="row"
+                                 ng-show="vm.isPharmaceutical"
+                                 class="md-padding">
+                                <md-input-container class="md-block"
+                                                    ng-show="vm.isPharmaceutical"
+                                                    flex>
+                                    <label translate>PRODUCT.TABLE.DRUG_TYPE</label>
+                                    <md-select ng-model="vm.product.drugType"
+                                               ng-required="vm.isPharmaceutical">
+                                        <md-option ng-value="item.id"
+                                                   ng-repeat="item in vm.parametricData.drugTypes">
+                                            {{item.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="vm.createForm.clasificationForm.productType.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block">
+                                    <md-switch class="md-primary margin-0"
+                                               aria-label="Controlado"
+                                               ng-model="vm.product.isControlled">
+                                        Controlado
+                                    </md-switch>
+                                    <div ng-messages="vm.createForm.clasificationForm.isControlled.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <div flex
+                                 layout-gt-sm="row"
+                                 ng-show="vm.isPharmaceutical"
+                                 class="md-padding">
+                                <md-input-container class="md-block"
+                                                    ng-show="vm.isPharmaceutical"
+                                                    flex>
+                                    <label translate>PRODUCT.TABLE.DOSAGE_TYPE</label>
+                                    <md-select ng-model="vm.product.dosageType"
+                                               ng-required="vm.isPharmaceutical">
+                                        <md-option ng-value="item.id"
+                                                   ng-repeat="item in vm.parametricData.dosageTypes">
+                                            {{item.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="vm.createForm.clasificationForm.dosageType.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block"
+                                                    ng-show="vm.isPharmaceutical"
+                                                    flex>
+                                    <label for="dosage"
+                                           translate>PRODUCT.TABLE.DOSAGE</label>
+                                    <input type="number"
+                                           name="dosage"
+                                           ng-model="vm.product.dosage"
+                                           min="0"
+                                           ng-required="vm.isPharmaceutical">
+                                    <div ng-messages="vm.createForm.clasificationForm.dosage.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <div flex
+                                 layout-gt-sm="row"
+                                 class="md-padding">
+                                <md-input-container class="md-block"
+                                                    flex>
+                                    <label translate>PRODUCT.TABLE.PRESENTATION_TYPE</label>
+                                    <md-select ng-model="vm.product.presentationType"
+                                               required>
+                                        <md-option ng-value="item.id"
+                                                   ng-repeat="item in vm.parametricData.presentationTypes">
+                                            {{item.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="vm.createForm.clasificationForm.presentationType.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block"
+                                                    ng-show="vm.isPharmaceutical"
+                                                    flex>
+                                    <label translate>PRODUCT.TABLE.ADMINISTRATION_WAY</label>
+                                    <md-select ng-model="vm.product.administrationWay"
+                                               ng-required="vm.isPharmaceutical">
+                                        <md-option ng-value="item.id"
+                                                   ng-repeat="item in vm.parametricData.administrationWays">
+                                            {{item.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="vm.createForm.clasificationForm.administrationWay.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                            <div flex
+                                 layout-gt-sm="row"
+                                 class="md-padding">
+                                <md-input-container class="md-block"
+                                                    flex>
+                                    <label translate>PRODUCT.TABLE.CATEGORY</label>
+                                    <md-select ng-model="vm.product.category"
+                                               ng-change="vm.onCategoryChange(vm.product.category)"
+                                               required>
+                                        <md-option ng-value="item.id"
+                                                   ng-repeat="item in vm.parametricData.categories | filter: { category: null }">
+                                            {{item.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="vm.createForm.clasificationForm.category.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container class="md-block"
+                                                    flex>
+                                    <label translate>PRODUCT.TABLE.SUB_CATEGORY</label>
+                                    <md-select ng-model="vm.product.subCategory"
+                                               required>
+                                        <md-option ng-value="item.id"
+                                                   ng-repeat="item in vm.parametricData.subCategories">
+                                            {{item.description}}
+                                        </md-option>
+                                    </md-select>
+                                    <div ng-messages="vm.createForm.clasificationForm.subCategory.$error">
+                                        <div ng-message="required">
+                                            <span translate>PRODUCT.VALIDATOR.REQUIRED</span>
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                            </div>
+                        </ng-form>
+                    </md-tab-body>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button class="md-primary"
+                       ng-click="triWizard.prevStep()"
+                       ng-show="triWizard.currentStep > 0"
+                       translate="Anterior"
+                       aria-label="Anterior">
+            </md-button>
+            <md-button class="md-raised md-primary"
+                       ng-click="triWizard.nextStep()"
+                       ng-show="triWizard.currentStep < 1"
+                       ng-disabled="triWizard.nextStepDisabled()"
+                       translate="Siguiente"
+                       aria-label="Siguiente">
+            </md-button>
+            <md-button class="md-raised md-primary"
+                       ng-click="vm.confirm()"
+                       ng-show="triWizard.currentStep == 1"
+                       ng-disabled="clasificationForm.$invalid || basicForm.$invalid"
+                       aria-label="CRUD.SAVE"
+                       translate="CRUD.SAVE">
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

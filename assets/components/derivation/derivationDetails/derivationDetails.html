@@ -1,0 +1,172 @@
+<div>
+    <md-toolbar class="md-hue-1">
+        <div class="md-toolbar-tools"
+             layout="row">
+            <md-button class="md-icon-button"
+                       href="#/derivaciones">
+                <md-tooltip>Volver al listado</md-tooltip>
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            </md-button>
+            <div layout="column"
+                 flex>
+                <span class="md-subhead">Derivación #{{vm.derivation.id}}</span>
+                <span class="md-caption"
+                      md-truncate>
+                    Ingresada
+                    <b>
+                        <ssvq-custom-time-ago time-at="::vm.derivation.createdAt"></ssvq-custom-time-ago>
+                    </b> por
+                    <b ssvq-employee-profile-link
+                       id-employee="{{vm.derivation.createdBy.id}}">{{vm.derivation.createdBy.fullname || '--'}}</b>
+                </span>
+            </div>
+            <md-button ng-click="vm.changeStatus($event)">
+                <span>{{vm.derivation.status.name}}</span>
+                <md-icon md-font-icon="zmdi zmdi-caret-down"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content class="overlay-5">
+        <div ng-hide="vm.permissionDenied"
+             layout-gt-sm="row"
+             layout-align="center start">
+            <div flex-gt-sm="70"
+                 flex="100">
+                <md-card style="min-height: 248px;">
+                    <md-card-content class="padding-0">
+                        <!-- Información general de la solicitud -->
+                        <md-list-item class="md-2-line">
+                            <div class="md-list-item-text">
+                                <p>Título</p>
+                                <h3>{{vm.derivation.title || '...'}}</h3>
+                            </div>
+                        </md-list-item>
+                        <md-divider class="margin-top-10 margin-bottom-10"></md-divider>
+                        <md-list-item class="md-2-line">
+                            <div class="md-list-item-text">
+                                <p>Descripción</p>
+                                <h3 class="respect-line-break">{{vm.derivation.description || '...'}}</h3>
+                            </div>
+                        </md-list-item>
+                        <div layout="row">
+                            <md-list-item class="md-2-line"
+                                          flex="80">
+                                <div class="md-list-item-text">
+                                    <p>Diagnóstico</p>
+                                    <h3>{{vm.derivation.diagnostic || '...'}}</h3>
+                                </div>
+                            </md-list-item>
+                            <md-list-item class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <p>CUDYR</p>
+                                    <h3>{{vm.derivation.risk || '...'}}</h3>
+                                </div>
+                            </md-list-item>
+                        </div>
+                        <md-divider ng-show="(vm.derivation.requiredEquipment.length > 0 || vm.derivation.attachments.length > 0)"
+                                    class="margin-top-10 margin-bottom-10"></md-divider>
+                        <md-list-item class="md-2-line">
+                            <div class="md-list-item-text">
+                                <p>Cuidados de enfermería</p>
+                                <h4 ng-if="vm.derivation.requiredEquipment.length == 0">Sin cuidados de enfermería</h4>
+                                <md-chips flex
+                                          class="no-underline">
+                                    <md-chip class="md-caption"
+                                             ng-repeat="equipment in vm.derivation.requiredEquipment track by $index">
+                                        {{equipment.name}}
+                                    </md-chip>
+                                </md-chips>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="md-2-line">
+                            <div class="md-list-item-text">
+                                <p>Archivos adjuntos</p>
+                                <h4 ng-if="vm.derivation.attachments.length == 0">Sin archivos adjuntos</h4>
+                                <ssvq-upload-list-files ng-if="vm.derivation"
+                                                        mode="Viewer"
+                                                        files="vm.derivation.attachments"
+                                                        style="display:block; margin-bottom: 10px; padding: 0 16px;"
+                                                        class="tiny-files">
+                                </ssvq-upload-list-files>
+                            </div>
+                        </md-list-item>
+                    </md-card-content>
+                </md-card>
+                <md-card style="min-height: 216px;">
+                    <md-card-content class="padding-0">
+                        <ssvq-comment-box on-create="vm.sendComment"></ssvq-comment-box>
+                        <md-divider></md-divider>
+                        <ssvq-derivation-timeline></ssvq-derivation-timeline>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <!-- Sidebar -->
+            <md-card flex="100"
+                     flex-gt-sm="30"
+                     style="min-height: 248px;">
+                <md-card-content class="padding-0">
+                    <md-list class="padding-0">
+                        <md-list-item class="md-2-line"
+                                      ng-click="vm.showPatientDetails($event)">
+                            <md-icon class="md-avatar-icon"
+                                     layout="row"
+                                     layout-align="center center"
+                                     style="background:#4bad9f;"
+                                     md-font-icon="zmdi zmdi-account"></md-icon>
+                            <div class="md-list-item-text">
+                                <h4>{{vm.derivation.patient.fullname}}</h4>
+                                <p>{{vm.derivation.patient.gender | translate}} •
+                                    <ssvq-patient-age patient="vm.derivation.patient"></ssvq-patient-age>
+                                </p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                        <md-list-item class="md-3-line"
+                                      ng-click="vm.editFromEstablishment($event)">
+                            <md-icon class="md-avatar-icon"
+                                     layout="row"
+                                     layout-align="center center"
+                                     style="background: #ef9164;"
+                                     md-font-icon="fa fa-hospital-o"></md-icon>
+                            <div class="md-list-item-text">
+                                <h3>Origen</h3>
+                                <h4>{{vm.derivation.fromEstablishment.name}}</h4>
+                                <p>{{vm.derivation.fromUnit.name}}</p>
+                            </div>
+                            <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                        <md-list-item class="md-3-line"
+                                      ng-click="vm.editToEstablishment($event)">
+                            <md-icon class="md-avatar-icon"
+                                     layout="row"
+                                     layout-align="center center"
+                                     style="background: #ef9164;"
+                                     md-font-icon="fa fa-hospital-o"></md-icon>
+                            <div class="md-list-item-text">
+                                <h3>Destino</h3>
+                                <h4>{{vm.derivation.toEstablishment.name}}</h4>
+                                <p>{{vm.derivation.toUnit.name}}</p>
+                            </div>
+                            <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+                        </md-list-item>
+                    </md-list>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div ng-show="vm.permissionDenied"
+             layout="row"
+             layout-align="center center">
+            <md-card flex="100"
+                     flex-gt-xs="80">
+                <md-card-content layout="column"
+                                 layout-align="center center">
+                    <span class="text-center">Lo sentimos, no tienes acceso a la derivación.</span>
+                    <md-button class="md-primary"
+                               ng-click="vm.back()">Volver</md-button>
+                </md-card-content>
+            </md-card>
+        </div>
+    </md-content>
+</div>

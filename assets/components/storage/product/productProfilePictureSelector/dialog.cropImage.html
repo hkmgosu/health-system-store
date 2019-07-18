@@ -1,0 +1,36 @@
+<md-dialog aria-label="Cortar imagen">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 flex>Imagen del Producto</h2>
+            <md-button class="md-icon-button"
+                       aria-label="Cancelar"
+                       ng-click="vm.close()">
+                <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <img-crop ng-style="{width: vm.pictureWidth, height: vm.pictureHeight}"
+                      image="vm.profileImage"
+                      result-image="vm.croppedDataUrl"
+                      area-type="square"
+                      result-image-size="160"
+                      ng-init="vm.croppedDataUrl=''">
+            </img-crop>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button aria-label="Cancelar"
+                   class="md-accent"
+                   ng-click="vm.close()">
+            <span>Cancelar</span>
+        </md-button>
+        <md-button aria-label="Listo"
+                   class="md-primary"
+                   ng-disabled="vm.processing"
+                   ng-click="vm.confirm()">
+            <span>Aceptar</span>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

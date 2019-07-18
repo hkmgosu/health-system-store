@@ -1,0 +1,37 @@
+<div ng-if="vm.events">
+    <ssvq-adverse-event-list-item flex
+                            ng-repeat="event in vm.events"
+                            event="event">
+    </ssvq-adverse-event-list-item>
+</div>
+<div class="full-height"
+     ng-show="!vm.events"
+     layout="column"
+     layout-align="center center">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    <p>Cargando eventos...</p>
+</div>
+<div layout="row"
+     layout-align="center center">
+    <md-button aria-label="Ver más solicitudes"
+               class="md-primary md-raised ng-hide"
+               ng-show="vm.showMoreButton"
+               ng-disabled="vm.loading"
+               ng-click="vm.nextPage()"
+               flex="90">
+        <span ng-show="!vm.loading">Ver más eventos</span>
+        <span ng-show="vm.loading">Cargando eventos...</span>
+    </md-button>
+</div>
+<div ng-show="vm.events.length === 0"
+     class="full-height"
+     layout="column"
+     layout-align="center center">
+    <div>
+        <md-icon md-font-icon="zmdi zmdi-search-in-page"
+                 class="md-warn"
+                 style="font-size: 46px;">
+        </md-icon>
+    </div>
+    <p>No se encontraron eventos</p>
+</div>

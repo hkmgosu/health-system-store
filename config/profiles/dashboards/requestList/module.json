@@ -1,0 +1,33 @@
+{
+    "name": "PRIVILEGES.REQUESTS.NAME",
+    "description": "PRIVILEGES.REQUESTS.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.requests",
+            "icon": "zmdi zmdi-ticket-star",
+            "url": "/solicitudes",
+            "template": "<ssvq-request-list-view></ssvq-request-list-view>"
+        },
+        "_controllers": {
+            "read": [
+                "RequestController.getLabels",
+                "RequestController.getStates",
+                "RequestController.getSubscribed",
+                "RequestController.getSupervised",
+                "RequestController.canAutoassign",
+                "EmployeeController.getSupervisedUnits",
+                "UnitController.getAvailableToRequest",
+                "ArchiveController.attachmentByOwner",
+                "RequestController.getPopularTags"
+            ],
+            "create": [
+                "RequestController.create",
+                "ArchiveController.uploadArchive"
+            ]
+        }
+    }
+}

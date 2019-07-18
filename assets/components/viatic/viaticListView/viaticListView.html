@@ -1,0 +1,67 @@
+<!-- ssvq-viatic-list-view -->
+<section layout="row"
+         flex>
+    <md-content flex>
+        <md-tabs md-swipe-content
+                 md-selected="vm.selectedTab"
+                 class="md-primary md-hue-1 tabs-requests">
+            <md-tab md-on-select="null"
+                    id="open">
+                <md-tab-label>
+                    <span>Abiertos</span>
+                    <span class="ssvq-badge">{{vm.openedCount}}</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <ssvq-viatic-list type="open"
+                                      filter="vm.filter"
+                                      ng-if="vm.selectedTab == 0"
+                                      count="vm.openedCount"></ssvq-viatic-list>
+                </md-tab-body>
+            </md-tab>
+            <md-tab md-on-select="null"
+                    id="closed">
+                <md-tab-label>
+                    <span>Cerrados</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <ssvq-viatic-list type="closed"
+                                      ng-if="vm.selectedTab == 1"
+                                      filter="vm.filter"></ssvq-viatic-list>
+                </md-tab-body>
+            </md-tab>
+            <md-tab md-on-select="null"
+                    id="all">
+                <md-tab-label>
+                    <span>Todos</span>
+                </md-tab-label>
+                <md-tab-body>
+                    <ssvq-viatic-list ng-if="vm.selectedTab == 2"
+                                      filter="vm.filter"></ssvq-viatic-list>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+        <md-button aria-label="Ingresar nuevo viático"
+                   class="md-raised md-primary md-fab md-fab-bottom-right"
+                   ng-click="vm.showSaveDialog($event)">
+            <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+            <md-tooltip md-direction="left">
+                Ingresar nuevo viático
+            </md-tooltip>
+        </md-button>
+
+        <md-button class="md-fab md-mini md-accent md-fab-top-right hide-gt-xs"
+                   ng-click="vm.toggleFilter()"
+                   aria-label="Filtros">
+            <md-tooltip>Ver filtros</md-tooltip>
+            <md-icon md-font-icon="zmdi zmdi-filter-list"></md-icon>
+        </md-button>
+    </md-content>
+
+    <md-sidenav class="md-sidenav-right md-whiteframe-1dp"
+                md-is-locked-open="$mdMedia('gt-xs')"
+                md-component-id="sidenav-filter">
+        <ssvq-viatic-list-filter filter="vm.filter">
+        </ssvq-viatic-list-filter>
+    </md-sidenav>
+</section>
+<!-- end ssvqViaticListView -->

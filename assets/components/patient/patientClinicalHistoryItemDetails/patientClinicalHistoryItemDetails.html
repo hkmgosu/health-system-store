@@ -1,0 +1,211 @@
+<md-list>
+    <md-subheader class="md-no-sticky">Datos de REM</md-subheader>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <div layout="row"
+                 layout-align="start center">
+                <md-icon md-font-icon="zmdi zmdi-calendar"
+                         class="date-icon">
+                </md-icon>
+                <h3 flex>Fecha de ingreso</h3>
+            </div>
+            <p md-truncate>
+                {{ vm.data.rem.createdAt | date:"dd 'de' MMM yyyy" }}
+            </p>
+        </div>
+    </md-list-item>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <div layout="row"
+                 layout-align="start center">
+                <md-icon md-font-icon="zmdi zmdi-label"
+                         class="material-icons callReason-icon"></md-icon>
+                <h3 flex>Motivo del llamado</h3>
+            </div>
+            <p md-truncate>
+                {{ vm.data.rem.callReason.name }}{{ vm.data.rem.subCallReason ? ' • ' + vm.data.rem.subCallReason.name : '' }}
+            </p>
+        </div>
+    </md-list-item>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h3>Detalle de la emergencia</h3>
+            <p>{{ vm.data.rem.description }}</p>
+        </div>
+    </md-list-item>
+    <md-divider></md-divider>
+    <md-subheader class="md-no-sticky">Regulación</md-subheader>
+    <md-list-item class="md-2-line"
+                  ng-if="vm.data.observations.length > 0"
+                  ng-repeat="obs in vm.data.observations | orderBy:'-createdAt'">
+        <div>
+            <div style="width:44px; height:44px; float:left;">
+                <ssvq-employee-avatar employee="obs.createdBy"></ssvq-employee-avatar>
+            </div>
+            <div class="md-list-item-text padding-left-10 margin-bottom-10">
+                <div>
+                    <span class="md-body-1">
+                        <b ssvq-employee-profile-link
+                           id-employee="{{obs.createdBy.id}}">{{ obs.createdBy.fullname }}</b> agregó observación
+                    </span>
+                </div>
+                <div ng-if="obs.coordination || obs.nurseAdvice || obs.medicalAdvice">
+                    <span class="md-body-1">
+                        <b>{{ ::('PATIENT.REGULATOR.BENEFITS' | translate) }}: </b>
+                        {{ obs.coordination ? 'PATIENT.REGULATOR.COORDINATION' : '' | translate}} {{ obs.coordination && obs.nurseAdvice ? '-' :
+                        ''}} {{ obs.nurseAdvice ? 'PATIENT.REGULATOR.NURSEADVICE' : '' | translate}} {{ (obs.nurseAdvice || obs.nurseAdvice)
+                        && obs.medicalAdvice ? '-' : ''}} {{ obs.medicalAdvice ? 'PATIENT.REGULATOR.MEDICALADVICE' : '' | translate}}
+                    </span>
+                </div>
+                <div>
+                    <span class="md-body-1">
+                        <b>{{ ::('PATIENT.REGULATOR.MEDICAL' | translate) }}:</b>
+                    </span>
+                    <span class="md-body-1 respect-line-break">{{obs.medical ? obs.medical : '--'}}</span>
+                </div>
+                <div>
+                    <span class="md-body-1">
+                        <b>{{ ::('PATIENT.REGULATOR.DIAGNOSTIC' | translate) }}:</b>
+                    </span>
+                    <span class="md-body-1 respect-line-break">{{obs.diagnostic ? obs.diagnostic : '--'}}</span>
+                </div>
+                <div>
+                    <span class="md-body-1">
+                        <b>{{ ::('PATIENT.REGULATOR.ADMINISTRATIVE' | translate) }}:</b>
+                    </span>
+                    <span class="md-body-1 respect-line-break">{{obs.administrative ? obs.administrative : '--'}}</span>
+                </div>
+            </div>
+        </div>
+    </md-list-item>
+    <md-list-item class="md-1-line"
+                  ng-if="vm.data.observations.length === 0">
+        <div class="md-list-item-text">
+            <p>--</p>
+        </div>
+    </md-list-item>
+    <md-divider></md-divider>
+    <md-subheader class="md-no-sticky">Intervención</md-subheader>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h3>{{ ::('PATIENT.INTERVENTION.DESCRIPTION' | translate) }}</h3>
+            <p>{{ vm.data.descriptionIntervention ? vm.data.descriptionIntervention : '--'}}</p>
+        </div>
+    </md-list-item>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h3>{{ ::('PATIENT.INTERVENTION.DIAGNOSTIC' | translate) }}</h3>
+            <p>{{ vm.data.diagnosticIntervention ? vm.data.diagnosticIntervention : '--'}}</p>
+        </div>
+    </md-list-item>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text margin-bottom-10">
+            <h3>{{ ::('Prestaciones' | translate) }}</h3>
+            <div layout="row"
+                 layout-wrap>
+                <p flex-xs="100"
+                   flex="50"
+                   flex-gt-md="25"
+                   ng-repeat="attention in vm.data.setAttentions">
+                    <i class="zmdi zmdi-caret-right"></i>&nbsp;{{ attention.name }}
+                    <i ng-if="attention.observation"
+                       class="zmdi zmdi-arrow-right"></i>
+                    {{ attention.observation ? attention.observation : ''}}
+                </p>
+                <p ng-if="vm.data.setAttentions.length === 0">--</p>
+            </div>
+        </div>
+    </md-list-item>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text margin-bottom-10">
+            <h3>{{ ::('Estado del traslado' | translate) }}</h3>
+            <div layout="column">
+                <p ng-repeat="status in vm.data.transferStatus">
+                    <i class="zmdi zmdi-caret-right"></i>&nbsp;{{ status.name }}
+                </p>
+                <p ng-if="vm.data.transferStatus.length === 0">--</p>
+            </div>
+        </div>
+    </md-list-item>
+    <md-divider></md-divider>
+    <md-subheader class="md-no-sticky">Evolución</md-subheader>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h3>{{ ::('PATIENT.EVOLUTION.TRIAGE.NAME' | translate) }}</h3>
+            <p>{{ vm.data.triage ? vm.data.triage : '--' | translate }}</p>
+        </div>
+    </md-list-item>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+            <h3>{{ ::('Signos Vitales' | translate) }}</h3>
+            <div layout="column">
+                <div layout="row"
+                     layout-wrap
+                     class="margin-bottom-10"
+                     ng-repeat="vitalSigns in vm.data.vitalSigns | orderBy: '-takenAt'">
+                    <p flex-xs="100"
+                       flex="50"
+                       flex-gt-md="25">
+                        <i class="zmdi zmdi-caret-right"></i>&nbsp;Temperatura: {{ vitalSigns.temperature || '--' }}
+                    </p>
+                    <p flex-xs="100"
+                       flex="50"
+                       flex-gt-md="25">
+                        <i class="zmdi zmdi-caret-right"></i>&nbsp;PAS: {{ vitalSigns.pas || '--' }}
+                    </p>
+                    <p flex-xs="100"
+                       flex="50"
+                       flex-gt-md="25">
+                        <i class="zmdi zmdi-caret-right"></i>&nbsp;PAD: {{ vitalSigns.pad || '--' }}
+                    </p>
+                    <p flex-xs="100"
+                       flex="50"
+                       flex-gt-md="25">
+                        <i class="zmdi zmdi-caret-right"></i>&nbsp;Pulso: {{ vitalSigns.pulse || '--' }}
+                    </p>
+                    <p flex-xs="100"
+                       flex="50"
+                       flex-gt-md="25">
+                        <i class="zmdi zmdi-caret-right"></i>&nbsp;Frec. Resp: {{ vitalSigns.breathingFrequency || '--' }}
+                    </p>
+                    <p flex-xs="100"
+                       flex="50"
+                       flex-gt-md="25">
+                        <i class="zmdi zmdi-caret-right"></i>&nbsp;Sat. O2: {{ vitalSigns.o2 || '--' }}
+                    </p>
+                    <p flex-xs="100"
+                       flex="50"
+                       flex-gt-md="25">
+                        <i class="zmdi zmdi-caret-right"></i>&nbsp;FiO2: {{ vitalSigns.fio2 || '--' }}
+                    </p>
+                    <p flex-xs="100"
+                       flex="50"
+                       flex-gt-md="25">
+                        <i class="zmdi zmdi-caret-right"></i>&nbsp;HGT: {{ vitalSigns.hgt || '--'}}
+                    </p>
+                    <p flex-xs="100"
+                       flex="50"
+                       flex-gt-md="25">
+                        <i class="zmdi zmdi-caret-right"></i>&nbsp;Glasgow: {{ vitalSigns.glasgow || '--' }}
+                    </p>
+                    <p flex-xs="100"
+                       flex="50"
+                       flex-gt-md="25">
+                        <i class="zmdi zmdi-caret-right"></i>&nbsp;RTS: {{ vitalSigns.rts || '--' }}
+                    </p>
+                    <p flex-xs="100"
+                       flex="50"
+                       flex-gt-md="25">
+                        <i class="zmdi zmdi-caret-right"></i>&nbsp;CO2: {{ vitalSigns.co2 || '--' }}
+                    </p>
+                    <p flex-xs="100"
+                       flex="50"
+                       flex-gt-md="25">
+                        <i class="zmdi zmdi-caret-right"></i>&nbsp;ECG: {{ vitalSigns.ecg || '--' }}
+                    </p>
+                </div>
+                <p ng-if="vm.data.vitalSigns.length === 0">--</p>
+            </div>
+        </div>
+    </md-list-item>
+</md-list>

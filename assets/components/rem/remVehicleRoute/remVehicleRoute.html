@@ -1,0 +1,43 @@
+<div id="rem-vehicle-route-map"
+     layout="column"
+     layout-gt-xs="row">
+    <md-content flex="100"
+                flex-gt-xs="30"
+                flex-order-gt-xs="1"
+                flex-order="2">
+        <md-list>
+            <md-list-item ng-click="vm.selectStatus(log)"
+                          ng-repeat="log in vm.remLogVehicle">
+                <span class="md-body-2"
+                      flex
+                      ng-class="{'selected md-body-2': status.selected}"
+                      ng-style="log.style">
+                    {{log.status.name}}
+                </span>
+                <div>
+                    <p class="md-body-1">{{log.createdAt | date:"HH:mm"}}</p>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+    </md-content>
+    <div flex
+         flex-order="-2"
+         flex-order-gt-xs="2"
+         style="min-height: 250px;position: relative;">
+        <div id="ssvqVehicleRouteMap"
+             class="full-width full-height"></div>
+        <md-button class="md-fab md-mini md-primary md-hue-1 md-fab-top-right"
+                   ng-click="vm.updateBounds()"
+                   aria-label="Ajustar bordes del mapa">
+            <md-tooltip>Ajustar bordes del mapa</md-tooltip>
+            <md-icon md-font-icon="zmdi zmdi-fullscreen-alt"></md-icon>
+        </md-button>
+        <div style="position:absolute; bottom:16px; left: 16px;">
+            <span ng-if="vm.routeStatus === 'loading'"
+                  class="md-body-2">Cargando información GPS...</span>
+            <span ng-if="vm.routeStatus === 'empty'"
+                  class="md-body-2">No hay información GPS disponible</span>
+        </div>
+    </div>
+</div>

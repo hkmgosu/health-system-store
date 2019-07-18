@@ -1,0 +1,13 @@
+<md-content ng-if="vm.viaticList.length > 0"
+            class="animated slideInUp animation-stop full-height"
+            ssvq-infinite-load
+            next-page="vm.nextPage">
+    <div ng-repeat="viatic in vm.viaticList">
+        <ssvq-viatic-item viatic="viatic">
+        </ssvq-viatic-item>
+        <md-divider ng-if="!$last"></md-divider>
+    </div>
+</md-content>
+<ssvq-loading ng-if="!vm.viaticList"></ssvq-loading>
+<ssvq-no-results message="No se encontraron viáticos"
+                 ng-if="vm.viaticList.length === 0"></ssvq-no-results>

@@ -1,0 +1,135 @@
+<div class="view-rem-container">
+    <md-toolbar class="md-hue-1"
+                md-scroll-shrink
+                md-shrink-speed-factor="0.25">
+        <div class="md-toolbar-tools"
+             layout="row">
+            <md-button class="md-icon-button"
+                       href="#/samu/incidentes">
+                <md-tooltip>Volver al listado</md-tooltip>
+                <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+            </md-button>
+            <div layout="column"
+                 flex>
+                <h4 class="md-subhead margin-0"
+                    md-truncate><span hide-xs>Incidente</span> #{{vm.rem.id}}</h4>
+                <span class="md-caption"
+                      md-truncate>
+                    Ingresada el
+                    <b>{{vm.rem.createdAt | date:"dd 'de' MMM yyyy 'a las' HH:mm"}}</b> por
+                    <ssvq-employee-profile-link id-employee="{{::vm.rem.createdBy.id}}">
+                        {{::vm.rem.createdBy.fullname}}
+                    </ssvq-employee-profile-link>
+                </span>
+            </div>
+            <md-button ng-click="vm.changeStatus()">
+                <span>{{vm.rem.status.description}}</span>
+                <md-icon md-font-icon="zmdi zmdi-caret-down"></md-icon>
+                <md-tooltip>Cambiar el estado del incidente</md-tooltip>
+            </md-button>
+            <md-divider style="height:70%;"
+                        hide-xs></md-divider>
+            <md-button ng-click="vm.updateCallCounter()"
+                       hide-xs>
+                <span>{{vm.rem.callCounter}}</span>
+                <md-icon md-font-icon="zmdi zmdi-phone-in-talk"></md-icon>
+                <md-tooltip>Llamadas relacionadas</md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content style="height:100%;">
+        <div layout-gt-sm="row"
+             layout-align="center start">
+            <div layout="column"
+                 flex-gt-sm="60">
+                <md-subheader class="md-primary md-hue-1">
+                    <div layout="row"
+                         layout-align="center center">
+                        <span flex>Datos básicos</span>
+                        <i class="zmdi zmdi-{{vm.showBasicInformation ? 'minus':'plus'}} toggle-rem-box-view"
+                           ng-click="vm.showBasicInformation = !vm.showBasicInformation;">
+                            <md-tooltip>{{ vm.showBasicInformation ? 'Ocultar' : 'Mostrar'}}</md-tooltip>
+                        </i>
+                    </div>
+                </md-subheader>
+                <md-card ng-show="vm.showBasicInformation">
+                    <md-card-content class="animated fadeIn padding-0">
+                        <ssvq-rem-basic-information-read data="vm.basicInformation"
+                                                         mode="remCreated">
+                        </ssvq-rem-basic-information-read>
+                    </md-card-content>
+                </md-card>
+                <md-subheader class="md-primary md-hue-1">
+                    <div layout="row"
+                         layout-align="center center">
+                        <span flex>Ubicación</span>
+                        <i class="zmdi zmdi-{{vm.showAddressInformation ? 'minus':'plus'}} toggle-rem-box-view"
+                           ng-click="vm.showAddressInformation = !vm.showAddressInformation;">
+                            <md-tooltip>{{ vm.showAddressInformation ? 'Ocultar' : 'Mostrar'}}</md-tooltip>
+                        </i>
+                    </div>
+                </md-subheader>
+                <md-card ng-show="vm.showAddressInformation">
+                    <ssvq-rem-address-read data="vm.rem.originAddress"
+                                           id-rem="{{vm.idRem}}"></ssvq-rem-address-read>
+                </md-card>
+                <div ng-if="mobile">
+                    <md-subheader class="md-primary md-hue-1">
+                        <div layout="row"
+                             layout-align="center center">
+                            <span flex>Pacientes y despachos</span>
+                            <i class="zmdi zmdi-{{vm.showRemVehiclePatients ? 'minus':'plus'}} toggle-rem-box-view"
+                               ng-click="vm.showRemVehiclePatients = !vm.showRemVehiclePatients;">
+                                <md-tooltip>{{ vm.showRemVehiclePatients ? 'Ocultar' : 'Mostrar'}}</md-tooltip>
+                            </i>
+                        </div>
+                    </md-subheader>
+                    <ssvq-rem-patient-vehicle flex
+                                              id-rem="{{::vm.idRem}}"
+                                              rem-vehicle-count="vm.remVehicleCount"
+                                              ng-show="vm.showRemVehiclePatients">
+                    </ssvq-rem-patient-vehicle>
+                </div>
+                <md-subheader class="md-primary md-hue-1">
+                    <div layout="row"
+                         layout-align="center center">
+                        <span flex>Actividad reciente</span>
+                        <i class="zmdi zmdi-{{vm.showObservations ? 'minus':'plus'}} toggle-rem-box-view"
+                           ng-click="vm.showObservations = !vm.showObservations;">
+                            <md-tooltip>{{ vm.showObservations ? 'Ocultar' : 'Mostrar'}}</md-tooltip>
+                        </i>
+                    </div>
+                </md-subheader>
+                <md-card ng-show="vm.showObservations">
+                    <md-card-content class="padding-0 padding-top-10 padding-bottom-10">
+                        <!-- Box de comentario -->
+                        <ssvq-comment-box opts="vm.commentBoxOptions"
+                                          on-create="vm.sendComment"></ssvq-comment-box>
+                        <!-- Actividad reciente -->
+                        <div class="md-padding padding-top-0">
+                            <ssvq-rem-timeline id-rem="{{::vm.idRem}}"></ssvq-rem-timeline>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <div flex
+                 ng-if="desktop">
+                <md-subheader class="md-primary md-hue-1">
+                    <div layout="row"
+                         layout-align="center center">
+                        <span flex>Pacientes y despachos</span>
+                        <i class="zmdi zmdi-{{vm.showRemVehiclePatients ? 'minus':'plus'}} toggle-rem-box-view"
+                           ng-click="vm.showRemVehiclePatients = !vm.showRemVehiclePatients;">
+                            <md-tooltip>{{ vm.showRemVehiclePatients ? 'Ocultar' : 'Mostrar'}}</md-tooltip>
+                        </i>
+                    </div>
+                </md-subheader>
+                <ssvq-rem-patient-vehicle flex
+                                          id-rem="{{::vm.idRem}}"
+                                          rem-vehicle-count="vm.remVehicleCount"
+                                          ng-show="vm.showRemVehiclePatients">
+                </ssvq-rem-patient-vehicle>
+            </div>
+        </div>
+    </md-content>
+</div>

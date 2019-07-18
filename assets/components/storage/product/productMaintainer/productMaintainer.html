@@ -1,0 +1,14 @@
+<section layout="row"
+         flex>
+
+    <div flex
+         ng-include="'/components/storage/product/productMaintainer/productList.html'"></div>
+
+    <!-- SECCION FILTRO -->
+    <md-sidenav class="md-sidenav-right md-whiteframe-1dp"
+                md-is-locked-open="$mdMedia('gt-xs')"
+                md-component-id='products-filter'>
+
+        <div ng-include="'/components/storage/product/productMaintainer/productFilter.html'"></div>
+    </md-sidenav>
+</section>

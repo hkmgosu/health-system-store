@@ -1,0 +1,21 @@
+<md-list-item class="md-2-line animated flipInX"
+              ng-class="'withoutTriage'"
+              aria-label="{{vm.patient.fullname}}"
+              ng-click="vm.selectPatient($event, vm.patient)">
+    <md-icon class="patient-icon md-avatar-icon"
+             md-font-icon="zmdi zmdi-account">
+    </md-icon>
+    <div class="md-list-item-text"
+         style="width:calc(100% - 100px)">
+        <h3 md-truncate>
+            <span>{{vm.patient.fullname || 's/nombre'}}</span>
+        </h3>
+        <p md-truncate>
+            <span>
+                {{ (vm.patient.gender | translate) || 's/género'}}
+            </span>
+            <span>•</span>
+            <ssvq-patient-age patient="vm.patient"></ssvq-patient-age>
+        </p>
+    </div>
+</md-list-item>

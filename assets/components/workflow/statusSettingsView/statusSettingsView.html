@@ -1,0 +1,35 @@
+<md-toolbar class="md-hue-1"
+            hide-xs>
+    <div class="md-toolbar-tools">
+        <div layout="column"
+             flex>
+            <span class="md-subhead">Configuración del módulo</span>
+            <span class="md-caption">Supervisores de estado</span>
+        </div>
+        <span flex></span>
+    </div>
+</md-toolbar>
+<md-content>
+    <md-list>
+        <md-list-item class="md-2-line"
+                      ng-repeat="status in vm.status | orderBy: 'order'"
+                      ng-click="(status.authorization === 'workflow' || status.authorization === 'closure') && status.isSupervised ? vm.showSupervisors(status, $event) : null">
+            <div class="md-list-item-text">
+                <h3>{{ status.name }}</h3>
+                <p ng-if="(status.authorization === 'workflow' || status.authorization === 'closure') && status.isSupervised">
+                    <i style="color: darkgreen" class="zmdi zmdi-shield-security"></i>
+                    {{ status.supervisorsCount > 0 ? status.supervisorsCount : 'Sin' }} supervisores
+                </p>
+                <p ng-if="status.authorization === 'manager'">
+                    <i class="md-accent zmdi zmdi-shield-security"></i>
+                    Supervisado por gestores de unidad
+                </p>
+                <p ng-if="!status.isSupervised">
+                    <i class="zmdi zmdi-shield-security"></i>
+                    Estado no necesita supervisores
+                </p>
+            </div>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+</md-content>

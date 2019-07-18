@@ -1,0 +1,23 @@
+<md-list-item ng-click="vm.selectCategory()">
+    <md-icon ng-class="{'zmdi zmdi-lock': vm.category.private}"></md-icon>
+    <div class="md-list-item-text"
+         flex>
+        <h4>{{vm.category.name}}</h4>
+    </div>
+    <md-button class="md-secondary md-accent md-icon-button"
+               ng-click="vm.editCategoryManagerList()">
+        <md-icon md-font-icon="zmdi zmdi-accounts-list"></md-icon>
+        <md-tooltip>Administrar publicadores</md-tooltip>
+    </md-button>
+    <md-button class="md-secondary md-primary md-icon-button"
+               ng-click="vm.editCategory()">
+        <md-icon md-font-icon="zmdi zmdi-edit"></md-icon>
+        <md-tooltip>Editar categoría</md-tooltip>
+    </md-button>
+    <md-button class="md-secondary md-primary md-warn md-icon-button"
+               ng-click="vm.deleteCategory()">
+        <md-icon md-font-icon="zmdi zmdi-delete"></md-icon>
+        <md-tooltip>Eliminar categoría</md-tooltip>
+    </md-button>
+</md-list-item>
+<md-divider></md-divider>

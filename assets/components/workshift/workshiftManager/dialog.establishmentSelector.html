@@ -1,0 +1,45 @@
+<md-dialog aria-label="Selección de establecimiento"
+           id="establishment-selector-dialog"
+           flex="60"
+           flex-sm="80"
+           flex-xs="100"
+           class="mobile-fullwidth-dialog">
+    <form name="vm.saveForm"
+          ng-submit="vm.saveForm.$valid && vm.confirm()"
+          novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button"
+                           ng-click="vm.cancel()">
+                    <md-icon md-font-icon="zmdi zmdi-arrow-left"></md-icon>
+                    <md-tooltip>Volver</md-tooltip>
+                </md-button>
+                <span>Selección de establecimiento</span>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-list>
+                <md-list-item ng-click="vm.establishmentSelected = establishment"
+                              ng-repeat="establishment in vm.establishmentList track by $index">
+                    <md-icon ng-class="vm.establishmentSelected.id == establishment.id ? 'zmdi zmdi-home' : ''"
+                             class="md-primary"></md-icon>
+                    <div class="md-list-item-text"
+                         flex>
+                        <span>{{establishment.name}}</span>
+                    </div>
+                    <md-icon ng-show="vm.establishmentSelected.id == establishment.id"
+                             class="md-primary"
+                             md-font-icon="zmdi zmdi-check-circle"></md-icon>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button class="md-primary"
+                       type="submit"
+                       aria-label="Cambiar establecimiento">
+                Cambiar establecimiento
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,9 @@
+.drug-type-list-container {
+    height: calc(100vh - 128px);
+}
+
+@media (max-width: 599px) {
+    .drug-type-list-container {
+        height: calc(100vh - 112px);
+    }
+}

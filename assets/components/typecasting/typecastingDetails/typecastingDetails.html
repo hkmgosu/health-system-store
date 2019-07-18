@@ -1,0 +1,253 @@
+<div layout="column"
+     class="ssvq-typecasting">
+    <md-card id="employee-info">
+        <md-card-content>
+            <div class="hidden-print">
+                <ssvq-typecasting-header layout-gt-md="row"></ssvq-typecasting-header>
+            </div>
+
+            <div class="show-print">
+                <ssvq-typecasting-header layout="row"></ssvq-typecasting-header>
+            </div>
+
+            <md-divider class="margin-top-10"></md-divider>
+
+            <!-- Datos del funcionario -->
+            <div layout="column"
+                 layout-padding>
+                <div flex="100"
+                     layout="row">
+                    <div flex
+                         layout="row">
+                        <span class="md-body-1">Establecimiento</span>
+                        <span flex
+                              class="md-body-2 text-center">
+                            {{(vm.employee.establishment)? vm.employee.establishment.name : '--'}}
+                        </span>
+                    </div>
+                </div>
+                <div flex="100"
+                     layout="row">
+                    <div flex
+                         layout="row">
+                        <span class="md-body-1">Nombre</span>
+                        <span flex
+                              class="md-body-2 text-center">{{vm.employee.name}} {{vm.employee.lastname}}</span>
+                    </div>
+                </div>
+                <div layout="row">
+                    <div flex
+                         layout="row">
+                        <span class="md-body-1">Cargo</span>
+                        <span flex
+                              class="md-body-2 text-center">{{vm.employee.job.name || '--'}}</span>
+                    </div>
+                    <div flex
+                         layout="row">
+                        <span class="md-body-1">Grado</span>
+                        <span flex
+                              class="md-body-2 text-center">{{vm.employee.level || '--'}} ° EUS</span>
+                    </div>
+                    <div flex
+                         layout="row">
+                        <span class="md-body-1">Planta</span>
+                        <span flex
+                              class="md-body-2 text-center">{{vm.employee.plant.name || '--'}}</span>
+                    </div>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
+
+    <div ng-if="vm.typecasting.length > 0"
+         layout="column">
+        <!-- Table 1 -->
+        <md-subheader ng-click="vm.showHistoryInfo($event)"
+                      class="md-primary md-hue-1 overlay-5 hidden-print">Antigüedades</md-subheader>
+        <md-card ng-if="vm.typecasting && vm.typecasting.length > 0">
+            <md-card-content class="padding-0">
+                <md-table-container>
+                    <table md-table
+                           class="history-table">
+                        <thead md-head>
+                            <tr md-row>
+                                <th md-column>
+                                    <div>Grado</div>
+                                </th>
+                                <th md-column>
+                                    <div>Antigüedades</div>
+                                </th>
+                                <th md-column
+                                    ng-click="vm.showHistoryInfo($event)">
+                                    <div>Último ascenso en el cargo (1*)</div>
+                                    <md-tooltip class="md-subhead">
+                                        ¿Qué significa esto?
+                                    </md-tooltip>
+                                </th>
+                                <th md-column
+                                    class="text-center"
+                                    ng-click="vm.showHistoryInfo($event)">
+                                    <div>Último ascenso en el grado (2*)</div>
+                                    <md-tooltip class="md-subhead">
+                                        ¿Qué significa esto?
+                                    </md-tooltip>
+                                </th>
+                                <th md-column
+                                    class="text-center"
+                                    ng-click="vm.showHistoryInfo($event)">
+                                    <div>En el Servicio, desde que fue nombrada/o Titular (3*)</div>
+                                    <md-tooltip class="md-subhead">
+                                        ¿Qué significa esto?
+                                    </md-tooltip>
+                                </th>
+                                <th md-column
+                                    class="text-center"
+                                    ng-click="vm.showHistoryInfo($event)">
+                                    <div>En la Administracion Pública (4*)</div>
+                                    <md-tooltip class="md-subhead">
+                                        ¿Qué significa esto?
+                                    </md-tooltip>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody md-body>
+                            <tr md-row
+                                ng-repeat="year in vm.typecasting track by $index | orderBy: 'year.year'">
+                                <td md-cell
+                                    class="especial-td  text-center">{{year.level || '--'}} ° EUS</td>
+                                <td md-cell
+                                    class="especial-td text-center">Escalafón {{year.year || '--'}}</td>
+                                <td md-cell
+                                    class="text-center">{{year.antiquityJob || '--'}}</td>
+                                <td md-cell
+                                    class="text-center">{{year.antiquityGrade || '--'}}</td>
+                                <td md-cell
+                                    class="text-center">{{vm.getParseDate(year.antiquityService) || '--'}}</td>
+                                <td md-cell
+                                    class="text-center">{{vm.getParseDate(year.antiquityPublicAdmin) || '--'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+
+                <md-divider></md-divider>
+
+                <ssvq-typecasting-history-info class="show-print"></ssvq-typecasting-history-info>
+            </md-card-content>
+        </md-card>
+
+        <!-- Mensaje para profesionales -->
+        <md-card ng-if="vm.employee.plant && vm.employee.plant.professional">
+            <md-card-content>
+                <div layout="row"
+                     layout-align="center center"
+                     layout-padding>
+                    <md-icon md-font-icon="zmdi zmdi-info"
+                             class="md-primary"></md-icon>
+                    <div layout="column"
+                         layout-padding>
+                        <span class="md-body-1 md-primary">
+                            La Planta profesional no requiere la confección de un escalafón de merito, ya que los procesos de desarrollo de carrera funcionaria
+                            se concretan mediante Concursos Internos de Promoción, los que se realizan anualmente y se encuentran
+                            sujetos a las respectivas bases de Concurso, también anuales.
+                        </span>
+                        <span class="md-body-1">
+                            La eventual ubicación de un profesional en el ""escalafón"" no implica que sea promovido al año siguiente, ya que para ello
+                            dependerá unica y exclusivamente del puntaje que obtenga en el Concurso Interno de Promoción.
+                        </span>
+                        <span class="md-body-1">
+                            La norma determina que para los concursos Internos de promoción, se considerarán los factores de Capacitación, Calificación,
+                            Aptitudes y antigüedad. Además determina que cada factor debe tener una ponderación de 25%.
+                        </span>
+                        <span>
+                            Si de todos modos desea conocer su información contractual ingrese a
+                            <a href="#/autoconsulta">módulo autoconsulta</a>
+                        </span>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
+
+        <!-- Table 2 - Score -->
+        <md-subheader ng-click="vm.showScoreInfo($event)"
+                      class="md-primary md-hue-1 overlay-5 hidden-print">Puntaje de acreditación</md-subheader>
+        <md-card ng-if="vm.employee.plant && !vm.employee.plant.professional && vm.typecasting.length > 0">
+            <md-card-content class="padding-0">
+                <md-table-container>
+                    <table md-table>
+                        <thead md-head>
+                            <tr md-row>
+                                <th md-column>Puntaje</th>
+                                <th md-column
+                                    ng-repeat="year in vm.typecasting track by $index">
+                                    Escalafón {{year.year}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody md-body>
+                            <tr md-row
+                                ng-repeat="item in [{}]">
+                                <td md-cell
+                                    class="custom-td especial-td">Su puntaje total de acreditación fue</td>
+                                <td md-cell
+                                    ng-repeat="year in vm.typecasting track by $index"
+                                    class="text-center">
+                                    {{year.score || '--'}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+
+                <md-divider></md-divider>
+
+                <ssvq-typecasting-score-info class="show-print"></ssvq-typecasting-score-info>
+            </md-card-content>
+        </md-card>
+
+        <!-- Table 3 - Priority -->
+        <md-subheader ng-click="vm.showPriorityInfo($event)"
+                      class="md-primary md-hue-1 overlay-5 hidden-print">Prioridad</md-subheader>
+        <md-card ng-if="vm.employee.plant && !vm.employee.plant.professional && vm.typecasting.length > 0">
+            <md-card-content class="padding-0">
+                <md-table-container>
+                    <table md-table>
+                        <thead md-head>
+                            <tr md-row>
+                                <th md-column>Prioridad</th>
+                                <th md-column
+                                    ng-repeat="year in vm.typecasting track by $index">
+                                    Escalafón {{year.year}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody md-body>
+                            <tr md-row
+                                ng-repeat="item in [{}]">
+                                <td md-cell
+                                    class="especial-td">Su prioridad para el ascenso fue</td>
+                                <td md-cell
+                                    ng-repeat="year in vm.typecasting track by $index"
+                                    class="text-center">
+                                    {{year.priority || '--'}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+
+                <md-divider></md-divider>
+
+                <ssvq-typecasting-priority-info class="show-print"></ssvq-typecasting-priority-info>
+
+            </md-card-content>
+        </md-card>
+    </div>
+</div>
+
+<md-button class="md-fab md-fab-bottom-right md-primary hidden-print"
+           ng-click="vm.export()"
+           ng-if="vm.typecasting && vm.typecasting.length > 0">
+    <md-icon md-font-icon="fa fa-file-pdf-o"></md-icon>
+    <md-tooltip md-direction="left">Exportar a pdf</md-tooltip>
+</md-button>

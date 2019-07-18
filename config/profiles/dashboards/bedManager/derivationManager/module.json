@@ -1,0 +1,39 @@
+{
+    "name": "PRIVILEGES.BED_MANAGER.PATIENT_TRANSFER_MANAGER.NAME",
+    "description": "PRIVILEGES.BED_MANAGER.PATIENT_TRANSFER_MANAGER.DESCRIPTION",
+    "config": {
+        "privileges": {
+            "read": false,
+            "create": false,
+            "update": false
+        },
+        "menu": {
+            "state": "triangular.mi-ssvq.bed-manager-patient-transfer-manager",
+            "url": "/derivaciones",
+            "template": "<ssvq-derivation-manager></ssvq-derivation-manager>",
+            "icon": "fa fa-exchange"
+        },
+        "_controllers": {
+            "read": [
+                "DerivationController.getList",
+                "DerivationController.getRequiredEquipmentList",
+                "PatientController.getList",
+                "PatientController.getExternalPatient",
+                "EstablishmentController.get",
+                "DerivationController.getMySupervisedEstablishmentList",
+                "UnitController.getAutocomplete",
+                "RegionController.getAll",
+                "CommuneController.getAll",
+                "CommuneController.get"
+            ],
+            "create": [
+                "DerivationController.create",
+                "ArchiveController.uploadArchive",
+                "PatientController.save"
+            ],
+            "update": [
+                "PatientController.save"
+            ]
+        }
+    }
+}

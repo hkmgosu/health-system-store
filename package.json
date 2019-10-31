@@ -9,7 +9,7 @@
     "async": "^2.0.0-rc.6",
     "bcrypt": "^0.8.5",
     "bluebird": "^3.3.4",
-    "connect-pg-simple": "^4.2.0",
+    "connect-pg-simple": "^6.0.1",
     "connect-redis": "1.4.5",
     "ejs": "~0.8.4",
     "emailify": "0.0.3",
